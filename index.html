@@ -1,0 +1,1194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RUDOHAGE | The Anatomy of Craft</title>
+
+   <!-- SEO Meta Tags -->
+  <meta name="description" content="RUDOHAGE – Handcrafted luxury goods designed with precision. Explore premium materials, artisanal craftsmanship, and limited edition pieces.">
+  <meta name="keywords" content="RUDOHAGE, luxury, handcrafted, leather, artisan, premium, boutique, limited edition">
+  <meta name="author" content="Anand Prakash">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="RUDOHAGE | The Anatomy of Craft">
+  <meta property="og:description" content="Discover the luxury of handcrafted precision. Limited edition premium products by RUDOHAGE.">
+  <meta property="og:image" content="https://yourwebsite.com/images/RUDOHAGE-hero.jpg">
+  <meta property="og:url" content="https://yourwebsite.com">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RUDOHAGE | The Anatomy of Craft">
+  <meta name="twitter:description" content="Discover the luxury of handcrafted precision. Limited edition premium products by RUDOHAGE.">
+  <meta name="twitter:image" content="https://yourwebsite.com/images/RUDOHAGE-hero.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" href="https://yourwebsite.com/images/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="https://yourwebsite.com/images/favicon.ico" type="image/x-icon">
+
+  <!-- Google Site Verification -->
+  <meta name="google-site-verification" content="YOUR_GOOGLE_VERIFICATION_CODE_HERE">
+
+  <!-- Fonts & Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Manrope:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Manrope:wght@300;500;700&display=swap');
+
+    :root {
+      --bg: #f6f2ea;
+      --text: #111111;
+      --muted: rgba(20, 20, 20, 0.65);
+      --accent: #a48b74;
+      --glass: rgba(255, 255, 255, 0.55);
+      --shadow: rgba(0, 0, 0, 0.18);
+      --radius: 22px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Manrope', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+   
+    /* =============== CINEMATIC LIGHT =============== */
+    .glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 20%, rgba(164,139,116,0.25), transparent 60%),
+                  radial-gradient(circle at 80% 80%, rgba(0,0,0,0.15), transparent 70%);
+      z-index: 0;
+      pointer-events: none;
+      animation: glowMove 8s infinite alternate ease-in-out;
+    }
+
+    @keyframes glowMove {
+      0% { transform: translateX(-20px) translateY(-20px); }
+      100% { transform: translateX(40px) translateY(30px); }
+    }
+
+    /* =============== NOISE =============== */
+    .noise {
+      position: fixed;
+      inset: 0;
+      background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+      opacity: 0.08;
+      z-index: 1;
+      pointer-events: none;
+      mix-blend-mode: multiply;
+    }
+
+    /* =============== HEADER =============== */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      padding: 1.3rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(246, 242, 234, 0.55);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.1rem;
+      font-weight: 600;
+      letter-spacing: -1px;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text);
+      transition: 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0%;
+      height: 2px;
+      background: var(--text);
+      transition: 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* MOBILE MENU */
+    .menu-btn {
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 280px;
+      height: 100vh;
+      background: rgba(15,15,15,0.95);
+      backdrop-filter: blur(20px);
+      z-index: 9999;
+      padding: 3rem 2rem;
+      transition: 0.5s;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .mobile-menu a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .mobile-menu.active {
+      right: 0;
+    }
+
+    .close-btn {
+      color: white;
+      font-size: 1.6rem;
+      align-self: flex-end;
+      cursor: pointer;
+    }
+
+    /* =============== HERO =============== */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 90px;
+      z-index: 5;
+    }
+
+    .hero-text {
+      text-align: center;
+      z-index: 5;
+      max-width: 950px;
+      padding: 0 1rem;
+    }
+
+    .hero-text h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 6.5vw;
+      line-height: 0.9;
+      font-style: italic;
+    }
+
+    .hero-text p {
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-btn {
+      margin-top: 2.8rem;
+      padding: 0.9rem 2.8rem;
+      border-radius: 50px;
+      border: 1px solid rgba(0,0,0,0.2);
+      background: transparent;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: 0.35s;
+    }
+
+    .hero-btn:hover {
+      background: var(--text);
+      color: var(--bg);
+      transform: translateY(-4px);
+    }
+
+    /* =============== SCROLL REVEAL =============== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =============== AUTOPSY SECTION =============== */
+    .exhibit-section {
+      padding: 7rem 10%;
+      min-height: 100vh;
+      position: relative;
+      z-index: 10;
+    }
+
+    .section-header {
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.4rem;
+      font-weight: 600;
+    }
+
+    .section-header p {
+      margin-top: 0.7rem;
+      font-size: 1rem;
+      color: var(--muted);
+    }
+
+    /* =============== EXPLODER =============== */
+    .exploded-view-container {
+      position: relative;
+      height: 650px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1400px;
+    }
+
+    .layer {
+      position: absolute;
+      width: 440px;
+      height: 440px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.18);
+      opacity: 1 !important;
+      display: block; 
+      pointer-events: auto;
+      transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+      filter: saturate(1.1) contrast(1.05);
+      z-index: 10; 
+    }
+
+    .layer.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .layer-1 { z-index: 1; background-image: url('https://i.pinimg.com/1200x/a2/a5/90/a2a590365a530f6054462988bb3e3916.jpg'); }
+    .layer-2 { z-index: 2; background-image: url('https://i.pinimg.com/1200x/2e/ff/56/2eff561d08842fb1a536f452f629b7d2.jpg'); }
+    .layer-3 { z-index: 3; background-image: url('https://i.pinimg.com/736x/e4/d2/90/e4d290c33a36face978f205b7a54bc16.jpg'); }
+    .layer-4 { z-index: 4; background-image: url('https://i.pinimg.com/1200x/dd/24/16/dd2416cb65215dcdce5275e060ef5084.jpg'); }
+
+    /* INFO BOX */
+    .layer-info {
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 360px;
+      padding: 2rem;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(16px);
+      border-radius: var(--radius);
+      box-shadow: 0 25px 80px rgba(0,0,0,0.15);
+      opacity: 1 !important; 
+      transition: 0.6s;
+      z-index: 20;
+    }
+
+    .layer-info.show { opacity: 1; }
+
+    .layer-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .layer-info p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* CONTROLS */
+    .controls {
+      position: absolute;
+      bottom: 45px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      z-index: 30;
+    }
+
+    .layer-btn {
+      padding: 0.75rem 1.8rem;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0,0,0,0.2);
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: 0.3s;
+    }
+
+    .layer-btn:hover {
+      background: var(--text);
+      color: var(--bg);
+      transform: translateY(-3px);
+    }
+
+    .layer-btn.active-btn {
+      background: var(--text);
+      color: var(--bg);
+    }
+
+    /* =============== CATALOG =============== */
+    .catalog {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 6rem 10%;
+      position: relative;
+      z-index: 10;
+    }
+
+    .catalog-item {
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      box-shadow: 0 20px 70px rgba(0,0,0,0.15);
+      transform-style: preserve-3d;
+      transition: 0.4s;
+    }
+
+    .catalog-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.6s ease;
+      filter: contrast(1.05);
+    }
+
+    .catalog-item:hover .catalog-img {
+      transform: scale(1.12);
+    }
+
+    .catalog-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 2.2rem;
+      background: linear-gradient(transparent, rgba(0,0,0,0.9));
+      color: white;
+      opacity: 0;
+      transition: 0.4s;
+    }
+
+    .catalog-item:hover .catalog-overlay {
+      opacity: 1;
+    }
+
+    .catalog-overlay h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+    }
+
+    .catalog-overlay p {
+      margin-top: 0.4rem;
+      opacity: 0.85;
+      font-size: 1rem;
+    }
+
+    /* =============== MODAL =============== */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999999;
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.4s;
+      padding: 2rem;
+    }
+
+    .modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      width: 900px;
+      max-width: 95%;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(18px);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 40px 120px rgba(0,0,0,0.4);
+      transform: scale(0.9);
+      transition: 0.4s;
+    }
+
+    .modal.active .modal-box {
+      transform: scale(1);
+    }
+
+    .modal-img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+    }
+
+    .modal-content {
+      padding: 2rem;
+      color: white;
+    }
+
+    .modal-content h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-content p {
+      opacity: 0.8;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-price {
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    .buy-btn {
+      padding: 0.9rem 2.6rem;
+      border-radius: 50px;
+      border: none;
+      background: white;
+      color: black;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      transition: 0.3s;
+    }
+
+    .buy-btn:hover {
+      transform: translateY(-4px);
+      background: var(--accent);
+      color: white;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 25px;
+      right: 35px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+
+    .modal-close:hover {
+      opacity: 1;
+      transform: rotate(10deg);
+    }
+
+    /* =============== FOOTER =============== */
+    footer {
+      padding: 4rem 10%;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* =============== RESPONSIVE =============== */
+    @media (max-width: 950px) {
+      header { padding: 1rem 2rem; }
+      nav { display: none; }
+
+      .hero-text h1 { font-size: 14vw; }
+
+      .exploded-view-container { height: 480px; }
+
+      .layer { width: 260px; height: 260px; }
+
+      .layer-info {
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
+        width: 100%;
+        margin-top: 2rem;
+      }
+
+      .catalog {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    body {
+  cursor: default !important;
+}
+
+.about, .why, .reviews {
+  padding: 60px 20px;
+  text-align: center;
+  background: #f9f9f9;
+}
+
+.about h2, .why h2, .reviews h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.about p {
+  max-width: 600px;
+  margin: auto;
+  line-height: 1.6;
+  color: #555;
+}
+
+.why-box {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.why-box div {
+  background: white;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.review-box {
+  background: white;
+  padding: 20px;
+  margin: 15px auto;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* CONTACT SECTION */
+.contact {
+  padding: 6rem 10%;
+  text-align: center;
+  background: #f9f9f9;
+}
+
+.contact h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.contact-sub {
+  color: #777;
+  margin-bottom: 3rem;
+}
+
+.contact-box {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.contact-item {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 250px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.contact-item h3 {
+  margin-bottom: 1rem;
+}
+
+.contact-item a {
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.contact-item a:hover {
+  text-decoration: underline;
+}
+
+/* TRUST SECTION */
+
+.trust {
+  padding: 5rem 10%;
+  background: #ffffff;
+}
+
+.trust-container {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 25px;
+}
+
+.trust-box {
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px);
+  padding: 35px 25px;
+  text-align: center;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.trust-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+}
+
+.trust-box i {
+  font-size: 30px;
+  margin-bottom: 15px;
+  color: #a48b74;
+}
+
+.trust-box h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.trust-box p {
+  font-size: 14px;
+  color: #666;
+}
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+.trust-container {
+  grid-template-columns: repeat(2,1fr);
+}
+
+}
+
+@media (max-width: 500px) { 
+
+.trust-container {
+  grid-template-columns: 1fr;
+}
+
+}
+
+ 
+/* =============== MOBILE LUXURY =============== */
+@media (max-width: 768px) {
+  header { padding: 1rem 1.5rem !important; }
+  nav { display: none !important; }
+  .menu-btn { display: block !important; }
+  .hero-text h1 { font-size: 13vw !important; }
+  
+  /* EXPLODED VIEW BECOMES A SELECTOR STACK */
+  .exploded-view-container { 
+    height: auto !important; 
+    min-height: 600px;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    padding-top: 30px !important;
+    gap: 0 !important;
+  }
+  
+  /* HIDE ALL LAYERS BY DEFAULT ON MOBILE */
+  .layer { 
+    display: none !important; /* Hidden by default */
+    width: 260px !important; 
+    height: 260px !important; 
+    position: relative !important;
+    margin-bottom: 25px !important;
+    
+    /* BUT WHEN ACTIVE - SHOW AS PERFECT CIRCLE */
+    border-radius: 50% !important; 
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25) !important;
+    transform: none !important;
+    opacity: 1 !important;
+    z-index: 10 !important;
+  }
+  
+  /* ONLY SHOW THE ACTIVE LAYER */
+  .layer.active { 
+    display: block !important;
+  }
+
+  .layer-info { 
+    position: relative !important; 
+    top: auto !important; 
+    left: auto !important;
+    transform: none !important; 
+    width: 85% !important; 
+    margin: 10px auto 30px auto !important; 
+    z-index: 20 !important; 
+    opacity: 1 !important; 
+    background: rgba(255,255,255,0.95) !important;
+  }
+  
+  .controls { 
+    bottom: auto !important; 
+    margin-top: 25px !important;
+    position: relative !important;
+    z-index: 30 !important; 
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Better button spacing */
+  .layer-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.7rem;
+  }
+
+  .catalog { grid-template-columns: 1fr !important; padding: 3rem 5% !important; }
+  .trust-container { grid-template-columns: 1fr !important; }
+  .contact-box { flex-direction: column !important; align-items: center; }
+  .contact-item { width: 90% !important; margin-bottom: 15px; }
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="glow"></div>
+  <div class="noise"></div>
+
+  <header>
+    <div class="brand">RUDOHAGE</div> 
+
+    <nav>
+      <a href="#autopsy">Autopsy</a>
+      <a href="#catalog">Catalog</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <i class="fas fa-bars menu-btn" onclick="openMenu()"></i>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <i class="fas fa-times close-btn" onclick="closeMenu()"></i>
+    <a href="#autopsy" onclick="closeMenu()">Autopsy</a>
+    <a href="#catalog" onclick="closeMenu()">Catalog</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero reveal">
+    <div class="hero-text">
+      <h1>Un Made.</h1>
+      <p>Luxury craftsmanship dissected with precision</p>
+
+      <button class="hero-btn" onclick="document.getElementById('autopsy').scrollIntoView({behavior:'smooth'})">
+        Explore Craft
+      </button>
+    </div>
+  </section>
+
+  <!-- AUTOPSY -->
+  <section class="exhibit-section reveal" id="autopsy">
+    <div class="section-header">
+      <h2 class="section-title">THE RESULT.</h2>
+      <p>Rotate the object. Select layers. Observe perfection.</p>
+    </div>
+
+    <div class="exploded-view-container" id="exploder">
+
+      <div class="layer layer-1 active" data-title="model 1"
+        data-info="pure wood crafted material. with precision crafted by hand.full polished and colured with red using spray."></div>
+
+      <div class="layer layer-2 active" data-title="model 2"
+        data-info="pure wood hand crafted material. in a round four layer towards the needle of the clock that's look asthetic."></div>
+
+      <div class="layer layer-3 active" data-title="model 3"
+        data-info="pure hand crafted material. i used the heat flames to colour of thre top thats look more satisfying."></div>
+
+      <div class="layer layer-4 active" data-title="model 4"
+        data-info="pure hand crafted material. like a boll with anger that's blew flames lile a heat wave."></div>
+
+      <div class="layer-info show" id="layerInfo">
+        <h3 id="infoTitle">THE COLLECTION.</h3>
+        <p id="infoText">An exploded view of handcrafted components.</p>
+      </div>
+
+      <div class="controls">
+        <button class="layer-btn" onclick="setLayer(event,1)">model 1</button>
+        <button class="layer-btn" onclick="setLayer(event,2)">model 2</button>
+        <button class="layer-btn" onclick="setLayer(event,3)">model 3</button>
+        <button class="layer-btn" onclick="setLayer(event,4)">model 4</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOG -->
+  <section class="catalog reveal" id="catalog">
+    <div class="catalog-item" 
+    onclick="openModal(
+      'The Weekender',
+      '$850',
+      'https://i.pinimg.com/1200x/dd/24/16/dd2416cb65215dcdce5275e060ef5084.jpg',
+      'pure wood crafted material. with precision crafted by hand.full polished and colured with red using spray.'
+      )">
+      <img src="https://i.pinimg.com/1200x/dd/24/16/dd2416cb65215dcdce5275e060ef5084.jpg" class="catalog-img">
+      <div class="catalog-overlay">
+        <h3>The Weekender</h3>
+        <p>$850</p>
+      </div>
+    </div>
+
+     <div class="catalog-item" 
+    onclick="openModal(
+      'The Satchel',
+      '$620',
+      'https://i.pinimg.com/736x/fb/41/36/fb41364b735e3b458b6a0e8b1a38873b.jpg',
+      'pure wood hand crafted material. in a round four layer towards the needle of the clock thats look asthetic.'
+  )">   
+    <img src="https://i.pinimg.com/736x/fb/41/36/fb41364b735e3b458b6a0e8b1a38873b.jpg" class="catalog-img">
+      <div class="catalog-overlay">
+        <h3>The Satchel</h3>
+        <p>$620</p>
+      </div>
+    </div>
+
+    <div class="catalog-item"
+    onclick="openModal(
+    'The Tote',
+    '$450',
+    'https://i.pinimg.com/736x/14/b3/6b/14b36b7229ccc17cb8e403977ffaac30.jpg',
+   'pure hand crafted material. i used the heat flames to colour of three top thats look more satisfying.'
+  )">
+      <img src="https://i.pinimg.com/736x/14/b3/6b/14b36b7229ccc17cb8e403977ffaac30.jpg" class="catalog-img">
+      <div class="catalog-overlay">
+        <h3>The Tote</h3>
+        <p>$450</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST SECTION -->
+<section class="trust">
+  <div class="trust-container">
+
+    <div class="trust-box">
+      <i class="fas fa-truck"></i>
+      <h3>Free Shipping</h3>
+      <p>Fast and secure delivery across India.</p>
+    </div>
+
+    <div class="trust-box">
+      <i class="fas fa-lock"></i>
+      <h3>Secure Order</h3>
+      <p>Direct WhatsApp ordering with safe communication.</p>
+    </div>
+
+    <div class="trust-box">
+      <i class="fas fa-hammer"></i>
+      <h3>Handcrafted</h3>
+      <p>Each product is handmade with premium materials.</p>
+    </div>
+
+    <div class="trust-box">
+      <i class="fas fa-box-open"></i>
+      <h3>Limited Stock</h3>
+      <p>Exclusive pieces produced in small batches.</p>
+    </div>
+
+  </div>
+</section>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal">
+    <i class="fas fa-times modal-close" onclick="closeModal()"></i>
+    <div class="modal-box">
+      <img id="modalImg" class="modal-img" src="">
+      <div class="modal-content">
+        <h2 id="modalTitle"></h2>
+        <div class="modal-price" id="modalPrice"></div>
+        <p id="modalDesc"></p>
+        <button class="buy-btn" id="buyBtn">Buy Now</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+      // CUSTOM CURSOR
+    const cursor = document.getElementById("cursor");
+    const outline = document.getElementById("cursorOutline");
+
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.top = e.clientY + "px";
+      cursor.style.left = e.clientX + "px";
+      outline.style.top = e.clientY + "px";
+      outline.style.left = e.clientX + "px";
+    });
+
+    // MOBILE MENU
+    function openMenu() {
+      document.getElementById("mobileMenu").classList.add("active");
+    }
+    function closeMenu() {
+      document.getElementById("mobileMenu").classList.remove("active");
+    }
+
+    // SCROLL REVEAL
+    function revealOnScroll() {
+      document.querySelectorAll(".reveal").forEach(el => {
+        const rect = el.getBoundingClientRect().top;
+        if (rect < window.innerHeight - 120) {
+          el.classList.add("active");
+        }
+      });
+    }
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll();
+
+            // LAYER SYSTEM
+    const layers = document.querySelectorAll(".layer");
+    const btns = document.querySelectorAll(".layer-btn");
+
+    const infoTitle = document.getElementById("infoTitle");
+    const infoText = document.getElementById("infoText");
+
+    function setLayer(event, layerIndex) {
+      btns.forEach(b => b.classList.remove("active-btn"));
+      event.target.classList.add("active-btn");
+
+      layers.forEach((layer, index) => {
+        layer.classList.remove("active");
+
+        if (layerIndex === 0) {
+          layer.classList.add("active");
+          layer.style.transition = "all 0.8s cubic-bezier(0.22, 1, 0.36, 1)";
+          layer.style.transform = `translateZ(${index * 150}px) scale(${0.55 + index * 0.05})`;
+          infoTitle.innerText = "The Anatomy";
+          infoText.innerText = "An exploded view of handcrafted components.";
+        } else {
+          if (index + 1 === layerIndex) {
+            layer.classList.add("active");
+            layer.style.transition = "all 0.8s cubic-bezier(0.22, 1, 0.36, 1)";
+            layer.style.transform = `translateZ(0px) scale(1)`;
+            infoTitle.innerText = layer.getAttribute("data-title");
+            infoText.innerText = layer.getAttribute("data-info");
+          } else {
+            layer.style.transform = `translateZ(-800px) scale(0.05)`;
+          }
+        }
+      });
+    }
+
+    // Initialize (Show first model on load for mobile)
+    if (window.innerWidth < 768) {
+      setLayer({ target: btns[0] }, 1);
+    }
+
+    setTimeout(() => {
+      layers.forEach((layer, index) => {
+        layer.classList.add("active");
+        layer.style.transform = `translateZ(${index * 150}px) scale(${0.82 + index * 0.05})`;
+      });
+    }, 500);
+      
+    const container = document.getElementById("exploder");
+    container.addEventListener("mousemove", (e) => {
+      const x = (window.innerWidth / 2 - e.pageX) / 40;
+      const y = (window.innerHeight / 2 - e.pageY) / 40;
+
+      layers.forEach(layer => {
+        if (layer.classList.contains("active")) {
+          layer.style.transform += ` rotateY(${x}deg) rotateX(${y}deg)`;
+        }
+      });
+    });
+
+    function openModal(title, price, img, desc) {
+  document.getElementById("modal").classList.add("active");
+  document.getElementById("modalTitle").innerText = title;
+  document.getElementById("modalPrice").innerText = price;
+  document.getElementById("modalImg").src = img;
+  document.getElementById("modalDesc").innerText = desc;
+
+  const message = `Hello, I want to order ${title} for ${price}.`;
+  const phoneNumber = "917091955862";
+
+  document.getElementById("buyBtn").onclick = function() {
+    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, "_blank");
+  };
+}
+
+function closeModal() {
+  document.getElementById("modal").classList.remove("active");
+}
+  </script>
+
+<!-- ABOUT SECTION -->
+<section class="about">
+  <h2>About Our Brand</h2>
+<p>
+RUDOHAGE was founded by Anand Prakash with a single belief — true luxury lies in precision.
+Every piece is handcrafted, layer by layer, using premium materials and time-honored techniques.
+We do not mass produce. We create legacy pieces designed to age beautifully..
+</p>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="why">
+  <h2>Why Choose Us</h2>
+  <div class="why-box">
+    <div>✔ 100% Handcrafted</div>
+    <div>✔ Premium Quality Materials</div>
+    <div>✔ Limited Collection</div>
+    <div>✔ Direct WhatsApp Support</div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews">
+  <h2>Customer Reviews</h2>
+  <div class="review-box">
+    <p>⭐⭐⭐⭐⭐</p>
+    <p>"Amazing craftsmanship and premium feel!"</p>
+  </div>
+  <div class="review-box">
+    <p>⭐⭐⭐⭐⭐</p>
+    <p>"Worth every rupee. Highly recommended."</p>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section class="contact" id="contact">
+  <h2>Contact Us</h2>
+  <p class="contact-sub">Have questions or custom order requests? Reach out to us.</p>
+
+  <div class="contact-box">
+    <div class="contact-item">
+      <h3>Email</h3>
+      <p>
+        <a href="mailto:anaprakash234@gmail.com">
+          anaprakash234@gmail.com
+        </a>
+      </p>
+    </div>
+
+    <div class="contact-item">
+      <h3>Business Hours</h3>
+      <p>Mon - Sat : 10 AM - 7 PM</p>
+    </div>
+
+    <div class="contact-item">
+      <h3>WhatsApp</h3>
+      <p>
+        <a href="https://wa.me/917091955862" target="_blank">
+          Chat on WhatsApp
+        </a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 RUDOHAGE. Crafted by Anand Prakash.. All Rights Reserved.</p>
+</footer>
+
+<!-- LUXURY STYLE WHATSAPP BUTTON -->
+<a href="https://wa.me/917091955862?text=Hello,%20I%20am%20interested%20in%20your%20products!" 
+   target="_blank" 
+   class="whatsapp-lux">
+   <i class="fab fa-whatsapp"></i>
+</a>
+
+<style>
+.whatsapp-lux {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 65px;
+  height: 65px;
+  background: rgba(37, 211, 102, 0.85); /* WhatsApp green with transparency */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 32px;
+  z-index: 10000;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+  backdrop-filter: blur(6px);
+  transition: all 0.3s ease;
+}
+
+.whatsapp-lux:hover {
+  transform: scale(1.15);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+  background: rgba(37, 211, 102, 1); /* Full green on hover */
+}
+</style>
+
+</body>
+</html>
