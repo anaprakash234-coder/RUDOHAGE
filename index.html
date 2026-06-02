@@ -1043,11 +1043,31 @@
       setLayer({ target: btns[0] }, 1);
     }
 
-    setTimeout(() => {
-      layers.forEach((layer, index) => {
-        layer.classList.add("active");
-        layer.style.transform = `translateZ(${index * 150}px) scale(${0.82 + index * 0.05})`;
-      });
+     setTimeout(() => {
+      // Check if screen width is less than 768px (Mobile/Tablet)
+      if (window.innerWidth < 768) {
+        
+        // MOBILE FIX: Only show Model 1, hide the rest
+        layers.forEach((layer, index) => {
+          if (index === 0) {
+            // Show first layer
+            layer.classList.add("active");
+            layer.style.transform = "translateZ(0px) scale(1)";
+            layer.style.display = "block"; 
+          } else {
+            // Hide other layers
+            layer.classList.remove("active");
+            layer.style.display = "none";
+          }
+        });
+        
+      } else {
+        // DESKTOP: Run the original 3D exploded view animation
+        layers.forEach((layer, index) => {
+          layer.classList.add("active");
+          layer.style.transform = `translateZ(${index * 150}px) scale(${0.82 + index * 0.05})`;
+        });
+      }
     }, 500);
       
     const container = document.getElementById("exploder");
