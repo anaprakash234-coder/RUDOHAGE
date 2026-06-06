@@ -139,11 +139,118 @@ rows="5"
 placeholder="Write your review">
 </textarea>
 
-<button>
+<button id="publishBtn">
 Publish Review
 </button>
 
 </div>
+
+  <script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+getDocs,
+query,
+orderBy
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
+  authDomain: "rudohage.firebaseapp.com",
+  projectId: "rudohage",
+  storageBucket: "rudohage.firebasestorage.app",
+  messagingSenderId: "487042116246",
+  appId: "1:487042116246:web:990d65636addd6d653f0b7",
+  measurementId: "G-6GLB5PPXMY"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function loadReviews() {
+
+const container =
+document.getElementById("reviewsContainer");
+
+container.innerHTML = "";
+
+const q = query(
+collection(db,"reviews"),
+orderBy("date","desc")
+);
+
+const snapshot = await getDocs(q);
+
+snapshot.forEach((doc)=>{
+
+const data = doc.data();
+
+container.innerHTML += `
+<div class="review-card">
+
+<h3>${data.name}</h3>
+
+<div class="stars">
+${"★".repeat(data.rating)}
+</div>
+
+<p>${data.review}</p>
+
+</div>
+`;
+
+});
+
+}
+
+document
+.getElementById("publishBtn")
+.addEventListener("click", async ()=>{
+
+const name =
+document.getElementById("reviewName").value;
+
+const review =
+document.getElementById("reviewText").value;
+
+const rating =
+parseInt(
+document.getElementById("reviewRating").value
+);
+
+if(!name || !review){
+
+alert("Please fill all fields");
+
+return;
+
+}
+
+await addDoc(
+collection(db,"reviews"),
+{
+name,
+review,
+rating,
+date:Date.now()
+}
+);
+
+document.getElementById("reviewName").value="";
+document.getElementById("reviewText").value="";
+
+loadReviews();
+
+});
+
+loadReviews();
+
+</script>
 
 </body>
 </html>
