@@ -1134,17 +1134,25 @@ We do not mass produce. We create legacy pieces designed to age beautifully..
 
 <!-- REVIEWS -->
 <section class="reviews">
-  <h2>Customer Reviews</h2>
-  <div class="review-box">
-    <p>★★★★★</p>
-    <p>"Amazing craftsmanship and premium feel!"</p>
-  </div>
-  <div class="review-box">
-    <p>★★★★★</p>
-    <p>"Worth every rupee. Highly recommended."</p>
-  </div>
-</section>
 
+<h2>Client Impressions</h2>
+
+<div id="homeReviews">
+
+<div class="review-box">
+<p>Loading reviews...</p>
+</div>
+
+</div>
+
+<br>
+
+<a href="reviews.html" class="hero-btn">
+View All Reviews
+</a>
+
+</section>
+  
 <!-- CONTACT SECTION -->
 <section class="contact" id="contact">
   <h2>Contact Us</h2>
@@ -1228,6 +1236,83 @@ document.onkeydown = function(e) {
         return false;
     }
 };
+</script>
+
+  <script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs,
+query,
+orderBy,
+limit
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
+  authDomain: "rudohage.firebaseapp.com",
+  projectId: "rudohage",
+  storageBucket: "rudohage.firebasestorage.app",
+  messagingSenderId: "487042116246",
+  appId: "1:487042116246:web:990d65636addd6d653f0b7",
+  measurementId: "G-6GLB5PPXMY"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+async function loadHomeReviews(){
+
+const container =
+document.getElementById("homeReviews");
+
+container.innerHTML = "";
+
+const q = query(
+collection(db,"reviews"),
+orderBy("date","desc"),
+limit(3)
+);
+
+const snapshot =
+await getDocs(q);
+
+snapshot.forEach(doc=>{
+
+const data = doc.data();
+
+container.innerHTML += `
+
+<div class="review-box">
+
+<p>
+${"★".repeat(data.rating)}
+</p>
+
+<p>
+"${data.review}"
+</p>
+
+<strong>
+— ${data.name}
+</strong>
+
+</div>
+
+`;
+
+});
+
+}
+
+loadHomeReviews();
+
 </script>
 
 </body>
