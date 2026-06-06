@@ -106,16 +106,6 @@ opacity:.9;
 Thoughts from collectors and admirers of RUDOHAGE.
 </p>
 
-<div id="reviewsContainer">
-
-<div class="review-card">
-<h3>RUDOHAGE Visitor</h3>
-<div class="stars">★★★★★</div>
-<p>Beautiful handcrafted work.</p>
-</div>
-
-</div>
-
 <div class="form-box">
 
 <h2>Share Your Experience</h2>
@@ -145,6 +135,12 @@ Publish Review
 
 </div>
 
+<h2 style="margin-top:60px;margin-bottom:25px;text-align:center;">
+Latest Reviews
+</h2>
+
+<div id="reviewsContainer"></div>
+
   <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -155,7 +151,8 @@ collection,
 addDoc,
 getDocs,
 query,
-orderBy
+orderBy,
+limit
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -181,7 +178,8 @@ container.innerHTML = "";
 
 const q = query(
 collection(db,"reviews"),
-orderBy("date","desc")
+orderBy("date","desc"),
+limit(20)
 );
 
 const snapshot = await getDocs(q);
