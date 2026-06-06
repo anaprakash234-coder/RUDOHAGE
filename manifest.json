@@ -1,0 +1,15 @@
+{
+  "name": "RUDOHAGE",
+  "short_name": "RUDOHAGE",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f6f2ea",
+  "theme_color": "#a48b74",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
