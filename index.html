@@ -535,25 +535,14 @@
   flex-wrap:nowrap;
 }
 
-.modal-buttons .buy-btn,
-.modal-buttons .view-btn{
-  flex:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  height:50px;
-  padding:0;
-  text-align:center;
-  font-size:0.8rem;
-  letter-spacing:1px;
-  white-space:nowrap;
-}
-
 .view-btn{
+  padding:0.9rem 2.6rem;
   border-radius:50px;
   background:white;
   color:black;
   text-decoration:none;
+  font-size:0.85rem;
+  letter-spacing:3px;
   text-transform:uppercase;
   border:none;
   transition:0.3s;
@@ -852,6 +841,25 @@
   white-space:nowrap;
   font-size:0.7rem;
   letter-spacing:1px;
+}
+
+    @media (max-width:768px){
+
+  .modal-buttons{
+    display:flex;
+    gap:8px;
+  }
+
+  .buy-btn,
+  .view-btn{
+    flex:1;
+    padding:12px 8px;
+    font-size:0.7rem;
+    letter-spacing:1px;
+    text-align:center;
+    white-space:nowrap;
+  }
+
 }
 
   </style>
