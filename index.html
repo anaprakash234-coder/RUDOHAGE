@@ -462,17 +462,18 @@
       pointer-events: auto;
     }
 
-    .modal-box {
-      width: 900px;
-      max-width: 95%;
-      background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(18px);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: 0 40px 120px rgba(0,0,0,0.4);
-      transform: scale(0.9);
-      transition: 0.4s;
-    }
+   .modal-box {
+  width: 900px;
+  max-width: 95%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(18px);
+  border-radius: var(--radius);
+  box-shadow: 0 40px 120px rgba(0,0,0,0.4);
+  transform: scale(0.9);
+  transition: 0.4s;
+}
 
     .modal.active .modal-box {
       transform: scale(1);
@@ -842,6 +843,13 @@
   .trust-container { grid-template-columns: 1fr !important; }
   .contact-box { flex-direction: column !important; align-items: center; }
   .contact-item { width: 90% !important; margin-bottom: 15px; }
+}
+    .buy-btn,
+.view-btn{
+  flex:1;
+  white-space:nowrap;
+  font-size:0.7rem;
+  letter-spacing:1px;
 }
 
   </style>
