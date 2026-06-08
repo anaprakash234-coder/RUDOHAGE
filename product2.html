@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RUDOHAGE | Crimson Orbit</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Manrope:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--bg:#f6f2ea;
+--text:#111;
+--accent:#a48b74;
+--radius:22px;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:var(--bg);
+font-family:'Manrope',sans-serif;
+color:var(--text);
+padding:40px 8%;
+}
+
+.brand{
+text-align:center;
+margin-bottom:50px;
+}
+
+.brand a{
+text-decoration:none;
+color:#111;
+font-size:3rem;
+font-family:'Cormorant Garamond',serif;
+font-weight:600;
+}
+
+.product-container{
+max-width:1300px;
+margin:auto;
+display:flex;
+gap:60px;
+align-items:flex-start;
+}
+
+.product-image{
+flex:1;
+}
+
+.product-image img{
+width:100%;
+border-radius:22px;
+box-shadow:0 15px 50px rgba(0,0,0,.08);
+}
+
+.product-info{
+flex:1;
+}
+
+.product-info h1{
+font-size:3rem;
+font-family:'Cormorant Garamond',serif;
+margin-bottom:10px;
+}
+
+.piece{
+opacity:.7;
+margin-bottom:8px;
+}
+
+.made{
+margin-bottom:20px;
+}
+
+.rating{
+font-size:20px;
+margin-bottom:20px;
+}
+
+.price{
+font-size:2.2rem;
+font-weight:700;
+margin-bottom:20px;
+}
+
+.delivery{
+background:white;
+padding:15px;
+border-radius:12px;
+margin-bottom:25px;
+box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+
+.buttons{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+margin-bottom:30px;
+}
+
+.buy-btn,
+.share-btn{
+padding:15px 30px;
+border:none;
+border-radius:50px;
+cursor:pointer;
+text-decoration:none;
+font-size:15px;
+}
+
+.buy-btn{
+background:black;
+color:white;
+}
+
+.share-btn{
+background:white;
+color:black;
+}
+
+.story,
+.specs,
+.review-section{
+margin-top:60px;
+}
+
+.story h2,
+.specs h2,
+.review-section h2{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+margin-bottom:20px;
+}
+
+.story p{
+line-height:1.8;
+}
+
+.spec-box{
+background:white;
+padding:20px;
+border-radius:20px;
+box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+
+.spec-box p{
+margin-bottom:10px;
+}
+
+.review-card{
+background:white;
+padding:20px;
+border-radius:20px;
+margin-top:20px;
+box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+
+.form-box{
+margin-top:40px;
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:15px;
+margin-top:10px;
+margin-bottom:20px;
+border:none;
+background:#f4f4f4;
+border-radius:12px;
+font-size:15px;
+}
+
+.publish-btn{
+background:black;
+color:white;
+padding:15px 30px;
+border:none;
+border-radius:50px;
+cursor:pointer;
+}
+
+@media(max-width:768px){
+
+body{
+padding:20px;
+}
+
+.product-container{
+flex-direction:column;
+}
+
+.product-info h1{
+font-size:2.2rem;
+}
+
+.brand a{
+font-size:2.2rem;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="brand">
+<a href="index.html">
+RUDOHAGE
+</a>
+</div>
+
+<div class="product-container">
+
+<div class="product-image">
+
+<img src="https://anaprakash234-coder.github.io/RUDOHAGE/image/fire-clock-2.png">
+
+</div>
+
+<div class="product-info">
+
+<h1>Crimson Orbit</h1>
+  
+<div class="piece">
+Piece No. 02
+</div>
+
+<div class="made">
+Handmade by RUDOHAGE
+</div>
+
+<div class="rating">
+★★★★★ 4.9
+</div>
+
+<div class="price">
+₹2500
+</div>
+
+<div class="delivery">
+🚚 Delivery within 4–8 business days
+</div>
+
+<div class="buttons">
+
+<a
+href="https://wa.me/917091955862?text=Hello%20I%20want%20to%20buy%20Inferno%20Core"
+class="buy-btn">
+
+Buy Now
+
+</a>
+
+<button
+class="share-btn"
+id="shareBtn">
+
+Share
+
+</button>
+
+</div>
+
+<div class="story">
+
+<h2>
+The Story
+</h2>
+
+<p>
+
+  Inspired by celestial motion and crafted with precision,
+  Crimson Orbit is a bold expression of modern artistry. 
+  Designed to stand out while remaining timeless,
+  it reflects the signature craftsmanship and distinctive identity of RUDOHAGE.
+
+
+</p>
+
+</div>
+
+<div class="specs">
+
+<h2>
+Specifications
+</h2>
+
+<div class="spec-box">
+
+<p>
+Material : Premium Wood
+</p>
+
+<p>
+Finish : Matte
+</p>
+
+<p>
+Handmade : Yes
+</p>
+
+<p>
+Collection : RUDOHAGE
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="review-section">
+
+<h2>Customer Reviews</h2>
+
+<div id="reviewsContainer"></div>
+
+<div class="form-box">
+
+<h2>Write a Review</h2>
+
+<input
+type="text"
+id="reviewName"
+placeholder="Your Name">
+
+<select id="reviewRating">
+
+<option value="5">★★★★★</option>
+<option value="4">★★★★</option>
+<option value="3">★★★</option>
+<option value="2">★★</option>
+<option value="1">★</option>
+
+</select>
+
+<textarea
+id="reviewText"
+rows="5"
+placeholder="Write your review">
+</textarea>
+
+<button
+class="publish-btn"
+id="publishBtn">
+
+Publish Review
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc,
+getDocs,
+query,
+orderBy
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
+
+authDomain: "rudohage.firebaseapp.com",
+
+projectId: "rudohage",
+
+storageBucket: "rudohage.firebasestorage.app",
+
+messagingSenderId: "487042116246",
+
+appId: "1:487042116246:web:990d65636addd6d653f0b7",
+
+measurementId: "G-6GLB5PPXMY"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+async function loadReviews(){
+
+const container =
+document.getElementById(
+"reviewsContainer"
+);
+
+container.innerHTML="";
+
+const q = query(
+collection(db,"product2_reviews"),
+orderBy("date","desc")
+);
+
+const snapshot =
+await getDocs(q);
+
+snapshot.forEach((doc)=>{
+
+const data = doc.data();
+
+container.innerHTML += `
+
+<div class="review-card">
+
+<h3>${data.name}</h3>
+
+<div class="stars">
+
+${"★".repeat(data.rating)}
+
+</div>
+
+<p>${data.review}</p>
+
+</div>
+
+`;
+
+});
+
+}
+
+document
+.getElementById("publishBtn")
+.addEventListener("click",
+async ()=>{
+
+const name =
+document.getElementById(
+"reviewName"
+).value;
+
+const review =
+document.getElementById(
+"reviewText"
+).value;
+
+const rating =
+parseInt(
+document.getElementById(
+"reviewRating"
+).value
+);
+
+if(!name || !review){
+
+alert(
+"Please fill all fields"
+);
+
+return;
+
+}
+
+await addDoc(
+collection(
+db,
+"product2_reviews"
+),
+{
+name,
+review,
+rating,
+date:Date.now()
+}
+);
+
+document.getElementById(
+"reviewName"
+).value="";
+
+document.getElementById(
+"reviewText"
+).value="";
+
+loadReviews();
+
+});
+
+document
+.getElementById("shareBtn")
+.addEventListener("click",
+async()=>{
+
+if(navigator.share){
+
+await navigator.share({
+title:"Crimson Orbit",
+url:window.location.href
+});
+
+}else{
+
+navigator.clipboard.writeText(
+window.location.href
+);
+
+alert("Link copied");
+
+}
+
+});
+
+loadReviews();
+
+</script>
+
+</body>
+</html>
