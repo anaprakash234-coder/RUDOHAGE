@@ -1036,9 +1036,9 @@
         <div class="modal-price" id="modalPrice"></div>
         <p id="modalDesc"></p>
         <button class="buy-btn" id="buyBtn">Buy Now</button>
-         <a href="product1.html" class="view-btn">
-      View Product
-    </a>
+        <a href="#" class="view-btn" id="viewBtn">
+  View Product
+</a>
       </div>
     </div>
   </div>
@@ -1153,7 +1153,8 @@
       });
     });
 
-    function openModal(title, price, img, desc) {
+   function openModal(title, price, img, desc) {
+
   document.getElementById("modal").classList.add("active");
   document.getElementById("modalTitle").innerText = title;
   document.getElementById("modalPrice").innerText = price;
@@ -1164,8 +1165,23 @@
   const phoneNumber = "917091955862";
 
   document.getElementById("buyBtn").onclick = function() {
-    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, "_blank");
+    window.open(
+      `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,
+      "_blank"
+    );
   };
+
+  let productPage = "product1.html";
+
+  if(title === "Crimson Orbit"){
+    productPage = "product2.html";
+  }
+
+  if(title === "Ember Crown"){
+    productPage = "product3.html";
+  }
+
+  document.getElementById("viewBtn").href = productPage;
 }
 
 function closeModal() {
