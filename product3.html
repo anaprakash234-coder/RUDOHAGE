@@ -259,147 +259,68 @@ font-size:3rem;
 @media(max-width:768px){
 
 body{
-padding:90px 20px 20px;
+padding:90px 15px 20px;
+overflow-x:hidden;
 }
 
 .product-container{
 flex-direction:column;
 }
 
-    .hero-piece h1{
-font-size:2rem;
+.hero-piece{
+text-align:center;
+margin-bottom:35px;
+padding:0 10px;
 }
 
 .hero-piece-number{
-font-size:11px;
-letter-spacing:3px;
+font-size:10px;
+letter-spacing:2px;
+margin-bottom:8px;
+}
+
+.hero-piece h1{
+font-size:1.7rem;
+line-height:1.1;
+margin-bottom:8px;
 }
 
 .hero-piece p{
-font-size:14px;
+font-size:12px;
+letter-spacing:1.5px;
 }
 
 .product-info h1{
-font-size:2.2rem;
+font-size:2rem;
 }
 
 .product-brand{
-font-size:2rem;
-}
-
-}
-
-.product-header{
-padding:1rem 1.5rem;
-}
-
-.product-brand{
-font-size:2rem;
-}
-
-.hero-piece h1{
-font-size:3rem;
-}
-
-.related-products{
-margin-top:80px;
-}
-
-.related-products h2{
-font-family:'Cormorant Garamond',serif;
-font-size:2rem;
-margin-bottom:25px;
-}
-
-.related-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-}
-
-.related-card{
-background:white;
-padding:20px;
-border-radius:20px;
-text-decoration:none;
-color:black;
-box-shadow:0 5px 20px rgba(0,0,0,.05);
-transition:.3s;
-}
-
-.related-card:hover{
-transform:translateY(-8px);
-}
-
-.related-card h3{
-font-family:'Cormorant Garamond',serif;
 font-size:1.8rem;
-margin-bottom:10px;
 }
-
-.piece-number{
-font-size:12px;
-letter-spacing:3px;
-text-transform:uppercase;
-opacity:.6;
-margin-bottom:12px;
-}
-
-.hero-piece{
-text-align:center;
-margin-bottom:60px;
-}
-
-.hero-piece-number{
-letter-spacing:4px;
-font-size:12px;
-opacity:.6;
-text-transform:uppercase;
-margin-bottom:15px;
-}
-
-.hero-piece h1{
-font-family:'Cormorant Garamond',serif;
-font-size:5rem;
-font-weight:600;
-line-height:1;
-margin-bottom:15px;
-}
-
-.hero-piece p{
-font-size:15px;
-letter-spacing:3px;
-text-transform:uppercase;
-opacity:.7;
-}
-
 
 .gallery{
-display:flex;
-gap:10px;
-margin-bottom:15px;
+overflow-x:auto;
+scroll-snap-type:x mandatory;
+padding-bottom:8px;
 }
 
 .gallery img{
-width:90px;
-height:90px;
-object-fit:cover;
-border-radius:12px;
-cursor:pointer;
-border:2px solid transparent;
-transition:.3s;
-}
-
-.gallery img:hover{
-border-color:black;
+width:75px;
+height:75px;
+flex-shrink:0;
+scroll-snap-align:center;
 }
 
 #mainImage{
 width:100%;
-border-radius:22px;
-box-shadow:0 15px 50px rgba(0,0,0,.08);
+max-width:100%;
 }
 
+.related-grid{
+grid-template-columns:1fr;
+}
+
+}
 </style>
 </head>
 
