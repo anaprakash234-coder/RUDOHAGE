@@ -238,89 +238,78 @@ border-radius:50px;
 cursor:pointer;
 }
 
-.signature{
-text-align:center;
-margin-top:100px;
-margin-bottom:80px;
-}
-
-.signature p{
-letter-spacing:4px;
-text-transform:uppercase;
-opacity:.6;
-margin-bottom:10px;
-}
-
-.signature h2{
-font-family:'Cormorant Garamond',serif;
-font-size:3rem;
-}
-
 @media(max-width:768px){
 
 body{
-padding:90px 15px 20px;
-overflow-x:hidden;
+padding:90px 20px 20px;
 }
 
 .product-container{
 flex-direction:column;
 }
 
-.hero-piece{
-text-align:center;
-margin-bottom:35px;
-padding:0 10px;
-}
-
-.hero-piece-number{
-font-size:10px;
-letter-spacing:2px;
-margin-bottom:8px;
-}
-
-.hero-piece h1{
-font-size:1.7rem;
-line-height:1.1;
-margin-bottom:8px;
-}
-
-.hero-piece p{
-font-size:12px;
-letter-spacing:1.5px;
-}
-
 .product-info h1{
-font-size:2rem;
+font-size:2.2rem;
 }
 
 .product-brand{
-font-size:1.8rem;
+font-size:2rem;
 }
 
-.gallery{
-overflow-x:auto;
-scroll-snap-type:x mandatory;
-padding-bottom:8px;
 }
 
-.gallery img{
-width:75px;
-height:75px;
-flex-shrink:0;
-scroll-snap-align:center;
+.product-header{
+padding:1rem 1.5rem;
 }
 
-#mainImage{
-width:100%;
-max-width:100%;
+.product-brand{
+font-size:2rem;
+}
+
+.related-products{
+margin-top:80px;
+}
+
+.related-products h2{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+margin-bottom:25px;
 }
 
 .related-grid{
-grid-template-columns:1fr;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
 }
 
+.related-card{
+background:white;
+padding:20px;
+border-radius:20px;
+text-decoration:none;
+color:black;
+box-shadow:0 5px 20px rgba(0,0,0,.05);
+transition:.3s;
 }
+
+.related-card:hover{
+transform:translateY(-8px);
+}
+
+.related-card h3{
+font-family:'Cormorant Garamond',serif;
+font-size:1.8rem;
+margin-bottom:10px;
+}
+
+.piece-number{
+font-size:12px;
+letter-spacing:3px;
+text-transform:uppercase;
+opacity:.6;
+margin-bottom:12px;
+}
+
 </style>
 </head>
 
@@ -334,44 +323,11 @@ RUDOHAGE
 
 </header>
 
-<div class="hero-piece">
-
-<div class="hero-piece-number">
-Piece No. 03
-</div>
-
-<h1>
-EMBER CROWN
-</h1>
-
-<p>
-A One-of-One Creation
-</p>
-
-</div>
-
 <div class="product-container">
 
 <div class="product-image">
 
-    <div class="gallery">
-
-<img onclick="changeImage(this.src)"
-src="https://anaprakash234-coder.github.io/RUDOHAGE/image/fire-clock-3.png">
-
-<img onclick="changeImage(this.src)"
-src="https://anaprakash234-coder.github.io/RUDOHAGE/image/fire-clock-8.png">
-
-<img onclick="changeImage(this.src)"
-src="https://anaprakash234-coder.github.io/RUDOHAGE/image/fire-clock-9.png">
-
-<img onclick="changeImage(this.src)"
-src="https://anaprakash234-coder.github.io/RUDOHAGE/image/fire-clock-10.png">
-
-</div>
-
-<img id="mainImage"
-src="https://anaprakash234-coder.github.io/RUDOHAGE/image/fire-clock-3.png">
+<img src="https://anaprakash234-coder.github.io/RUDOHAGE/image/fire-clock-3.png">
 
 </div>
 
@@ -540,18 +496,6 @@ Piece No. 02
 </a>
 
 </div>
-
-</div>
-
-<div class="signature">
-
-<p>
-Not Produced. Crafted.
-</p>
-
-<h2>
-RUDOHAGE
-</h2>
 
 </div>
 
@@ -764,17 +708,10 @@ alert("Link copied");
 });
 
 loadReviews();
-</script>
-
-<script>
-
-function changeImage(src){
-document.getElementById("mainImage").src = src;
-}
 
 </script>
 
- <script>
+    <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 
 document.onkeydown = function(e) {
@@ -788,7 +725,7 @@ document.onkeydown = function(e) {
     }
 };
 </script>
-       
+    
 
 </body>
 </html>
