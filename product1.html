@@ -28,20 +28,36 @@ body{
 background:var(--bg);
 font-family:'Manrope',sans-serif;
 color:var(--text);
-padding:40px 8%;
+
+padding:120px 8% 40px;
 }
 
-.brand{
-text-align:center;
-margin-bottom:50px;
+.product-header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:1000;
+
+padding:1.3rem 4rem;
+
+background:rgba(246,242,234,0.55);
+backdrop-filter:blur(18px);
+
+border-bottom:1px solid rgba(0,0,0,0.08);
+
+display:flex;
+align-items:center;
 }
 
-.brand a{
+.product-brand{
 text-decoration:none;
 color:#111;
-font-size:3rem;
+
 font-family:'Cormorant Garamond',serif;
+font-size:2.1rem;
 font-weight:600;
+letter-spacing:-1px;
 }
 
 .product-container{
@@ -90,6 +106,35 @@ margin-bottom:20px;
 font-size:2.2rem;
 font-weight:700;
 margin-bottom:20px;
+}
+
+.certificate{
+background:transparent;
+padding:0;
+margin-bottom:25px;
+line-height:2;
+font-size:15px;
+box-shadow:none;
+}
+
+.archive-status{
+background:#111;
+color:white;
+padding:18px 22px;
+border-radius:16px;
+margin-bottom:25px;
+}
+
+.status-label{
+font-size:11px;
+letter-spacing:4px;
+opacity:.7;
+margin-bottom:8px;
+}
+
+.status-value{
+font-family:'Cormorant Garamond',serif;
+font-size:1.8rem;
 }
 
 .delivery{
@@ -194,10 +239,60 @@ border-radius:50px;
 cursor:pointer;
 }
 
+.related-products{
+margin-top:80px;
+}
+
+.related-products h2{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+margin-bottom:25px;
+}
+
+.related-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.related-card{
+background:white;
+padding:20px;
+border-radius:20px;
+text-decoration:none;
+color:black;
+box-shadow:0 5px 20px rgba(0,0,0,.05);
+transition:.3s;
+}
+
+.related-card:hover{
+transform:translateY(-8px);
+}
+
+.related-card img{
+width:100%;
+border-radius:15px;
+margin-bottom:15px;
+}
+
+.related-card h3{
+font-family:'Cormorant Garamond',serif;
+font-size:1.8rem;
+margin-bottom:10px;
+}
+
+.piece-number{
+font-size:12px;
+letter-spacing:3px;
+text-transform:uppercase;
+opacity:.6;
+margin-bottom:12px;
+}
+
 @media(max-width:768px){
 
 body{
-padding:20px;
+padding:90px 20px 20px;
 }
 
 .product-container{
@@ -214,16 +309,28 @@ font-size:2.2rem;
 
 }
 
+.product-header{
+padding:1rem 1.5rem;
+}
+
+.product-brand{
+font-size:2rem;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="brand">
-<a href="index.html">
+    <div style="height:30px;"></div>
+
+<header class="product-header">
+
+<a href="index.html" class="product-brand">
 RUDOHAGE
 </a>
-</div>
+
+</header>
 
 <div class="product-container">
 
@@ -253,8 +360,46 @@ Handmade by RUDOHAGE
 ₹3000
 </div>
 
+<div class="certificate">
+
+<div>✓ Piece No. 01</div>
+
+<div>✓ One of One Creation</div>
+
+<div>✓ Crafted by RUDOHAGE</div>
+
+<div>✓ Will Never Be Reproduced</div>
+
+</div>
+
+<div class="archive-status">
+
+<div class="status-label">
+ARCHIVE STATUS
+</div>
+
+<div class="status-value">
+ACTIVE PIECE
+</div>
+
+</div>
+
 <div class="delivery">
-🚚 Delivery within 4–7 business days
+
+<div>
+Handcrafted & Packed Securely
+</div>
+
+<br>
+
+<div>
+ Dispatch : 3–5 Days
+</div>
+
+<div>
+Tracked Delivery Available
+</div>
+
 </div>
 
 <div class="buttons">
@@ -285,14 +430,21 @@ The Story
 
 <p>
 
-The Inferno Core represents the
-balance between craftsmanship,
-precision and timeless design.
+Inspired by the raw energy of fire,
+Inferno Core is a one-of-one creation
+crafted to embody strength, precision
+and individuality.
 
-Each piece is individually finished
-and carefully inspected before
-becoming part of the RUDOHAGE
-collection.
+Every contour is shaped by hand,
+every surface carefully refined,
+ensuring that no two pieces can ever
+be identical.
+
+Created not for mass production,
+but for collectors who value
+craftsmanship above repetition,
+Inferno Core stands as a permanent
+part of the RUDOHAGE archive.
 
 </p>
 
@@ -325,6 +477,40 @@ Collection : RUDOHAGE
 </div>
 
 </div>
+
+</div>
+
+</div>
+
+<div class="related-products">
+
+<h2>Explore More Pieces</h2>
+
+<div class="related-grid">
+
+<a href="product2.html" class="related-card">
+
+<div class="piece-number">
+Piece No. 02
+</div>
+
+<h3>Crimson Orbit</h3>
+
+<p>₹2500</p>
+
+</a>
+
+<a href="product3.html" class="related-card">
+
+<div class="piece-number">
+Piece No. 03
+</div>
+
+<h3>Ember Crown</h3>
+
+<p>₹2500</p>
+
+</a>
 
 </div>
 
@@ -539,9 +725,9 @@ alert("Link copied");
 });
 
 loadReviews();
-
 </script>
-    <script>
+
+<script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 
 document.onkeydown = function(e) {
@@ -555,6 +741,7 @@ document.onkeydown = function(e) {
     }
 };
 </script>
+
 
 </body>
 </html>
