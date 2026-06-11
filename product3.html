@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" type="image/png" href="logo.png">
 
 <title>RUDOHAGE | Ember Crown</title>
@@ -258,22 +259,38 @@ font-size:3rem;
 
 @media(max-width:768px){
 
+html, body{
+    width:100%;
+    overflow-x:hidden;
+}
+
+/* page spacing fix */
 body{
-padding:90px 20px 20px;
+    padding:70px 15px 20px;
 }
 
-.product-container{
-flex-direction:column;
-}
-
-.product-info h1{
-font-size:2.2rem;
+/* header center + small */
+.product-header{
+    justify-content:center;
+    padding:10px 0;
+    text-align:center;
 }
 
 .product-brand{
-font-size:2rem;
+    font-size:1.3rem;
+    width:100%;
+    text-align:center;
 }
 
+/* main title fix */
+.hero-piece h1{
+    font-size:2.5rem;
+}
+
+/* layout fix */
+.product-container{
+    flex-direction:column;
+}
 }
 
 .product-header{
@@ -385,6 +402,10 @@ border-color:black;
 width:100%;
 border-radius:22px;
 box-shadow:0 15px 50px rgba(0,0,0,.08);
+}
+
+.hero-piece h1{
+    font-size:2.2rem;
 }
 
 </style>
@@ -840,7 +861,7 @@ document.getElementById("mainImage").src = src;
 
 </script>
 
- <script>
+   <script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 
 document.onkeydown = function(e) {
@@ -854,7 +875,8 @@ document.onkeydown = function(e) {
     }
 };
 </script>
-       
+    
+
 
 </body>
 </html>
