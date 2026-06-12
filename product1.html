@@ -289,25 +289,60 @@ opacity:.6;
 margin-bottom:12px;
 }
 
+.signature{
+text-align:center;
+margin-top:100px;
+margin-bottom:80px;
+}
+
+.signature p{
+letter-spacing:4px;
+text-transform:uppercase;
+opacity:.6;
+margin-bottom:10px;
+}
+
+.signature h2{
+font-family:'Cormorant Garamond',serif;
+font-size:3rem;
+}
+
 @media(max-width:768px){
 
+html, body{
+    width:100%;
+    overflow-x:hidden;
+}
+
+/* page spacing fix */
 body{
-padding:90px 20px 20px;
+    padding:70px 15px 20px;
 }
 
+/* header center + small */
+.product-header{
+    justify-content:center;
+    padding:10px 0;
+    text-align:center;
+}
+
+.product-brand{
+    font-size:1.3rem;
+    width:100%;
+    text-align:center;
+}
+
+/* main title fix */
+.hero-piece h1{
+    font-size:2.5rem;
+}
+
+/* layout fix */
 .product-container{
-flex-direction:column;
+    flex-direction:column;
+}
 }
 
-.product-info h1{
-font-size:2.2rem;
-}
-
-.brand a{
-font-size:2.2rem;
-}
-
-}
 
 .product-header{
 padding:1rem 1.5rem;
@@ -317,28 +352,201 @@ padding:1rem 1.5rem;
 font-size:2rem;
 }
 
+.hero-piece h1{
+font-size:3rem;
+}
+
+.related-products{
+margin-top:80px;
+}
+
+.related-products h2{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+margin-bottom:25px;
+}
+
+.related-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.related-card{
+background:white;
+padding:20px;
+border-radius:20px;
+text-decoration:none;
+color:black;
+box-shadow:0 5px 20px rgba(0,0,0,.05);
+transition:.3s;
+}
+
+.related-card:hover{
+transform:translateY(-8px);
+}
+
+.related-card h3{
+font-family:'Cormorant Garamond',serif;
+font-size:1.8rem;
+margin-bottom:10px;
+}
+
+.piece-number{
+font-size:12px;
+letter-spacing:3px;
+text-transform:uppercase;
+opacity:.6;
+margin-bottom:12px;
+}
+
+.hero-piece{
+text-align:center;
+margin-bottom:70px;
+}
+
+.hero-piece-number{
+letter-spacing:4px;
+font-size:12px;
+opacity:.6;
+text-transform:uppercase;
+margin-bottom:15px;
+}
+
+.hero-piece h1{
+font-family:'Cormorant Garamond',serif;
+font-size:5rem;
+font-weight:600;
+line-height:1;
+margin-bottom:15px;
+}
+
+.hero-piece p{
+font-size:15px;
+letter-spacing:3px;
+text-transform:uppercase;
+opacity:.7;
+}
+
+
+.gallery{
+display:flex;
+gap:10px;
+margin-bottom:15px;
+}
+
+.gallery img{
+width:90px;
+height:90px;
+object-fit:cover;
+border-radius:12px;
+cursor:pointer;
+border:2px solid transparent;
+transition:.3s;
+}
+
+.gallery img:hover{
+border-color:black;
+}
+
+#mainImage{
+width:100%;
+border-radius:22px;
+box-shadow:0 15px 50px rgba(0,0,0,.08);
+}
+
+.hero-piece h1{
+    font-size:2.2rem;
+}
+
+.product-image,
+.product-info{
+    width:100%;
+}
+
+#mainImage{
+    width:100%;
+    height:auto;
+    object-fit:contain;
+}
+
+.gallery{
+    overflow-x:auto;
+    flex-wrap:nowrap;
+}
+
+.gallery img{
+    width:70px;
+    height:70px;
+    flex-shrink:0;
+}
+
+
+.hero-piece{
+    width:100%;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
 </style>
 </head>
 
 <body>
 
-    <div style="height:30px;"></div>
-
-<header class="product-header">
+   <header class="product-header">
 
 <a href="index.html" class="product-brand">
 RUDOHAGE
 </a>
 
-</header>
+</header> 
+
+  <div class="hero-piece">
+
+    <div class="hero-piece-number">
+        Piece No. 01
+    </div>
+
+    <h1>
+     Inferno Core   
+    </h1>
+
+    <p>
+        A One-of-One Creation
+    </p>
+
+</div>
+
+</div>
 
 <div class="product-container">
 
 <div class="product-image">
 
-<img src="https://anaprakash234-coder.github.io/RUDOHAGE/image/fire-clock-1.png">
+    <div class="gallery">
+
+<img onclick="changeImage(this.src)"
+src="https://anaprakash234-coder.github.io/RUDOHAGE/image/fire-clock-1.png">
+
+<img onclick="changeImage(this.src)"
+src="https://anaprakash234-coder.github.io/RUDOHAGE/image/fire-clock-14.png">
+
+<img onclick="changeImage(this.src)"
+src="https://anaprakash234-coder.github.io/RUDOHAGE/image/fire-clock-15.png">
+
+<img onclick="changeImage(this.src)"
+src="https://anaprakash234-coder.github.io/RUDOHAGE/image/fire-clock-16.png">
 
 </div>
+
+<img id="mainImage"
+src="https://anaprakash234-coder.github.io/RUDOHAGE/image/fire-clock-1.png">
+
+</div>
+ 
 
 <div class="product-info">
 
@@ -513,6 +721,18 @@ Piece No. 03
 </a>
 
 </div>
+
+</div>
+
+<div class="signature">
+
+<p>
+Not Produced. Crafted.
+</p>
+
+<h2>
+RUDOHAGE
+</h2>
 
 </div>
 
@@ -728,6 +948,12 @@ loadReviews();
 </script>
 
 <script>
+function changeImage(src){
+    document.getElementById("mainImage").src = src;
+}
+</script>
+
+<script>
 document.addEventListener('contextmenu', event => event.preventDefault());
 
 document.onkeydown = function(e) {
@@ -741,6 +967,8 @@ document.onkeydown = function(e) {
     }
 };
 </script>
+
+
 
 
 </body>
