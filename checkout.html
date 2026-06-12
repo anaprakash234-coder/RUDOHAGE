@@ -4,61 +4,253 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>RUDOHAGE Checkout</title>
+<title>RUDOHAGE | Checkout</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Manrope:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 
-body{
-background:#f6f2ea;
-font-family:'Manrope',sans-serif;
-padding:40px;
-max-width:800px;
-margin:auto;
+:root{
+--bg:#f6f2ea;
+--text:#111;
 }
 
-h1{
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:var(--bg);
+font-family:'Manrope',sans-serif;
+color:var(--text);
+padding:120px 8% 40px;
+}
+
+.checkout-header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:1000;
+padding:1.2rem 2rem;
+background:rgba(246,242,234,.65);
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(0,0,0,.08);
+}
+
+.logo{
+text-decoration:none;
+color:#111;
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+font-weight:600;
+}
+
+.hero{
+text-align:center;
+margin-bottom:60px;
+}
+
+.hero span{
+letter-spacing:4px;
+font-size:12px;
+opacity:.6;
+}
+
+.hero h1{
+font-family:'Cormorant Garamond',serif;
+font-size:5rem;
+margin-top:15px;
+margin-bottom:15px;
+}
+
+.hero p{
+max-width:600px;
+margin:auto;
+line-height:1.8;
+opacity:.75;
+}
+
+.luxury-line{
+width:120px;
+height:1px;
+background:#111;
+margin:40px auto;
+opacity:.2;
+}
+
+.checkout-grid{
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:420px 1fr;
+gap:40px;
+align-items:start;
+}
+
+.checkout-image{
+width:100%;
+border-radius:20px;
+margin-bottom:25px;
+box-shadow:0 15px 40px rgba(0,0,0,.08);
+}
+
+.summary-card,
+.form-card{
+background:white;
+padding:35px;
+border-radius:24px;
+box-shadow:0 10px 40px rgba(0,0,0,.05);
+}
+
+.small-title{
+font-size:11px;
+letter-spacing:4px;
+opacity:.6;
+margin-bottom:20px;
+}
+
+.product-name{
 font-family:'Cormorant Garamond',serif;
 font-size:3rem;
+margin-bottom:10px;
+}
+
+.oneofone{
+opacity:.65;
+margin-bottom:25px;
+}
+
+.price{
+font-size:2rem;
+font-weight:700;
 margin-bottom:30px;
 }
 
-.form-box{
-background:white;
-padding:30px;
-border-radius:20px;
-box-shadow:0 5px 20px rgba(0,0,0,.05);
+.certificate div{
+margin-bottom:10px;
+}
+
+.archive-box{
+background:#111;
+color:white;
+padding:18px 22px;
+border-radius:16px;
+margin-top:25px;
+width:100%;
+}
+
+.status-label{
+font-size:11px;
+letter-spacing:4px;
+opacity:.7;
+margin-bottom:8px;
+}
+
+.status-value{
+font-family:'Cormorant Garamond',serif;
+font-size:1.8rem;
+}
+
+.form-card h2{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+margin-bottom:20px;
 }
 
 input,
 textarea,
 select{
 width:100%;
-padding:15px;
-margin-bottom:20px;
+padding:16px;
+margin-bottom:18px;
 border:none;
 background:#f4f4f4;
-border-radius:12px;
+border-radius:14px;
 font-size:15px;
 }
 
-button{
+textarea{
+resize:none;
+height:120px;
+}
+
+.place-order{
+width:100%;
+padding:18px;
 background:black;
 color:white;
-padding:15px 30px;
 border:none;
 border-radius:50px;
 cursor:pointer;
 font-size:15px;
+letter-spacing:2px;
+}
+
+.trust-box{
+margin-top:25px;
+line-height:2;
+opacity:.75;
+}
+
+.footer-note{
+margin-top:30px;
+text-align:center;
+opacity:.65;
+font-size:14px;
+line-height:1.8;
+}
+
+@media(max-width:768px){
+
+    .checkout-grid{
+grid-template-columns:1fr;
+}
+
+.summary-card,
+.form-card{
 width:100%;
 }
 
-.product-info{
-background:#f4f4f4;
-padding:15px;
-border-radius:12px;
-margin-bottom:20px;
+
+.product-name{
+font-size:2.2rem;
+}
+
+body{
+padding:90px 20px 20px;
+}
+
+.hero h1{
+font-size:2.6rem;
+}
+
+
+
+.product-name{
+font-size:2.2rem;
+}
+
+}
+
+.signature-footer{
+text-align:center;
+margin-top:80px;
+}
+
+.signature-footer p{
+letter-spacing:5px;
+font-size:11px;
+opacity:.6;
+text-transform:uppercase;
+}
+
+.signature-footer h2{
+font-family:'Cormorant Garamond',serif;
+font-size:4rem;
+margin-top:15px;
 }
 
 </style>
@@ -66,39 +258,123 @@ margin-bottom:20px;
 
 <body>
 
-<h1>Checkout</h1>
+<header class="checkout-header">
+<a href="index.html" class="logo">
+RUDOHAGE
+</a>
+</header>
 
-<div class="form-box">
+<section class="hero">
 
-<div class="product-info">
+<span>CHECKOUT</span>
 
-<p><b>Product:</b> <span id="productName"></span></p>
+<h1>Complete Your Order</h1>
 
-<p><b>Price:</b> ₹<span id="productPrice"></span></p>
+<p>
+Every RUDOHAGE piece is handcrafted and prepared individually for its owner.
+</p>
+
+</section>
+
+<div class="luxury-line"></div>
+
+<div class="checkout-grid">
+
+<div class="summary-card">
+
+    <img
+    id="productImage"
+    class="checkout-image"
+    src="https://via.placeholder.com/600x600">
+
+    <div class="small-title">
+    ORDER SUMMARY
+    </div>
+
+    <div class="product-name" id="productName">
+    Loading...
+    </div>
+
+    <div class="oneofone">
+    One-of-One Creation
+    </div>
+
+    <div class="price">
+    ₹<span id="productPrice"></span>
+    </div>
+
+    <div class="certificate">
+        <div>✓ Crafted by RUDOHAGE</div>
+        <div>✓ Handmade Creation</div>
+        <div>✓ Secure Packaging</div>
+        <div>✓ Tracked Delivery</div>
+    </div>
+
+    <div class="archive-box">
+        <div class="status-label">
+        ARCHIVE STATUS
+        </div>
+
+        <div class="status-value">
+        ACTIVE PIECE
+        </div>
+    </div>
 
 </div>
 
-<input type="text" id="name" placeholder="Full Name">
+<!-- SUMMARY CARD YAHI CLOSE HOGA -->
 
-<input type="text" id="phone" placeholder="Phone Number">
+<div class="form-card">
 
-<textarea id="address" placeholder="Full Address"></textarea>
+<h2>Shipping Details</h2>
 
-<input type="text" id="city" placeholder="City">
+<input type="text" placeholder="Full Name">
 
-<input type="text" id="pincode" placeholder="Pincode">
+<input type="text" placeholder="Phone Number">
 
-<select id="paymentMethod">
+<textarea placeholder="Full Address"></textarea>
 
+<input type="text" placeholder="City">
+
+<input type="text" placeholder="Pincode">
+
+<h2>Payment Method</h2>
+
+<select>
 <option>Cash On Delivery</option>
-
 </select>
 
-<button id="placeOrder">
-
-Place Order
-
+<button class="place-order">
+COMPLETE ORDER
 </button>
+
+<div class="trust-box">
+✓ Secure Checkout<br>
+✓ Handcrafted Order<br>
+✓ Tracked Delivery<br>
+✓ Premium Packaging
+</div>
+
+</div>
+
+</div>
+
+<div class="footer-note">
+
+Every RUDOHAGE Piece Is Handcrafted<br>
+And Prepared Individually For Its Owner.
+
+</div>
+
+<div class="signature-footer">
+
+<p>
+Not Produced. Crafted.
+</p>
+
+<h2>
+RUDOHAGE
+</h2>
 
 </div>
 
@@ -106,14 +382,33 @@ Place Order
 
 const params = new URLSearchParams(window.location.search);
 
+const product =
+params.get("product") || "RUDOHAGE Piece";
+
+const price =
+params.get("price") || "0";
+
 document.getElementById("productName").innerText =
-params.get("product");
+product;
 
 document.getElementById("productPrice").innerText =
-params.get("price");
+price;
+
+if(product === "Inferno Core"){
+document.getElementById("productImage").src =
+"fire-clock-1.png";
+}
+
+if(product === "Crimson Orbit"){
+document.getElementById("productImage").src =
+"fire-clock-2.png";
+}
+
+if(product === "Ember Crown"){
+document.getElementById("productImage").src =
+"fire-clock-3.png";
+}
 
 </script>
-
 </body>
 </html>
-```
