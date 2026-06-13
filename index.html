@@ -862,6 +862,23 @@
 
 }
 
+.my-orders-nav{
+padding:12px 22px;
+border-radius:50px;
+border:1px solid rgba(0,0,0,.15);
+text-decoration:none;
+color:#111;
+font-size:.75rem;
+letter-spacing:2px;
+text-transform:uppercase;
+transition:.3s;
+}
+
+.my-orders-nav:hover{
+background:#111;
+color:#fff;
+}
+
   </style>
 
   <script type="application/ld+json">
@@ -880,17 +897,21 @@
   <div class="glow"></div>
   <div class="noise"></div>
 
-  <header>
-    <div class="brand">RUDOHAGE</div> 
+ <header>
+  <div class="brand">RUDOHAGE</div>
 
-    <nav>
-      <a href="#autopsy">Autopsy</a>
-      <a href="#catalog">Catalog</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <nav>
+    <a href="#autopsy">Autopsy</a>
+    <a href="#catalog">Catalog</a>
+    <a href="#contact">Contact</a>
 
-    <i class="fas fa-bars menu-btn" onclick="openMenu()"></i>
-  </header>
+    <a href="myorders.html" class="my-orders-nav">
+      My Orders
+    </a>
+  </nav>
+
+  <i class="fas fa-bars menu-btn" onclick="openMenu()"></i>
+</header>
 
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
@@ -898,6 +919,8 @@
     <a href="#autopsy" onclick="closeMenu()">Autopsy</a>
     <a href="#catalog" onclick="closeMenu()">Catalog</a>
     <a href="#contact" onclick="closeMenu()">Contact</a>
+
+    <a href="myorders.html">My Orders</a>
   </div>
 
   <!-- HERO -->
@@ -1327,21 +1350,6 @@ View All Reviews
   
 </style>
 
-<script>
-document.addEventListener('contextmenu', event => event.preventDefault());
-
-document.onkeydown = function(e) {
-    if (
-        e.keyCode == 123 ||
-        (e.ctrlKey && e.shiftKey && e.keyCode == 73) ||
-        (e.ctrlKey && e.shiftKey && e.keyCode == 74) ||
-        (e.ctrlKey && e.keyCode == 85)
-    ) {
-        return false;
-    }
-};
-</script>
-
   <script type="module">
 
 import { initializeApp }
@@ -1437,6 +1445,21 @@ async function shareWebsite() {
 
 }
     
+</script>
+
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+document.onkeydown = function(e) {
+    if (
+        e.keyCode == 123 ||
+        (e.ctrlKey && e.shiftKey && e.keyCode == 73) ||
+        (e.ctrlKey && e.shiftKey && e.keyCode == 74) ||
+        (e.ctrlKey && e.keyCode == 85)
+    ) {
+        return false;
+    }
+};
 </script>
 
 </body>
