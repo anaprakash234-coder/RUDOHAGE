@@ -463,7 +463,7 @@ return;
 
 try{
 
-await addDoc(
+const docRef = await addDoc(
 collection(db,"orders"),
 {
 name,
@@ -479,9 +479,8 @@ createdAt:Date.now()
 }
 );
 
-alert("Order Placed Successfully!");
-
-window.location.href = "index.html";
+window.location.href =
+`success.html?orderId=${docRef.id}`;
 
 }catch(error){
 
