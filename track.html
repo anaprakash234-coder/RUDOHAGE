@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RUDOHAGE | Track Order</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Manrope:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+background:#f6f2ea;
+font-family:'Manrope',sans-serif;
+padding:120px 8%;
+color:#111;
+text-align:center;
+}
+
+.small{
+letter-spacing:4px;
+font-size:12px;
+opacity:.6;
+margin-bottom:20px;
+}
+
+h1{
+font-family:'Cormorant Garamond',serif;
+font-size:5rem;
+margin-bottom:20px;
+}
+
+.track-box{
+max-width:700px;
+margin:auto;
+background:white;
+padding:40px;
+border-radius:30px;
+box-shadow:0 10px 40px rgba(0,0,0,.05);
+}
+
+input{
+width:100%;
+padding:18px;
+border:none;
+background:#f4f4f4;
+border-radius:14px;
+margin-top:20px;
+margin-bottom:20px;
+font-size:16px;
+}
+
+button{
+padding:18px 35px;
+border:none;
+background:black;
+color:white;
+border-radius:50px;
+cursor:pointer;
+}
+
+.result{
+margin-top:40px;
+}
+
+.status{
+display:inline-block;
+margin-top:15px;
+padding:12px 22px;
+background:black;
+color:white;
+border-radius:50px;
+letter-spacing:2px;
+}
+
+@media(max-width:768px){
+
+h1{
+font-size:2.8rem;
+}
+
+body{
+padding:90px 20px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="small">
+ORDER TRACKING
+</div>
+
+<h1>
+Track Your Piece
+</h1>
+
+<div class="track-box">
+
+<input
+type="text"
+id="orderId"
+placeholder="Enter Order ID">
+
+<button id="trackBtn">
+TRACK ORDER
+</button>
+
+<div class="result" id="result">
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
+authDomain: "rudohage.firebaseapp.com",
+projectId: "rudohage",
+storageBucket: "rudohage.firebasestorage.app",
+messagingSenderId: "487042116246",
+appId: "1:487042116246:web:990d65636addd6d653f0b7"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+document.getElementById("trackBtn")
+.addEventListener("click", async ()=>{
+
+const orderId =
+document.getElementById("orderId").value.trim();
+
+if(!orderId){
+alert("Enter Order ID");
+return;
+}
+
+const orderRef = doc(db,"orders",orderId);
+
+const orderSnap = await getDoc(orderRef);
+
+if(orderSnap.exists()){
+
+const order = orderSnap.data();
+
+document.getElementById("result").innerHTML = `
+
+<h2>${order.product}</h2>
+
+<p>Collector : ${order.name}</p>
+
+<p>City : ${order.city}</p>
+
+<div class="status">
+${order.status}
+</div>
+
+`;
+
+}else{
+
+document.getElementById("result").innerHTML = `
+<p>Order Not Found</p>
+`;
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
