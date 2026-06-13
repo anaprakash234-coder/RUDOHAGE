@@ -1184,15 +1184,10 @@ color:#fff;
   document.getElementById("modalImg").src = img;
   document.getElementById("modalDesc").innerText = desc;
 
-  const message = `Hello, I want to order ${title} for ${price}.`;
-  const phoneNumber = "917091955862";
-
-  document.getElementById("buyBtn").onclick = function() {
-    window.open(
-      `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,
-      "_blank"
-    );
-  };
+ document.getElementById("buyBtn").onclick = function () {
+  window.location.href =
+    `checkout.html?product=${encodeURIComponent(title)}&price=${price}`;
+};
 
   let productPage = "product1.html";
 
