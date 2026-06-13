@@ -379,7 +379,28 @@ RUDOHAGE
 
 </div>
 
-<script>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+addDoc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
+authDomain: "rudohage.firebaseapp.com",
+projectId: "rudohage",
+storageBucket: "rudohage.firebasestorage.app",
+messagingSenderId: "487042116246",
+appId: "1:487042116246:web:990d65636addd6d653f0b7",
+measurementId: "G-6GLB5PPXMY"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 const params = new URLSearchParams(window.location.search);
 
@@ -395,6 +416,8 @@ product;
 document.getElementById("productPrice").innerText =
 price;
 
+/* PRODUCT IMAGE */
+
 if(product === "Inferno Core"){
 document.getElementById("productImage").src =
 "fire-clock-1.png";
@@ -409,6 +432,65 @@ if(product === "Ember Crown"){
 document.getElementById("productImage").src =
 "fire-clock-3.png";
 }
+
+/* PLACE ORDER */
+
+document.querySelector(".place-order")
+.addEventListener("click", async () => {
+
+const name =
+document.querySelector('input[placeholder="Full Name"]').value;
+
+const phone =
+document.querySelector('input[placeholder="Phone Number"]').value;
+
+const address =
+document.querySelector("textarea").value;
+
+const city =
+document.querySelector('input[placeholder="City"]').value;
+
+const pincode =
+document.querySelector('input[placeholder="Pincode"]').value;
+
+if(!name || !phone || !address || !city || !pincode){
+
+alert("Please fill all details");
+return;
+
+}
+
+try{
+
+await addDoc(
+collection(db,"orders"),
+{
+name,
+phone,
+address,
+city,
+pincode,
+product,
+price:Number(price),
+payment:"COD",
+status:"Pending",
+createdAt:Date.now()
+}
+);
+
+alert("Order Placed Successfully!");
+
+window.location.href = "index.html";
+
+}catch(error){
+
+console.log(error);
+
+alert("Order Failed");
+
+}
+
+});
 
 </script>
 </body>
