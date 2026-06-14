@@ -3,30 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="logo.png">
+ <link rel="icon" type="image/png" href="logo.png">
 
-<title>RUDOHAGE | Admin Archive</title>
+<title>RUDOHAGE | My Orders</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Manrope:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
 
-:root{
---bg:#f6f2ea;
---text:#111;
-}
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
 body{
-background:var(--bg);
+background:#f6f2ea;
 font-family:'Manrope',sans-serif;
-color:var(--text);
-padding:120px 8% 50px;
+padding:140px 8% 60px;
+text-align:center;
+}
+
+h1{
+font-family:'Cormorant Garamond',serif;
+font-size:4rem;
+margin-bottom:20px;
+}
+
+input{
+width:100%;
+max-width:500px;
+padding:18px;
+border:none;
+background:white;
+border-radius:14px;
+margin-top:20px;
+}
+
+button{
+margin-top:20px;
+padding:16px 35px;
+border:none;
+background:black;
+color:white;
+border-radius:50px;
+cursor:pointer;
+}
+
+#ordersContainer{
+margin-top:50px;
+}
+
+.small-title{
+letter-spacing:5px;
+font-size:11px;
+text-transform:uppercase;
+opacity:.6;
+margin-bottom:15px;
+}
+
+h1{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+font-weight:600;
+margin-bottom:15px;
+}
+
+.hero-text{
+opacity:.7;
+max-width:600px;
+margin:auto;
+line-height:1.8;
+margin-bottom:40px;
 }
 
 .header{
@@ -34,11 +76,11 @@ position:fixed;
 top:0;
 left:0;
 width:100%;
+z-index:1000;
 padding:1.2rem 2rem;
 background:rgba(246,242,234,.65);
 backdrop-filter:blur(18px);
 border-bottom:1px solid rgba(0,0,0,.08);
-z-index:999;
 }
 
 .logo{
@@ -49,114 +91,7 @@ font-size:2rem;
 font-weight:600;
 }
 
-.hero{
-text-align:center;
-margin-bottom:70px;
-}
-
-.hero span{
-font-size:12px;
-letter-spacing:4px;
-opacity:.6;
-}
-
-.hero h1{
-font-family:'Cormorant Garamond',serif;
-font-size:5rem;
-margin-top:15px;
-}
-
-.hero p{
-opacity:.7;
-margin-top:15px;
-}
-
-.stats{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-margin-bottom:50px;
-}
-
-.stat-card{
-background:white;
-padding:40px;
-border-radius:30px;
-text-align:center;
-box-shadow:0 20px 60px rgba(0,0,0,.06);
-}
-
-.stat-card h2{
-font-family:'Cormorant Garamond',serif;
-font-size:3rem;
-}
-
-.stat-card p{
-letter-spacing:5px;
-font-size:11px;
-text-transform:uppercase;
-opacity:.6;
-margin-bottom:15px;
-}
-
-.orders-grid{
-display:grid;
-gap:25px;
-}
-
-.order-card{
-background:white;
-padding:30px;
-border-radius:24px;
-box-shadow:0 10px 40px rgba(0,0,0,.05);
-}
-
-.order-name{
-font-family:'Cormorant Garamond',serif;
-font-size:2rem;
-margin-bottom:10px;
-}
-
-.status{
-display:inline-block;
-padding:8px 14px;
-border-radius:50px;
-background:black;
-color:white;
-font-size:12px;
-letter-spacing:2px;
-margin-top:15px;
-}
-
-.status-btn{
-background:#111;
-color:white;
-border:none;
-padding:12px 20px;
-border-radius:50px;
-cursor:pointer;
-margin-top:15px;
-letter-spacing:2px;
-font-size:12px;
-}
-
-.status-btn:hover{
-opacity:.8;
-}
-
-@media(max-width:768px){
-
-body{
-padding:90px 20px 20px;
-}
-
-.hero h1{
-font-size:2.8rem;
-}
-
-}
-
- .product-header{
+.product-header{
 position:fixed;
 top:0;
 left:0;
@@ -183,6 +118,40 @@ font-weight:600;
 letter-spacing:-1px;
 }
 
+.order-card{
+background:white;
+padding:35px;
+border-radius:24px;
+margin-top:25px;
+box-shadow:0 10px 40px rgba(0,0,0,.05);
+text-align:left;
+}
+
+.order-product{
+font-family:'Cormorant Garamond',serif;
+font-size:2.3rem;
+margin-bottom:10px;
+}
+
+.order-piece{
+font-size:11px;
+letter-spacing:4px;
+text-transform:uppercase;
+opacity:.6;
+margin-bottom:15px;
+}
+
+.order-status{
+display:inline-block;
+padding:10px 18px;
+border-radius:50px;
+background:black;
+color:white;
+font-size:12px;
+letter-spacing:2px;
+margin-top:15px;
+}
+
 @media(max-width:768px){
 
 .product-header{
@@ -197,7 +166,58 @@ width:100%;
 text-align:center;
 }
 
-}   
+}
+
+.progress-bar{
+width:100%;
+height:8px;
+background:#eee;
+border-radius:20px;
+margin:20px 0;
+overflow:hidden;
+}
+
+.progress-fill{
+height:100%;
+background:#111;
+border-radius:20px;
+transition:1s;
+}
+
+.timeline{
+margin-top:20px;
+padding:20px;
+background:#fafafa;
+border-radius:15px;
+}
+
+.timeline div{
+margin:10px 0;
+}
+
+.order-actions{
+margin-top:20px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.action-btn{
+padding:10px 15px;
+border:none;
+border-radius:30px;
+background:#111;
+color:#fff;
+cursor:pointer;
+text-decoration:none;
+font-size:13px;
+}
+
+.countdown{
+margin-top:15px;
+font-size:14px;
+opacity:.7;
+}
 
 </style>
 </head>
@@ -212,26 +232,30 @@ RUDOHAGE
 
 </header>
 
-<header class="header">
-<a href="index.html" class="logo">RUDOHAGE</a>
-</header>
-
-<section class="hero">
-<span>ORDER ARCHIVE</span>
-<h1>Collector Archive</h1>
-<p>Every RUDOHAGE Piece Has Found Its Owner.</p>
-</section>
-
-<div class="stats">
-
-<div class="stat-card">
-<p>ARCHIVED COLLECTORS</p>
-<h2 id="totalOrders">0</h2>
+<div class="small-title">
+ORDER ARCHIVE
 </div>
 
-</div>
+<h1>
+My Collection
+</h1>
 
-<div class="orders-grid" id="ordersContainer">
+<p class="hero-text">
+Every handcrafted piece leaves a trace.
+</p>
+
+<input
+type="text"
+id="phone"
+placeholder="Enter Your Phone Number">
+
+<br>
+
+<button id="searchBtn">
+View My Orders
+</button>
+
+<div id="ordersContainer">
 </div>
 
 <script type="module">
@@ -241,9 +265,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/fireba
 import {
 getFirestore,
 collection,
-getDocs,
-doc,
-updateDoc
+onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -258,82 +280,146 @@ appId: "1:487042116246:web:990d65636addd6d653f0b7"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const ordersContainer =
+document.getElementById("searchBtn")
+.addEventListener("click", async ()=>{
+
+const phone =
+document.getElementById("phone").value.trim();
+
+const container =
 document.getElementById("ordersContainer");
 
-const totalOrders =
-document.getElementById("totalOrders");
+container.innerHTML = "";
 
-async function loadOrders(){
+onSnapshot(
+collection(db,"orders"),
+(snapshot)=>{
 
-const snapshot =
-await getDocs(collection(db,"orders"));
+let found = false;
 
-totalOrders.innerText = snapshot.size;
+container.innerHTML = "";
 
 snapshot.forEach((doc)=>{
-    const orderId = doc.id;
 
 const order = doc.data();
 
-ordersContainer.innerHTML += `
+if(order.phone === phone){
+
+found = true;
+
+let progress = 33;
+
+if(order.status === "Packed"){
+progress = 50;
+}
+
+if(order.status === "Shipped"){
+progress = 75;
+}
+
+if(order.status === "Delivered"){
+progress = 100;
+}
+
+container.innerHTML += `
 <div class="order-card">
 
-<div class="order-name">
+<div class="order-piece">
+RUDOHAGE ARCHIVE
+</div>
+
+<div class="order-product">
 ${order.product}
 </div>
 
-<p><b>Collector:</b> ${order.name}</p>
+<p>Price: ₹${order.price}</p>
 
-<p><b>Phone:</b> ${order.phone}</p>
+<div class="order-status">
+${order.status}
+</div>
 
-<p><b>City:</b> ${order.city}</p>
+<div class="progress-bar">
+<div class="progress-fill"
+style="width:${progress}%">
+</div>
+</div>
 
-<p><b>Price:</b> ₹${order.price}</p>
+<div class="timeline">
+
+<div>
+${progress >= 33 ? "✔" : "○"}
+ Order Placed
+</div>
+
+<div>
+${progress >= 50 ? "✔" : "○"}
+ Packed
+</div>
+
+<div>
+${progress >= 75 ? "✔" : "○"}
+ Shipped
+</div>
+
+<div>
+${progress >= 100 ? "✔" : "○"}
+ Delivered
+</div>
+
+</div>
+
+<div class="countdown">
+Estimated Delivery:
+3 - 5 Business Days
+</div>
+
+<div class="order-actions">
 
 <button
-class="status-btn"
-onclick="changeStatus('${orderId}','${order.status}')">
-${order.status}
+class="action-btn"
+onclick="copyOrderId('${doc.id}')">
+Copy Order ID
 </button>
+
+<a
+class="action-btn"
+href="https://wa.me/917091955862?text=My Order ID is ${doc.id}"
+target="_blank">
+WhatsApp Support
+</a>
+
+</div>
 
 </div>
 `;
 
+}
+
 });
 
-}
+if(!found){
 
-window.changeStatus = async function(orderId,currentStatus){
-
-let newStatus = "Pending";
-
-if(currentStatus === "Pending"){
-newStatus = "Packed";
-}
-else if(currentStatus === "Packed"){
-newStatus = "Shipped";
-}
-else if(currentStatus === "Shipped"){
-newStatus = "Delivered";
-}
-else{
-newStatus = "Pending";
-}
-
-await updateDoc(
-doc(db,"orders",orderId),
-{
-status:newStatus
-}
-);
-
-location.reload();
+container.innerHTML = `
+<p>No Orders Found</p>
+`;
 
 }
 
-loadOrders();
+});
 
+});
+
+
+</script>
+
+<script>
+function copyOrderId(id){
+
+navigator.clipboard.writeText(id);
+
+alert("Order ID Copied!");
+
+}
 </script>
 
 </body>
