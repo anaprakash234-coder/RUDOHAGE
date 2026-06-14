@@ -265,7 +265,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/fireba
 import {
 getFirestore,
 collection,
-getDocs
+onSnapshot
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -291,10 +291,13 @@ document.getElementById("ordersContainer");
 
 container.innerHTML = "";
 
-const snapshot =
-await getDocs(collection(db,"orders"));
+onSnapshot(
+collection(db,"orders"),
+(snapshot)=>{
 
 let found = false;
+
+container.innerHTML = "";
 
 snapshot.forEach((doc)=>{
 
@@ -306,8 +309,12 @@ found = true;
 
 let progress = 33;
 
+if(order.status === "Packed"){
+progress = 50;
+}
+
 if(order.status === "Shipped"){
-progress = 66;
+progress = 75;
 }
 
 if(order.status === "Delivered"){
@@ -345,7 +352,12 @@ ${progress >= 33 ? "✔" : "○"}
 </div>
 
 <div>
-${progress >= 66 ? "✔" : "○"}
+${progress >= 50 ? "✔" : "○"}
+ Packed
+</div>
+
+<div>
+${progress >= 75 ? "✔" : "○"}
  Shipped
 </div>
 
@@ -380,6 +392,7 @@ WhatsApp Support
 
 </div>
 `;
+
 }
 
 });
@@ -393,6 +406,9 @@ container.innerHTML = `
 }
 
 });
+
+});
+
 
 </script>
 
