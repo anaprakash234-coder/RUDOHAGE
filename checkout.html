@@ -452,6 +452,8 @@ measurementId: "G-6GLB5PPXMY"
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+const RAZORPAY_KEY = "rzp_live_T2N3YbZ3iKazSC";
+
 const params = new URLSearchParams(window.location.search);
 
 const product =
@@ -529,21 +531,26 @@ return;
 
 }
 
-if(
-paymentMethod === "UPI" ||
-paymentMethod === "CARD" ||
-paymentMethod === "NETBANKING"
-){
-
-alert(
-"Online Payments will be activated after Razorpay approval."
-);
-
-return;
-
-}
-
 try{
+
+const options = {
+
+key: RAZORPAY_KEY,
+
+amount: Number(price) * 100,
+
+currency: "INR",
+
+name: "RUDOHAGE",
+
+description: product,
+
+prefill: {
+name: name,
+contact: phone
+},
+
+handler: async function(response){
 
 const docRef = await addDoc(
 collection(db,"orders"),
@@ -556,13 +563,22 @@ pincode,
 product,
 price:Number(price),
 payment: paymentMethod,
-status:"Pending",
+paymentId: response.razorpay_payment_id,
+status:"Paid",
 createdAt:Date.now()
 }
 );
 
 window.location.href =
 `success.html?orderId=${docRef.id}`;
+
+}
+
+};
+
+const rzp = new Razorpay(options);
+
+rzp.open();
 
 }catch(error){
 
@@ -590,6 +606,10 @@ document.onkeydown = function(e) {
     }
 };
 </script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
 </body>
 </html>
+
 
