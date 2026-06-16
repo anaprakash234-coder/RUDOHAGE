@@ -555,6 +555,14 @@ try{
 
 if(paymentMethod === "COD"){
 
+    const confirmCOD = confirm(
+"Cash On Delivery orders require a ₹50 Security Charge. This amount must be paid online before your order is confirmed.\n\nDo you want to continue?"
+);
+
+if(!confirmCOD){
+return;
+}
+
 const options = {
 
 key: RAZORPAY_KEY,
