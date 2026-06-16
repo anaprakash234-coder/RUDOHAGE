@@ -338,6 +338,9 @@ Every RUDOHAGE piece is handcrafted and prepared individually for its owner.
     ₹<span id="productPrice"></span>
     </div>
 
+    <div id="extraCharge" style="margin-top:10px;color:#777;font-size:14px;">
+</div>
+
     <div class="certificate">
         <div>✓ Crafted by RUDOHAGE</div>
         <div>✓ Handmade Creation</div>
@@ -467,6 +470,31 @@ product;
 
 document.getElementById("productPrice").innerText =
 price;
+
+    const paymentSelect =
+document.getElementById("paymentMethod");
+
+paymentSelect.addEventListener("change", () => {
+
+if(paymentSelect.value === "COD"){
+
+document.getElementById("productPrice").innerText =
+Number(price) + 50;
+
+document.getElementById("extraCharge").innerHTML =
+"COD Security Charge: ₹50";
+
+}else{
+
+document.getElementById("productPrice").innerText =
+price;
+
+document.getElementById("extraCharge").innerHTML =
+"";
+
+}
+
+});
 
 /* PRODUCT IMAGE */
 
