@@ -288,6 +288,73 @@ font-size:2rem;
 margin-top:15px;
 }
 
+.luxury-modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.45);
+backdrop-filter:blur(12px);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.luxury-modal.active{
+display:flex;
+}
+
+.luxury-box{
+width:90%;
+max-width:500px;
+background:white;
+padding:40px;
+border-radius:30px;
+text-align:center;
+box-shadow:0 30px 80px rgba(0,0,0,.15);
+}
+
+.luxury-tag{
+letter-spacing:4px;
+font-size:11px;
+opacity:.6;
+margin-bottom:15px;
+}
+
+.luxury-box h2{
+font-family:'Cormorant Garamond',serif;
+font-size:2.2rem;
+margin-bottom:15px;
+}
+
+.luxury-box p{
+line-height:1.8;
+opacity:.75;
+margin-bottom:30px;
+}
+
+.luxury-buttons{
+display:flex;
+gap:12px;
+}
+
+.luxury-buttons button{
+flex:1;
+padding:15px;
+border:none;
+border-radius:50px;
+cursor:pointer;
+font-weight:600;
+}
+
+#cancelCOD{
+background:#f3f3f3;
+}
+
+#continueCOD{
+background:#111;
+color:white;
+}
+
 </style>
 </head>
 
@@ -432,6 +499,8 @@ RUDOHAGE
 
 </div>
 
+
+
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
@@ -555,13 +624,22 @@ try{
 
 if(paymentMethod === "COD"){
 
-    const confirmCOD = confirm(
-"Cash On Delivery orders require a ₹50 Security Charge. This amount must be paid online before your order is confirmed.\n\nDo you want to continue?"
-);
+  const modal =
+document.getElementById("luxuryModal");
 
-if(!confirmCOD){
-return;
-}
+modal.classList.add("active");
+
+document.getElementById("cancelCOD").onclick = () => {
+modal.classList.remove("active");
+};
+
+document.getElementById("continueCOD").onclick = () => {
+
+modal.classList.remove("active");
+
+/* Razorpay ₹50 COD code yahan chalega */
+
+};
 
 const options = {
 
@@ -696,6 +774,24 @@ document.onkeydown = function(e) {
 </script>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<div id="luxuryModal" class="luxury-modal">
+  <div class="luxury-box">
+    <div class="luxury-tag">RUDOHAGE</div>
+
+    <h2>Cash On Delivery</h2>
+
+    <p>
+      To maintain order authenticity and reduce fraudulent deliveries,
+      a refundable ₹50 Security Charge is required before confirmation.
+    </p>
+
+    <div class="luxury-buttons">
+      <button id="cancelCOD">Cancel</button>
+      <button id="continueCOD">Continue</button>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
