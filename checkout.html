@@ -555,6 +555,25 @@ try{
 
 if(paymentMethod === "COD"){
 
+const options = {
+
+key: RAZORPAY_KEY,
+
+amount: 5000, // ₹50
+
+currency: "INR",
+
+name: "RUDOHAGE",
+
+description: "COD Security Charge",
+
+prefill: {
+name: name,
+contact: phone
+},
+
+handler: async function(response){
+
 const docRef = await addDoc(
 collection(db,"orders"),
 {
@@ -564,8 +583,10 @@ address,
 city,
 pincode,
 product,
-price:Number(price) + 50,
+price:Number(price),
+codCharge:50,
 payment:"COD",
+paymentId: response.razorpay_payment_id,
 status:"Pending",
 createdAt:Date.now()
 }
@@ -573,6 +594,14 @@ createdAt:Date.now()
 
 window.location.href =
 `success.html?orderId=${docRef.id}`;
+
+}
+
+};
+
+const rzp = new Razorpay(options);
+
+rzp.open();
 
 return;
 
@@ -662,5 +691,6 @@ document.onkeydown = function(e) {
 
 </body>
 </html>
+
 
 
