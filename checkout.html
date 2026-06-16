@@ -533,9 +533,42 @@ return;
 
 try{
 
+if(paymentMethod === "COD"){
+
+const docRef = await addDoc(
+collection(db,"orders"),
+{
+name,
+phone,
+address,
+city,
+pincode,
+product,
+price:Number(price),
+payment:"COD",
+status:"Pending",
+createdAt:Date.now()
+}
+);
+
+window.location.href =
+`success.html?orderId=${docRef.id}`;
+
+return;
+
+}
+
 const options = {
 
 key: RAZORPAY_KEY,
+
+amount: Number(price) * 100,
+
+currency: "INR",
+
+name: "RUDOHAGE",
+
+description: product,
 
 amount: Number(price) * 100,
 
