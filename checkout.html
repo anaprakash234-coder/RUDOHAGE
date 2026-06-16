@@ -586,15 +586,15 @@ return;
 
 }
 
-const options = {
-
-key: RAZORPAY_KEY,
-
     let finalPrice = Number(price);
 
 if(paymentMethod === "COD"){
 finalPrice += 50;
 }
+
+const options = {
+
+key: RAZORPAY_KEY,
 
 amount: finalPrice * 100,
 
