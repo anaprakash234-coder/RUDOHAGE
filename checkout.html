@@ -590,15 +590,13 @@ const options = {
 
 key: RAZORPAY_KEY,
 
-amount: Number(price) * 100,
+    let finalPrice = Number(price);
 
-currency: "INR",
+if(paymentMethod === "COD"){
+finalPrice += 50;
+}
 
-name: "RUDOHAGE",
-
-description: product,
-
-amount: Number(price) * 100,
+amount: finalPrice * 100,
 
 currency: "INR",
 
