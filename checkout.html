@@ -537,26 +537,18 @@ const paymentMethod =
 document.getElementById("paymentMethod").value;
 
 if(!name || !phone || !address || !city || !pincode){
-
-    if(phone.length !== 10){
-
-alert("Enter Valid Phone Number");
-
+alert("Please fill all details");
 return;
+}
 
+if(phone.length !== 10){
+alert("Enter Valid Phone Number");
+return;
 }
 
 if(pincode.length !== 6){
-
 alert("Enter Valid Pincode");
-
 return;
-
-}
-
-alert("Please fill all details");
-return;
-
 }
 
 try{
