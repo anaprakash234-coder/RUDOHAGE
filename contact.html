@@ -265,27 +265,37 @@ We aim to respond to all inquiries within 24–48 business hours.
 
 <h2>Send A Message</h2>
 
-<form action="https://formsubmit.co/rudohage.com12@gmail.com" method="POST">
+<form id="contactForm">
 
 <input
+id="name"
 type="text"
-name="name"
-placeholder="Full Name"
+placeholder="Your Name"
 required>
 
 <input
+id="email"
 type="email"
-name="email"
-placeholder="Email Address"
+placeholder="Your Email"
+required>
+
+<input
+id="subject"
+type="text"
+placeholder="Subject"
 required>
 
 <textarea
-name="message"
+id="message"
 placeholder="Your Message"
 required></textarea>
 
-<button type="submit">
+<button
+type="submit"
+id="sendBtn">
+
 SEND MESSAGE
+
 </button>
 
 </form>
@@ -303,6 +313,54 @@ SEND MESSAGE
 <h2>RUDOHAGE</h2>
 
 </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+emailjs.init("LHQqnBtxsnUhQWinY");
+
+document.getElementById("contactForm").addEventListener("submit", function(e){
+
+e.preventDefault();
+
+const btn = document.getElementById("sendBtn");
+
+btn.innerHTML = "SENDING...";
+
+emailjs.send("service_1k374tr","template_589kggl",{
+
+name: document.getElementById("name").value,
+
+email: document.getElementById("email").value,
+
+subject: document.getElementById("subject").value,
+
+message: document.getElementById("message").value
+
+})
+
+.then(function(){
+
+btn.innerHTML = "MESSAGE SENT";
+
+document.getElementById("contactForm").reset();
+
+setTimeout(()=>{
+btn.innerHTML = "SEND MESSAGE";
+},3000);
+
+})
+
+.catch(function(error){
+
+console.log(error);
+
+btn.innerHTML = "TRY AGAIN";
+
+});
+
+});
+</script>
 
 </body>
 </html>
