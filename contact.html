@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RUDOHAGE | Contact</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--bg:#f6f2ea;
+--text:#111;
+--line:rgba(0,0,0,.08);
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+font-family:'Manrope',sans-serif;
+}
+
+.header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:1.3rem 8%;
+background:rgba(246,242,234,.72);
+backdrop-filter:blur(18px);
+border-bottom:1px solid var(--line);
+z-index:1000;
+}
+
+.logo{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+font-weight:600;
+text-decoration:none;
+color:#111;
+}
+
+.hero{
+padding:180px 20px 80px;
+text-align:center;
+}
+
+.hero span{
+letter-spacing:5px;
+font-size:11px;
+opacity:.55;
+}
+
+.hero h1{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+margin-top:15px;
+}
+
+.hero p{
+max-width:650px;
+margin:25px auto 0;
+line-height:1.9;
+opacity:.7;
+}
+
+.line{
+width:120px;
+height:1px;
+background:#111;
+opacity:.15;
+margin:0 auto 70px;
+}
+
+.container{
+max-width:1200px;
+margin:auto;
+padding:0 8% 120px;
+}
+
+.contact-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+}
+
+.card{
+background:white;
+padding:50px;
+border-radius:30px;
+box-shadow:0 20px 60px rgba(0,0,0,.05);
+}
+
+.card h2{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+margin-bottom:20px;
+}
+
+.card p{
+line-height:2;
+opacity:.8;
+}
+
+.contact-info{
+margin-top:25px;
+}
+
+.contact-info div{
+margin-bottom:20px;
+line-height:1.8;
+}
+
+.label{
+font-size:11px;
+letter-spacing:4px;
+opacity:.55;
+margin-bottom:5px;
+text-transform:uppercase;
+}
+
+.value{
+font-size:16px;
+}
+
+input,
+textarea{
+width:100%;
+padding:18px;
+margin-bottom:18px;
+border:none;
+background:#f5f5f5;
+border-radius:18px;
+font-size:15px;
+font-family:'Manrope',sans-serif;
+}
+
+textarea{
+height:160px;
+resize:none;
+}
+
+button{
+width:100%;
+padding:18px;
+border:none;
+background:#111;
+color:white;
+border-radius:50px;
+cursor:pointer;
+font-size:14px;
+letter-spacing:2px;
+}
+
+button:hover{
+opacity:.9;
+}
+
+.footer{
+text-align:center;
+padding:70px 20px;
+border-top:1px solid rgba(0,0,0,.08);
+margin-top:80px;
+}
+
+.footer p{
+letter-spacing:5px;
+font-size:11px;
+opacity:.6;
+text-transform:uppercase;
+}
+
+.footer h2{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+margin-top:12px;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+font-size:2rem;
+}
+
+.contact-grid{
+grid-template-columns:1fr;
+}
+
+.card{
+padding:30px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header class="header">
+<a href="index.html" class="logo">RUDOHAGE</a>
+</header>
+
+<section class="hero">
+
+<span>CONTACT</span>
+
+<h1>Get In Touch</h1>
+
+<p>
+For product inquiries, custom requests, collaborations, or support,
+our team is available to assist you.
+</p>
+
+</section>
+
+<div class="line"></div>
+
+<div class="container">
+
+<div class="contact-grid">
+
+<div class="card">
+
+<h2>Contact Information</h2>
+
+<p>
+We aim to respond to all inquiries within 24–48 business hours.
+</p>
+
+<div class="contact-info">
+
+<div>
+<div class="label">Email</div>
+<div class="value">rudohage.com12@gmail.com</div>
+</div>
+
+<div>
+<div class="label">Location</div>
+<div class="value">Gurugram, Haryana, India</div>
+</div>
+
+<div>
+<div class="label">Brand</div>
+<div class="value">RUDOHAGE</div>
+</div>
+
+<div>
+<div class="label">Support Hours</div>
+<div class="value">Monday – Saturday<br>10:00 AM – 7:00 PM</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Send A Message</h2>
+
+<form action="https://formsubmit.co/rudohage.com12@gmail.com" method="POST">
+
+<input
+type="text"
+name="name"
+placeholder="Full Name"
+required>
+
+<input
+type="email"
+name="email"
+placeholder="Email Address"
+required>
+
+<textarea
+name="message"
+placeholder="Your Message"
+required></textarea>
+
+<button type="submit">
+SEND MESSAGE
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="footer">
+
+<p>Not Produced. Crafted.</p>
+
+<h2>RUDOHAGE</h2>
+
+</footer>
+
+</body>
+</html>
