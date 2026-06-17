@@ -44,6 +44,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Manrope:wght@300;500;700&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
+  <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Manrope:wght@300;500;700&display=swap');
 
@@ -981,6 +984,69 @@ color:#fff;
 }
 }
 
+    .footer{
+padding:80px 8% 40px;
+border-top:1px solid rgba(0,0,0,.08);
+}
+
+.footer-links{
+display:grid;
+grid-template-columns:2fr 1fr 1fr 1fr;
+gap:50px;
+margin-bottom:50px;
+}
+
+.footer-brand h3{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+margin-bottom:15px;
+}
+
+.footer-brand p{
+line-height:1.9;
+opacity:.7;
+max-width:320px;
+}
+
+.footer-column h4{
+margin-bottom:20px;
+font-size:14px;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+.footer-column a{
+display:block;
+margin-bottom:12px;
+text-decoration:none;
+color:#111;
+opacity:.75;
+transition:.3s;
+}
+
+.footer-column a:hover{
+opacity:1;
+transform:translateX(4px);
+}
+
+.footer-bottom{
+margin-top:40px;
+padding-top:30px;
+border-top:1px solid rgba(0,0,0,.08);
+text-align:center;
+opacity:.6;
+font-size:14px;
+}
+
+@media(max-width:768px){
+
+.footer-links{
+grid-template-columns:1fr;
+gap:35px;
+}
+
+}
+
   </style>
 
   <script type="application/ld+json">
@@ -1394,7 +1460,68 @@ View All Reviews
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 RUDOHAGE. Crafted by Anand Prakash.. All Rights Reserved.</p>
+ <div class="footer-links">
+
+<div class="footer-brand">
+
+<h3>RUDOHAGE</h3>
+
+<p>
+Handcrafted luxury creations designed for collectors and individuals who value uniqueness.
+</p>
+
+</div>
+
+<div class="footer-column">
+
+<h4>Company</h4>
+
+<a href="contact.html">Contact</a>
+<a href="shipping-policy.html">Shipping Policy</a>
+
+</div>
+
+<div class="footer-column">
+
+<h4>Legal</h4>
+
+<a href="terms.html">Terms & Conditions</a>
+<a href="refund-policy.html">Refund Policy</a>
+<a href="privacy-policy.html">Privacy Policy</a>
+
+</div>
+
+<div class="footer-column">
+
+<h4>Follow</h4>
+
+<a href="https://instagram.com/" target="_blank">
+<i class="fab fa-instagram"></i> Instagram
+</a>
+
+<a href="https://facebook.com/" target="_blank">
+<i class="fab fa-facebook-f"></i> Facebook
+</a>
+
+<a href="https://threads.net/" target="_blank">
+<i class="fab fa-threads"></i> Threads
+</a>
+
+<a href="https://pinterest.com/" target="_blank">
+<i class="fab fa-pinterest"></i> Pinterest
+</a>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+
+<p>
+© 2026 RUDOHAGE. All Rights Reserved.
+</p>
+
+</div>
 </footer>
 
 <!-- LUXURY STYLE WHATSAPP BUTTON -->
