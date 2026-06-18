@@ -1,0 +1,7 @@
+User-agent: *
+
+Allow: /
+
+Disallow: /admin-rudohage-x9k7v2-archive.html
+
+Sitemap: https://rudohage.com/sitemap.xml
