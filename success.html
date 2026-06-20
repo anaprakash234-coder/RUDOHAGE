@@ -207,6 +207,24 @@ return;
 }
 
 const order = snap.data();
+
+let productImage = "";
+
+if(order.product === "Inferno Core"){
+productImage =
+"https://rudohage.com/image/fire-clock-1.png";
+}
+
+else if(order.product === "Crimson Orbit"){
+productImage =
+"https://rudohage.com/image/fire-clock-2.png";
+}
+
+else{
+productImage =
+"https://rudohage.com/image/fire-clock-3.png";
+}
+
 const invoiceNo =
 "RUD-" + orderId.slice(0,8).toUpperCase();
 
@@ -218,9 +236,74 @@ invoiceWindow.document.write(`
 <title>Invoice</title>
 <style>
 body{
-font-family:Arial;
-padding:40px;
+background:#f6f2ea;
+padding:50px;
+font-family:'Manrope',sans-serif;
+color:#111;
 }
+
+.invoice{
+max-width:900px;
+margin:auto;
+background:white;
+padding:50px;
+border-radius:25px;
+box-shadow:0 20px 60px rgba(0,0,0,.08);
+}
+
+.logo{
+font-family:'Cormorant Garamond',serif;
+font-size:60px;
+text-align:center;
+margin-bottom:10px;
+}
+
+.tagline{
+text-align:center;
+letter-spacing:4px;
+font-size:12px;
+opacity:.6;
+margin-bottom:40px;
+}
+
+.section{
+margin-top:35px;
+}
+
+.divider{
+height:1px;
+background:#ddd;
+margin:30px 0;
+}
+
+.shipping{
+border:2px solid #111;
+padding:25px;
+border-radius:15px;
+margin-top:20px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+}
+
+td,th{
+padding:14px;
+border-bottom:1px solid #eee;
+text-align:left;
+}
+
+.print-btn{
+background:black;
+color:white;
+border:none;
+padding:15px 30px;
+border-radius:50px;
+cursor:pointer;
+margin-top:30px;
+}
+
 h1{
 text-align:center;
 }
@@ -237,7 +320,27 @@ padding:10px;
 </head>
 <body>
 
-<h1>RUDOHAGE INVOICE</h1>
+<div class="invoice">
+
+<div class="logo">
+RUDOHAGE
+</div>
+
+<div class="tagline">
+NOT PRODUCED. CRAFTED.
+</div>
+
+<div style="text-align:center">
+
+<img
+src="${productImage}"
+style="
+width:250px;
+border-radius:20px;
+box-shadow:0 15px 40px rgba(0,0,0,.08);
+">
+
+</div>
 
 <img
 src="${
