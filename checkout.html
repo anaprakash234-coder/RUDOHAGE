@@ -375,6 +375,11 @@ margin-bottom:20px;
 overflow:hidden;
 }
 
+.leaflet-control-attribution{
+font-size:7px !important;
+opacity:0.2 !important;
+}
+
 </style>
 
 <link rel="stylesheet"
@@ -815,7 +820,7 @@ alert("Order Failed");
 const LOCATIONIQ_KEY = "pk.7e2f6dce3e940737e4468e4b61b37eb9";
 
 let map = L.map('map').setView([28.6139,77.2090], 10);
-map.attributionControl.remove();
+
 
 L.tileLayer(
 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
