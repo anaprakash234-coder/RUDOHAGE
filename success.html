@@ -119,6 +119,9 @@ text-align:center;
 }
 
 </style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 </head>
 <body>
 
@@ -152,13 +155,40 @@ Loading...
 Track My Order
 </a>
 
+<br>
+
+<button id="invoiceBtn" class="btn" style="margin-left:10px;">
+Download Invoice
+</button>
+
 </div>
 
-<script>
+
+    <script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getFirestore,
+doc,
+getDoc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
+authDomain: "rudohage.firebaseapp.com",
+projectId: "rudohage",
+storageBucket: "rudohage.firebasestorage.app",
+messagingSenderId: "487042116246",
+appId: "1:487042116246:web:990d65636addd6d653f0b7"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 const params = new URLSearchParams(window.location.search);
-
 const orderId = params.get("orderId");
+
 
 document.getElementById("orderId").innerText =
 "Order ID: " + orderId;
@@ -166,10 +196,165 @@ document.getElementById("orderId").innerText =
 document.getElementById("trackBtn").href =
 `track.html?orderId=${orderId}`;
 
+document.getElementById("invoiceBtn")
+.addEventListener("click", async ()=>{
+
+const snap = await getDoc(doc(db,"orders",orderId));
+
+if(!snap.exists()){
+alert("Order Not Found");
+return;
+}
+
+const order = snap.data();
+const invoiceNo =
+"RUD-" + orderId.slice(0,8).toUpperCase();
+
+const invoiceWindow = window.open("","_blank");
+
+invoiceWindow.document.write(`
+<html>
+<head>
+<title>Invoice</title>
+<style>
+body{
+font-family:Arial;
+padding:40px;
+}
+h1{
+text-align:center;
+}
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+td,th{
+border:1px solid #ddd;
+padding:10px;
+}
+</style>
+</head>
+<body>
+
+<h1>RUDOHAGE INVOICE</h1>
+
+<img
+src="${
+order.product === 'Inferno Core'
+? 'https://rudohage.com/image/fire-clock-1.png'
+: order.product === 'Crimson Orbit'
+? 'https://rudohage.com/image/fire-clock-2.png'
+: 'https://rudohage.com/image/fire-clock-3.png'
+}"
+width="220">
+
+<table>
+<tr>
+<th>Order ID</th>
+<td>${orderId}</td>
+</tr>
+
+<tr>
+<th>Invoice Number</th>
+<td>${invoiceNo}</td>
+</tr>
+
+<tr>
+<th>Name</th>
+<td>${order.name}</td>
+</tr>
+
+<tr>
+<th>Phone</th>
+<td>${order.phone}</td>
+</tr>
+
+<tr>
+<th>Address</th>
+<td>${order.address}</td>
+</tr>
+
+<tr>
+<th>City</th>
+<td>${order.city}</td>
+</tr>
+
+<tr>
+<th>Pincode</th>
+<td>${order.pincode}</td>
+</tr>
+
+<tr>
+<th>Product</th>
+<td>${order.product}</td>
+</tr>
+
+<tr>
+<th>Order Date</th>
+<td>${order.orderDate}</td>
+</tr>
+
+<tr>
+<th>Price</th>
+<td>₹${order.price}</td>
+</tr>
+
+<tr>
+<th>Payment</th>
+<td>${order.payment}</td>
+</tr>
+
+</table>
+
+<hr>
+
+<h2>Shipping Label</h2>
+
+<div style="
+border:2px solid black;
+padding:20px;
+margin-top:20px;
+font-size:18px;
+">
+
+<b>${order.name}</b>
+
+<br><br>
+
+${order.address}
+
+<br>
+
+${order.city}
+
+<br>
+
+${order.pincode}
+
+<br><br>
+
+Phone:
+${order.phone}
+
+</div>
+
+<br><br>
+
+<button onclick="window.print()">
+Print / Save PDF
+</button>
+
+</body>
+</html>
+`);
+
+});
+
 </script>
 
-   <script>
-document.addEventListener('contextmenu', event => event.preventDefault());
+<script>
+
 
 document.onkeydown = function(e) {
     if (
