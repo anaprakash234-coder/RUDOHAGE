@@ -355,7 +355,31 @@ background:#111;
 color:white;
 }
 
+.location-btn{
+width:100%;
+padding:16px;
+margin-bottom:18px;
+border:none;
+background:#111;
+color:#fff;
+border-radius:14px;
+cursor:pointer;
+font-size:15px;
+}
+
+#map{
+width:100%;
+height:300px;
+border-radius:18px;
+margin-bottom:20px;
+overflow:hidden;
+}
+
 </style>
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
 </head>
 
 <body>
@@ -437,11 +461,19 @@ Every RUDOHAGE piece is handcrafted and prepared individually for its owner.
 
 <input type="text" placeholder="Phone Number">
 
-<textarea placeholder="Full Address"></textarea>
+<button type="button" id="detectLocation" class="location-btn">
+📍 Use Current Location
+</button>
 
-<input type="text" placeholder="City">
+<div id="map"></div>
 
-<input type="text" placeholder="Pincode">
+<textarea id="address" placeholder="Full Address"></textarea>
+
+<input id="city" type="text" placeholder="City">
+
+<input id="state" type="text" placeholder="State">
+
+<input id="pincode" type="text" placeholder="Pincode">
 
 <h2>Payment Method</h2>
 
@@ -755,20 +787,8 @@ alert("Order Failed");
 
 </script>
 
-<script>
-document.addEventListener('contextmenu', event => event.preventDefault());
 
-document.onkeydown = function(e) {
-    if (
-        e.keyCode == 123 ||
-        (e.ctrlKey && e.shiftKey && e.keyCode == 73) ||
-        (e.ctrlKey && e.shiftKey && e.keyCode == 74) ||
-        (e.ctrlKey && e.keyCode == 85)
-    ) {
-        return false;
-    }
-};
-</script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
@@ -790,8 +810,85 @@ document.onkeydown = function(e) {
   </div>
 </div>
 
+<script>
+
+const LOCATIONIQ_KEY = "pk.7e2f6dce3e940737e4468e4b61b37eb9";
+
+let map = L.map('map').setView([28.6139,77.2090], 10);
+map.attributionControl.remove();
+
+L.tileLayer(
+'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+).addTo(map);
+
+let marker;
+
+document
+.getElementById("detectLocation")
+.addEventListener("click", ()=>{
+
+navigator.geolocation.getCurrentPosition(
+async(position)=>{
+
+const lat = position.coords.latitude;
+const lon = position.coords.longitude;
+
+map.setView([lat,lon],15);
+
+if(marker){
+map.removeLayer(marker);
+}
+
+marker = L.marker([lat,lon]).addTo(map);
+
+const response = await fetch(
+`https://us1.locationiq.com/v1/reverse?key=${LOCATIONIQ_KEY}&lat=${lat}&lon=${lon}&format=json`
+);
+
+const data = await response.json();
+
+document.getElementById("address").value =
+data.display_name || "";
+
+document.getElementById("city").value =
+data.address.city ||
+data.address.town ||
+data.address.village ||
+"";
+
+document.getElementById("state").value =
+data.address.state || "";
+
+document.getElementById("pincode").value =
+data.address.postcode || "";
+
+},
+()=>{
+alert("Location permission denied");
+}
+);
+
+});
+
+
+</script>
+
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+
+document.onkeydown = function(e) {
+    if (
+        e.keyCode == 123 ||
+        (e.ctrlKey && e.shiftKey && e.keyCode == 73) ||
+        (e.ctrlKey && e.shiftKey && e.keyCode == 74) ||
+        (e.ctrlKey && e.keyCode == 85)
+    ) {
+        return false;
+    }
+};
+</script>
+
 </body>
 </html>
-
 
 
