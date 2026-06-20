@@ -707,7 +707,8 @@ codCharge:50,
 payment:"COD",
 paymentId: response.razorpay_payment_id,
 status:"Pending",
-createdAt:Date.now()
+createdAt:Date.now(),
+    orderDate: new Date().toLocaleDateString("en-IN")
 }
 );
 
