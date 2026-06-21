@@ -731,48 +731,23 @@ modal.classList.remove("active");
 document.getElementById("loadingOverlay")
 .classList.add("active");
 
+setTimeout(() => {
+
 const options = {
 
 key: RAZORPAY_KEY,
-
-amount: 5000, // ₹50
-
+amount: 5000,
 currency: "INR",
-
 name: "RUDOHAGE",
-
 description: "COD Security Charge",
 
-prefill: {
-name: name,
-contact: phone
+prefill:{
+name:name,
+contact:phone
 },
 
 handler: async function(response){
-
-const docRef = await addDoc(
-collection(db,"orders"),
-{
-name,
-phone,
-address,
-city,
-pincode,
-product,
-price:Number(price),
-codCharge:50,
-payment:"COD",
-paymentId: response.razorpay_payment_id,
-status:"Pending",
-createdAt:Date.now(),
-orderDate: new Date().toLocaleDateString("en-IN")
-
-}
-);
-
-window.location.href =
-`success.html?orderId=${docRef.id}`;
-
+  // tera existing code
 }
 
 };
@@ -783,6 +758,9 @@ rzp.open();
 
 document.getElementById("loadingOverlay")
 .classList.remove("active");
+
+}, 1500);
+
 };
 
 return;
