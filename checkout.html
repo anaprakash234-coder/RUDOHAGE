@@ -380,6 +380,44 @@ font-size:7px !important;
 opacity:0.2 !important;
 }
 
+.loading-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(255,255,255,0.9);
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:99999;
+}
+
+.loading-overlay.active{
+display:flex;
+}
+
+.loader{
+width:60px;
+height:60px;
+border:4px solid #ddd;
+border-top:4px solid #111;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+.loading-text{
+margin-top:20px;
+font-size:14px;
+letter-spacing:2px;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
 </style>
 
 <link rel="stylesheet"
@@ -729,6 +767,9 @@ return;
 
 }
 
+document.getElementById("loadingOverlay")
+.classList.add("active");
+
    let finalPrice = Number(price);
 
 if(paymentMethod === "COD"){
@@ -792,6 +833,9 @@ window.location.href =
 };
 
 const rzp = new Razorpay(options);
+
+document.getElementById("loadingOverlay")
+.classList.remove("active");
 
 rzp.open();
 
@@ -908,6 +952,13 @@ document.onkeydown = function(e) {
 };
 </script>
 
+
+<div id="loadingOverlay" class="loading-overlay">
+    <div class="loader"></div>
+    <div class="loading-text">
+        PREPARING SECURE CHECKOUT...
+    </div>
+</div>
+
 </body>
 </html>
-
