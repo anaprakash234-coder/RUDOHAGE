@@ -380,44 +380,6 @@ font-size:7px !important;
 opacity:0.2 !important;
 }
 
-.loading-overlay{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(255,255,255,0.9);
-display:none;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-z-index:99999;
-}
-
-.loading-overlay.active{
-display:flex;
-}
-
-.loader{
-width:60px;
-height:60px;
-border:4px solid #ddd;
-border-top:4px solid #111;
-border-radius:50%;
-animation:spin 1s linear infinite;
-}
-
-.loading-text{
-margin-top:20px;
-font-size:14px;
-letter-spacing:2px;
-}
-
-@keyframes spin{
-0%{transform:rotate(0deg);}
-100%{transform:rotate(360deg);}
-}
-
 </style>
 
 <link rel="stylesheet"
@@ -662,7 +624,6 @@ document.getElementById("productImage").src =
 document.querySelector(".place-order")
 .addEventListener("click", async () => {
 
-
 const name =
 document.querySelector('input[placeholder="Full Name"]').value;
 
@@ -682,34 +643,19 @@ const paymentMethod =
 document.getElementById("paymentMethod").value;
 
 if(!name || !phone || !address || !city || !pincode){
-
-    document.getElementById("loadingOverlay")
-.classList.remove("active");
-
 alert("Please fill all details");
 return;
 }
 
 if(phone.length !== 10){
-
-document.getElementById("loadingOverlay")
-.classList.remove("active");
-
 alert("Enter Valid Phone Number");
 return;
 }
 
 if(pincode.length !== 6){
-
-document.getElementById("loadingOverlay")
-.classList.remove("active");
-
 alert("Enter Valid Pincode");
 return;
 }
-
-document.getElementById("loadingOverlay")
-.classList.add("active");
 
 try{
 
@@ -728,26 +674,48 @@ document.getElementById("continueCOD").onclick = () => {
 
 modal.classList.remove("active");
 
-document.getElementById("loadingOverlay")
-.classList.add("active");
-
-setTimeout(() => {
-
 const options = {
 
 key: RAZORPAY_KEY,
-amount: 5000,
+
+amount: 5000, // ₹50
+
 currency: "INR",
+
 name: "RUDOHAGE",
+
 description: "COD Security Charge",
 
-prefill:{
-name:name,
-contact:phone
+prefill: {
+name: name,
+contact: phone
 },
 
 handler: async function(response){
-  // tera existing code
+
+const docRef = await addDoc(
+collection(db,"orders"),
+{
+name,
+phone,
+address,
+city,
+pincode,
+product,
+price:Number(price),
+codCharge:50,
+payment:"COD",
+paymentId: response.razorpay_payment_id,
+status:"Pending",
+createdAt:Date.now(),
+orderDate: new Date().toLocaleDateString("en-IN")
+
+}
+);
+
+window.location.href =
+`success.html?orderId=${docRef.id}`;
+
 }
 
 };
@@ -755,12 +723,6 @@ handler: async function(response){
 const rzp = new Razorpay(options);
 
 rzp.open();
-
-document.getElementById("loadingOverlay")
-.classList.remove("active");
-
-}, 1500);
-
 };
 
 return;
@@ -833,13 +795,7 @@ const rzp = new Razorpay(options);
 
 rzp.open();
 
-document.getElementById("loadingOverlay")
-.classList.remove("active");
-
 }catch(error){
-
-    document.getElementById("loadingOverlay")
-.classList.remove("active");
 
 console.log(error);
 
@@ -951,14 +907,6 @@ document.onkeydown = function(e) {
     }
 };
 </script>
-
-<div id="loadingOverlay" class="loading-overlay">
-    <div class="loader"></div>
-    <div class="loading-text">
-        PREPARING SECURE CHECKOUT...
-    </div>
-</div>
-
 
 </body>
 </html>
