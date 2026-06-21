@@ -693,11 +693,19 @@ return;
 }
 
 if(phone.length !== 10){
+
+document.getElementById("loadingOverlay")
+.classList.remove("active");
+
 alert("Enter Valid Phone Number");
 return;
 }
 
 if(pincode.length !== 6){
+
+document.getElementById("loadingOverlay")
+.classList.remove("active");
+
 alert("Enter Valid Pincode");
 return;
 }
@@ -841,6 +849,9 @@ window.location.href =
 
 const rzp = new Razorpay(options);
 
+document.getElementById("loadingOverlay")
+.classList.remove("active");
+
 rzp.open();
 
 }catch(error){
@@ -965,6 +976,7 @@ document.onkeydown = function(e) {
         PREPARING SECURE CHECKOUT...
     </div>
 </div>
+
 
 </body>
 </html>
