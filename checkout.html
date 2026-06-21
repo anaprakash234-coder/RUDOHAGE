@@ -708,6 +708,9 @@ alert("Enter Valid Pincode");
 return;
 }
 
+document.getElementById("loadingOverlay")
+.classList.add("active");
+
 try{
 
 if(paymentMethod === "COD"){
@@ -776,10 +779,10 @@ window.location.href =
 
 const rzp = new Razorpay(options);
 
+rzp.open();
+
 document.getElementById("loadingOverlay")
 .classList.remove("active");
-
-rzp.open();
 };
 
 return;
@@ -850,10 +853,10 @@ window.location.href =
 
 const rzp = new Razorpay(options);
 
+rzp.open();
+
 document.getElementById("loadingOverlay")
 .classList.remove("active");
-
-rzp.open();
 
 }catch(error){
 
