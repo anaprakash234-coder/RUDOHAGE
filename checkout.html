@@ -708,15 +708,41 @@ document.getElementById("cancelCOD").onclick = () => {
 modal.classList.remove("active");
 };
 
-document.getElementById("continueCOD").onclick = () => {
+document.getElementById("continueCOD").onclick = async () => {
+
+try{
 
 modal.classList.remove("active");
+
+document.getElementById("loadingOverlay")
+.classList.add("active");
+
+const res = await fetch(
+"https://razorpay-backend-6yg5.onrender.com/create-order",
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+amount:50
+})
+}
+);
+
+const order = await res.json();
+
+if(!order.id){
+throw new Error("Order ID not received");
+}
 
 const options = {
 
 key: RAZORPAY_KEY,
 
-amount: 5000, // ₹50
+amount: order.amount,
+
+order_id: order.id,
 
 currency: "INR",
 
@@ -724,9 +750,9 @@ name: "RUDOHAGE",
 
 description: "COD Security Charge",
 
-prefill: {
-name: name,
-contact: phone
+prefill:{
+name:name,
+contact:phone
 },
 
 handler: async function(response){
@@ -746,8 +772,7 @@ payment:"COD",
 paymentId: response.razorpay_payment_id,
 status:"Pending",
 createdAt:Date.now(),
-orderDate: new Date().toLocaleDateString("en-IN")
-
+orderDate:new Date().toLocaleDateString("en-IN")
 }
 );
 
@@ -760,8 +785,25 @@ window.location.href =
 
 const rzp = new Razorpay(options);
 
+document.getElementById("loadingOverlay")
+.classList.remove("active");
+
 rzp.open();
+
+}catch(error){
+
+document.getElementById("loadingOverlay")
+.classList.remove("active");
+
+console.log(error);
+
+alert("COD Payment Failed");
+
+}
+
+
 };
+
 
 return;
 
@@ -787,6 +829,10 @@ amount: finalPrice
 });
 
 const order = await res.json();
+
+if(!order.id){
+throw new Error("Order ID not received");
+}
 
 const options = {
 
@@ -839,7 +885,11 @@ document.getElementById("loadingOverlay")
 
 rzp.open();
 
-}catch(error){
+}
+catch(error){
+
+document.getElementById("loadingOverlay")
+.classList.remove("active");
 
 console.log(error);
 
