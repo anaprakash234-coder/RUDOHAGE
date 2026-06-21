@@ -708,7 +708,8 @@ payment:"COD",
 paymentId: response.razorpay_payment_id,
 status:"Pending",
 createdAt:Date.now(),
-    orderDate: new Date().toLocaleDateString("en-IN")
+orderDate: new Date().toLocaleDateString("en-IN")
+
 }
 );
 
@@ -734,11 +735,24 @@ if(paymentMethod === "COD"){
 finalPrice += 50;
 }
 
+const res = await fetch("https://razorpay-backend-6yg5.onrender.com/create-order", {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify({
+amount: finalPrice
+})
+});
+
+const order = await res.json();
+
 const options = {
 
 key: RAZORPAY_KEY,
 
-amount: finalPrice * 100,
+amount: order.amount,
+order_id: order.id,
 
 currency: "INR",
 
@@ -896,4 +910,3 @@ document.onkeydown = function(e) {
 
 </body>
 </html>
-
