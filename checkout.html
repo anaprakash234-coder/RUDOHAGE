@@ -662,8 +662,6 @@ document.getElementById("productImage").src =
 document.querySelector(".place-order")
 .addEventListener("click", async () => {
 
-    document.getElementById("loadingOverlay")
-.classList.add("active");
 
 const name =
 document.querySelector('input[placeholder="Full Name"]').value;
@@ -726,6 +724,9 @@ modal.classList.remove("active");
 document.getElementById("continueCOD").onclick = () => {
 
 modal.classList.remove("active");
+
+document.getElementById("loadingOverlay")
+.classList.add("active");
 
 const options = {
 
