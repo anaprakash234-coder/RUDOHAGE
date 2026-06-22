@@ -415,6 +415,23 @@ font-size:14px;
 letter-spacing:2px;
 }
 
+    .loading-text{
+margin-top:24px;
+font-size:15px;
+font-weight:600;
+letter-spacing:1px;
+text-align:center;
+line-height:1.8;
+}
+
+.loading-text span{
+display:block;
+font-size:13px;
+font-weight:400;
+opacity:.65;
+letter-spacing:.5px;
+}
+
 @keyframes spin{
 0%{transform:rotate(0deg);}
 100%{transform:rotate(360deg);}
@@ -1157,8 +1174,10 @@ document.onkeydown = function(e) {
 
 <div id="loadingOverlay" class="loading-overlay">
     <div class="loader"></div>
+
     <div class="loading-text">
-        PREPARING SECURE CHECKOUT...
+        Securing Your Checkout
+        <span>Usually takes 5–30 seconds</span>
     </div>
 </div>
 
