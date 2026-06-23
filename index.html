@@ -1153,6 +1153,99 @@ left:20px;
 
 }
 
+    /* ===== MOBILE MODAL FIX ===== */
+
+@media (max-width:768px){
+
+.modal{
+  padding:10px !important;
+}
+
+.modal-box{
+
+  width:95% !important;
+  max-width:380px !important;
+
+  max-height:90vh !important;
+
+  overflow:hidden !important;
+
+  border-radius:28px !important;
+}
+
+/* IMAGE SMALLER */
+
+.modal-img{
+
+  height:280px !important;
+  width:100% !important;
+
+  object-fit:cover !important;
+}
+
+/* CONTENT COMPACT */
+
+.modal-content{
+
+  padding:20px !important;
+}
+
+.modal-content h2{
+
+  font-size:1.2rem !important;
+  margin-bottom:8px !important;
+}
+
+.modal-price{
+
+  font-size:1.8rem !important;
+  margin-bottom:10px !important;
+}
+
+.modal-content p{
+
+  font-size:0.95rem !important;
+  line-height:1.5 !important;
+
+  margin-bottom:15px !important;
+
+  display:-webkit-box;
+  -webkit-line-clamp:4;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+
+/* BUTTONS */
+
+.modal-buttons{
+  display:flex;
+  gap:10px;
+}
+
+.buy-btn,
+.view-btn{
+
+  flex:1;
+
+  padding:12px 8px !important;
+
+  font-size:.72rem !important;
+
+  letter-spacing:1px !important;
+}
+
+/* CLOSE BUTTON */
+
+.modal-close{
+
+  top:12px !important;
+  right:15px !important;
+
+  font-size:28px !important;
+}
+
+}
+
   </style>
 
   <script type="application/ld+json">
