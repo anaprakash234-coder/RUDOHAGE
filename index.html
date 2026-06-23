@@ -1048,6 +1048,111 @@ gap:35px;
 
 }
 
+    .support-float{
+position:fixed;
+bottom:25px;
+left:25px;
+
+height:58px;
+width:58px;
+
+background:rgba(0,0,0,.75);
+backdrop-filter:blur(12px);
+
+color:#fff;
+text-decoration:none;
+
+border-radius:50px;
+
+display:flex;
+align-items:center;
+
+overflow:hidden;
+
+z-index:9999;
+
+box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+animation:introSupport 4s ease forwards;
+}
+
+.support-float i{
+font-size:22px;
+min-width:58px;
+text-align:center;
+}
+
+.support-float span{
+white-space:nowrap;
+font-size:13px;
+font-weight:600;
+letter-spacing:2px;
+opacity:0;
+}
+
+@keyframes introSupport{
+
+0%{
+width:58px;
+}
+
+25%{
+width:170px;
+}
+
+75%{
+width:170px;
+}
+
+100%{
+width:58px;
+}
+
+}
+
+@keyframes textFade{
+
+0%{
+opacity:0;
+}
+
+25%{
+opacity:1;
+}
+
+75%{
+opacity:1;
+}
+
+100%{
+opacity:0;
+}
+
+}
+
+.support-float span{
+animation:textFade 4s ease forwards;
+}
+
+.support-float:hover{
+width:170px;
+transition:.4s;
+}
+
+.support-float:hover span{
+opacity:1;
+transition:.4s;
+}
+
+@media(max-width:768px){
+
+.support-float{
+bottom:20px;
+left:20px;
+}
+
+}
+
   </style>
 
   <script type="application/ld+json">
@@ -1696,6 +1801,11 @@ document.onkeydown = function(e) {
     }
 };
 </script>
+
+  <a href="support.html" class="support-float">
+    <i class="fa-solid fa-headset"></i>
+    <span>SUPPORT</span>
+</a>
 
 </body>
 </html>
