@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RUDOHAGE | Support Center</title>
+
+<link rel="icon" href="logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Manrope:wght@300;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+:root{
+--bg:#f6f2ea;
+--text:#111;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:var(--bg);
+font-family:'Manrope',sans-serif;
+color:var(--text);
+overflow-x:hidden;
+position:relative;
+}
+
+body::before{
+content:'';
+position:fixed;
+
+width:600px;
+height:600px;
+
+background:
+radial-gradient(
+circle,
+rgba(0,0,0,.04),
+transparent
+);
+
+top:-250px;
+right:-250px;
+
+pointer-events:none;
+}
+
+header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:1.3rem 8%;
+background:rgba(246,242,234,.75);
+backdrop-filter:blur(20px);
+border-bottom:1px solid rgba(0,0,0,.08);
+z-index:1000;
+}
+
+.logo{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+text-decoration:none;
+color:#111;
+}
+
+.hero{
+padding:170px 20px 80px;
+text-align:center;
+}
+
+.hero span{
+letter-spacing:5px;
+font-size:11px;
+opacity:.6;
+}
+
+.hero h1{
+font-family:'Cormorant Garamond',serif;
+font-size:3rem;
+margin-top:15px;
+}
+
+.hero p{
+max-width:700px;
+margin:20px auto;
+line-height:1.9;
+opacity:.75;
+}
+
+.support-grid{
+max-width:1200px;
+margin:auto;
+padding:0 8% 100px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+}
+
+.card{
+background:rgba(255,255,255,.75);
+
+backdrop-filter:blur(20px);
+
+padding:40px;
+
+border-radius:32px;
+
+border:1px solid rgba(0,0,0,.08);
+
+box-shadow:
+0 25px 80px rgba(0,0,0,.06);
+}
+
+.card h2{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+margin-bottom:20px;
+}
+
+input,
+textarea,
+select{
+
+width:100%;
+
+padding:18px 22px;
+
+margin-bottom:18px;
+
+background:rgba(255,255,255,.75);
+
+backdrop-filter:blur(20px);
+
+border:1px solid rgba(0,0,0,.08);
+
+border-radius:20px;
+
+font-size:15px;
+
+font-family:'Manrope',sans-serif;
+
+transition:.3s;
+
+outline:none;
+
+}
+
+textarea{
+height:180px;
+resize:none;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+
+border-color:#111;
+
+box-shadow:
+0 0 0 4px rgba(0,0,0,.05);
+
+}
+
+select{
+
+appearance:none;
+-webkit-appearance:none;
+-moz-appearance:none;
+
+cursor:pointer;
+
+font-weight:600;
+
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' fill='black' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 5.646a.5.5 0 0 1 .708 0L8 11.293l5.646-5.647a.5.5 0 1 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+
+background-repeat:no-repeat;
+
+background-position:right 20px center;
+
+padding-right:55px;
+
+}
+
+button{
+width:100%;
+
+padding:20px;
+
+border:none;
+
+background:#111;
+
+color:white;
+
+border-radius:999px;
+
+cursor:pointer;
+
+letter-spacing:3px;
+
+transition:.4s;
+}
+
+button:hover{
+transform:translateY(-3px);
+}
+
+
+
+.quick-links{
+display:grid;
+gap:18px;
+}
+
+.support-option{
+
+background:linear-gradient(
+135deg,
+rgba(255,255,255,.95),
+rgba(255,255,255,.70)
+);
+
+backdrop-filter:blur(24px);
+
+padding:28px;
+
+border-radius:28px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+border:1px solid rgba(0,0,0,.06);
+
+transition:.4s;
+
+position:relative;
+
+overflow:hidden;
+
+pointer-events:none;
+
+}
+
+.support-option::before{
+
+content:'';
+
+position:absolute;
+
+top:0;
+left:-100%;
+
+width:100%;
+height:100%;
+
+background:linear-gradient(
+90deg,
+transparent,
+rgba(255,255,255,.6),
+transparent
+);
+
+animation:shine 4s infinite;
+
+}
+
+.support-option h3{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:1.2rem;
+
+font-weight:600;
+
+letter-spacing:.5px;
+
+position:relative;
+
+z-index:2;
+
+}
+
+.support-option i{
+
+font-size:20px;
+
+opacity:.35;
+
+position:relative;
+
+z-index:2;
+
+}
+
+@keyframes shine{
+
+0%{
+left:-100%;
+}
+
+100%{
+left:100%;
+}
+
+}
+
+.footer p{
+letter-spacing:5px;
+font-size:11px;
+opacity:.6;
+}
+
+.footer h2{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+margin-top:12px;
+}
+
+.footer{
+text-align:center;
+padding:70px 20px;
+margin-top:80px;
+}
+
+@media(max-width:768px){
+
+.support-grid{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:2.3rem;
+}
+
+}
+
+.issue-dropdown{
+margin-bottom:18px;
+position:relative;
+}
+
+.issue-selected{
+
+background:rgba(255,255,255,.75);
+
+backdrop-filter:blur(20px);
+
+padding:18px 22px;
+
+border-radius:20px;
+
+border:1px solid rgba(0,0,0,.08);
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:.3s;
+}
+
+.issue-selected:hover{
+
+transform:translateY(-2px);
+
+box-shadow:0 10px 30px rgba(0,0,0,.06);
+
+}
+
+.issue-arrow{
+font-size:22px;
+}
+
+.issue-list{
+
+display:none;
+
+margin-top:10px;
+
+background:white;
+
+border-radius:20px;
+
+overflow:hidden;
+
+box-shadow:0 20px 50px rgba(0,0,0,.08);
+
+}
+
+.issue-list.active{
+display:block;
+}
+
+.issue-option{
+
+padding:18px 22px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.issue-option:hover{
+
+background:#f6f2ea;
+
+padding-left:30px;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<a href="index.html" class="logo">
+RUDOHAGE
+</a>
+</header>
+
+<section class="hero">
+
+<span>RUDOHAGE SUPPORT ARCHIVE</span>
+
+<h1>Dedicated Support For Every Owner</h1>
+
+<p>
+Every RUDOHAGE owner receives dedicated support,
+guidance and assistance for their handcrafted piece.
+</p>
+
+</section>
+
+<div class="support-grid">
+
+<div class="card">
+
+<h2>Submit Support Request</h2>
+
+<form id="supportForm">
+
+<input
+type="text"
+id="name"
+placeholder="Full Name"
+required>
+
+<input
+type="email"
+id="email"
+placeholder="Email Address"
+required>
+
+<input
+type="text"
+id="orderid"
+placeholder="Order ID (Optional)">
+
+<div class="issue-dropdown">
+
+<div class="issue-selected" id="issueSelected">
+Order Support
+<span class="issue-arrow">›</span>
+</div>
+
+<div class="issue-list" id="issueList">
+
+<div class="issue-option">Order Support</div>
+
+<div class="issue-option">Payment Issue</div>
+
+<div class="issue-option">Delivery Tracking</div>
+
+<div class="issue-option">Product Question</div>
+
+<div class="issue-option">Refund Request</div>
+
+<div class="issue-option">Other</div>
+
+</div>
+
+</div>
+
+<input type="hidden" id="issue" value="Order Support">
+
+<textarea
+id="message"
+placeholder="Describe your issue..."
+required></textarea>
+
+<button id="sendBtn">
+SUBMIT REQUEST
+</button>
+
+</form>
+
+</div>
+
+<div class="card">
+
+<h2>Owner Assistance Archive</h2>
+
+<p style="opacity:.65;margin-bottom:25px;line-height:1.8;">
+Dedicated assistance for every handcrafted RUDOHAGE piece.
+</p>
+
+<div class="quick-links">
+
+<div class="support-option" onclick="selectIssue('Order Support')">
+<h3>Order Support</h3>
+<i class="fa-solid fa-box-archive"></i>
+</div>
+
+<div class="support-option" onclick="selectIssue('Payment Issue')">
+<h3>Payment Assistance</h3>
+<i class="fa-solid fa-gem"></i>
+</div>
+
+<div class="support-option" onclick="selectIssue('Delivery Tracking')">
+<h3>Delivery Tracking</h3>
+<i class="fa-solid fa-truck"></i>
+</div>
+
+<div class="support-option" onclick="selectIssue('Refund Request')">
+<h3>Refund Request</h3>
+<i class="fa-solid fa-shield-heart"></i>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<footer class="footer">
+
+<p>Not Produced. Crafted.</p>
+
+<h2>RUDOHAGE</h2>
+
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+
+emailjs.init("LHQqnBtxsnUhQWinY");
+
+document.getElementById("supportForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const btn =
+document.getElementById("sendBtn");
+
+btn.innerHTML="SUBMITTING...";
+
+emailjs.send(
+"service_1k374tr",
+"template_589kggl",
+{
+name:
+document.getElementById("name").value,
+
+email:
+document.getElementById("email").value,
+
+subject:
+"SUPPORT REQUEST - " +
+document.getElementById("issue").value,
+
+message:
+"Order ID: " +
+document.getElementById("orderid").value +
+
+"\n\nIssue Type: " +
+
+document.getElementById("issue").value +
+
+"\n\nMessage:\n" +
+
+document.getElementById("message").value
+}
+)
+
+.then(()=>{
+
+btn.innerHTML="REQUEST SUBMITTED";
+
+document.getElementById("supportForm").reset();
+
+setTimeout(()=>{
+btn.innerHTML="SUBMIT REQUEST";
+},3000);
+
+});
+
+});
+
+function selectIssue(issue){
+
+document.getElementById("issue").value = issue;
+
+document.getElementById("supportForm")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+const issueSelected =
+document.getElementById("issueSelected");
+
+const issueList =
+document.getElementById("issueList");
+
+const issueInput =
+document.getElementById("issue");
+
+issueSelected.onclick = ()=>{
+
+issueList.classList.toggle("active");
+
+};
+
+document
+.querySelectorAll(".issue-option")
+.forEach(option=>{
+
+option.onclick = ()=>{
+
+issueSelected.innerHTML =
+option.innerHTML +
+'<span class="issue-arrow">›</span>';
+
+issueInput.value =
+option.innerText;
+
+issueList.classList.remove("active");
+
+};
+
+});
+
+</script>
+
+
+</body>
+</html>
