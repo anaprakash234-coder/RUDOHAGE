@@ -887,6 +887,8 @@ modal.classList.remove("active");
 document.getElementById("loadingOverlay")
 .classList.add("active");
 
+startLuxuryLoader();
+
 const res = await fetch(
 "https://razorpay-backend-6yg5.onrender.com/create-order",
 {
@@ -982,6 +984,8 @@ return;
 document.getElementById("loadingOverlay")
 .classList.add("active");
 
+startLuxuryLoader();
+
    let finalPrice = Number(price);
 
 if(paymentMethod === "COD"){
@@ -1050,6 +1054,8 @@ window.location.href =
 
 const rzp = new Razorpay(options);
 
+stopLuxuryLoader();
+
 document.getElementById("loadingOverlay")
 .classList.remove("active");
 
@@ -1058,6 +1064,8 @@ rzp.open();
 }
 catch(error){
 
+    stopLuxuryLoader();
+    
 document.getElementById("loadingOverlay")
 .classList.remove("active");
 
@@ -1173,13 +1181,79 @@ document.onkeydown = function(e) {
 </script>
 
 <div id="loadingOverlay" class="loading-overlay">
+
     <div class="loader"></div>
 
-    <div class="loading-text">
-        Securing Your Checkout
-        <span>Usually takes 5–30 seconds</span>
+    <div class="loading-text" id="loadingText">
+        Processing Order
+        <span id="loadingSubText">
+            Preparing secure checkout...
+        </span>
     </div>
+
 </div>
+
+<script>
+
+let loadingStep1;
+let loadingStep2;
+let loadingStep3;
+
+function startLuxuryLoader(){
+
+const main =
+document.getElementById("loadingText");
+
+const sub =
+document.getElementById("loadingSubText");
+
+main.innerHTML =
+`Processing Order
+<span id="loadingSubText">
+Preparing secure checkout...
+</span>`;
+
+loadingStep1 = setTimeout(()=>{
+
+main.innerHTML =
+`Verifying Credentials
+<span id="loadingSubText">
+Authenticating payment session...
+</span>`;
+
+},5000);
+
+loadingStep2 = setTimeout(()=>{
+
+main.innerHTML =
+`Securing Payment
+<span id="loadingSubText">
+Establishing encrypted connection...
+</span>`;
+
+},15000);
+
+loadingStep3 = setTimeout(()=>{
+
+main.innerHTML =
+`Connecting To Banking Network
+<span id="loadingSubText">
+Please wait while Razorpay loads...
+</span>`;
+
+},25000);
+
+}
+
+function stopLuxuryLoader(){
+
+clearTimeout(loadingStep1);
+clearTimeout(loadingStep2);
+clearTimeout(loadingStep3);
+
+}
+
+</script>
 
 </body>
 </html>
