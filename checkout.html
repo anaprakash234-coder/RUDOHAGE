@@ -888,9 +888,9 @@ if(paymentMethod === "COD"){
       const res = await fetch("https://razorpay-backend-6yg5.onrender.com/create-order", {
         method: "POST",
         headers: {"Content-Type":"application/json"},
-        body: JSON.stringify({
-          amount: 50   // 🔥 FIX: COD security fee fixed
-        })
+       body: JSON.stringify({
+  amount: 50 * 100
+})
       });
 
       const data = await res.json();
