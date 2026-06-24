@@ -265,6 +265,24 @@ const auth = getAuth(app);
 
 const ADMIN_EMAIL = "anaprakash123@gmail.com";
 
+onAuthStateChanged(auth,(user)=>{
+
+if(user){
+
+if(user.email === ADMIN_EMAIL){
+
+window.location.href = "admin.html";
+
+}else{
+
+window.location.href = "my-orders.html";
+
+}
+
+}
+
+});
+
 const loginBtn =
 document.querySelector(".btn");
 
