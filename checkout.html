@@ -890,16 +890,15 @@ document.getElementById("loadingOverlay")
 startLuxuryLoader();
 
 const res = await fetch("https://razorpay-backend-6yg5.onrender.com/create-order", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    product: product
-  })
-});
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({
+          amount: 50   // 🔥 FIX: COD security fee fixed
+        })
+      });
 
-const order = await res.json();
+      const data = await res.json();
+      const order = data.order;
 
 if(!order.id){
 throw new Error("Order ID not received");
