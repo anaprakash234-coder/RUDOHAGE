@@ -892,14 +892,13 @@ if(paymentMethod === "COD"){
       const res = await fetch("https://razorpay-backend-6yg5.onrender.com/create-order", {
         method: "POST",
         headers: {"Content-Type":"application/json"},
-   body: JSON.stringify({
+  body: JSON.stringify({
   product: product,
-  amount: 50
+  cod: true
 })
       });
 
-      const data = await res.json();
-      const order = data.order;
+     const order = await res.json();
 
       if(!order || !order.id){
         throw new Error("Order ID not received");
@@ -966,12 +965,6 @@ document.getElementById("loadingOverlay")
 .classList.add("active");
 
 startLuxuryLoader();
-
-   let finalPrice = Number(price);
-
-if(paymentMethod === "COD"){
-finalPrice += 50;
-}
 
 const res = await fetch("https://razorpay-backend-6yg5.onrender.com/create-order", {
 method: "POST",
@@ -1228,6 +1221,5 @@ clearTimeout(loadingStep3);
 
 </body>
 </html>
-
 
 
