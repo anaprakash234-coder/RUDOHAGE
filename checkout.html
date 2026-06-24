@@ -756,6 +756,8 @@ document.getElementById("paymentList");
 const paymentInput =
 document.getElementById("paymentMethod");
 
+const modal = document.getElementById("luxuryModal");
+
 paymentSelected.onclick = ()=>{
 
 paymentList.classList.toggle("active");
@@ -871,6 +873,8 @@ try{
 
 if(paymentMethod === "COD"){
 
+    const modal = document.getElementById("luxuryModal");
+
   modal.classList.add("active");
 
   document.getElementById("cancelCOD").onclick = () => {
@@ -888,8 +892,9 @@ if(paymentMethod === "COD"){
       const res = await fetch("https://razorpay-backend-6yg5.onrender.com/create-order", {
         method: "POST",
         headers: {"Content-Type":"application/json"},
-       body: JSON.stringify({
-  amount: 50 * 100
+   body: JSON.stringify({
+  product: product,
+  amount: 50
 })
       });
 
