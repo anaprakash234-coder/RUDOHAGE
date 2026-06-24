@@ -867,29 +867,25 @@ return;
 
 try{
 
+
+
 if(paymentMethod === "COD"){
 
-  const modal =
-document.getElementById("luxuryModal");
+  modal.classList.add("active");
 
-modal.classList.add("active");
+  document.getElementById("cancelCOD").onclick = () => {
+    modal.classList.remove("active");
+  };
 
-document.getElementById("cancelCOD").onclick = () => {
-modal.classList.remove("active");
-};
+  document.getElementById("continueCOD").onclick = async () => {
 
-document.getElementById("continueCOD").onclick = async () => {
+    try{
 
-try{
+      modal.classList.remove("active");
+      document.getElementById("loadingOverlay").classList.add("active");
+      startLuxuryLoader();
 
-modal.classList.remove("active");
-
-document.getElementById("loadingOverlay")
-.classList.add("active");
-
-startLuxuryLoader();
-
-const res = await fetch("https://razorpay-backend-6yg5.onrender.com/create-order", {
+      const res = await fetch("https://razorpay-backend-6yg5.onrender.com/create-order", {
         method: "POST",
         headers: {"Content-Type":"application/json"},
         body: JSON.stringify({
@@ -900,81 +896,60 @@ const res = await fetch("https://razorpay-backend-6yg5.onrender.com/create-order
       const data = await res.json();
       const order = data.order;
 
-if(!order.id){
-throw new Error("Order ID not received");
-}
+      if(!order || !order.id){
+        throw new Error("Order ID not received");
+      }
 
-const options = {
+      const options = {
+        key: RAZORPAY_KEY,
+        amount: order.amount,
+        currency: "INR",
+        order_id: order.id,
 
-key: RAZORPAY_KEY,
+        name: "RUDOHAGE",
+        description: "COD Security Charge",
 
-amount: order.amount,
+        prefill:{
+          name:name,
+          contact:phone
+        },
 
-order_id: order.id,
+        handler: async function(response){
 
-currency: "INR",
+          const docRef = await addDoc(collection(db,"orders"),{
+            name,
+            phone,
+            address,
+            city,
+            pincode,
+            product,
+            price:Number(price),
+            codCharge:50,
+            payment:"COD",
+            paymentId: response.razorpay_payment_id,
+            status:"COD Pending Approval", // 🔥 better status
+            createdAt:Date.now()
+          });
 
-name: "RUDOHAGE",
+          window.location.href =
+          `success.html?orderId=${docRef.id}`;
+        }
+      };
 
-description: "COD Security Charge",
+      const rzp = new Razorpay(options);
 
-prefill:{
-name:name,
-contact:phone
-},
+      stopLuxuryLoader();
+      document.getElementById("loadingOverlay").classList.remove("active");
 
-handler: async function(response){
+      rzp.open();
 
-const docRef = await addDoc(
-collection(db,"orders"),
-{
-name,
-phone,
-address,
-city,
-pincode,
-product,
-price:Number(price),
-codCharge:50,
-payment:"COD",
-paymentId: response.razorpay_payment_id,
-status:"Pending",
-createdAt:Date.now(),
-orderDate:new Date().toLocaleDateString("en-IN")
-}
-);
+    } catch(err){
+      console.log(err);
+      alert("COD Payment Failed");
+    }
+  };
 
-window.location.href =
-`success.html?orderId=${docRef.id}`;
-
-}
-
-};
-
-const rzp = new Razorpay(options);
-
-document.getElementById("loadingOverlay")
-.classList.remove("active");
-
-rzp.open();
-
-}catch(error){
-
-document.getElementById("loadingOverlay")
-.classList.remove("active");
-
-console.log(error);
-
-alert("COD Payment Failed");
-
-}
-
-
-};
-
-
-return;
-
+  return;
 }
 
 document.getElementById("loadingOverlay")
