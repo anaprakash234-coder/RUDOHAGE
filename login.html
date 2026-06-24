@@ -354,7 +354,8 @@ import {
 getAuth,
 signInWithEmailAndPassword,
 GoogleAuthProvider,
-signInWithPopup
+signInWithPopup,
+onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -375,21 +376,13 @@ const auth = getAuth(app);
 const ADMIN_EMAIL = "anaprakash123@gmail.com";
 
 onAuthStateChanged(auth,(user)=>{
-
 if(user){
-
 if(user.email === ADMIN_EMAIL){
-
 window.location.href = "admin.html";
-
 }else{
-
 window.location.href = "my-orders.html";
-
 }
-
 }
-
 });
 
 const loginBtn =
@@ -433,39 +426,30 @@ alert(error.message);
 
 });
 
-googleBtn.addEventListener("click", async()=>{
+document.querySelector(".google-btn").addEventListener("click", async () => {
+  try {
+    const provider = new GoogleAuthProvider();
 
-try{
+    provider.setCustomParameters({
+      prompt: "select_account"
+    });
 
-const provider =
-new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
 
-const result =
-await signInWithPopup(auth,provider);
+    const email = result.user.email;
 
-const email =
-result.user.email;
+    if (email === ADMIN_EMAIL) {
+      window.location.href = "admin.html";
+    } else {
+      window.location.href = "my-orders.html";
+    }
 
-if(email === ADMIN_EMAIL){
-
-window.location.href = "admin.html";
-
-}else{
-
-window.location.href = "my-orders.html";
-
-}
-
-}catch(error){
-
-alert(error.message);
-
-}
-
+  } catch (error) {
+    alert(error.message);
+  }
 });
 
 </script>
-
 
 </body>
 </html>
