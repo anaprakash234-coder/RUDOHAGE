@@ -53,7 +53,7 @@ font-weight:600;
 }
 
 .container{
-min-height:100vh;
+min-height:calc(100vh - 100px);
 display:grid;
 grid-template-columns:1.2fr 0.8fr;
 align-items:center;
@@ -169,6 +169,115 @@ font-size:3.5rem;
 
 .card{
 padding:30px;
+}
+
+}
+
+/* MOBILE OPTIMIZATION */
+
+@media (max-width: 900px){
+
+body{
+overflow-y:auto;
+overflow-x:hidden;
+}
+
+.container{
+grid-template-columns:1fr;
+padding:100px 20px 40px;
+gap:25px;
+min-height:auto;
+}
+
+.left{
+text-align:center;
+}
+
+.left h1{
+font-size:3.2rem;
+line-height:1;
+margin-bottom:15px;
+}
+
+.left p{
+font-size:14px;
+max-width:100%;
+}
+
+.badge{
+font-size:11px;
+letter-spacing:3px;
+}
+
+.card{
+width:100%;
+max-width:100%;
+padding:28px;
+border-radius:24px;
+}
+
+.card h2{
+font-size:2rem;
+text-align:center;
+}
+
+.input{
+padding:16px;
+font-size:16px;
+}
+
+.btn,
+.google-btn{
+padding:16px;
+font-size:13px;
+}
+
+.logo{
+font-size:1.7rem;
+}
+
+.blur-circle{
+width:250px;
+height:250px;
+filter:blur(90px);
+}
+
+}
+
+@media (max-width: 480px){
+
+.header{
+padding:1rem 1.2rem;
+}
+
+.container{
+padding:90px 15px 30px;
+}
+
+.left h1{
+font-size:2.5rem;
+}
+
+.left p{
+font-size:13px;
+line-height:1.7;
+}
+
+.card{
+padding:22px;
+}
+
+.card h2{
+font-size:1.8rem;
+}
+
+.input{
+padding:15px;
+}
+
+.btn,
+.google-btn{
+padding:15px;
 }
 
 }
