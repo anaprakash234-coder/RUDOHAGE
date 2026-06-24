@@ -706,6 +706,8 @@ RUDOHAGE
 
 </div>
 
+<button id="loginBtn">Login with Google</button>
+
 
 
 <script type="module">
@@ -717,6 +719,13 @@ getFirestore,
 collection,
 addDoc
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+import {
+getAuth,
+GoogleAuthProvider,
+signInWithPopup,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
@@ -730,6 +739,10 @@ measurementId: "G-6GLB5PPXMY"
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
 
 const RAZORPAY_KEY = "rzp_live_T2N3YbZ3iKazSC";
 
@@ -929,6 +942,11 @@ contact:phone
 
 handler: async function(response){
 
+if(!auth.currentUser){
+  alert("Please login first");
+  return;
+}
+
 const docRef = await addDoc(
 collection(db,"orders"),
 {
@@ -944,7 +962,10 @@ payment:"COD",
 paymentId: response.razorpay_payment_id,
 status:"Pending",
 createdAt:Date.now(),
-orderDate:new Date().toLocaleDateString("en-IN")
+orderDate:new Date().toLocaleDateString("en-IN"),
+
+userId: auth.currentUser.uid
+
 }
 );
 
@@ -1028,6 +1049,11 @@ contact: phone
 
 handler: async function(response){
 
+if(!auth.currentUser){
+  alert("Please login first");
+  return;
+}
+
 const docRef = await addDoc(
 collection(db,"orders"),
 {
@@ -1038,10 +1064,15 @@ city,
 pincode,
 product,
 price:Number(price),
-payment: paymentMethod,
+codCharge:50,
+payment:"COD",
 paymentId: response.razorpay_payment_id,
-status:"Paid",
-createdAt:Date.now()
+status:"Pending",
+createdAt:Date.now(),
+orderDate:new Date().toLocaleDateString("en-IN"),
+
+userId: auth.currentUser.uid
+
 }
 );
 
@@ -1253,7 +1284,18 @@ clearTimeout(loadingStep3);
 
 }
 
+document.getElementById("loginBtn").addEventListener("click", async () => {
+  try {
+    await signInWithPopup(auth, provider);
+    alert("Login Successful");
+  } catch (error) {
+    console.log(error);
+    alert("Login Failed");
+  }
+});
+
 </script>
 
 </body>
 </html>
+
