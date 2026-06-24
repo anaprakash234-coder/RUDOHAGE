@@ -889,21 +889,17 @@ document.getElementById("loadingOverlay")
 
 startLuxuryLoader();
 
-const res = await fetch(
-"https://razorpay-backend-6yg5.onrender.com/create-order",
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-amount:50
-})
-}
-);
+const res = await fetch("https://razorpay-backend-6yg5.onrender.com/create-order", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    product: product
+  })
+});
 
-const data = await res.json();
-const order = data.order;
+const order = await res.json();
 
 if(!order.id){
 throw new Error("Order ID not received");
@@ -1003,55 +999,44 @@ body: JSON.stringify({
   })
 });
 
-const data = await res.json();
-const order = data.order;
+const order = await res.json();
 
 if(!order.id){
 throw new Error("Order ID not received");
 }
 
 const options = {
+  key: RAZORPAY_KEY,
+  amount: order.amount,
+  currency: "INR",
+  order_id: order.id,
 
-key: RAZORPAY_KEY,
+  name: "RUDOHAGE",
+  description: product,
 
-amount: order.amount,
-order_id: order.order.id,
+  prefill: {
+    name: name,
+    contact: phone
+  },
 
-currency: "INR",
+  handler: async function(response){
 
-name: "RUDOHAGE",
+    const docRef = await addDoc(collection(db,"orders"), {
+      name,
+      phone,
+      address,
+      city,
+      pincode,
+      product,
+      price:Number(price),
+      payment: paymentMethod,
+      paymentId: response.razorpay_payment_id,
+      status:"Paid",
+      createdAt:Date.now()
+    });
 
-description: product,
-    
-prefill: {
-name: name,
-contact: phone
-},
-
-handler: async function(response){
-
-const docRef = await addDoc(
-collection(db,"orders"),
-{
-name,
-phone,
-address,
-city,
-pincode,
-product,
-price:Number(price),
-payment: paymentMethod,
-paymentId: response.razorpay_payment_id,
-status:"Paid",
-createdAt:Date.now()
-}
-);
-
-window.location.href =
-`success.html?orderId=${docRef.id}`;
-
-}
-
+    window.location.href = `success.html?orderId=${docRef.id}`;
+  }
 };
 
 const rzp = new Razorpay(options);
