@@ -944,11 +944,16 @@ if(paymentMethod === "COD"){
       const rzp = new Razorpay(options);
 
       stopLuxuryLoader();
-      document.getElementById("loadingOverlay").classList.remove("active");
+      document.getElementById("loadingOverlay")
+      .classList.remove("active");
 
       rzp.open();
 
     } catch(err){
+
+   document.getElementById("loadingOverlay")
+.classList.remove("active");
+        
       console.log(err);
       alert("COD Payment Failed");
     }
