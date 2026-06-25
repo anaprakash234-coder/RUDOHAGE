@@ -440,6 +440,9 @@ document.querySelector(".google-btn").addEventListener("click", async () => {
 
     const email = result.user.email;
 
+    alert("LOGIN EMAIL = " + email);
+alert("ADMIN EMAIL = " + ADMIN_EMAIL);
+
     if (email === ADMIN_EMAIL) {
       window.location.href = "admin-rudohage-x9k7v2-archive.html";
     } else {
