@@ -738,8 +738,19 @@ const params = new URLSearchParams(window.location.search);
 const product =
 params.get("product") || "RUDOHAGE Piece";
 
-const price =
-params.get("price") || "0";
+const productData = {
+  "Inferno Core": 3000,
+  "Crimson Orbit": 2500,
+  "Ember Crown": 2500
+};
+
+
+if(!productData[product]){
+  document.body.innerHTML = "<h1>Invalid Product</h1>";
+  throw new Error("Fake product blocked");
+}
+
+const price = productData[product] || 0;
 
 document.getElementById("productName").innerText =
 product;
