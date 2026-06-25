@@ -218,11 +218,6 @@ doc,
 updateDoc
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-import {
-getAuth,
-onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-
 const firebaseConfig = {
 apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
 authDomain: "rudohage.firebaseapp.com",
@@ -233,32 +228,7 @@ appId: "1:487042116246:web:990d65636addd6d653f0b7"
 };
 
 const app = initializeApp(firebaseConfig);
-
 const db = getFirestore(app);
-
-const auth = getAuth(app);
-
-const ADMIN_EMAIL = "anaprakash123@gmail.com";
-
-onAuthStateChanged(auth,(user)=>{
-
-if(!user){
-
-window.location.href = "login.html";
-
-return;
-
-}
-
-if(user.email !== ADMIN_EMAIL){
-
-window.location.href = "login.html";
-
-return;
-
-}
-
-});
 
 const ordersContainer =
 document.getElementById("ordersContainer");
