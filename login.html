@@ -374,6 +374,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 const ADMIN_EMAIL = "anaprakash123@gmail.com";
+console.log("ADMIN =", ADMIN_EMAIL);
 
 onAuthStateChanged(auth,(user)=>{
 if(user){
@@ -395,6 +396,7 @@ loginBtn.addEventListener("click", async()=>{
 
 const email =
 document.getElementById("email").value;
+console.log("LOGIN =", email);
 
 const password =
 document.getElementById("password").value;
