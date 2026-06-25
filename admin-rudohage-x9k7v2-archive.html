@@ -169,6 +169,23 @@ box-shadow:0 10px 30px rgba(0,0,0,.08);
 
 <body>
 
+    <button id="logoutBtn"
+style="
+position:fixed;
+top:20px;
+right:20px;
+z-index:99999;
+padding:12px 20px;
+border:none;
+border-radius:30px;
+background:#111;
+color:white;
+cursor:pointer;
+font-size:12px;
+letter-spacing:2px;">
+LOGOUT
+</button>
+
 <header class="header">
 <a href="index.html" class="logo">RUDOHAGE</a>
 </header>
@@ -238,6 +255,15 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const auth = getAuth(app);
+
+document.getElementById("logoutBtn")
+.addEventListener("click", async ()=>{
+
+await signOut(auth);
+
+window.location.href = "login.html";
+
+});
 
 const ADMIN_EMAIL = "anaprakash123@gmail.com";
 
