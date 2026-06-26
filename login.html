@@ -351,14 +351,6 @@ Create Account
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 
 import {
-getAuth,
-signInWithEmailAndPassword,
-GoogleAuthProvider,
-signInWithPopup,
-onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-
-import {
 getFirestore,
 doc,
 getDoc
@@ -410,6 +402,7 @@ const googleBtn =
 document.querySelector(".google-btn");
 
 loginBtn.addEventListener("click", async()=>{
+
 
 const email =
 document.getElementById("email").value;
@@ -471,7 +464,9 @@ document.querySelector(".google-btn").addEventListener("click", async () => {
 
 const email = result.user.email;
 
-const userRef = doc(db,"users",result.user.uid);
+const uid = result.user.uid;
+
+const userRef = doc(db,"users",uid);
 
 const userSnap = await getDoc(userRef);
 
@@ -487,12 +482,13 @@ if(email === ADMIN_EMAIL){
 
     }else{
 
-        alert("Account not found.");
+        await signOut(auth);
+
+        alert("Please create an account first.");
 
     }
 
 }
-
   } catch (error) {
     alert(error.message);
   }
