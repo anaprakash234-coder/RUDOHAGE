@@ -353,7 +353,8 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/fireba
 import {
 getFirestore,
 doc,
-getDoc
+getDoc,
+setDoc
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 import {
@@ -432,15 +433,18 @@ window.location.href = "admin-rudohage-x9k7v2-archive.html";
 
 }else{
 
-if(userSnap.exists()){
+if(!userSnap.exists()){
 
-window.location.href = "myorders.html";
-
-}else{
-
-alert("Account not found.");
+    await setDoc(userRef,{
+        uid: uid,
+        email: userCredential.user.email,
+        name: "",
+        createdAt: Date.now()
+    });
 
 }
+
+window.location.href = "myorders.html";
 
 }
 
@@ -464,7 +468,10 @@ document.querySelector(".google-btn").addEventListener("click", async () => {
 
 const email = result.user.email;
 
+
 const uid = result.user.uid;
+
+
 
 const userRef = doc(db,"users",uid);
 
@@ -476,17 +483,18 @@ if(email === ADMIN_EMAIL){
 
 }else{
 
-    if(userSnap.exists()){
+    if(!userSnap.exists()){
 
-        window.location.href = "myorders.html";
+    await setDoc(userRef,{
+        uid: uid,
+        name: result.user.displayName || "",
+        email: result.user.email,
+        createdAt: Date.now()
+    });
 
-    }else{
+}
 
-        await signOut(auth);
-
-        alert("Please create an account first.");
-
-    }
+window.location.href = "myorders.html";
 
 }
   } catch (error) {
