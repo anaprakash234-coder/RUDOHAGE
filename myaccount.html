@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RUDOHAGE | My Account</title>
+
+<link rel="icon" type="image/png" href="logo.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+:root{
+--bg:#f6f2ea;
+--text:#111;
+--accent:#a48b74;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:var(--bg);
+font-family:'Manrope',sans-serif;
+color:var(--text);
+padding:120px 8% 60px;
+}
+
+/* HEADER */
+.product-header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:1000;
+padding:1.3rem 4rem;
+background:rgba(246,242,234,0.55);
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(0,0,0,0.08);
+display:flex;
+align-items:center;
+justify-content:space-between;
+}
+
+.product-brand{
+text-decoration:none;
+color:#111;
+font-family:'Cormorant Garamond',serif;
+font-size:2.1rem;
+font-weight:600;
+letter-spacing:-1px;
+}
+
+.back-link{
+text-decoration:none;
+color:#111;
+font-size:.78rem;
+letter-spacing:2px;
+text-transform:uppercase;
+opacity:.7;
+transition:.3s;
+}
+
+.back-link:hover{ opacity:1; }
+
+@media(max-width:768px){
+.product-header{
+flex-direction:column;
+gap:10px;
+padding:14px 0;
+text-align:center;
+}
+.product-brand{ font-size:1.5rem; }
+}
+
+/* PAGE HERO */
+.small-title{
+letter-spacing:5px;
+font-size:11px;
+text-transform:uppercase;
+opacity:.6;
+margin-bottom:15px;
+text-align:center;
+}
+
+.page-hero h1{
+font-family:'Cormorant Garamond',serif;
+font-size:2.4rem;
+font-weight:600;
+margin-bottom:12px;
+text-align:center;
+}
+
+.page-hero p{
+opacity:.7;
+max-width:560px;
+margin:0 auto 50px;
+line-height:1.8;
+text-align:center;
+}
+
+.wrap{
+max-width:780px;
+margin:0 auto;
+}
+
+/* PROFILE CARD */
+.profile-card{
+background:white;
+padding:35px;
+border-radius:24px;
+box-shadow:0 10px 40px rgba(0,0,0,.05);
+display:flex;
+align-items:center;
+gap:25px;
+margin-bottom:40px;
+flex-wrap:wrap;
+}
+
+.avatar{
+width:80px;
+height:80px;
+border-radius:50%;
+background:var(--accent);
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:'Cormorant Garamond',serif;
+font-size:2.2rem;
+flex-shrink:0;
+}
+
+.profile-meta{
+flex:1;
+min-width:200px;
+}
+
+.profile-name-row{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.profile-name-row h2{
+font-family:'Cormorant Garamond',serif;
+font-size:1.8rem;
+}
+
+.edit-icon{
+cursor:pointer;
+opacity:.5;
+font-size:14px;
+transition:.3s;
+}
+
+.edit-icon:hover{ opacity:1; }
+
+.profile-email{
+opacity:.65;
+margin-top:4px;
+font-size:14px;
+}
+
+.profile-since{
+margin-top:8px;
+font-size:12px;
+letter-spacing:1px;
+text-transform:uppercase;
+opacity:.5;
+}
+
+.name-edit-box{
+display:none;
+gap:10px;
+margin-top:5px;
+}
+
+.name-edit-box input{
+padding:10px 14px;
+border:none;
+background:#f4f4f4;
+border-radius:10px;
+font-size:14px;
+flex:1;
+}
+
+.name-edit-box button{
+padding:10px 18px;
+border:none;
+border-radius:10px;
+background:#111;
+color:white;
+cursor:pointer;
+font-size:13px;
+}
+
+/* SECTION TITLES */
+.section-title{
+font-family:'Cormorant Garamond',serif;
+font-size:1.8rem;
+margin-bottom:20px;
+padding-bottom:12px;
+border-bottom:1px solid rgba(0,0,0,.08);
+}
+
+/* ORDER CARDS (matches myorders.html) */
+.order-card{
+background:white;
+padding:30px;
+border-radius:24px;
+margin-bottom:25px;
+box-shadow:0 10px 40px rgba(0,0,0,.05);
+text-align:left;
+}
+
+.order-piece{
+font-size:11px;
+letter-spacing:4px;
+text-transform:uppercase;
+opacity:.6;
+margin-bottom:10px;
+}
+
+.order-product{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+margin-bottom:8px;
+}
+
+.order-status{
+display:inline-block;
+padding:8px 16px;
+border-radius:50px;
+background:black;
+color:white;
+font-size:11px;
+letter-spacing:2px;
+margin-top:10px;
+}
+
+.progress-bar{
+width:100%;
+height:8px;
+background:#eee;
+border-radius:20px;
+margin:18px 0;
+overflow:hidden;
+}
+
+.progress-fill{
+height:100%;
+background:#111;
+border-radius:20px;
+transition:1s;
+}
+
+.timeline{
+padding:16px;
+background:#fafafa;
+border-radius:14px;
+font-size:14px;
+}
+
+.timeline div{
+margin:8px 0;
+}
+
+.countdown{
+margin-top:14px;
+font-size:13px;
+opacity:.65;
+}
+
+.order-actions{
+margin-top:18px;
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+}
+
+.action-btn{
+padding:10px 16px;
+border:none;
+border-radius:30px;
+background:#111;
+color:#fff;
+cursor:pointer;
+text-decoration:none;
+font-size:12px;
+}
+
+.empty-orders{
+background:white;
+padding:50px 30px;
+border-radius:24px;
+text-align:center;
+box-shadow:0 10px 40px rgba(0,0,0,.05);
+}
+
+.empty-orders p{
+opacity:.65;
+margin-bottom:20px;
+}
+
+.hero-btn{
+display:inline-block;
+padding:14px 32px;
+border-radius:50px;
+border:1px solid rgba(0,0,0,.2);
+background:transparent;
+font-size:.8rem;
+letter-spacing:2px;
+text-transform:uppercase;
+text-decoration:none;
+color:#111;
+transition:.3s;
+}
+
+.hero-btn:hover{
+background:#111;
+color:white;
+}
+
+.loading-text{
+text-align:center;
+opacity:.6;
+padding:40px 0;
+}
+
+/* ACCOUNT SETTINGS */
+.settings-box{
+background:white;
+padding:30px;
+border-radius:24px;
+box-shadow:0 10px 40px rgba(0,0,0,.05);
+margin-bottom:60px;
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.settings-btn{
+flex:1;
+min-width:160px;
+padding:16px;
+border:none;
+border-radius:14px;
+background:#f4f4f4;
+cursor:pointer;
+font-size:13px;
+letter-spacing:1px;
+text-transform:uppercase;
+font-family:'Manrope',sans-serif;
+transition:.3s;
+}
+
+.settings-btn:hover{
+background:#eaeaea;
+}
+
+.settings-btn.danger{
+background:#111;
+color:white;
+}
+
+.settings-btn.danger:hover{
+background:#000;
+}
+
+/* SIGNATURE */
+.signature{
+text-align:center;
+margin-top:40px;
+margin-bottom:40px;
+}
+
+.signature p{
+letter-spacing:4px;
+text-transform:uppercase;
+opacity:.6;
+font-size:11px;
+margin-bottom:10px;
+}
+
+.signature h2{
+font-family:'Cormorant Garamond',serif;
+font-size:2rem;
+}
+
+/* SESSION CHECK OVERLAY */
+.session-check{
+position:fixed;
+inset:0;
+background:var(--bg);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:99999;
+}
+
+.session-check .loader{
+width:46px;
+height:46px;
+border:3px solid #ddd;
+border-top:3px solid #111;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+#pageContent{
+display:none;
+}
+
+@media(max-width:600px){
+.profile-card{ flex-direction:column; text-align:center; }
+.profile-name-row{ justify-content:center; }
+.settings-box{ flex-direction:column; }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="session-check" id="sessionCheck">
+  <div class="loader"></div>
+</div>
+
+<header class="product-header">
+  <a href="index.html" class="product-brand">RUDOHAGE</a>
+  <a href="index.html" class="back-link">← Back to Shop</a>
+</header>
+
+<div id="pageContent">
+
+<div class="page-hero">
+  <div class="small-title">COLLECTOR DASHBOARD</div>
+  <h1>My Account</h1>
+  <p>Manage your profile, track your acquisitions and access your collector archive.</p>
+</div>
+
+<div class="wrap">
+
+  <!-- PROFILE CARD -->
+  <div class="profile-card">
+    <div class="avatar" id="avatarLetter">R</div>
+
+    <div class="profile-meta">
+      <div class="profile-name-row" id="nameDisplay">
+        <h2 id="profileName">Collector</h2>
+        <i class="fas fa-pen edit-icon" id="editNameBtn"></i>
+      </div>
+
+      <div class="name-edit-box" id="nameEditBox">
+        <input type="text" id="nameInput" placeholder="Your Name">
+        <button id="saveNameBtn">Save</button>
+      </div>
+
+      <div class="profile-email" id="profileEmail"></div>
+      <div class="profile-since" id="memberSince"></div>
+    </div>
+  </div>
+
+  <!-- ORDERS -->
+  <div class="section-title">My Orders</div>
+  <div id="ordersContainer">
+    <p class="loading-text">Loading your orders...</p>
+  </div>
+
+  <!-- ACCOUNT SETTINGS -->
+  <div class="section-title">Account Settings</div>
+  <div class="settings-box">
+    <button class="settings-btn" id="changePasswordBtn">
+      <i class="fas fa-lock"></i> Change Password
+    </button>
+    <button class="settings-btn danger" id="logoutBtn">
+      <i class="fas fa-right-from-bracket"></i> Logout
+    </button>
+  </div>
+
+  <div class="signature">
+    <p>Not Produced. Crafted.</p>
+    <h2>RUDOHAGE</h2>
+  </div>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+  getAuth,
+  onAuthStateChanged,
+  signOut,
+  sendPasswordResetEmail
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  updateDoc,
+  collection,
+  query,
+  where,
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
+  authDomain: "rudohage.firebaseapp.com",
+  projectId: "rudohage",
+  storageBucket: "rudohage.firebasestorage.app",
+  messagingSenderId: "487042116246",
+  appId: "1:487042116246:web:990d65636addd6d653f0b7"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let ordersUnsub = null;
+
+onAuthStateChanged(auth, async (user) => {
+
+  if(!user){
+    window.location.href = "login.html";
+    return;
+  }
+
+  document.getElementById("sessionCheck").style.display = "none";
+  document.getElementById("pageContent").style.display = "block";
+
+  await loadProfile(user);
+  loadOrders(user.uid);
+
+});
+
+async function loadProfile(user){
+
+  const userRef = doc(db,"users",user.uid);
+  const snap = await getDoc(userRef);
+  const data = snap.exists() ? snap.data() : {};
+
+  const displayName = data.name || "Collector";
+
+  document.getElementById("profileEmail").innerText = user.email;
+  document.getElementById("profileName").innerText = displayName;
+  document.getElementById("nameInput").value = data.name || "";
+  document.getElementById("avatarLetter").innerText =
+    displayName.charAt(0).toUpperCase();
+
+  if(data.createdAt && data.createdAt.toDate){
+    const d = data.createdAt.toDate();
+    document.getElementById("memberSince").innerText =
+      "Member Since " + d.toLocaleDateString("en-IN", { month:"long", year:"numeric" });
+  }
+
+}
+
+function loadOrders(uid){
+
+  const container = document.getElementById("ordersContainer");
+
+  const q = query(
+    collection(db,"orders"),
+    where("uid","==", uid)
+  );
+
+  if(ordersUnsub) ordersUnsub();
+
+  ordersUnsub = onSnapshot(q, (snapshot) => {
+
+    if(snapshot.empty){
+      container.innerHTML = `
+        <div class="empty-orders">
+          <p>You haven't placed any orders yet.</p>
+          <a href="index.html#catalog" class="hero-btn">Explore Catalog</a>
+        </div>`;
+      return;
+    }
+
+    let orders = [];
+    snapshot.forEach(d => orders.push({ id:d.id, ...d.data() }));
+    orders.sort((a,b) => (b.createdAt||0) - (a.createdAt||0));
+
+    container.innerHTML = "";
+
+    orders.forEach(order => {
+
+      let progress = 33;
+      if(order.status === "COD Pending Approval") progress = 20;
+      if(order.status === "Packed") progress = 50;
+      if(order.status === "Shipped") progress = 75;
+      if(order.status === "Delivered") progress = 100;
+
+      container.innerHTML += `
+        <div class="order-card">
+          <div class="order-piece">RUDOHAGE ARCHIVE</div>
+          <div class="order-product">${order.product}</div>
+          <p>Price: ₹${order.price}</p>
+          <div class="order-status">${order.status}</div>
+
+          <div class="progress-bar">
+            <div class="progress-fill" style="width:${progress}%"></div>
+          </div>
+
+          <div class="timeline">
+            <div>${progress >= 33 ? "✔" : "○"} Order Placed</div>
+            <div>${progress >= 50 ? "✔" : "○"} Packed</div>
+            <div>${progress >= 75 ? "✔" : "○"} Shipped</div>
+            <div>${progress >= 100 ? "✔" : "○"} Delivered</div>
+          </div>
+
+          <div class="countdown">Estimated Delivery: 3 - 5 Business Days</div>
+
+          <div class="order-actions">
+            <button class="action-btn" onclick="copyOrderId('${order.id}')">
+              Copy Order ID
+            </button>
+            <a class="action-btn"
+               href="https://wa.me/917091955862?text=My Order ID is ${order.id}"
+               target="_blank">
+              WhatsApp Support
+            </a>
+          </div>
+        </div>`;
+
+    });
+
+  }, (err) => {
+    console.error(err);
+    container.innerHTML = `<p class="loading-text">Unable to load orders right now.</p>`;
+  });
+
+}
+
+/* EDIT NAME */
+document.getElementById("editNameBtn").addEventListener("click", () => {
+  document.getElementById("nameDisplay").style.display = "none";
+  document.getElementById("nameEditBox").style.display = "flex";
+});
+
+document.getElementById("saveNameBtn").addEventListener("click", async () => {
+
+  const user = auth.currentUser;
+  const newName = document.getElementById("nameInput").value.trim();
+
+  if(!newName){
+    alert("Please enter a name");
+    return;
+  }
+
+  try{
+    await updateDoc(doc(db,"users",user.uid), { name:newName });
+
+    document.getElementById("profileName").innerText = newName;
+    document.getElementById("avatarLetter").innerText = newName.charAt(0).toUpperCase();
+    document.getElementById("nameDisplay").style.display = "flex";
+    document.getElementById("nameEditBox").style.display = "none";
+  }catch(err){
+    alert(err.message);
+  }
+
+});
+
+/* CHANGE PASSWORD */
+document.getElementById("changePasswordBtn").addEventListener("click", async () => {
+
+  const user = auth.currentUser;
+
+  try{
+    await sendPasswordResetEmail(auth, user.email);
+    alert("Password reset link sent to " + user.email);
+  }catch(err){
+    alert(err.message);
+  }
+
+});
+
+/* LOGOUT */
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+  await signOut(auth);
+  window.location.href = "index.html";
+});
+
+window.copyOrderId = function(id){
+  navigator.clipboard.writeText(id);
+  alert("Order ID Copied!");
+};
+
+</script>
+
+<script>
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) {
+    if (
+        e.keyCode == 123 ||
+        (e.ctrlKey && e.shiftKey && e.keyCode == 73) ||
+        (e.ctrlKey && e.shiftKey && e.keyCode == 74) ||
+        (e.ctrlKey && e.keyCode == 85)
+    ) {
+        return false;
+    }
+};
+</script>
+
+</body>
+</html>
