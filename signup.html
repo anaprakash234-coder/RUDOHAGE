@@ -354,164 +354,126 @@ Already have an account? Login
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-
+import { initializeApp } from "https://gstatic.com";
 import {
-getAuth,
-createUserWithEmailAndPassword,
-GoogleAuthProvider,
-signInWithPopup
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-
+  getAuth,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup
+} from "https://gstatic.com";
 import {
-getFirestore,
-doc,
-getDoc,
-setDoc,
-serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  serverTimestamp
+} from "https://gstatic.com";
 
 const firebaseConfig = {
-apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
-authDomain: "rudohage.firebaseapp.com",
-projectId: "rudohage",
-storageBucket: "rudohage.firebasestorage.app",
-messagingSenderId: "487042116246",
-appId: "1:487042116246:web:990d65636addd6d653f0b7"
+  apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
+  authDomain: "://firebaseapp.com",
+  projectId: "rudohage",
+  storageBucket: "rudohage.firebasestorage.app",
+  messagingSenderId: "487042116246",
+  appId: "1:487042116246:web:990d65636addd6d653f0b7"
 };
 
 const app = initializeApp(firebaseConfig);
-
 const auth = getAuth(app);
-
 const db = getFirestore(app);
 
 const params = new URLSearchParams(window.location.search);
 const redirectTo = params.get("redirect");
-
-const OTP_API_BASE = "https://razorpay-backend-6yg5.onrender.com";
-
-function goAfterSignup(){
-if(redirectTo){
-window.location.href = decodeURIComponent(redirectTo);
-}else{
-window.location.href = "myaccount.html";
-}
-}
+const OTP_API_BASE = "https://onrender.com";
 
 function goToVerifyEmail(){
-let url = "verify-email.html";
-if(redirectTo){
-url += "?redirect=" + encodeURIComponent(redirectTo);
-}
-window.location.href = url;
-}
-
-document.getElementById("signupBtn")
-.addEventListener("click", async()=>{
-
-const email =
-document.getElementById("email").value;
-
-const password =
-document.getElementById("password").value;
-
-const confirmPassword =
-document.getElementById("confirmPassword").value;
-
-if(!email || !password){
-alert("Please fill all fields");
-return;
+  let url = "verify-email.html";
+  if(redirectTo){
+    url += "?redirect=" + encodeURIComponent(redirectTo);
+  }
+  window.location.href = url;
 }
 
-if(password !== confirmPassword){
-alert("Passwords do not match");
-return;
-}
+document.getElementById("signupBtn").addEventListener("click", async()=>{
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
 
-try{
+  if(!email || !password){
+    alert("Please fill all fields");
+    return;
+  }
+  if(password !== confirmPassword){
+    alert("Passwords do not match");
+    return;
+  }
 
-const userCredential =
-await createUserWithEmailAndPassword(
-auth,
-email,
-password
-);
+  try{
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    
+    await setDoc(doc(db,"users",userCredential.user.uid), {
+      email: userCredential.user.email,
+      emailVerified: false, 
+      createdAt: serverTimestamp()
+    });
 
-await setDoc(
-doc(db,"users",userCredential.user.uid),
-{
-email: userCredential.user.email,
-emailVerified: false,
-createdAt: serverTimestamp()
-}
-);
+    try{
+      await fetch(OTP_API_BASE + "/send-otp", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({ email: userCredential.user.email })
+      });
+    }catch(otpError){
+      console.log(otpError);
+    }
 
-try{
-await fetch(OTP_API_BASE + "/send-otp", {
-method: "POST",
-headers: {"Content-Type":"application/json"},
-body: JSON.stringify({ email: userCredential.user.email })
-});
-}catch(otpError){
-console.log(otpError);
-}
-
-goToVerifyEmail();
-
-}catch(error){
-
-alert(error.message);
-
-}
-
+    goToVerifyEmail();
+  }catch(error){
+    alert(error.message);
+  }
 });
 
-document.getElementById("googleBtn")
-.addEventListener("click", async()=>{
+document.getElementById("googleBtn").addEventListener("click", async()=>{
+  try{
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    const userRef = doc(db,"users",result.user.uid);
+    const userSnap = await getDoc(userRef);
 
-try{
+    if(!userSnap.exists()){
+      await setDoc(userRef, {
+        email: result.user.email,
+        emailVerified: false, 
+        createdAt: serverTimestamp()
+      });
 
-const provider =
-new GoogleAuthProvider();
-
-const result =
-await signInWithPopup(
-auth,
-provider
-);
-
-const userRef =
-doc(db,"users",result.user.uid);
-
-const userSnap =
-await getDoc(userRef);
-
-if(!userSnap.exists()){
-
-await setDoc(
-userRef,
-{
-email: result.user.email,
-emailVerified: true,
-createdAt: serverTimestamp()
-}
-);
-
-}
-
-goAfterSignup();
-
-}catch(error){
-
-alert(error.message);
-
-}
-
+      try {
+        await fetch(OTP_API_BASE + "/send-otp", {
+          method: "POST",
+          headers: {"Content-Type":"application/json"},
+          body: JSON.stringify({ email: result.user.email })
+        });
+      } catch(otpError) {
+        console.log(otpError);
+      }
+      
+      goToVerifyEmail();
+    } else {
+      const existingData = userSnap.data();
+      if(existingData.emailVerified === true){
+        if(redirectTo) window.location.href = decodeURIComponent(redirectTo);
+        else window.location.href = "myaccount.html";
+      } else {
+        goToVerifyEmail();
+      }
+    }
+  }catch(error){
+    alert(error.message);
+  }
 });
 
 </script>
 
 </body>
 </html>
+
