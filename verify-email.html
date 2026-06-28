@@ -351,13 +351,11 @@ Didn't get the code?
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-
 import {
 getAuth,
 onAuthStateChanged,
 signOut
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-
 import {
 getFirestore,
 doc,
@@ -379,7 +377,6 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 const OTP_API_BASE = "https://razorpay-backend-6yg5.onrender.com";
-
 const params = new URLSearchParams(window.location.search);
 const redirectTo = params.get("redirect");
 
@@ -394,31 +391,33 @@ window.location.href = "myaccount.html";
 let currentUser = null;
 
 onAuthStateChanged(auth, async (user) => {
-
 if(!user){
 window.location.href = "login.html";
 return;
 }
 
+try {
 const snap = await getDoc(doc(db,"users",user.uid));
-const data = snap.exists() ? snap.data() : {};
-
-if (data.emailVerified === true) {
-  goAfterVerify();
-  return;
+if (snap.exists()) {
+  const data = snap.data();
+  if (data && data.emailVerified === true) {
+    goAfterVerify();
+    return;
+  }
 }
 
-
 currentUser = user;
-
 document.getElementById("userEmail").innerText = user.email;
 document.getElementById("sessionCheck").style.display = "none";
 document.getElementById("pageContent").style.display = "block";
 
+} catch (err) {
+console.error(err);
+window.location.href = "login.html";
+}
 });
 
 document.getElementById("verifyBtn").addEventListener("click", async () => {
-
 const otp = document.getElementById("otpInput").value.trim();
 
 if(!otp || otp.length !== 6){
@@ -427,7 +426,6 @@ return;
 }
 
 try{
-
 const res = await fetch(OTP_API_BASE + "/verify-otp", {
 method: "POST",
 headers: {"Content-Type":"application/json"},
@@ -442,20 +440,16 @@ goAfterVerify();
 }else{
 alert(result.message || "Invalid code, please try again");
 }
-
 }catch(err){
 alert("Something went wrong. Please try again.");
 }
-
 });
 
 let resendCooldown = 0;
 let resendTimer = null;
 
 document.getElementById("resendBtn").addEventListener("click", async (e) => {
-
 e.preventDefault();
-
 if(resendCooldown > 0) return;
 
 const resendBtn = document.getElementById("resendBtn");
@@ -466,9 +460,7 @@ method: "POST",
 headers: {"Content-Type":"application/json"},
 body: JSON.stringify({ email: currentUser.email })
 });
-
 alert("A new code has been sent to " + currentUser.email);
-
 }catch(err){
 alert("Couldn't resend code, please try again in a moment.");
 return;
@@ -487,7 +479,6 @@ resendBtn.innerText = "Resend Code";
 resendBtn.classList.remove("disabled");
 }
 }, 1000);
-
 });
 
 document.getElementById("logoutLink").addEventListener("click", async (e) => {
@@ -497,6 +488,5 @@ window.location.href = "login.html";
 });
 
 </script>
-
 </body>
 </html>
