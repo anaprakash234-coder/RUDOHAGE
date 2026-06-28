@@ -50,6 +50,40 @@ font-size:2rem;
 font-weight:600;
 }
 
+/* SESSION CHECK */
+.session-check{
+position:fixed;
+inset:0;
+background:var(--bg);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+z-index:99999;
+gap:18px;
+}
+
+.session-check .loader{
+width:46px;
+height:46px;
+border:3px solid #ddd;
+border-top:3px solid #111;
+border-radius:50%;
+animation:spinSession 1s linear infinite;
+}
+
+.session-check span{
+font-size:12px;
+letter-spacing:2px;
+text-transform:uppercase;
+opacity:.55;
+}
+
+@keyframes spinSession{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
 .hero{
 text-align:center;
 margin-bottom:60px;
@@ -536,11 +570,18 @@ href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
 <body>
 
+<div class="session-check" id="sessionCheck">
+  <div class="loader"></div>
+  <span>Verifying Access...</span>
+</div>
+
 <header class="checkout-header">
 <a href="index.html" class="logo">
 RUDOHAGE
 </a>
 </header>
+
+<div id="checkoutContent" style="display:none;">
 
 <section class="hero">
 
@@ -706,16 +747,23 @@ RUDOHAGE
 
 </div>
 
-
+</div>
 
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 
 import {
+getAuth,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+import {
 getFirestore,
 collection,
-addDoc
+addDoc,
+doc,
+getDoc
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -729,7 +777,38 @@ measurementId: "G-6GLB5PPXMY"
 };
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getFirestore(app);
+
+let currentUser = null;
+
+onAuthStateChanged(auth, async (user) => {
+
+  if(!user){
+    window.location.href =
+      "login.html?redirect=" + encodeURIComponent(window.location.href);
+    return;
+  }
+
+  const snap = await getDoc(doc(db,"users",user.uid));
+  const data = snap.exists() ? snap.data() : {};
+
+  if(data.emailVerified === false){
+    window.location.href =
+      "verify-email.html?redirect=" + encodeURIComponent(window.location.href);
+    return;
+  }
+
+  currentUser = user;
+
+  document.getElementById("sessionCheck").style.display = "none";
+  document.getElementById("checkoutContent").style.display = "block";
+
+  if(window.initCheckoutMap){
+    setTimeout(() => window.initCheckoutMap(), 50);
+  }
+
+});
 
 const RAZORPAY_KEY = "rzp_live_T2N3YbZ3iKazSC";
 
@@ -845,6 +924,12 @@ document.getElementById("productImage").src =
 document.querySelector(".place-order")
 .addEventListener("click", async () => {
 
+if(!currentUser){
+  window.location.href =
+    "login.html?redirect=" + encodeURIComponent(window.location.href);
+  return;
+}
+
 const name =
 document.querySelector('input[placeholder="Full Name"]').value;
 
@@ -932,6 +1017,7 @@ if(paymentMethod === "COD"){
         handler: async function(response){
 
           const docRef = await addDoc(collection(db,"orders"),{
+            uid: currentUser.uid,
             name,
             phone,
             address,
@@ -1010,6 +1096,7 @@ const options = {
   handler: async function(response){
 
     const docRef = await addDoc(collection(db,"orders"), {
+      uid: currentUser.uid,
       name,
       phone,
       address,
@@ -1081,18 +1168,32 @@ alert("Order Failed");
 
 const LOCATIONIQ_KEY = "pk.7e2f6dce3e940737e4468e4b61b37eb9";
 
-let map = L.map('map').setView([28.6139,77.2090], 10);
+let map;
+let marker;
 
+function initCheckoutMap(){
+
+if(map) return;
+
+map = L.map('map').setView([28.6139,77.2090], 10);
 
 L.tileLayer(
 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 ).addTo(map);
 
-let marker;
+setTimeout(() => map.invalidateSize(), 200);
+
+}
+
+window.initCheckoutMap = initCheckoutMap;
 
 document
 .getElementById("detectLocation")
 .addEventListener("click", ()=>{
+
+if(!map){
+initCheckoutMap();
+}
 
 navigator.geolocation.getCurrentPosition(
 async(position)=>{
