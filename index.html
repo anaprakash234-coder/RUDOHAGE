@@ -137,6 +137,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       font-size: 0.85rem;
       letter-spacing: 3px;
       text-transform: uppercase;
+      align-items: center;
     }
 
     nav a {
@@ -909,6 +910,66 @@ background:#111;
 color:#fff;
 }
 
+/* =============== HEADER ACTIONS (LOGIN / PROFILE) =============== */
+.header-actions{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-link{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.profile-avatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--accent), #8a715c);
+  color: white;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: 2px solid rgba(255,255,255,.6);
+  box-shadow: 0 6px 18px rgba(164,139,116,.4);
+  transition: .3s;
+  flex-shrink: 0;
+}
+
+.profile-avatar:hover{
+  transform: translateY(-2px);
+}
+
+.profile-avatar img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 480px){
+  .brand{ font-size: 1.6rem; }
+
+  .header-actions{ gap: .6rem; }
+
+  .header-actions .my-orders-nav{
+    padding: 8px 14px;
+    font-size: .65rem;
+  }
+
+  .profile-avatar{
+    width: 32px;
+    height: 32px;
+    font-size: .9rem;
+  }
+}
+
     .catalog-title{
   padding: 4rem 10% 1.5rem 10%;
   font-family: 'Cormorant Garamond', serif;
@@ -977,7 +1038,7 @@ color:#fff;
     margin: 10px 0 0 0; /* LEFT ALIGN FIX */
   }
 }
-}
+
 
     .footer{
 padding:80px 8% 40px;
@@ -1286,11 +1347,15 @@ left:20px;
     <a href="#autopsy">Autopsy</a>
     <a href="#catalog">Catalog</a>
     <a href="#contact">Contact</a>
-
-    <a href="myorders.html" class="my-orders-nav">
-      My Orders
-    </a>
   </nav>
+
+  <div class="header-actions">
+    <a href="login.html" class="profile-link" id="profileWrap">
+      <div class="profile-avatar" id="headerAvatar">
+        <i class="fas fa-user"></i>
+      </div>
+    </a>
+  </div>
 
   <i class="fas fa-bars menu-btn" onclick="openMenu()"></i>
 </header>
@@ -1302,7 +1367,9 @@ left:20px;
     <a href="#catalog" onclick="closeMenu()">Catalog</a>
     <a href="#contact" onclick="closeMenu()">Contact</a>
 
-    <a href="myorders.html">My Orders</a>
+    <a href="login.html" id="mobileLoginBtn" onclick="closeMenu()">Login</a>
+    <a href="myaccount.html" id="mobileAccountBtn" style="display:none;" onclick="closeMenu()">My Account</a>
+    <a href="#" id="mobileLogoutBtn" style="display:none;">Logout</a>
   </div>
 
   <!-- HERO -->
@@ -1887,6 +1954,88 @@ loadHomeReviews();
 
 </script>
 
+<!-- LOGIN / PROFILE AUTH STATE -->
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getAuth,
+onAuthStateChanged,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
+import {
+getFirestore,
+doc,
+getDoc
+}
+from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const authConfig = {
+  apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
+  authDomain: "rudohage.firebaseapp.com",
+  projectId: "rudohage",
+  storageBucket: "rudohage.firebasestorage.app",
+  messagingSenderId: "487042116246",
+  appId: "1:487042116246:web:990d65636addd6d653f0b7"
+};
+
+const authApp = initializeApp(authConfig, "authApp");
+const auth = getAuth(authApp);
+const authDb = getFirestore(authApp);
+
+const profileWrap = document.getElementById("profileWrap");
+const headerAvatar = document.getElementById("headerAvatar");
+
+const mobileLoginBtn = document.getElementById("mobileLoginBtn");
+const mobileAccountBtn = document.getElementById("mobileAccountBtn");
+const mobileLogoutBtn = document.getElementById("mobileLogoutBtn");
+
+onAuthStateChanged(auth, async (user) => {
+
+  if(user){
+    profileWrap.href = "myaccount.html";
+
+    mobileLoginBtn.style.display = "none";
+    mobileAccountBtn.style.display = "block";
+    mobileLogoutBtn.style.display = "block";
+
+    try{
+      const snap = await getDoc(doc(authDb,"users",user.uid));
+      const data = snap.exists() ? snap.data() : {};
+
+      if(data.photoURL){
+        headerAvatar.innerHTML = `<img src="${data.photoURL}">`;
+      }else{
+        const initial = (data.name || user.email || "C").charAt(0).toUpperCase();
+        headerAvatar.innerText = initial;
+      }
+    }catch(err){
+      console.log(err);
+    }
+
+  } else {
+    profileWrap.href = "login.html";
+    headerAvatar.innerHTML = '<i class="fas fa-user"></i>';
+
+    mobileLoginBtn.style.display = "block";
+    mobileAccountBtn.style.display = "none";
+    mobileLogoutBtn.style.display = "none";
+  }
+
+});
+
+mobileLogoutBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+  await signOut(auth);
+  window.location.reload();
+});
+
+</script>
+
   <script>
 async function shareWebsite() {
 
@@ -1907,20 +2056,7 @@ async function shareWebsite() {
     
 </script>
 
-<script>
-document.addEventListener('contextmenu', event => event.preventDefault());
 
-document.onkeydown = function(e) {
-    if (
-        e.keyCode == 123 ||
-        (e.ctrlKey && e.shiftKey && e.keyCode == 73) ||
-        (e.ctrlKey && e.shiftKey && e.keyCode == 74) ||
-        (e.ctrlKey && e.keyCode == 85)
-    ) {
-        return false;
-    }
-};
-</script>
 
   <a href="support.html" class="support-float">
     <i class="fa-solid fa-headset"></i>
