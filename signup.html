@@ -279,6 +279,27 @@ padding:15px;
 
 }
 
+.btn-spinner{
+width:18px;
+height:18px;
+border:2px solid rgba(255,255,255,.4);
+border-top:2px solid #ffffff;
+border-radius:50%;
+display:inline-block;
+animation:btnSpin .7s linear infinite;
+vertical-align:middle;
+}
+
+.google-btn .btn-spinner{
+border:2px solid rgba(0,0,0,.2);
+border-top:2px solid #111;
+}
+
+@keyframes btnSpin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
 </style>
 </head>
 
@@ -393,6 +414,17 @@ url += "?redirect=" + encodeURIComponent(redirectTo);
 window.location.href = url;
 }
 
+function setBtnLoading(btn, isLoading){
+if(isLoading){
+btn.dataset.originalText = btn.innerHTML;
+btn.innerHTML = '<span class="btn-spinner"></span>';
+btn.disabled = true;
+}else{
+btn.innerHTML = btn.dataset.originalText;
+btn.disabled = false;
+}
+}
+
 document.getElementById("signupBtn").addEventListener("click", async()=>{
 const email = document.getElementById("email").value.trim();
 const password = document.getElementById("password").value;
@@ -407,6 +439,9 @@ if(password !== confirmPassword){
 alert("Passwords do not match");
 return;
 }
+
+const signupBtn = document.getElementById("signupBtn");
+setBtnLoading(signupBtn, true);
 
 try{
 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -429,11 +464,15 @@ console.log(otpError);
 
 goToVerifyEmail();
 }catch(error){
+setBtnLoading(signupBtn, false);
 alert(error.message);
 }
 });
 
 document.getElementById("googleBtn").addEventListener("click", async()=>{
+const googleBtn = document.getElementById("googleBtn");
+setBtnLoading(googleBtn, true);
+
 try{
 const provider = new GoogleAuthProvider();
 const result = await signInWithPopup(auth, provider);
@@ -468,6 +507,7 @@ goToVerifyEmail();
 }
 }
 }catch(error){
+setBtnLoading(googleBtn, false);
 alert(error.message);
 }
 });
@@ -475,4 +515,3 @@ alert(error.message);
 </script>
 </body>
 </html>
-
