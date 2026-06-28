@@ -403,10 +403,11 @@ return;
 const snap = await getDoc(doc(db,"users",user.uid));
 const data = snap.exists() ? snap.data() : {};
 
-if(data.emailVerified !== false){
-goAfterVerify();
-return;
+if (data.emailVerified === true) {
+  goAfterVerify();
+  return;
 }
+
 
 currentUser = user;
 
