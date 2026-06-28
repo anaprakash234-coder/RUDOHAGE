@@ -350,142 +350,150 @@ Didn't get the code?
 
 <script type="module">
 
-import { initializeApp } from "https://gstatic.com";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
 import {
-  getAuth,
-  onAuthStateChanged,
-  signOut
-} from "https://gstatic.com";
+getAuth,
+onAuthStateChanged,
+signOut
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+
 import {
-  getFirestore,
-  doc,
-  getDoc,
-  updateDoc
-} from "https://gstatic.com";
+getFirestore,
+doc,
+getDoc,
+updateDoc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
-  authDomain: "://firebaseapp.com",
-  projectId: "rudohage",
-  storageBucket: "rudohage.firebasestorage.app",
-  messagingSenderId: "487042116246",
-  appId: "1:487042116246:web:990d65636addd6d653f0b7"
+apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
+authDomain: "rudohage.firebaseapp.com",
+projectId: "rudohage",
+storageBucket: "rudohage.firebasestorage.app",
+messagingSenderId: "487042116246",
+appId: "1:487042116246:web:990d65636addd6d653f0b7"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const OTP_API_BASE = "https://onrender.com";
+const OTP_API_BASE = "https://razorpay-backend-6yg5.onrender.com";
+
 const params = new URLSearchParams(window.location.search);
 const redirectTo = params.get("redirect");
 
 function goAfterVerify(){
-  if(redirectTo){
-    window.location.href = decodeURIComponent(redirectTo);
-  }else{
-    window.location.href = "myaccount.html";
-  }
+if(redirectTo){
+window.location.href = decodeURIComponent(redirectTo);
+}else{
+window.location.href = "myaccount.html";
+}
 }
 
 let currentUser = null;
 
 onAuthStateChanged(auth, async (user) => {
-  if(!user){
-    window.location.href = "login.html";
-    return;
-  }
 
-  try {
-    const snap = await getDoc(doc(db,"users",user.uid));
-    
-    if(snap.exists()) {
-      const data = snap.data();
-      if(data.emailVerified === true){
-        goAfterVerify();
-        return;
-      }
-    }
+if(!user){
+window.location.href = "login.html";
+return;
+}
 
-    currentUser = user;
-    document.getElementById("userEmail").innerText = user.email;
-    document.getElementById("sessionCheck").style.display = "none";
-    document.getElementById("pageContent").style.display = "block";
+const snap = await getDoc(doc(db,"users",user.uid));
+const data = snap.exists() ? snap.data() : {};
 
-  } catch(err) {
-    console.error(err);
-    window.location.href = "login.html";
-  }
+if (data.emailVerified === true) {
+  goAfterVerify();
+  return;
+}
+
+
+currentUser = user;
+
+document.getElementById("userEmail").innerText = user.email;
+document.getElementById("sessionCheck").style.display = "none";
+document.getElementById("pageContent").style.display = "block";
+
 });
 
 document.getElementById("verifyBtn").addEventListener("click", async () => {
-  const otp = document.getElementById("otpInput").value.trim();
 
-  if(!otp || otp.length !== 6){
-    alert("Please enter the 6-digit code");
-    return;
-  }
+const otp = document.getElementById("otpInput").value.trim();
 
-  try{
-    const res = await fetch(OTP_API_BASE + "/verify-otp", {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({ email: currentUser.email, otp })
-    });
+if(!otp || otp.length !== 6){
+alert("Please enter the 6-digit code");
+return;
+}
 
-    const result = await res.json();
+try{
 
-    if(result.success){
-      await updateDoc(doc(db,"users",currentUser.uid), { emailVerified: true });
-      goAfterVerify();
-    }else{
-      alert(result.message || "Invalid code, please try again");
-    }
-  }catch(err){
-    alert("Something went wrong. Please try again.");
-  }
+const res = await fetch(OTP_API_BASE + "/verify-otp", {
+method: "POST",
+headers: {"Content-Type":"application/json"},
+body: JSON.stringify({ email: currentUser.email, otp })
+});
+
+const result = await res.json();
+
+if(result.success){
+await updateDoc(doc(db,"users",currentUser.uid), { emailVerified: true });
+goAfterVerify();
+}else{
+alert(result.message || "Invalid code, please try again");
+}
+
+}catch(err){
+alert("Something went wrong. Please try again.");
+}
+
 });
 
 let resendCooldown = 0;
 let resendTimer = null;
 
 document.getElementById("resendBtn").addEventListener("click", async (e) => {
-  e.preventDefault();
-  if(resendCooldown > 0) return;
 
-  const resendBtn = document.getElementById("resendBtn");
+e.preventDefault();
 
-  try{
-    await fetch(OTP_API_BASE + "/send-otp", {
-      method: "POST",
-      headers: {"Content-Type":"application/json"},
-      body: JSON.stringify({ email: currentUser.email })
-    });
-    alert("A n_ew code has been sent to " + currentUser.email);
-  }catch(err){
-    alert("Couldn't resend code, please try again in a moment.");
-    return;
-  }
+if(resendCooldown > 0) return;
 
-  resendCooldown = 30;
-  resendBtn.classList.add("disabled");
+const resendBtn = document.getElementById("resendBtn");
 
-  resendTimer = setInterval(() => {
-    resendCooldown--;
-    resendBtn.innerText = "Resend Code (" + resendCooldown + "s)";
+try{
+await fetch(OTP_API_BASE + "/send-otp", {
+method: "POST",
+headers: {"Content-Type":"application/json"},
+body: JSON.stringify({ email: currentUser.email })
+});
 
-    if(resendCooldown <= 0){
-      clearInterval(resendTimer);
-      resendBtn.innerText = "Resend Code";
-      resendBtn.classList.remove("disabled");
-    }
-  }, 1000);
+alert("A new code has been sent to " + currentUser.email);
+
+}catch(err){
+alert("Couldn't resend code, please try again in a moment.");
+return;
+}
+
+resendCooldown = 30;
+resendBtn.classList.add("disabled");
+
+resendTimer = setInterval(() => {
+resendCooldown--;
+resendBtn.innerText = "Resend Code (" + resendCooldown + "s)";
+
+if(resendCooldown <= 0){
+clearInterval(resendTimer);
+resendBtn.innerText = "Resend Code";
+resendBtn.classList.remove("disabled");
+}
+}, 1000);
+
 });
 
 document.getElementById("logoutLink").addEventListener("click", async (e) => {
-  e.preventDefault();
-  await signOut(auth);
-  window.location.href = "login.html";
+e.preventDefault();
+await signOut(auth);
+window.location.href = "login.html";
 });
 
 </script>
