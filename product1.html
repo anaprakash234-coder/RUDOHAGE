@@ -314,12 +314,10 @@ html, body{
     overflow-x:hidden;
 }
 
-/* page spacing fix */
 body{
     padding:70px 15px 20px;
 }
 
-/* header center + small */
 .product-header{
     justify-content:center;
     padding:10px 0;
@@ -332,12 +330,10 @@ body{
     text-align:center;
 }
 
-/* main title fix */
 .hero-piece h1{
     font-size:2.5rem;
 }
 
-/* layout fix */
 .product-container{
     flex-direction:column;
 }
@@ -614,7 +610,8 @@ Tracked Delivery Available
 
 <a
 href="checkout.html?product=Inferno Core&price=3000"
-class="buy-btn">
+class="buy-btn"
+id="buyNowBtn">
 Buy Now
 </a>
 
@@ -785,6 +782,12 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
+getAuth,
+onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
 getFirestore,
 collection,
 addDoc,
@@ -815,8 +818,34 @@ measurementId: "G-6GLB5PPXMY"
 const app =
 initializeApp(firebaseConfig);
 
+const auth =
+getAuth(app);
+
 const db =
 getFirestore(app);
+
+let currentUser = null;
+
+onAuthStateChanged(auth, (user) => {
+currentUser = user;
+});
+
+document.getElementById("buyNowBtn")
+.addEventListener("click", (e) => {
+
+e.preventDefault();
+
+const checkoutUrl =
+e.currentTarget.getAttribute("href");
+
+if(currentUser){
+window.location.href = checkoutUrl;
+}else{
+window.location.href =
+"login.html?redirect=" + encodeURIComponent(checkoutUrl);
+}
+
+});
 
 async function loadReviews(){
 
