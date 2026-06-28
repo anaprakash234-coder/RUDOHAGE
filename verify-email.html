@@ -217,6 +217,33 @@ opacity:.55;
 display:none;
 }
 
+.btn-spinner{
+width:18px;
+height:18px;
+border:2px solid rgba(255,255,255,.4);
+border-top:2px solid #ffffff;
+border-radius:50%;
+display:inline-block;
+animation:btnSpin .7s linear infinite;
+vertical-align:middle;
+}
+
+.btn-spinner-sm{
+width:13px;
+height:13px;
+border:2px solid rgba(17,17,17,.25);
+border-top:2px solid #111;
+border-radius:50%;
+display:inline-block;
+animation:btnSpin .7s linear infinite;
+vertical-align:middle;
+}
+
+@keyframes btnSpin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
 @media(max-width:900px){
 
 .container{
@@ -388,6 +415,17 @@ window.location.href = "myaccount.html";
 }
 }
 
+function setBtnLoading(btn, isLoading){
+if(isLoading){
+btn.dataset.originalText = btn.innerHTML;
+btn.innerHTML = '<span class="btn-spinner"></span>';
+btn.disabled = true;
+}else{
+btn.innerHTML = btn.dataset.originalText;
+btn.disabled = false;
+}
+}
+
 let currentUser = null;
 
 onAuthStateChanged(auth, async (user) => {
@@ -425,6 +463,9 @@ alert("Please enter the 6-digit code");
 return;
 }
 
+const verifyBtn = document.getElementById("verifyBtn");
+setBtnLoading(verifyBtn, true);
+
 try{
 const res = await fetch(OTP_API_BASE + "/verify-otp", {
 method: "POST",
@@ -438,9 +479,11 @@ if(result.success){
 await updateDoc(doc(db,"users",currentUser.uid), { emailVerified: true });
 goAfterVerify();
 }else{
+setBtnLoading(verifyBtn, false);
 alert(result.message || "Invalid code, please try again");
 }
 }catch(err){
+setBtnLoading(verifyBtn, false);
 alert("Something went wrong. Please try again.");
 }
 });
@@ -453,6 +496,9 @@ e.preventDefault();
 if(resendCooldown > 0) return;
 
 const resendBtn = document.getElementById("resendBtn");
+const originalText = resendBtn.innerText;
+resendBtn.innerHTML = '<span class="btn-spinner-sm"></span>';
+resendBtn.classList.add("disabled");
 
 try{
 await fetch(OTP_API_BASE + "/send-otp", {
@@ -462,12 +508,14 @@ body: JSON.stringify({ email: currentUser.email })
 });
 alert("A new code has been sent to " + currentUser.email);
 }catch(err){
+resendBtn.innerText = originalText;
+resendBtn.classList.remove("disabled");
 alert("Couldn't resend code, please try again in a moment.");
 return;
 }
 
 resendCooldown = 30;
-resendBtn.classList.add("disabled");
+resendBtn.innerText = "Resend Code (" + resendCooldown + "s)";
 
 resendTimer = setInterval(() => {
 resendCooldown--;
