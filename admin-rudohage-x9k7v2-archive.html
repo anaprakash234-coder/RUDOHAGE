@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="logo.png">
+<link rel="icon" type="image/png" href="logo.png">
 
 <title>RUDOHAGE | Admin Archive</title>
 
@@ -39,6 +39,9 @@ background:rgba(246,242,234,.65);
 backdrop-filter:blur(18px);
 border-bottom:1px solid rgba(0,0,0,.08);
 z-index:999;
+display:flex;
+justify-content:space-between;
+align-items:center;
 }
 
 .logo{
@@ -47,6 +50,117 @@ color:#111;
 font-family:'Cormorant Garamond',serif;
 font-size:2rem;
 font-weight:600;
+}
+
+.logout-btn{
+padding:8px 18px;
+border:1px solid rgba(0,0,0,.15);
+border-radius:50px;
+background:transparent;
+font-size:.75rem;
+letter-spacing:2px;
+cursor:pointer;
+}
+
+.logout-btn:hover{
+background:#111;
+color:white;
+}
+
+/* ===== LOGIN SCREEN ===== */
+.login-screen{
+position:fixed;
+inset:0;
+background:var(--bg);
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:9999;
+}
+
+.login-box{
+background:white;
+padding:50px;
+border-radius:30px;
+box-shadow:0 20px 60px rgba(0,0,0,.08);
+width:100%;
+max-width:420px;
+text-align:center;
+}
+
+.login-box h1{
+font-family:'Cormorant Garamond',serif;
+font-size:2.5rem;
+margin-bottom:8px;
+}
+
+.login-box p{
+opacity:.6;
+font-size:13px;
+letter-spacing:2px;
+text-transform:uppercase;
+margin-bottom:30px;
+}
+
+.login-box input{
+width:100%;
+padding:16px;
+margin-bottom:14px;
+border:none;
+background:#f7f7f7;
+border-radius:14px;
+font-size:15px;
+}
+
+.login-box button{
+width:100%;
+padding:16px;
+border:none;
+border-radius:14px;
+background:#111;
+color:white;
+font-size:13px;
+letter-spacing:3px;
+cursor:pointer;
+}
+
+/* ===== SESSION CHECK ===== */
+.session-check{
+position:fixed;
+inset:0;
+background:var(--bg);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+z-index:9998;
+gap:18px;
+}
+
+.session-check .loader{
+width:46px;
+height:46px;
+border:3px solid #ddd;
+border-top:3px solid #111;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+.session-check span{
+font-size:12px;
+letter-spacing:2px;
+text-transform:uppercase;
+opacity:.55;
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg);}
+100%{transform:rotate(360deg);}
+}
+
+/* ===== ADMIN CONTENT ===== */
+#adminContent{
+display:none;
 }
 
 .hero{
@@ -117,17 +231,6 @@ font-size:2rem;
 margin-bottom:10px;
 }
 
-.status{
-display:inline-block;
-padding:8px 14px;
-border-radius:50px;
-background:black;
-color:white;
-font-size:12px;
-letter-spacing:2px;
-margin-top:15px;
-}
-
 .status-btn{
 background:#111;
 color:white;
@@ -145,15 +248,15 @@ opacity:.8;
 }
 
 @media(max-width:768px){
-
 body{
 padding:90px 20px 20px;
 }
-
 .hero h1{
 font-size:2.8rem;
 }
-
+.login-box{
+padding:30px;
+}
 }
 
 .product-thumb{
@@ -169,9 +272,31 @@ box-shadow:0 10px 30px rgba(0,0,0,.08);
 
 <body>
 
+<!-- SESSION CHECK -->
+<div class="session-check" id="sessionCheck">
+  <div class="loader"></div>
+  <span>Verifying Admin Access...</span>
+</div>
+
+<!-- LOGIN SCREEN -->
+<div class="login-screen" id="loginScreen" style="display:none;">
+  <div class="login-box">
+    <h1>RUDOHAGE</h1>
+    <p>Admin Access Only</p>
+    <input type="email" id="adminEmail" placeholder="Admin Email">
+    <input type="password" id="adminPassword" placeholder="Password" style="margin-top:0;">
+    <button id="adminLoginBtn">LOGIN</button>
+  </div>
+</div>
+
+<!-- HEADER -->
 <header class="header">
-<a href="index.html" class="logo">RUDOHAGE</a>
+  <a href="/" class="logo">RUDOHAGE</a>
+  <button class="logout-btn" id="logoutBtn" style="display:none;">LOGOUT</button>
 </header>
+
+<!-- ADMIN CONTENT -->
+<div id="adminContent">
 
 <section class="hero">
 <span>ORDER ARCHIVE</span>
@@ -181,7 +306,7 @@ box-shadow:0 10px 30px rgba(0,0,0,.08);
 
 <div class="stats">
 
-    <br>
+<br>
 
 <input
 type="text"
@@ -203,12 +328,20 @@ font-size:15px;">
 
 </div>
 
-<div class="orders-grid" id="ordersContainer">
+<div class="orders-grid" id="ordersContainer"></div>
+
 </div>
 
 <script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+
+import {
+getAuth,
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
 import {
 getFirestore,
@@ -227,404 +360,252 @@ messagingSenderId: "487042116246",
 appId: "1:487042116246:web:990d65636addd6d653f0b7"
 };
 
+const ADMIN_EMAIL = "anaprakash123@gmail.com";
+
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 const db = getFirestore(app);
 
-const ordersContainer =
-document.getElementById("ordersContainer");
+const sessionCheck = document.getElementById("sessionCheck");
+const loginScreen = document.getElementById("loginScreen");
+const adminContent = document.getElementById("adminContent");
+const logoutBtn = document.getElementById("logoutBtn");
 
-const totalOrders =
-document.getElementById("totalOrders");
+// ===== AUTH STATE =====
+onAuthStateChanged(auth, (user) => {
 
+  sessionCheck.style.display = "none";
+
+  if(user && user.email === ADMIN_EMAIL){
+    loginScreen.style.display = "none";
+    adminContent.style.display = "block";
+    logoutBtn.style.display = "block";
+    loadOrders();
+  } else {
+    if(user){
+      signOut(auth);
+    }
+    loginScreen.style.display = "flex";
+    adminContent.style.display = "none";
+    logoutBtn.style.display = "none";
+  }
+
+});
+
+// ===== LOGIN =====
+document.getElementById("adminLoginBtn").addEventListener("click", async () => {
+
+  const email = document.getElementById("adminEmail").value.trim();
+  const password = document.getElementById("adminPassword").value;
+
+  if(!email || !password){
+    alert("Please fill both fields");
+    return;
+  }
+
+  try{
+    const cred = await signInWithEmailAndPassword(auth, email, password);
+
+    if(cred.user.email !== ADMIN_EMAIL){
+      await signOut(auth);
+      alert("Access denied. Admin only.");
+    }
+
+  }catch(err){
+    alert("Login failed: " + err.message);
+  }
+
+});
+
+// ===== LOGOUT =====
+logoutBtn.addEventListener("click", async () => {
+  await signOut(auth);
+});
+
+// ===== LOAD ORDERS =====
 async function loadOrders(){
 
-const snapshot =
-await getDocs(collection(db,"orders"));
+  const ordersContainer = document.getElementById("ordersContainer");
+  const totalOrders = document.getElementById("totalOrders");
 
-totalOrders.innerText = snapshot.size;
+  ordersContainer.innerHTML = "";
 
-snapshot.forEach((doc)=>{
-    const orderId = doc.id;
+  const snapshot = await getDocs(collection(db,"orders"));
+  const search = document.getElementById("searchOrder")?.value?.toLowerCase() || "";
 
-const order = doc.data();
+  totalOrders.innerText = snapshot.size;
 
-const search =
-document.getElementById("searchOrder")
-?.value
-?.toLowerCase() || "";
+  snapshot.forEach((d) => {
 
-let productImage = "";
+    const orderId = d.id;
+    const order = d.data();
 
-if(order.product === "Inferno Core"){
-productImage = "image/fire-clock-1.png";
-}
+    if(
+      search &&
+      !(order.name || "").toLowerCase().includes(search) &&
+      !(order.phone || "").includes(search) &&
+      !(order.product || "").toLowerCase().includes(search)
+    ){
+      return;
+    }
 
-if(order.product === "Crimson Orbit"){
-productImage = "image/fire-clock-2.png";
-}
+    let productImage = "";
+    if(order.product === "Inferno Core") productImage = "image/fire-clock-1.png";
+    if(order.product === "Crimson Orbit") productImage = "image/fire-clock-2.png";
+    if(order.product === "Ember Crown") productImage = "image/fire-clock-3.png";
 
-if(order.product === "Ember Crown"){
-productImage = "image/fire-clock-3.png";
-}
+    ordersContainer.innerHTML += `
+      <div class="order-card">
 
-if(
-search &&
-!order.name.toLowerCase().includes(search) &&
-!order.phone.includes(search) &&
-!order.product.toLowerCase().includes(search)
-){
-return;
-}
+        <img src="${productImage}" class="product-thumb">
 
+        <div class="order-name">${order.product || ""}</div>
 
-ordersContainer.innerHTML += `
-<div class="order-card">
+        <p><b>Collector:</b> ${order.name || ""}</p>
+        <p><b>Phone:</b> ${order.phone || ""}</p>
+        <p><b>Address:</b> ${order.address || ""}</p>
+        <p><b>City:</b> ${order.city || ""}</p>
+        <p><b>Pincode:</b> ${order.pincode || ""}</p>
+        <p><b>Price:</b> ₹${order.price || ""}</p>
+        <p><b>Payment:</b> ${order.payment || ""}</p>
+        <p><b>Order ID:</b> ${orderId}</p>
 
-    <img
-src="${productImage}"
-class="product-thumb">
+        <button
+          class="status-btn"
+          onclick="changeStatus('${orderId}','${order.status}')">
+          ${order.status || "Pending"}
+        </button>
 
-<div class="order-name">
-${order.product}
-</div>
+        <br><br>
 
-<p><b>Collector:</b> ${order.name}</p>
+        <a
+          href="tel:${order.phone}"
+          class="status-btn"
+          style="text-decoration:none;display:inline-block;">
+          📞 Call Customer
+        </a>
 
-<p><b>Phone:</b> ${order.phone}</p>
+        <a
+          href="https://wa.me/91${order.phone}"
+          target="_blank"
+          class="status-btn"
+          style="text-decoration:none;display:inline-block;margin-left:10px;">
+          💬 WhatsApp
+        </a>
 
-<p><b>Address:</b> ${order.address}</p>
+        <br><br>
 
-<p><b>City:</b> ${order.city}</p>
+        <button
+          class="status-btn"
+          onclick="printLabel('${orderId}')">
+          📦 Print Shipping Label
+        </button>
 
-<p><b>Pincode:</b> ${order.pincode}</p>
+      </div>`;
 
-<p><b>Price:</b> ₹${order.price}</p>
-
-<p><b>Payment:</b> ${order.payment}</p>
-
-<p><b>Order ID:</b> ${orderId}</p>
-
-<button
-class="status-btn"
-onclick="changeStatus('${orderId}','${order.status}')">
-${order.status}
-</button>
-
-<br><br>
-
-<a
-href="tel:${order.phone}"
-class="status-btn"
-style="text-decoration:none;display:inline-block;">
-📞 Call Customer
-</a>
-
-<a
-href="https://wa.me/91${order.phone}"
-target="_blank"
-class="status-btn"
-style="text-decoration:none;display:inline-block;margin-left:10px;">
-💬 WhatsApp
-</a>
-
-<br><br>
-
-<button
-class="status-btn"
-onclick="printLabel('${orderId}')">
-📦 Print Shipping Label
-</button>
-
-</div>
-`;
-
-});
+  });
 
 }
 
-window.changeStatus = async function(orderId,currentStatus){
+// ===== CHANGE STATUS =====
+window.changeStatus = async function(orderId, currentStatus){
 
-let newStatus = "Pending";
+  const statusFlow = {
+    "Paid": "Packed",
+    "COD Pending Approval": "Packed",
+    "Packed": "Shipped",
+    "Shipped": "Delivered",
+    "Delivered": "Paid",
+    "Pending": "Packed"
+  };
 
-if(currentStatus === "Pending"){
-newStatus = "Packed";
-}
-else if(currentStatus === "Packed"){
-newStatus = "Shipped";
-}
-else if(currentStatus === "Shipped"){
-newStatus = "Delivered";
-}
-else{
-newStatus = "Pending";
-}
+  const newStatus = statusFlow[currentStatus] || "Packed";
 
-await updateDoc(
-doc(db,"orders",orderId),
-{
-status:newStatus
-}
-);
+  try{
+    await updateDoc(doc(db,"orders",orderId), { status: newStatus });
+    loadOrders();
+  }catch(err){
+    alert("Update failed: " + err.message);
+    console.error(err);
+  }
 
-location.reload();
+};
 
-}
-
+// ===== PRINT LABEL =====
 window.printLabel = async function(orderId){
 
-const snapshot = await getDocs(collection(db,"orders"));
-
-snapshot.forEach((d)=>{
-
-if(d.id === orderId){
-
-const order = d.data();
-
-const label = window.open("", "_blank");
-
-label.document.write(`
-
-<html>
-
-<head>
-
-<title>RUDOHAGE Premium Shipping Label</title>
-
-<style>
-body{
-background:#f6f2ea;
-padding:15px;      
-font-family:'Manrope',sans-serif;
-}
-
-.label{
-max-width:800px;   
-margin:auto;
-background:white;
-padding:25px;     
-border:3px solid #111;
-border-radius:15px;
-}
-
-.brand{
-text-align:center;
-margin-bottom:20px; 
-}
-
-.brand h1{
-font-family:'Cormorant Garamond',serif;
-font-size:38px;     
-margin:0;
-letter-spacing:3px;
-}
-
-.brand p{
-margin-top:4px;
-letter-spacing:2px;
-opacity:.6;
-font-size:11px;
-}
-
-.row{
-display:flex;
-justify-content:space-between;
-margin:6px 0;       
-font-size:13px;    
-}
-
-.address{
-margin-top:15px;
-padding:12px;       
-border:2px dashed #111;
-border-radius:10px;
-line-height:1.4;
-font-size:13px;
-}
-
-.badge{
-margin-top:12px;
-padding:10px;        
-font-size:12px;
-}
-
-.fragile{
-margin-top:10px;
-padding:10px;        
-font-size:12px;
-}
-
-.footer{
-margin-top:15px;     \
-text-align:center;
-font-size:11px;
-opacity:.7;
-}
-
-hr{
-margin:12px 0;      
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="label">
-
-<div class="brand">
-
-<h1>RUDOHAGE</h1>
-
-<p>HANDCRAFTED LUXURY HOROLOGY</p>
-
-</div>
-
-<div class="row">
-<span><b>Invoice Number</b></span>
-<span>INV-${orderId.slice(-6)}</span>
-</div>
-
-<div class="row">
-<span><b>Order Number</b></span>
-<span>${orderId}</span>
-</div>
-
-<div class="row">
-<span><b>Order Date</b></span>
-<span>${new Date().toLocaleDateString()}</span>
-</div>
-
-<div class="row">
-<span><b>Order Status</b></span>
-<span>${order.status || "Pending"}</span>
-</div>
-
-<hr>
-
-<h2>Customer Details</h2>
-
-<div class="row">
-<span>Name</span>
-<span>${order.name}</span>
-</div>
-
-<div class="row">
-<span>Phone</span>
-<span>${order.phone}</span>
-</div>
-
-<div class="row">
-<span>City</span>
-<span>${order.city}</span>
-</div>
-
-<div class="row">
-<span>Pincode</span>
-<span>${order.pincode}</span>
-</div>
-
-<div class="address">
-
-<b>SHIPPING ADDRESS</b>
-
-<br><br>
-
-${order.name}
-
-<br>
-
-${order.address}
-
-<br>
-
-${order.city}
-
-<br>
-
-${order.pincode}
-
-<br>
-
-${order.phone}
-
-</div>
-
-<hr>
-
-<h2>Order Details</h2>
-
-<div class="row">
-<span>Product</span>
-<span>${order.product}</span>
-</div>
-
-<div class="row">
-<span>Payment Method</span>
-<span>${order.payment}</span>
-</div>
-
-<div class="row">
-<span>Amount</span>
-<span>₹${order.price}</span>
-</div>
-
-<div class="badge">
-
-HANDCRAFTED PIECE
-
-</div>
-
-<div class="fragile">
-
-FRAGILE • HANDLE WITH CARE
-
-</div>
-
-<div class="footer">
-
-RUDOHAGE® Luxury Horology Collection
-
-</div>
-
-</div>
-
-</body>
-
-</html>
-
-`);
-
-label.document.close();
-
-setTimeout(()=>{
-label.print();
-},500);
-
-}
-
+  const snapshot = await getDocs(collection(db,"orders"));
+
+  snapshot.forEach((d) => {
+
+    if(d.id !== orderId) return;
+
+    const order = d.data();
+    const label = window.open("", "_blank");
+
+    label.document.write(`
+      <html>
+      <head>
+      <title>RUDOHAGE Shipping Label</title>
+      <style>
+      body{background:#f6f2ea;padding:15px;font-family:'Manrope',sans-serif;}
+      .label{max-width:800px;margin:auto;background:white;padding:25px;border:3px solid #111;border-radius:15px;}
+      .brand{text-align:center;margin-bottom:20px;}
+      .brand h1{font-family:'Cormorant Garamond',serif;font-size:38px;margin:0;letter-spacing:3px;}
+      .brand p{margin-top:4px;letter-spacing:2px;opacity:.6;font-size:11px;}
+      .row{display:flex;justify-content:space-between;margin:6px 0;font-size:13px;}
+      .address{margin-top:15px;padding:12px;border:2px dashed #111;border-radius:10px;line-height:1.4;font-size:13px;}
+      .footer{margin-top:15px;text-align:center;font-size:11px;opacity:.7;}
+      hr{margin:12px 0;}
+      </style>
+      </head>
+      <body>
+      <div class="label">
+        <div class="brand">
+          <h1>RUDOHAGE</h1>
+          <p>HANDCRAFTED LUXURY HOROLOGY</p>
+        </div>
+        <div class="row"><span><b>Invoice</b></span><span>INV-${orderId.slice(-6)}</span></div>
+        <div class="row"><span><b>Order ID</b></span><span>${orderId}</span></div>
+        <div class="row"><span><b>Date</b></span><span>${new Date().toLocaleDateString()}</span></div>
+        <div class="row"><span><b>Status</b></span><span>${order.status || "Pending"}</span></div>
+        <hr>
+        <h2>Customer Details</h2>
+        <div class="row"><span>Name</span><span>${order.name}</span></div>
+        <div class="row"><span>Phone</span><span>${order.phone}</span></div>
+        <div class="row"><span>City</span><span>${order.city}</span></div>
+        <div class="row"><span>Pincode</span><span>${order.pincode}</span></div>
+        <div class="address">
+          <b>SHIPPING ADDRESS</b><br><br>
+          ${order.name}<br>${order.address}<br>${order.city}<br>${order.pincode}<br>${order.phone}
+        </div>
+        <hr>
+        <h2>Order Details</h2>
+        <div class="row"><span>Product</span><span>${order.product}</span></div>
+        <div class="row"><span>Payment</span><span>${order.payment}</span></div>
+        <div class="row"><span>Amount</span><span>₹${order.price}</span></div>
+        <div class="footer">RUDOHAGE® Luxury Horology Collection • FRAGILE • HANDLE WITH CARE</div>
+      </div>
+      </body>
+      </html>
+    `);
+
+    label.document.close();
+    setTimeout(() => label.print(), 500);
+
+  });
+
+};
+
+// ===== SEARCH =====
+document.getElementById("searchOrder").addEventListener("input", () => {
+  loadOrders();
 });
-
-}
-
-loadOrders();
-
-document
-.getElementById("searchOrder")
-.addEventListener("input", ()=>{
-
-ordersContainer.innerHTML = "";
-
-loadOrders();
-
-});
-
 
 </script>
 
-    <script>
+<script>
 document.addEventListener('contextmenu', event => event.preventDefault());
-
 document.onkeydown = function(e) {
     if (
         e.keyCode == 123 ||
