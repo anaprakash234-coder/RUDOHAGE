@@ -350,21 +350,60 @@
     modal:   showModal
   };
 
+  /* ===== FIREBASE ERROR TRANSLATOR ===== */
+  function translateError(message){
+    const msg = String(message);
+
+    const firebaseErrors = {
+      "auth/invalid-credential":        "Incorrect email or password. Please try again.",
+      "auth/wrong-password":            "Incorrect password. Please try again.",
+      "auth/user-not-found":            "No account found with this email.",
+      "auth/email-already-in-use":      "This email is already registered. Please login instead.",
+      "auth/weak-password":             "Password must be at least 6 characters.",
+      "auth/invalid-email":             "Please enter a valid email address.",
+      "auth/too-many-requests":         "Too many attempts. Please wait a moment and try again.",
+      "auth/network-request-failed":    "Network error. Please check your connection.",
+      "auth/popup-closed-by-user":      "Sign-in cancelled. Please try again.",
+      "auth/popup-blocked":             "Popup was blocked. Please allow popups and try again.",
+      "auth/account-exists-with-different-credential": "An account already exists with this email. Try logging in differently.",
+      "auth/requires-recent-login":     "Please log out and log in again to do this.",
+      "auth/user-disabled":             "This account has been disabled. Contact support.",
+      "auth/expired-action-code":       "This link has expired. Please request a new one.",
+      "auth/invalid-action-code":       "This link is invalid. Please request a new one.",
+      "permission-denied":              "Access denied. Please log in again.",
+      "unavailable":                    "Service temporarily unavailable. Please try again.",
+      "not-found":                      "Data not found. Please try again.",
+    };
+
+    for(const [code, friendly] of Object.entries(firebaseErrors)){
+      if(msg.includes(code)){
+        return friendly;
+      }
+    }
+
+    // Strip "Firebase: " prefix if no match found
+    return msg
+      .replace(/Firebase:\s*/gi, "")
+      .replace(/\(auth\/[^)]+\)\./g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
   /* ===== OVERRIDE window.alert ===== */
   window.alert = function(message){
-    const msg = String(message);
+    const translated = translateError(message);
+    const lower = translated.toLowerCase();
     let type = "info";
 
-    const lower = msg.toLowerCase();
-    if(lower.includes("failed") || lower.includes("error") || lower.includes("wrong") || lower.includes("invalid") || lower.includes("denied")){
+    if(lower.includes("incorrect") || lower.includes("failed") || lower.includes("error") || lower.includes("wrong") || lower.includes("invalid") || lower.includes("denied") || lower.includes("disabled") || lower.includes("blocked") || lower.includes("cancelled")){
       type = "error";
-    } else if(lower.includes("success") || lower.includes("sent") || lower.includes("saved") || lower.includes("copied") || lower.includes("verified") || lower.includes("uploaded")){
+    } else if(lower.includes("sent") || lower.includes("saved") || lower.includes("copied") || lower.includes("verified") || lower.includes("uploaded") || lower.includes("success")){
       type = "success";
-    } else if(lower.includes("wait") || lower.includes("please") || lower.includes("note")){
+    } else if(lower.includes("wait") || lower.includes("please") || lower.includes("many attempts")){
       type = "warning";
     }
 
-    showToast(msg, type, 5000);
+    showToast(translated, type, 5000);
   };
 
 })();
