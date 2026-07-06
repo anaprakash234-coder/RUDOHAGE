@@ -337,7 +337,7 @@ Continue With Google
 </button>
 
 <div class="links">
-<a href="signup.html">
+<a href="/signup/">
 Create Account
 </a>
 </div>
@@ -390,12 +390,12 @@ function goAfterLogin(){
 if(redirectTo){
 window.location.href = decodeURIComponent(redirectTo);
 }else{
-window.location.href = "myaccount.html";
+window.location.href = "/myaccount/";
 }
 }
 
 function goToVerifyEmail(){
-let url = "verify-email.html";
+let url = "/verify-email/";
 if(redirectTo){
 url += "?redirect=" + encodeURIComponent(redirectTo);
 }
