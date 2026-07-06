@@ -402,7 +402,7 @@ Sign Up With Google
 </button>
 
 <div class="links">
-<a href="login.html">
+<a href="/login/">
 Already have an account? Login
 </a>
 </div>
@@ -446,7 +446,7 @@ const redirectTo = params.get("redirect");
 const OTP_API_BASE = "https://razorpay-backend-6yg5.onrender.com";
 
 function goToVerifyEmail(){
-let url = "verify-email.html";
+let url = "/verify-email/";
 if(redirectTo){
 url += "?redirect=" + encodeURIComponent(redirectTo);
 }
@@ -546,7 +546,7 @@ goToVerifyEmail();
 const existingData = userSnap.data();
 if(existingData && existingData.emailVerified === true){
 if(redirectTo) window.location.href = decodeURIComponent(redirectTo);
-else window.location.href = "myaccount.html";
+else window.location.href = "/myaccount/";
 } else {
 goToVerifyEmail();
 }
