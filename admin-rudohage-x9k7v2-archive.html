@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="logo.png">
+<link rel="icon" type="image/png" href="/logo.png">
 
 <title>RUDOHAGE | Admin Archive</title>
 
@@ -450,9 +450,9 @@ async function loadOrders(){
     }
 
     let productImage = "";
-    if(order.product === "Inferno Core") productImage = "image/fire-clock-1.png";
-    if(order.product === "Crimson Orbit") productImage = "image/fire-clock-2.png";
-    if(order.product === "Ember Crown") productImage = "image/fire-clock-3.png";
+    if(order.product === "Inferno Core") productImage = "/image/fire-clock-1.png";
+    if(order.product === "Crimson Orbit") productImage = "/image/fire-clock-1.png";
+    if(order.product === "Ember Crown") productImage = "/image/fire-clock-1.png";
 
     ordersContainer.innerHTML += `
       <div class="order-card">
