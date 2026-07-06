@@ -1,53 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-<url>
-<loc>https://rudohage.com/</loc>
-</url>
+  <url>
+    <loc>https://rudohage.com/</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
 
-<url>
-<loc>https://rudohage.com/product1.html</loc>
-</url>
+  <url>
+    <loc>https://rudohage.com/product1/</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 
-<url>
-<loc>https://rudohage.com/product2.html</loc>
-</url>
+  <url>
+    <loc>https://rudohage.com/product2/</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 
-<url>
-<loc>https://rudohage.com/product3.html</loc>
-</url>
+  <url>
+    <loc>https://rudohage.com/product3/</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
 
-<url>
-<loc>https://rudohage.com/contact.html</loc>
-</url>
+  <url>
+    <loc>https://rudohage.com/reviews.html</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
 
-<url>
-<loc>https://rudohage.com/reviews.html</loc>
-</url>
+  <url>
+    <loc>https://rudohage.com/contact.html</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 
-<url>
-<loc>https://rudohage.com/myorders.html</loc>
-</url>
+  <url>
+    <loc>https://rudohage.com/terms-policy.html</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 
-<url>
-<loc>https://rudohage.com/track.html</loc>
-</url>
+  <url>
+    <loc>https://rudohage.com/privacy-policy.html</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 
-<url>
-<loc>https://rudohage.com/terms-policy.html</loc>
-</url>
+  <url>
+    <loc>https://rudohage.com/refund-policy.html</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 
-<url>
-<loc>https://rudohage.com/privacy-policy.html</loc>
-</url>
-
-<url>
-<loc>https://rudohage.com/refund-policy.html</loc>
-</url>
-
-<url>
-<loc>https://rudohage.com/shipping.html</loc>
-</url>
+  <url>
+    <loc>https://rudohage.com/shipping.html</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 
 </urlset>
