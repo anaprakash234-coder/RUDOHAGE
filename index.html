@@ -1350,7 +1350,7 @@ left:20px;
   </nav>
 
   <div class="header-actions">
-    <a href="login.html" class="profile-link" id="profileWrap">
+    <a href="/login/" class="profile-link" id="profileWrap">
       <div class="profile-avatar" id="headerAvatar">
         <i class="fas fa-user"></i>
       </div>
@@ -1367,8 +1367,8 @@ left:20px;
     <a href="#catalog" onclick="closeMenu()">Catalog</a>
     <a href="#contact" onclick="closeMenu()">Contact</a>
 
-    <a href="login.html" id="mobileLoginBtn" onclick="closeMenu()">Login</a>
-    <a href="myaccount.html" id="mobileAccountBtn" style="display:none;" onclick="closeMenu()">My Account</a>
+    <a href="/login/" id="mobileLoginBtn" onclick="closeMenu()">Login</a>
+    <a href="/myaccount/" id="mobileAccountBtn" style="display:none;" onclick="closeMenu()">My Account</a>
     <a href="#" id="mobileLogoutBtn" style="display:none;">Logout</a>
   </div>
 
@@ -1660,14 +1660,14 @@ document.getElementById("buyBtn").onclick = function() {
   );
 };
 
-  let productPage = "product1.html";
+  let productPage = "/product1/";
 
   if(title === "Crimson Orbit"){
-    productPage = "product2.html";
+    productPage = "/product2/";
   }
 
   if(title === "Ember Crown"){
-    productPage = "product3.html";
+    productPage = "/product3/";
   }
 
   document.getElementById("viewBtn").href = productPage;
@@ -1997,7 +1997,7 @@ const mobileLogoutBtn = document.getElementById("mobileLogoutBtn");
 onAuthStateChanged(auth, async (user) => {
 
   if(user){
-    profileWrap.href = "myaccount.html";
+    profileWrap.href = "/myaccount/";
 
     mobileLoginBtn.style.display = "none";
     mobileAccountBtn.style.display = "block";
@@ -2018,7 +2018,7 @@ onAuthStateChanged(auth, async (user) => {
     }
 
   } else {
-    profileWrap.href = "login.html";
+    profileWrap.href = "/login/";
     headerAvatar.innerHTML = '<i class="fas fa-user"></i>';
 
     mobileLoginBtn.style.display = "block";
