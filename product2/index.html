@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/logo.png">
 
-<title>RUDOHAGE | Inferno Core</title>
+<title>RUDOHAGE | Crimson Orbit</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Manrope:wght@300;500;700&display=swap" rel="stylesheet">
 
@@ -28,9 +28,9 @@ body{
 background:var(--bg);
 font-family:'Manrope',sans-serif;
 color:var(--text);
-
 padding:120px 8% 40px;
 }
+
 
 .product-header{
 position:fixed;
@@ -53,7 +53,6 @@ align-items:center;
 .product-brand{
 text-decoration:none;
 color:#111;
-
 font-family:'Cormorant Garamond',serif;
 font-size:2.1rem;
 font-weight:600;
@@ -108,6 +107,14 @@ font-weight:700;
 margin-bottom:20px;
 }
 
+.delivery{
+background:white;
+padding:15px;
+border-radius:12px;
+margin-bottom:25px;
+box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+
 .certificate{
 background:transparent;
 padding:0;
@@ -135,14 +142,6 @@ margin-bottom:8px;
 .status-value{
 font-family:'Cormorant Garamond',serif;
 font-size:1.8rem;
-}
-
-.delivery{
-background:white;
-padding:15px;
-border-radius:12px;
-margin-bottom:25px;
-box-shadow:0 5px 20px rgba(0,0,0,.05);
 }
 
 .buttons{
@@ -238,57 +237,6 @@ border:none;
 border-radius:50px;
 cursor:pointer;
 }
-
-.related-products{
-margin-top:80px;
-}
-
-.related-products h2{
-font-family:'Cormorant Garamond',serif;
-font-size:2rem;
-margin-bottom:25px;
-}
-
-.related-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-}
-
-.related-card{
-background:white;
-padding:20px;
-border-radius:20px;
-text-decoration:none;
-color:black;
-box-shadow:0 5px 20px rgba(0,0,0,.05);
-transition:.3s;
-}
-
-.related-card:hover{
-transform:translateY(-8px);
-}
-
-.related-card img{
-width:100%;
-border-radius:15px;
-margin-bottom:15px;
-}
-
-.related-card h3{
-font-family:'Cormorant Garamond',serif;
-font-size:1.8rem;
-margin-bottom:10px;
-}
-
-.piece-number{
-font-size:12px;
-letter-spacing:3px;
-text-transform:uppercase;
-opacity:.6;
-margin-bottom:12px;
-}
-
 .signature{
 text-align:center;
 margin-top:100px;
@@ -314,10 +262,12 @@ html, body{
     overflow-x:hidden;
 }
 
+/* page spacing fix */
 body{
     padding:70px 15px 20px;
 }
 
+/* header center + small */
 .product-header{
     justify-content:center;
     padding:10px 0;
@@ -330,10 +280,12 @@ body{
     text-align:center;
 }
 
+/* main title fix */
 .hero-piece h1{
     font-size:2.5rem;
 }
 
+/* layout fix */
 .product-container{
     flex-direction:column;
 }
@@ -477,6 +429,10 @@ box-shadow:0 15px 50px rgba(0,0,0,.08);
     flex-shrink:0;
 }
 
+.hero-piece{
+    align-items:center;
+    text-align:center;
+}
 
 .hero-piece{
     width:100%;
@@ -487,27 +443,30 @@ box-shadow:0 15px 50px rgba(0,0,0,.08);
     justify-content:center;
 }
 
+
 </style>
 </head>
 
+
+
 <body>
 
-   <header class="product-header">
+<header class="product-header">
 
 <a href="index.html" class="product-brand">
 RUDOHAGE
 </a>
 
-</header> 
+</header>
 
-  <div class="hero-piece">
+<div class="hero-piece">
 
     <div class="hero-piece-number">
-        Piece No. 01
+        Piece No. 02
     </div>
 
     <h1>
-     Inferno Core   
+        Crimson Orbit
     </h1>
 
     <p>
@@ -525,31 +484,31 @@ RUDOHAGE
     <div class="gallery">
 
 <img onclick="changeImage(this.src)"
-src="https://rudohage.com/image/fire-clock-1.png">
+src="https://rudohage.com/image/fire-clock-2.png">
 
 <img onclick="changeImage(this.src)"
-src="https://rudohage.com/image/fire-clock-14.png">
+src="https://rudohage.com/image/fire-clock-11.png">
 
 <img onclick="changeImage(this.src)"
-src="https://rudohage.com/image/fire-clock-15.png">
+src="https://rudohage.com/image/fire-clock-12.png">
 
 <img onclick="changeImage(this.src)"
-src="https://rudohage.com/image/fire-clock-16.png">
+src="https://rudohage.com/image/fire-clock-13.png">
 
 </div>
 
 <img id="mainImage"
-src="https://rudohage.com/image/fire-clock-1.png">
+src="https://rudohage.com/image/fire-clock-2.png">
 
 </div>
- 
+
 
 <div class="product-info">
 
-<h1>Inferno Core</h1>
-
+<h1>Crimson Orbit</h1>
+  
 <div class="piece">
-Piece No. 01
+Piece No. 02
 </div>
 
 <div class="made">
@@ -557,16 +516,16 @@ Handmade by RUDOHAGE
 </div>
 
 <div class="rating">
-★★★★★ 5.0
+★★★★★ 4.9
 </div>
 
 <div class="price">
-₹3000
+₹2500
 </div>
 
 <div class="certificate">
 
-<div>✓ Piece No. 01</div>
+<div>✓ Piece No. 02</div>
 
 <div>✓ One of One Creation</div>
 
@@ -597,7 +556,7 @@ Handcrafted & Packed Securely
 <br>
 
 <div>
- Dispatch : 3–5 Days
+Dispatch : 3–5 Days
 </div>
 
 <div>
@@ -609,7 +568,7 @@ Tracked Delivery Available
 <div class="buttons">
 
 <a
-href="checkout.html?product=Inferno Core&price=3000"
+href="checkout.html?product=Crimson Orbit&price=2500"
 class="buy-btn"
 id="buyNowBtn">
 Buy Now
@@ -633,21 +592,11 @@ The Story
 
 <p>
 
-Inspired by the raw energy of fire,
-Inferno Core is a one-of-one creation
-crafted to embody strength, precision
-and individuality.
+  Inspired by celestial motion and crafted with precision,
+  Crimson Orbit is a bold expression of modern artistry. 
+  Designed to stand out while remaining timeless,
+  it reflects the signature craftsmanship and distinctive identity of RUDOHAGE.
 
-Every contour is shaped by hand,
-every surface carefully refined,
-ensuring that no two pieces can ever
-be identical.
-
-Created not for mass production,
-but for collectors who value
-craftsmanship above repetition,
-Inferno Core stands as a permanent
-part of the RUDOHAGE archive.
 
 </p>
 
@@ -685,21 +634,23 @@ Collection : RUDOHAGE
 
 </div>
 
-<div class="related-products">
+<div>
+
+    <div class="related-products">
 
 <h2>Explore More Pieces</h2>
 
 <div class="related-grid">
 
-<a href="product2.html" class="related-card">
+<a href="product1.html" class="related-card">
 
 <div class="piece-number">
-Piece No. 02
+Piece No. 01
 </div>
 
-<h3>Crimson Orbit</h3>
+<h3>Inferno Core</h3>
 
-<p>₹2500</p>
+<p>₹3000</p>
 
 </a>
 
@@ -728,7 +679,7 @@ Not Produced. Crafted.
 <h2>
 RUDOHAGE
 </h2>
-
+    
 </div>
 
 <div class="review-section">
@@ -857,7 +808,7 @@ document.getElementById(
 container.innerHTML="";
 
 const q = query(
-collection(db,"product1_reviews"),
+collection(db,"product2_reviews"),
 orderBy("date","desc")
 );
 
@@ -925,7 +876,7 @@ return;
 await addDoc(
 collection(
 db,
-"product1_reviews"
+"product2_reviews"
 ),
 {
 name,
@@ -955,7 +906,7 @@ async()=>{
 if(navigator.share){
 
 await navigator.share({
-title:"Inferno Core",
+title:"Crimson Orbit",
 url:window.location.href
 });
 
@@ -972,6 +923,7 @@ alert("Link copied");
 });
 
 loadReviews();
+
 </script>
 
 <script>
