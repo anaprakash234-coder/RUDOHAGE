@@ -10,4 +10,5 @@
 emailjs.init("LHQqnBtxsnUhQWinY");document.getElementById("contactForm").addEventListener("submit",function(e){e.preventDefault();const t=document.getElementById("sendBtn");t.innerHTML="SENDING...";emailjs.send("service_1k374tr","template_589kggl",{name:document.getElementById("name").value,email:document.getElementById("email").value,subject:document.getElementById("subject").value,message:document.getElementById("message").value}).then(function(){t.innerHTML="MESSAGE SENT";document.getElementById("contactForm").reset();setTimeout(()=>{t.innerHTML="SEND MESSAGE"},3000)}).catch(function(e){console.log(e);t.innerHTML="TRY AGAIN"})});
 document.addEventListener('contextmenu',e=>e.preventDefault());document.onkeydown=function(e){if(e.keyCode==123||(e.ctrlKey&&e.shiftKey&&(e.keyCode==73||e.keyCode==74))||(e.ctrlKey&&e.keyCode==85))return false;};
 </script>
+<script src="/toast.js"></script>
 </body></html>
