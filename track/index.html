@@ -9,4 +9,5 @@ if(t.exists()){const r=t.data();document.getElementById("result").innerHTML=`<h2
 else document.getElementById("result").innerHTML='<h2 style="font-size:2rem;font-family:\'Cormorant Garamond\'">Order Not Found</h2><p style="opacity:0.6">Please check your Order ID again</p>'}catch(o){document.getElementById("result").innerHTML='<h2>Connection Error</h2>';console.error(o)}});</script>
 <script>function copyOrderId(e){navigator.clipboard.writeText(e);alert("Order ID Copied!")}document.addEventListener("contextmenu",e=>e.preventDefault());
 document.onkeydown=function(e){if(123==e.keyCode||e.ctrlKey&&e.shiftKey&&(73==e.keyCode||74==e.keyCode)||e.ctrlKey&&85==e.keyCode)return!1};</script>
+  <script src="/toast.js"></script>
 </body></html>
