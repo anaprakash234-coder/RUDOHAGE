@@ -11,4 +11,5 @@ const app=initializeApp(firebaseConfig),db=getFirestore(app);async function load
 document.getElementById("publishBtn").addEventListener("click",async()=>{const e=document.getElementById("reviewName").value,t=document.getElementById("reviewText").value,n=parseInt(document.getElementById("reviewRating").value);if(!e||!t){alert("Please fill all fields");return}await addDoc(collection(db,"reviews"),{name:e,review:t,rating:n,date:Date.now()});document.getElementById("reviewName").value="";document.getElementById("reviewText").value="";loadReviews()});loadReviews();
 </script>
 <script>async function shareWebsite(){const e={title:"RUDOHAGE",text:"Check out RUDOHAGE handcrafted luxury collection.",url:"https://rudohage.com/"};if(navigator.share)await navigator.share(e);else{navigator.clipboard.writeText(e.url);alert("Website link copied!")}}document.addEventListener("contextmenu",e=>e.preventDefault());document.onkeydown=function(e){if(123==e.keyCode||e.ctrlKey&&e.shiftKey&&(73==e.keyCode||74==e.keyCode)||e.ctrlKey&&85==e.keyCode)return!1};</script>
+<script src="/toast.js"></script>
 </body></html>
