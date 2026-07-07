@@ -99,10 +99,10 @@ nav a:hover::after{width:100%;}
 .modal-content h2{font-family:'Cormorant Garamond',serif;font-size:2.8rem;margin-bottom:.5rem;}
 .modal-content p{opacity:.8;line-height:1.6;margin-bottom:1.5rem;}
 .modal-price{font-size:1.2rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:1.5rem;opacity:.9;}
-.buy-btn{padding:.9rem 2.6rem;border-radius:50px;border:none;background:white;color:black;font-size:.85rem;letter-spacing:3px;text-transform:uppercase;transition:.3s;}
+.buy-btn{padding:.75rem 1.8rem;border-radius:50px;border:none;background:white;color:black;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;transition:.3s;white-space:nowrap;}
 .buy-btn:hover{transform:translateY(-4px);background:var(--accent);color:white;}
 .modal-buttons{display:flex;gap:10px;margin-top:20px;flex-wrap:nowrap;}
-.view-btn{padding:.9rem 2.6rem;border-radius:50px;background:white;color:black;text-decoration:none;font-size:.85rem;letter-spacing:3px;text-transform:uppercase;border:none;transition:.3s;}
+.view-btn{padding:.75rem 1.8rem;border-radius:50px;background:white;color:black;text-decoration:none;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;border:none;transition:.3s;white-space:nowrap;}
 .view-btn:hover{transform:translateY(-4px);background:var(--accent);color:white;}
 .modal-close{position:absolute;top:25px;right:35px;font-size:2rem;color:white;cursor:pointer;opacity:.8;transition:.3s;}
 .modal-close:hover{opacity:1;transform:rotate(10deg);}
@@ -162,11 +162,10 @@ header{padding:1rem 1.5rem!important}nav{display:none!important}.menu-btn{displa
 .catalog{grid-template-columns:1fr 1fr!important;gap:12px!important;padding:2rem 4%!important}.trust-container{grid-template-columns:1fr!important}.contact-box{flex-direction:column!important;align-items:center}.contact-item{width:90%!important;margin-bottom:15px}
 .catalog-overlay{padding:1rem!important}.catalog-overlay h3{font-size:1.2rem!important}.catalog-overlay p{font-size:.75rem!important}
 .modal{padding:10px!important}.modal-box{width:95%!important;max-width:380px!important;max-height:90vh!important;overflow:hidden!important;border-radius:28px!important}
-.modal-img{height:280px!important;width:100%!important;object-fit:cover!important}.modal-content{padding:20px!important}.modal-content h2{font-size:1.2rem!important;margin-bottom:8px!important}.modal-price{font-size:1.8rem!important;margin-bottom:10px!important}
-.modal-content p{font-size:.95rem!important;line-height:1.5!important;margin-bottom:15px!important;display:-webkit-box;-webkit-line-clamp:4;line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
-.modal-buttons{display:flex;gap:8px}.buy-btn,.view-btn{flex:1;padding:12px 8px!important;font-size:.72rem!important;letter-spacing:1px!important}
+.modal-img{height:280px!important;width:100%!important;object-fit:cover!important}.modal-content{padding:20px!important}.modal-content h2{font-size:1.2rem!important;margin-bottom:8px!important}.modal-price{font-size:1.5rem!important;margin-bottom:10px!important}
+.modal-content p{font-size:.9rem!important;line-height:1.5!important;margin-bottom:15px!important;display:-webkit-box;-webkit-line-clamp:4;line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.modal-buttons{display:flex;gap:8px!important}.buy-btn,.view-btn{flex:1!important;padding:10px 8px!important;font-size:.7rem!important;letter-spacing:1px!important;white-space:nowrap!important}
 .modal-close{top:12px!important;right:15px!important;font-size:28px!important}
-.buy-btn,.view-btn{flex:1;white-space:nowrap;font-size:.7rem;letter-spacing:1px}
 .catalog-title{text-align:left;padding:3rem 5% 1rem}.catalog-title::after{margin:10px 0 0 0}
 .footer-links{grid-template-columns:1fr;gap:35px}.support-float{bottom:20px;left:20px}
 .brand{font-size:1.6rem}.header-actions{gap:.6rem}.profile-avatar{width:32px;height:32px;font-size:.9rem}}
@@ -294,7 +293,7 @@ header{padding:1rem 1.5rem!important}nav{display:none!important}.menu-btn{displa
   <h2>Client Impressions</h2>
   <div id="homeReviews"><div class="review-box"><p>Loading reviews...</p></div></div>
   <br>
-  <a href="/reviews/" class="hero-btn">View All Reviews</a>
+  <a href="/reviews.html" class="hero-btn">View All Reviews</a>
 </section>
 
 <section class="contact" id="contact">
@@ -315,14 +314,14 @@ header{padding:1rem 1.5rem!important}nav{display:none!important}.menu-btn{displa
     </div>
     <div class="footer-column">
       <h4>Company</h4>
-      <a href="/contact/">Contact</a>
-      <a href="/shipping/">Shipping Policy</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/shipping.html">Shipping Policy</a>
     </div>
     <div class="footer-column">
       <h4>Legal</h4>
-      <a href="/terms-policy/">Terms & Conditions</a>
-      <a href="/refund-policy/">Refund Policy</a>
-      <a href="/privacy-policy/">Privacy Policy</a>
+      <a href="/terms-policy.html">Terms & Conditions</a>
+      <a href="/refund-policy.html">Refund Policy</a>
+      <a href="/privacy-policy.html">Privacy Policy</a>
     </div>
     <div class="footer-column">
       <h4>Follow</h4>
@@ -337,7 +336,7 @@ header{padding:1rem 1.5rem!important}nav{display:none!important}.menu-btn{displa
 
 <a href="https://wa.me/918295462556?text=Hello,%20I%20am%20interested%20in%20your%20products!" target="_blank" class="whatsapp-lux"><i class="fab fa-whatsapp"></i></a>
 <button class="share-btn" onclick="shareWebsite()"><i class="fas fa-share-alt"></i></button>
-<a href="/support/" class="support-float"><i class="fa-solid fa-headset"></i><span>SUPPORT</span></a>
+<a href="/support.html" class="support-float"><i class="fa-solid fa-headset"></i><span>SUPPORT</span></a>
 
 <script>
 function openMenu(){document.getElementById("mobileMenu").classList.add("active");}
