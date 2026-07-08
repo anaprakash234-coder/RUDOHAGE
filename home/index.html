@@ -1,1694 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="google-site-verification" content="E9HdU3mGgu-ln2Gd5hTtOqdVo1MkFGliSd4xaBigUuY" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="p:domain_verify" content="e370bebac7c569b395a642e8656430b5"/>
-  <link rel="icon" type="image/png" href="logo.png">
-  <title>RUDOHAGE | The Anatomy of Craft</title>
-
-   <!-- SEO Meta Tags -->
-  <meta name="description" content="RUDOHAGE – Handcrafted luxury goods designed with precision. Explore premium materials, artisanal craftsmanship, and limited edition pieces.">
-  <meta name="keywords" content="RUDOHAGE, luxury, handcrafted, leather, artisan, premium, boutique, limited edition">
-  <meta name="author" content="Anand Prakash">
-  <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://rudohage.com/">
-
-  <!-- Open Graph / Social Media -->
-  <meta property="og:title" content="RUDOHAGE | The Anatomy of Craft">
-  <meta property="og:description" content="Discover the luxury of handcrafted precision. Limited edition premium products by RUDOHAGE.">
-  <meta property="og:image" content="https://rudohage.com/logo.png">
-  <meta property="og:url" content="https://rudohage.com/">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="RUDOHAGE | The Anatomy of Craft">
-  <meta name="twitter:description" content="Discover the luxury of handcrafted precision. Limited edition premium products by RUDOHAGE.">
-  <meta name="twitter:image" content="https://rudohage.com/logo.png">
-
-  <!-- Favicon -->
- <link rel="icon" type="image/x-icon" href="favicon.ico">
+<meta charset="UTF-8"/>
+<meta name="google-site-verification" content="E9HdU3mGgu-ln2Gd5hTtOqdVo1MkFGliSd4xaBigUuY"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="p:domain_verify" content="e370bebac7c569b395a642e8656430b5"/>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-
 <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png">
-  
-
-  <link rel="manifest" href="manifest.json">
+<link rel="manifest" href="manifest.json">
+<title>RUDOHAGE | The Anatomy of Craft</title>
+<meta name="description" content="RUDOHAGE – Handcrafted luxury goods designed with precision. Explore premium materials, artisanal craftsmanship, and limited edition pieces.">
+<meta name="keywords" content="RUDOHAGE, luxury, handcrafted, leather, artisan, premium, boutique, limited edition">
+<meta name="author" content="Anand Prakash">
+<meta name="robots" content="index, follow">
 <meta name="theme-color" content="#a48b74">
-
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Manrope:wght@300;500;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Manrope:wght@300;500;700&display=swap');
-
-    :root {
-      --bg: #f6f2ea;
-      --text: #111111;
-      --muted: rgba(20, 20, 20, 0.65);
-      --accent: #a48b74;
-      --glass: rgba(255, 255, 255, 0.55);
-      --shadow: rgba(0, 0, 0, 0.18);
-      --radius: 22px;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Manrope', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-   
-    /* =============== CINEMATIC LIGHT =============== */
-    .glow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 20% 20%, rgba(164,139,116,0.25), transparent 60%),
-                  radial-gradient(circle at 80% 80%, rgba(0,0,0,0.15), transparent 70%);
-      z-index: 0;
-      pointer-events: none;
-      animation: glowMove 8s infinite alternate ease-in-out;
-    }
-
-    @keyframes glowMove {
-      0% { transform: translateX(-20px) translateY(-20px); }
-      100% { transform: translateX(40px) translateY(30px); }
-    }
-
-    /* =============== NOISE =============== */
-    .noise {
-      position: fixed;
-      inset: 0;
-      background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-      opacity: 0.08;
-      z-index: 1;
-      pointer-events: none;
-      mix-blend-mode: multiply;
-    }
-
-    /* =============== HEADER =============== */
-    header {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      padding: 1.3rem 4rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(246, 242, 234, 0.55);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid rgba(0,0,0,0.08);
-    }
-
-    .brand {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.1rem;
-      font-weight: 600;
-      letter-spacing: -1px;
-    }
-
-    nav {
-      display: flex;
-      gap: 2rem;
-      font-size: 0.85rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      align-items: center;
-    }
-
-    nav a {
-      text-decoration: none;
-      color: var(--text);
-      transition: 0.3s;
-      position: relative;
-    }
-
-    nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -6px;
-      width: 0%;
-      height: 2px;
-      background: var(--text);
-      transition: 0.3s;
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    /* MOBILE MENU */
-    .menu-btn {
-      font-size: 1.3rem;
-      cursor: pointer;
-    }
-
-    .mobile-menu {
-      position: fixed;
-      top: 0;
-      right: -100%;
-      width: 280px;
-      height: 100vh;
-      background: rgba(15,15,15,0.95);
-      backdrop-filter: blur(20px);
-      z-index: 9999;
-      padding: 3rem 2rem;
-      transition: 0.5s;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .mobile-menu a {
-      color: white;
-      text-decoration: none;
-      font-size: 1rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-    }
-
-    .mobile-menu.active {
-      right: 0;
-    }
-
-    .close-btn {
-      color: white;
-      font-size: 1.6rem;
-      align-self: flex-end;
-      cursor: pointer;
-    }
-
-    /* =============== HERO =============== */
-    .hero {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      padding-top: 90px;
-      z-index: 5;
-    }
-
-    .hero-text {
-      text-align: center;
-      z-index: 5;
-      max-width: 950px;
-      padding: 0 1rem;
-    }
-
-    .hero-text h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 6.5vw;
-      line-height: 0.9;
-      font-style: italic;
-    }
-
-    .hero-text p {
-      margin-top: 1.5rem;
-      font-size: 0.9rem;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .hero-btn {
-      margin-top: 2.8rem;
-      padding: 0.9rem 2.8rem;
-      border-radius: 50px;
-      border: 1px solid rgba(0,0,0,0.2);
-      background: transparent;
-      font-size: 0.85rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      transition: 0.35s;
-    }
-
-    .hero-btn:hover {
-      background: var(--text);
-      color: var(--bg);
-      transform: translateY(-4px);
-    }
-
-    /* =============== SCROLL REVEAL =============== */
-    .reveal {
-      opacity: 0;
-      transform: translateY(60px);
-      transition: 1s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* =============== AUTOPSY SECTION =============== */
-    .exhibit-section {
-      padding: 7rem 10%;
-      min-height: 100vh;
-      position: relative;
-      z-index: 10;
-    }
-
-    .section-header {
-      margin-bottom: 3rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
-    }
-
-    .section-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
-      font-weight: 600;
-    }
-
-    .section-header p {
-      margin-top: 0.7rem;
-      font-size: 1rem;
-      color: var(--muted);
-    }
-
-    /* =============== EXPLODER =============== */
-    .exploded-view-container {
-      position: relative;
-      height: 650px;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      perspective: 1400px;
-    }
-
-    .layer {
-      position: absolute;
-      width: 440px;
-      height: 440px;
-      background-size: cover;
-      background-position: center;
-      border-radius: 50%;
-      box-shadow: 0 25px 70px rgba(0,0,0,0.18);
-      opacity: 1 !important;
-      display: block; 
-      pointer-events: auto;
-      transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
-      filter: saturate(1.1) contrast(1.05);
-      z-index: 10; 
-    }
-
-    .layer.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .layer-1 { z-index: 1; background-image: url('https://rudohage.com/image/fire-clock-7.png'); }
-    .layer-2 { z-index: 2; background-image: url('https://rudohage.com/image/fire-clock-6.png'); }
-    .layer-3 { z-index: 3; background-image: url('https://rudohage.com/image/fire-clock-5.png'); }
-    .layer-4 { z-index: 4; background-image: url('https://rudohage.com/image/fire-clock-4.png'); }
-
-    /* INFO BOX */
-    .layer-info {
-      position: absolute;
-      right: 5%;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 360px;
-      padding: 2rem;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(16px);
-      border-radius: var(--radius);
-      box-shadow: 0 25px 80px rgba(0,0,0,0.15);
-      opacity: 1 !important; 
-      transition: 0.6s;
-      z-index: 20;
-    }
-
-    .layer-info.show { opacity: 1; }
-
-    .layer-info h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.2rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .layer-info p {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      color: var(--muted);
-    }
-
-    /* CONTROLS */
-    .controls {
-      position: absolute;
-      bottom: 45px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      z-index: 30;
-    }
-
-    .layer-btn {
-      padding: 0.75rem 1.8rem;
-      border-radius: 50px;
-      background: rgba(255,255,255,0.55);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(0,0,0,0.2);
-      font-size: 0.75rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      transition: 0.3s;
-    }
-
-    .layer-btn:hover {
-      background: var(--text);
-      color: var(--bg);
-      transform: translateY(-3px);
-    }
-
-    .layer-btn.active-btn {
-      background: var(--text);
-      color: var(--bg);
-    }
-
-    /* =============== CATALOG =============== */
-    .catalog {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      padding: 6rem 10%;
-      position: relative;
-      z-index: 10;
-    }
-
-    .catalog-item {
-      aspect-ratio: 1;
-      position: relative;
-      overflow: hidden;
-      border-radius: var(--radius);
-      box-shadow: 0 20px 70px rgba(0,0,0,0.15);
-      transform-style: preserve-3d;
-      transition: 0.4s;
-    }
-
-  .catalog-img { 
-    width: 100%;
-    height: 100%; 
-    object-fit: cover;
-    transition: 0.6s ease;
-    filter: contrast(1.05);
+<link rel="canonical" href="https://rudohage.com/">
+<meta property="og:title" content="RUDOHAGE | The Anatomy of Craft">
+<meta property="og:description" content="Discover the luxury of handcrafted precision. Limited edition premium products by RUDOHAGE.">
+<meta property="og:image" content="https://rudohage.com/logo.png">
+<meta property="og:url" content="https://rudohage.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="RUDOHAGE | The Anatomy of Craft">
+<meta name="twitter:description" content="Discover the luxury of handcrafted precision. Limited edition premium products by RUDOHAGE.">
+<meta name="twitter:image" content="https://rudohage.com/logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Manrope:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"RUDOHAGE","url":"https://rudohage.com","logo":"https://rudohage.com/logo.png","sameAs":["https://instagram.com/rudohage"]}</script>
+<style>
+:root{
+--bg:#f6f2ea;--text:#111111;--muted:rgba(20,20,20,.6);--accent:#a48b74;--radius:22px;
+--fs-xs:.68rem;--fs-sm:.78rem;--fs-base:.88rem;--fs-md:.92rem;--fs-lg:1rem;--fs-xl:1.1rem;--fs-2xl:1.3rem;--fs-3xl:1.7rem;--fs-hero:3.8vw;
 }
-
-    .catalog-item:hover .catalog-img {
-      transform: scale(1.12);
-    }
-
-    .catalog-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      padding: 2.2rem;
-      background: linear-gradient(transparent, rgba(0,0,0,0.9));
-      color: white;
-      opacity: 0;
-      transition: 0.4s;
-    }
-
-    .catalog-item:hover .catalog-overlay {
-      opacity: 1;
-    }
-
-    .catalog-overlay h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem;
-    }
-
-    .catalog-overlay p {
-      margin-top: 0.4rem;
-      opacity: 0.85;
-      font-size: 1rem;
-    }
-
-    /* =============== MODAL =============== */
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.9);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999999;
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.4s;
-      padding: 2rem;
-    }
-
-    .modal.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-   .modal-box {
-  width: 900px;
-  max-width: 95%;
-  max-height: 90vh;
-  overflow-y: auto;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(18px);
-  border-radius: var(--radius);
-  box-shadow: 0 40px 120px rgba(0,0,0,0.4);
-  transform: scale(0.9);
-  transition: 0.4s;
-}
-
-    .modal.active .modal-box {
-      transform: scale(1);
-    }
-
-    .modal-img {
-      width: 100%;
-      height: 420px;
-      object-fit: cover;
-    }
-
-    .modal-content {
-      padding: 2rem;
-      color: white;
-    }
-
-    .modal-content h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.8rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .modal-content p {
-      opacity: 0.8;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
-
-    .modal-price {
-      font-size: 1.2rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      opacity: 0.9;
-    }
-
-    .buy-btn {
-      padding: 0.9rem 2.6rem;
-      border-radius: 50px;
-      border: none;
-      background: white;
-      color: black;
-      font-size: 0.85rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      transition: 0.3s;
-    }
-
-    .buy-btn:hover {
-      transform: translateY(-4px);
-      background: var(--accent);
-      color: white;
-    }
-
-  .modal-buttons{
-  display:flex;
-  gap:10px;
-  margin-top:20px;
-  flex-wrap:nowrap;
-}
-
-.view-btn{
-  padding:0.9rem 2.6rem;
-  border-radius:50px;
-  background:white;
-  color:black;
-  text-decoration:none;
-  font-size:0.85rem;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  border:none;
-  transition:0.3s;
-}
-
-.view-btn:hover{
-  transform:translateY(-4px);
-  background:var(--accent);
-  color:white;
-}
-
-    .modal-close {
-      position: absolute;
-      top: 25px;
-      right: 35px;
-      font-size: 2rem;
-      color: white;
-      cursor: pointer;
-      opacity: 0.8;
-      transition: 0.3s;
-    }
-
-    .modal-close:hover {
-      opacity: 1;
-      transform: rotate(10deg);
-    }
-
-    /* =============== FOOTER =============== */
-    footer {
-      padding: 4rem 10%;
-      border-top: 1px solid rgba(0,0,0,0.1);
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.9rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      position: relative;
-      z-index: 10;
-    }
-
-    /* =============== RESPONSIVE =============== */
-    @media (max-width: 950px) {
-      header { padding: 1rem 2rem; }
-      nav { display: none; }
-
-      .hero-text h1 { font-size: 14vw; }
-
-      .exploded-view-container { height: 480px; }
-
-      .layer { width: 260px; height: 260px; }
-
-      .layer-info {
-        position: relative;
-        top: auto;
-        right: auto;
-        transform: none;
-        width: 100%;
-        margin-top: 2rem;
-      }
-
-      .catalog {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    body {
-  cursor: default !important;
-}
-
-.about, .why, .reviews {
-  padding: 60px 20px;
-  text-align: center;
-  background: #f9f9f9;
-}
-
-.about h2, .why h2, .reviews h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
-}
-
-.about p {
-  max-width: 600px;
-  margin: auto;
-  line-height: 1.6;
-  color: #555;
-}
-
-.why-box {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-top: 20px;
-}
-
-.why-box div {
-  background: white;
-  padding: 15px 25px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-.review-box {
-  background: white;
-  padding: 20px;
-  margin: 15px auto;
-  max-width: 400px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-}
-
-/* CONTACT SECTION */
-.contact {
-  padding: 6rem 10%;
-  text-align: center;
-  background: #f9f9f9;
-}
-
-.contact h2 {
-  font-size: 2.2rem;
-  margin-bottom: 1rem;
-}
-
-.contact-sub {
-  color: #777;
-  margin-bottom: 3rem;
-}
-
-.contact-box {
-  display: flex;
-  justify-content: center;
-  gap: 3rem;
-  flex-wrap: wrap;
-}
-
-.contact-item {
-  background: white;
-  padding: 2rem;
-  border-radius: 10px;
-  width: 250px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-}
-
-.contact-item h3 {
-  margin-bottom: 1rem;
-}
-
-.contact-item a {
-  color: black;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.contact-item a:hover {
-  text-decoration: underline;
-}
-
-/* TRUST SECTION */
-
-.trust {
-  padding: 5rem 10%;
-  background: #ffffff;
-}
-
-.trust-container {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 25px;
-}
-
-.trust-box {
-  background: rgba(255,255,255,0.6);
-  backdrop-filter: blur(10px);
-  padding: 35px 25px;
-  text-align: center;
-  border-radius: 16px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-  transition: 0.3s;
-}
-
-.trust-box:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-}
-
-.trust-box i {
-  font-size: 30px;
-  margin-bottom: 15px;
-  color: #a48b74;
-}
-
-.trust-box h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.trust-box p {
-  font-size: 14px;
-  color: #666;
-}
-
-/* MOBILE */
-
-@media (max-width: 900px) {
-
-.trust-container {
-  grid-template-columns: repeat(2,1fr);
-}
-
-}
-
-@media (max-width: 500px) { 
-
-.trust-container {
-  grid-template-columns: 1fr;
-}
-
-}
-
- 
-/* =============== MOBILE LUXURY =============== */
-@media (max-width: 768px) {
-  header { padding: 1rem 1.5rem !important; }
-  nav { display: none !important; }
-  .menu-btn { display: block !important; }
-  .hero-text h1 { font-size: 13vw !important; }
-  
-  /* EXPLODED VIEW BECOMES A SELECTOR STACK */
-  .exploded-view-container { 
-    height: auto !important; 
-    min-height: 600px;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    padding-top: 30px !important;
-    gap: 0 !important;
-  }
-  
-  /* HIDE ALL LAYERS BY DEFAULT ON MOBILE */
-  .layer { 
-    display: none !important; /* Hidden by default */
-    width: 260px !important; 
-    height: 260px !important; 
-    position: relative !important;
-    margin-bottom: 25px !important;
-    
-    /* BUT WHEN ACTIVE - SHOW AS PERFECT CIRCLE */
-    border-radius: 50% !important; 
-    box-shadow: 0 20px 60px rgba(0,0,0,0.25) !important;
-    transform: none !important;
-    opacity: 1 !important;
-    z-index: 10 !important;
-  }
-  
-  /* ONLY SHOW THE ACTIVE LAYER */
-  .layer.active { 
-    display: block !important;
-  }
-
-  .layer-info { 
-    position: relative !important; 
-    top: auto !important; 
-    left: auto !important;
-    transform: none !important; 
-    width: 85% !important; 
-    margin: 10px auto 30px auto !important; 
-    z-index: 20 !important; 
-    opacity: 1 !important; 
-    background: rgba(255,255,255,0.95) !important;
-  }
-  
-  .controls { 
-    bottom: auto !important; 
-    margin-top: 25px !important;
-    position: relative !important;
-    z-index: 30 !important; 
-    width: 100%;
-    justify-content: center;
-  }
-  
-  /* Better button spacing */
-  .layer-btn {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.7rem;
-  }
-
-  .catalog { 
-  grid-template-columns: 1fr 1fr !important;
-  gap: 12px !important;
-  padding: 2rem 4% !important;
-}
-  .trust-container { grid-template-columns: 1fr !important; }
-  .contact-box { flex-direction: column !important; align-items: center; }
-  .contact-item { width: 90% !important; margin-bottom: 15px; }
-}
-
-    .catalog-overlay{
-  padding: 1rem !important;
-}
-
-.catalog-overlay h3{
-  font-size: 1.2rem !important;
-}
-
-.catalog-overlay p{
-  font-size: 0.75rem !important;
-}
-    
-    .buy-btn,
-.view-btn{
-  flex:1;
-  white-space:nowrap;
-  font-size:0.7rem;
-  letter-spacing:1px;
-}
-
-    @media (max-width:768px){
-
-  .modal-buttons{
-    display:flex;
-    gap:8px;
-  }
-
-  .buy-btn,
-  .view-btn{
-    flex:1;
-    padding:12px 8px;
-    font-size:0.7rem;
-    letter-spacing:1px;
-    text-align:center;
-    white-space:nowrap;
-  }
-
-}
-
-.my-orders-nav{
-padding:12px 22px;
-border-radius:50px;
-border:1px solid rgba(0,0,0,.15);
-text-decoration:none;
-color:#111;
-font-size:.75rem;
-letter-spacing:2px;
-text-transform:uppercase;
-transition:.3s;
-}
-
-.my-orders-nav:hover{
-background:#111;
-color:#fff;
-}
-
-/* =============== HEADER ACTIONS (LOGIN / PROFILE) =============== */
-.header-actions{
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.profile-link{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-}
-
-.profile-avatar{
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--accent), #8a715c);
-  color: white;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  border: 2px solid rgba(255,255,255,.6);
-  box-shadow: 0 6px 18px rgba(164,139,116,.4);
-  transition: .3s;
-  flex-shrink: 0;
-}
-
-.profile-avatar:hover{
-  transform: translateY(-2px);
-}
-
-.profile-avatar img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-@media (max-width: 480px){
-  .brand{ font-size: 1.6rem; }
-
-  .header-actions{ gap: .6rem; }
-
-  .header-actions .my-orders-nav{
-    padding: 8px 14px;
-    font-size: .65rem;
-  }
-
-  .profile-avatar{
-    width: 32px;
-    height: 32px;
-    font-size: .9rem;
-  }
-}
-
-    .catalog-title{
-  padding: 4rem 10% 1.5rem 10%;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem;
-  font-weight: 600;
-  text-align: left;
-  color: var(--text);
-  position: relative;
-
-  /* START STATE (hidden luxury feel) */
-  opacity: 0;
-  transform: translateY(30px);
-  letter-spacing: 3px;
-  filter: blur(6px);
-
-  animation: luxuryReveal 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  animation-delay: 0.2s;
-}
-
-/* underline luxury animation */
-.catalog-title::after{
-  content: "";
-  display: block;
-  width: 0;
-  height: 2px;
-  background: var(--accent);
-  margin-top: 10px;
-  animation: lineGrow 1.2s ease forwards;
-  animation-delay: 0.8s;
-}
-
-/* TEXT REVEAL */
-@keyframes luxuryReveal{
-  0%{
-    opacity: 0;
-    transform: translateY(40px);
-    filter: blur(10px);
-    letter-spacing: 6px;
-  }
-  100%{
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-    letter-spacing: 1px;
-  }
-}
-
-/* LINE DRAW EFFECT */
-@keyframes lineGrow{
-  from{
-    width: 0;
-  }
-  to{
-    width: 90px;
-  }
-}
-
-/* MOBILE RESPONSIVE */
-@media (max-width: 768px){
-  .catalog-title{
-    text-align: left;
-    padding: 3rem 5% 1rem 5%;
-  }
-
-  .catalog-title::after{
-    margin: 10px 0 0 0; /* LEFT ALIGN FIX */
-  }
-}
-
-
-    .footer{
-padding:80px 8% 40px;
-border-top:1px solid rgba(0,0,0,.08);
-}
-
-.footer-links{
-display:grid;
-grid-template-columns:2fr 1fr 1fr 1fr;
-gap:50px;
-margin-bottom:50px;
-}
-
-.footer-brand h3{
-font-family:'Cormorant Garamond',serif;
-font-size:2rem;
-margin-bottom:15px;
-}
-
-.footer-brand p{
-line-height:1.9;
-opacity:.7;
-max-width:320px;
-}
-
-.footer-column h4{
-margin-bottom:20px;
-font-size:14px;
-letter-spacing:2px;
-text-transform:uppercase;
-}
-
-.footer-column a{
-display:block;
-margin-bottom:12px;
-text-decoration:none;
-color:#111;
-opacity:.75;
-transition:.3s;
-}
-
-.footer-column a:hover{
-opacity:1;
-transform:translateX(4px);
-}
-
-.footer-bottom{
-margin-top:40px;
-padding-top:30px;
-border-top:1px solid rgba(0,0,0,.08);
-text-align:center;
-opacity:.6;
-font-size:14px;
-}
-
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Manrope',sans-serif;font-size:var(--fs-base);background:var(--bg);color:var(--text);overflow-x:hidden;cursor:default!important;line-height:1.6;}
+html{scroll-behavior:smooth;}
+.glow{position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle at 20% 20%,rgba(164,139,116,.25),transparent 60%),radial-gradient(circle at 80% 80%,rgba(0,0,0,.15),transparent 70%);z-index:0;pointer-events:none;animation:glowMove 8s infinite alternate ease-in-out;}
+@keyframes glowMove{0%{transform:translateX(-20px) translateY(-20px)}100%{transform:translateX(40px) translateY(30px)}}
+.noise{position:fixed;inset:0;background-image:url("https://grainy-gradients.vercel.app/noise.svg");opacity:.08;z-index:1;pointer-events:none;mix-blend-mode:multiply;}
+header{position:fixed;width:100%;top:0;z-index:1000;padding:1.2rem 4rem;display:flex;justify-content:space-between;align-items:center;background:rgba(246,242,234,.55);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,.08);}
+.brand{font-family:'Cormorant Garamond',serif;font-size:var(--fs-3xl);font-weight:600;letter-spacing:-1px;}
+nav{display:flex;gap:2rem;font-size:var(--fs-xs);letter-spacing:2.5px;text-transform:uppercase;align-items:center;}
+nav a{text-decoration:none;color:var(--text);transition:.3s;position:relative;}
+nav a::after{content:"";position:absolute;left:0;bottom:-5px;width:0%;height:1.5px;background:var(--text);transition:.3s;}
+nav a:hover::after{width:100%;}
+.menu-btn{font-size:1.25rem;cursor:pointer;}
+.mobile-menu{position:fixed;top:0;right:-100%;width:280px;height:100vh;background:rgba(15,15,15,.95);backdrop-filter:blur(20px);z-index:9999;padding:3rem 2rem;transition:.5s;display:flex;flex-direction:column;gap:2rem;}
+.mobile-menu a{color:white;text-decoration:none;font-size:var(--fs-sm);letter-spacing:2.5px;text-transform:uppercase;}
+.mobile-menu.active{right:0;}
+.close-btn{color:white;font-size:1.5rem;align-self:flex-end;cursor:pointer;}
+.header-actions{display:flex;align-items:center;gap:1rem;}
+.profile-link{display:flex;align-items:center;justify-content:center;text-decoration:none;}
+.profile-avatar{width:38px;height:38px;border-radius:50%;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent),#8a715c);color:white;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;border:2px solid rgba(255,255,255,.6);box-shadow:0 6px 18px rgba(164,139,116,.4);transition:.3s;flex-shrink:0;}
+.profile-avatar:hover{transform:translateY(-2px);}
+.profile-avatar img{width:100%;height:100%;object-fit:cover;}
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:90px;z-index:5;}
+.hero-text{text-align:center;z-index:5;max-width:950px;padding:0 1rem;}
+.hero-text h1{font-family:'Cormorant Garamond',serif;font-size:var(--fs-hero);line-height:.92;font-style:italic;letter-spacing:-1px;}
+.hero-text p{margin-top:1.4rem;font-size:var(--fs-xs);letter-spacing:3.5px;text-transform:uppercase;color:var(--muted);}
+.hero-btn{margin-top:2.6rem;padding:.85rem 2.6rem;border-radius:50px;border:1px solid rgba(0,0,0,.2);background:transparent;font-size:var(--fs-xs);letter-spacing:2.5px;text-transform:uppercase;transition:.35s;cursor:pointer;}
+.hero-btn:hover{background:var(--text);color:var(--bg);transform:translateY(-4px);}
+.reveal{opacity:0;transform:translateY(60px);transition:1s cubic-bezier(.22,1,.36,1);}
+.reveal.active{opacity:1;transform:translateY(0);}
+.exhibit-section{padding:7rem 10%;min-height:100vh;position:relative;z-index:10;}
+.section-header{margin-bottom:3rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(0,0,0,.1);}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;}
+.section-header p{margin-top:.6rem;font-size:var(--fs-sm);color:var(--muted);line-height:1.7;}
+.exploded-view-container{position:relative;height:650px;width:100%;display:flex;justify-content:center;align-items:center;perspective:1400px;}
+.layer{position:absolute;width:440px;height:440px;background-size:cover;background-position:center;border-radius:50%;box-shadow:0 25px 70px rgba(0,0,0,.18);opacity:1!important;display:block;pointer-events:auto;transition:all 1s cubic-bezier(.22,1,.36,1);filter:saturate(1.1) contrast(1.05);z-index:10;}
+.layer.active{opacity:1;pointer-events:auto;}
+.layer-1{z-index:1;background-image:url('https://rudohage.com/image/fire-clock-7.png');}
+.layer-2{z-index:2;background-image:url('https://rudohage.com/image/fire-clock-6.png');}
+.layer-3{z-index:3;background-image:url('https://rudohage.com/image/fire-clock-5.png');}
+.layer-4{z-index:4;background-image:url('https://rudohage.com/image/fire-clock-4.png');}
+.layer-info{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:340px;padding:1.8rem;background:rgba(255,255,255,.88);backdrop-filter:blur(16px);border-radius:var(--radius);box-shadow:0 25px 80px rgba(0,0,0,.12);opacity:1!important;transition:.6s;z-index:20;}
+.layer-info h3{font-family:'Cormorant Garamond',serif;font-size:var(--fs-xl);margin-bottom:.7rem;}
+.layer-info p{font-size:var(--fs-sm);line-height:1.7;color:var(--muted);}
+.controls{position:absolute;bottom:45px;left:50%;transform:translateX(-50%);display:flex;gap:.7rem;flex-wrap:wrap;justify-content:center;z-index:30;}
+.layer-btn{padding:.65rem 1.6rem;border-radius:50px;background:rgba(255,255,255,.55);backdrop-filter:blur(10px);border:1px solid rgba(0,0,0,.18);font-size:var(--fs-xs);letter-spacing:2px;text-transform:uppercase;transition:.3s;cursor:pointer;}
+.layer-btn:hover{background:var(--text);color:var(--bg);transform:translateY(-3px);}
+.layer-btn.active-btn{background:var(--text);color:var(--bg);}
+.catalog{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:6rem 10%;position:relative;z-index:10;}
+.catalog-item{aspect-ratio:1;position:relative;overflow:hidden;border-radius:var(--radius);box-shadow:0 20px 70px rgba(0,0,0,.15);transform-style:preserve-3d;transition:.4s;}
+.catalog-img{width:100%;height:100%;object-fit:cover;transition:.6s ease;filter:contrast(1.05);}
+.catalog-item:hover .catalog-img{transform:scale(1.1);}
+.catalog-overlay{position:absolute;bottom:0;left:0;width:100%;padding:1.8rem;background:linear-gradient(transparent,rgba(0,0,0,.88));color:white;opacity:0;transition:.4s;}
+.catalog-item:hover .catalog-overlay{opacity:1;}
+.catalog-overlay h3{font-family:'Cormorant Garamond',serif;font-size:1.1rem;line-height:1.1;}
+.catalog-overlay p{margin-top:.3rem;opacity:.8;font-size:var(--fs-sm);}
+.product-price{margin-top:8px;font-size:var(--fs-sm);font-weight:600;letter-spacing:1px;color:#fff;display:inline-block;padding:5px 12px;background:rgba(255,255,255,.12);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);border-radius:50px;}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.88);display:flex;justify-content:center;align-items:center;z-index:999999;opacity:0;pointer-events:none;transition:.4s;padding:2rem;}
+.modal.active{opacity:1;pointer-events:auto;}
+.modal-box{width:860px;max-width:95%;max-height:90vh;overflow-y:auto;background:rgba(255,255,255,.07);backdrop-filter:blur(20px);border-radius:var(--radius);box-shadow:0 40px 120px rgba(0,0,0,.4);transform:scale(.92);transition:.4s;}
+.modal.active .modal-box{transform:scale(1);}
+.modal-img{width:100%;height:400px;object-fit:cover;}
+.modal-content{padding:1.8rem 2rem;color:white;}
+.modal-content h2{font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:.4rem;line-height:1.1;}
+.modal-content p{opacity:.78;line-height:1.7;margin-bottom:1.2rem;font-size:var(--fs-sm);}
+.modal-price{font-size:var(--fs-lg);letter-spacing:1.5px;margin-bottom:1.2rem;opacity:.92;font-weight:600;}
+.modal-buttons{display:flex;gap:10px;margin-top:1.2rem;flex-wrap:nowrap;}
+.buy-btn,.view-btn{padding:.7rem 1.6rem;border-radius:50px;border:none;background:white;color:black;font-size:var(--fs-xs);letter-spacing:1.5px;text-transform:uppercase;transition:.3s;white-space:nowrap;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;}
+.buy-btn:hover,.view-btn:hover{transform:translateY(-3px);background:var(--accent);color:white;}
+.modal-close{position:absolute;top:22px;right:30px;font-size:1.8rem;color:white;cursor:pointer;opacity:.75;transition:.3s;}
+.modal-close:hover{opacity:1;transform:rotate(10deg);}
+.catalog-title{padding:4rem 10% 1.2rem;font-family:'Cormorant Garamond',serif;font-size:var(--fs-2xl);font-weight:600;text-align:left;color:var(--text);opacity:0;transform:translateY(30px);filter:blur(6px);animation:luxuryReveal 1.4s cubic-bezier(.22,1,.36,1) forwards;animation-delay:.2s;}
+.catalog-title::after{content:"";display:block;width:0;height:2px;background:var(--accent);margin-top:10px;animation:lineGrow 1.2s ease forwards;animation-delay:.8s;}
+@keyframes luxuryReveal{0%{opacity:0;transform:translateY(40px);filter:blur(10px)}100%{opacity:1;transform:translateY(0);filter:blur(0)}}
+@keyframes lineGrow{from{width:0}to{width:80px}}
+.trust{padding:5rem 10%;background:#fff;}
+.trust-container{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.trust-box{background:rgba(255,255,255,.6);backdrop-filter:blur(10px);padding:32px 22px;text-align:center;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.07);transition:.3s;}
+.trust-box:hover{transform:translateY(-6px);box-shadow:0 20px 55px rgba(0,0,0,.1);}
+.trust-box i{font-size:26px;margin-bottom:12px;color:var(--accent);}
+.trust-box h3{font-size:var(--fs-md);margin-bottom:8px;font-weight:600;}
+.trust-box p{font-size:var(--fs-sm);color:#666;line-height:1.6;}
+.about,.why,.reviews{padding:55px 20px;text-align:center;background:#f9f9f9;}
+.about h2,.why h2,.reviews h2{font-family:'Cormorant Garamond',serif;font-size:var(--fs-3xl);margin-bottom:18px;}
+.about p{max-width:600px;margin:auto;line-height:1.8;color:#555;font-size:var(--fs-base);}
+.why-box{display:flex;justify-content:center;flex-wrap:wrap;gap:16px;margin-top:22px;}
+.why-box div{background:white;padding:12px 22px;border-radius:8px;box-shadow:0 4px 10px rgba(0,0,0,.05);font-size:var(--fs-sm);}
+.review-box{background:white;padding:22px;margin:14px auto;max-width:420px;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,.06);font-size:var(--fs-sm);line-height:1.7;}
+.contact{padding:6rem 10%;text-align:center;background:#f9f9f9;}
+.contact h2{font-family:'Cormorant Garamond',serif;font-size:var(--fs-3xl);margin-bottom:.8rem;}
+.contact-sub{color:#777;margin-bottom:3rem;font-size:var(--fs-base);}
+.contact-box{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;}
+.contact-item{background:white;padding:1.8rem;border-radius:12px;width:240px;box-shadow:0 5px 20px rgba(0,0,0,.05);}
+.contact-item h3{margin-bottom:.8rem;font-size:var(--fs-md);font-weight:600;}
+.contact-item a{color:black;text-decoration:none;font-size:var(--fs-sm);}
+.contact-item a:hover{text-decoration:underline;}
+.footer{padding:75px 8% 38px;border-top:1px solid rgba(0,0,0,.08);}
+.footer-links{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:45px;margin-bottom:45px;}
+.footer-brand h3{font-family:'Cormorant Garamond',serif;font-size:var(--fs-2xl);margin-bottom:14px;}
+.footer-brand p{line-height:1.85;opacity:.65;max-width:300px;font-size:var(--fs-sm);}
+.footer-column h4{margin-bottom:18px;font-size:var(--fs-xs);letter-spacing:2px;text-transform:uppercase;}
+.footer-column a{display:block;margin-bottom:10px;text-decoration:none;color:#111;opacity:.7;font-size:var(--fs-sm);transition:.3s;}
+.footer-column a:hover{opacity:1;transform:translateX(3px);}
+.footer-bottom{margin-top:38px;padding-top:28px;border-top:1px solid rgba(0,0,0,.08);text-align:center;opacity:.55;font-size:var(--fs-xs);}
+.support-float{position:fixed;bottom:25px;left:25px;height:56px;width:56px;background:rgba(0,0,0,.75);backdrop-filter:blur(12px);color:#fff;text-decoration:none;border-radius:50px;display:flex;align-items:center;overflow:hidden;z-index:9999;box-shadow:0 10px 25px rgba(0,0,0,.25);animation:introSupport 4s ease forwards;}
+.support-float i{font-size:20px;min-width:56px;text-align:center;}
+.support-float span{white-space:nowrap;font-size:var(--fs-xs);font-weight:600;letter-spacing:2px;opacity:0;animation:textFade 4s ease forwards;}
+.support-float:hover{width:165px;transition:.4s;}
+.support-float:hover span{opacity:1;transition:.4s;}
+@keyframes introSupport{0%{width:56px}25%{width:165px}75%{width:165px}100%{width:56px}}
+@keyframes textFade{0%{opacity:0}25%{opacity:1}75%{opacity:1}100%{opacity:0}}
+.whatsapp-lux{position:fixed;bottom:30px;right:30px;width:62px;height:62px;background:rgba(37,211,102,.85);border-radius:50%;display:flex;justify-content:center;align-items:center;color:white;font-size:30px;z-index:10000;box-shadow:0 8px 25px rgba(0,0,0,.2);backdrop-filter:blur(6px);transition:all .3s ease;}
+.whatsapp-lux:hover{transform:scale(1.12);background:rgba(37,211,102,1);}
+.share-btn{position:fixed;bottom:108px;right:34px;width:52px;height:52px;border-radius:50%;border:none;background:#111;color:white;font-size:20px;cursor:pointer;z-index:10000;box-shadow:0 8px 25px rgba(0,0,0,.22);transition:.3s;}
+.share-btn:hover{transform:scale(1.1);}
+@media(max-width:950px){header{padding:1rem 2rem}nav{display:none}.hero-text h1{font-size:8vw}.exploded-view-container{height:480px}.layer{width:260px;height:260px}.layer-info{position:relative;top:auto;right:auto;transform:none;width:100%;margin-top:2rem}.catalog{grid-template-columns:1fr}}
+@media(max-width:900px){.trust-container{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:768px){
-
-.footer-links{
-grid-template-columns:1fr;
-gap:35px;
-}
-
-}
-
-    .support-float{
-position:fixed;
-bottom:25px;
-left:25px;
-
-height:58px;
-width:58px;
-
-background:rgba(0,0,0,.75);
-backdrop-filter:blur(12px);
-
-color:#fff;
-text-decoration:none;
-
-border-radius:50px;
-
-display:flex;
-align-items:center;
-
-overflow:hidden;
-
-z-index:9999;
-
-box-shadow:0 10px 25px rgba(0,0,0,.25);
-
-animation:introSupport 4s ease forwards;
-}
-
-.support-float i{
-font-size:22px;
-min-width:58px;
-text-align:center;
-}
-
-.support-float span{
-white-space:nowrap;
-font-size:13px;
-font-weight:600;
-letter-spacing:2px;
-opacity:0;
-}
-
-@keyframes introSupport{
-
-0%{
-width:58px;
-}
-
-25%{
-width:170px;
-}
-
-75%{
-width:170px;
-}
-
-100%{
-width:58px;
-}
-
-}
-
-@keyframes textFade{
-
-0%{
-opacity:0;
-}
-
-25%{
-opacity:1;
-}
-
-75%{
-opacity:1;
-}
-
-100%{
-opacity:0;
-}
-
-}
-
-.support-float span{
-animation:textFade 4s ease forwards;
-}
-
-.support-float:hover{
-width:170px;
-transition:.4s;
-}
-
-.support-float:hover span{
-opacity:1;
-transition:.4s;
-}
-
-@media(max-width:768px){
-
-.support-float{
-bottom:20px;
-left:20px;
-}
-
-}
-
-    /* ===== MOBILE MODAL FIX ===== */
-
-@media (max-width:768px){
-
-.modal{
-  padding:10px !important;
-}
-
-.modal-box{
-
-  width:95% !important;
-  max-width:380px !important;
-
-  max-height:90vh !important;
-
-  overflow:hidden !important;
-
-  border-radius:28px !important;
-}
-
-/* IMAGE SMALLER */
-
-.modal-img{
-
-  height:280px !important;
-  width:100% !important;
-
-  object-fit:cover !important;
-}
-
-/* CONTENT COMPACT */
-
-.modal-content{
-
-  padding:20px !important;
-}
-
-.modal-content h2{
-
-  font-size:1.2rem !important;
-  margin-bottom:8px !important;
-}
-
-.modal-price{
-
-  font-size:1.8rem !important;
-  margin-bottom:10px !important;
-}
-
-.modal-content p{
-
-  font-size:0.95rem !important;
-  line-height:1.5 !important;
-
-  margin-bottom:15px !important;
-
-  display:-webkit-box;
-  -webkit-line-clamp:4;
-  line-clamp:4;
-  -webkit-box-orient:vertical;
-  overflow:hidden;
-}
-
-/* BUTTONS */
-
-.modal-buttons{
-  display:flex;
-  gap:10px;
-}
-
-.buy-btn,
-.view-btn{
-
-  flex:1;
-
-  padding:12px 8px !important;
-
-  font-size:.72rem !important;
-
-  letter-spacing:1px !important;
-}
-
-/* CLOSE BUTTON */
-
-.modal-close{
-
-  top:12px !important;
-  right:15px !important;
-
-  font-size:28px !important;
-}
-
-}
-
-    .product-price{
-  margin-top:8px;
-  font-size:1rem;
-  font-weight:600;
-  letter-spacing:1px;
-  color:#fff;
-
-  display:inline-block;
-  padding:6px 14px;
-
-  background:rgba(255,255,255,.12);
-  backdrop-filter:blur(10px);
-
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:50px;
-}
-
-  </style>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "RUDOHAGE",
-  "url": "https://rudohage.com",
-  "logo": "https://rudohage.com/logo.png",
-  "sameAs": [
-    "https://instagram.com/rudohage"
-  ]
-}
-</script>
-  
+header{padding:1rem 1.5rem!important}nav{display:none!important}.menu-btn{display:block!important}
+.hero-text h1{font-size:7.5vw!important}
+.exploded-view-container{height:auto!important;min-height:580px;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;align-items:center!important;padding-top:30px!important;gap:0!important}
+.layer{display:none!important;width:250px!important;height:250px!important;position:relative!important;margin-bottom:22px!important;border-radius:50%!important;transform:none!important;opacity:1!important;z-index:10!important}
+.layer.active{display:block!important}
+.layer-info{position:relative!important;top:auto!important;left:auto!important;transform:none!important;width:85%!important;margin:10px auto 28px!important;z-index:20!important;opacity:1!important;background:rgba(255,255,255,.95)!important}
+.layer-info h3{font-size:1.3rem!important}.layer-info p{font-size:.82rem!important}
+.controls{bottom:auto!important;margin-top:22px!important;position:relative!important;z-index:30!important;width:100%;justify-content:center}
+.layer-btn{padding:.55rem 1.1rem!important;font-size:.68rem!important}
+.catalog{grid-template-columns:1fr 1fr!important;gap:12px!important;padding:2rem 4%!important}
+.catalog-overlay{padding:.9rem!important}.catalog-overlay h3{font-size:1.1rem!important}.catalog-overlay p{font-size:.72rem!important}
+.trust-container{grid-template-columns:1fr!important}
+.contact-box{flex-direction:column!important;align-items:center}.contact-item{width:90%!important;margin-bottom:14px}
+.modal{padding:10px!important}
+.modal-box{width:95%!important;max-width:380px!important;max-height:90vh!important;overflow:hidden!important;border-radius:24px!important}
+.modal-img{height:240px!important;object-fit:cover!important}
+.modal-content{padding:16px 18px!important}
+.modal-content h2{font-size:1.4rem!important;margin-bottom:6px!important}
+.modal-price{font-size:1rem!important;margin-bottom:8px!important;letter-spacing:1px!important}
+.modal-content p{font-size:.82rem!important;line-height:1.55!important;margin-bottom:12px!important;display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.modal-buttons{gap:8px!important}
+.buy-btn,.view-btn{flex:1!important;padding:9px 10px!important;font-size:.68rem!important;letter-spacing:1px!important;justify-content:center!important}
+.modal-close{top:12px!important;right:14px!important;font-size:1.6rem!important}
+.catalog-title{text-align:left;padding:2.5rem 5% 1rem;font-size:1.1rem!important}.catalog-title::after{margin:8px 0 0}
+.footer-links{grid-template-columns:1fr;gap:32px}.footer-brand p{max-width:100%}
+.support-float{bottom:20px;left:20px}
+.brand{font-size:1.2rem!important}.header-actions{gap:.6rem}.profile-avatar{width:30px;height:30px;font-size:.85rem}}
+@media(max-width:500px){.trust-container{grid-template-columns:1fr}.hero-text h1{font-size:9vw!important}}
+</style>
 </head>
-
 <body>
-  <div class="glow"></div>
-  <div class="noise"></div>
+<div class="glow"></div>
+<div class="noise"></div>
 
- <header>
+<header>
   <div class="brand">RUDOHAGE</div>
-
   <nav>
     <a href="#autopsy">Autopsy</a>
     <a href="#catalog">Catalog</a>
     <a href="#contact">Contact</a>
   </nav>
-
   <div class="header-actions">
     <a href="/login/" class="profile-link" id="profileWrap">
-      <div class="profile-avatar" id="headerAvatar">
-        <i class="fas fa-user"></i>
-      </div>
+      <div class="profile-avatar" id="headerAvatar"><i class="fas fa-user"></i></div>
     </a>
   </div>
-
   <i class="fas fa-bars menu-btn" onclick="openMenu()"></i>
 </header>
 
-  <!-- MOBILE MENU -->
-  <div class="mobile-menu" id="mobileMenu">
-    <i class="fas fa-times close-btn" onclick="closeMenu()"></i>
-    <a href="#autopsy" onclick="closeMenu()">Autopsy</a>
-    <a href="#catalog" onclick="closeMenu()">Catalog</a>
-    <a href="#contact" onclick="closeMenu()">Contact</a>
-
-    <a href="/login/" id="mobileLoginBtn" onclick="closeMenu()">Login</a>
-    <a href="/myaccount/" id="mobileAccountBtn" style="display:none;" onclick="closeMenu()">My Account</a>
-    <a href="#" id="mobileLogoutBtn" style="display:none;">Logout</a>
-  </div>
-
-  <!-- HERO -->
-  <section class="hero reveal">
-    <div class="hero-text">
-      <h1>Un Made.</h1>
-      <p>Luxury craftsmanship dissected with precision</p>
-
-      <button class="hero-btn" onclick="document.getElementById('autopsy').scrollIntoView({behavior:'smooth'})">
-        Explore Craft
-      </button>
-    </div>
-  </section>
-
-  <!-- AUTOPSY -->
-  <section class="exhibit-section reveal" id="autopsy">
-    <div class="section-header">
-      <h2 class="section-title">UPCOMING PROJECTS....</h2>
-      <p>Rotate the object. Select layers. Observe perfection.THE PROJECTS ARE COMING SOON.....</p>
-    </div>
-
-    <div class="exploded-view-container" id="exploder">
-
-      <div class="layer layer-1 active" data-title="model 1"
-        data-info="pure wood crafted material. with precision crafted by hand.full polished and colured with red using spray."></div>
-
-      <div class="layer layer-2" data-title="model 2"
-        data-info="pure wood hand crafted material. in a round four layer towards the needle of the clock that's look asthetic."></div>
-
-      <div class="layer layer-3" data-title="model 3"
-        data-info="pure hand crafted material. i used the heat flames to colour of thre top thats look more satisfying."></div>
-
-      <div class="layer layer-4" data-title="model 4"
-        data-info="pure hand crafted material. like a boll with anger that's blew flames lile a heat wave."></div>
-
-      <div class="layer-info show" id="layerInfo">
-        <h3 id="infoTitle">THE COLLECTION.</h3>
-        <p id="infoText">An exploded view of handcrafted components.</p>
-      </div>
-
-      <div class="controls">
-        <button class="layer-btn" onclick="setLayer(event,1)">model 1</button>
-        <button class="layer-btn" onclick="setLayer(event,2)">model 2</button>
-        <button class="layer-btn" onclick="setLayer(event,3)">model 3</button>
-        <button class="layer-btn" onclick="setLayer(event,4)">model 4</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- CATALOG -->
-
-  <div class="catalog-title">
-  Our Products
+<div class="mobile-menu" id="mobileMenu">
+  <i class="fas fa-times close-btn" onclick="closeMenu()"></i>
+  <a href="#autopsy" onclick="closeMenu()">Autopsy</a>
+  <a href="#catalog" onclick="closeMenu()">Catalog</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="/login/" id="mobileLoginBtn" onclick="closeMenu()">Login</a>
+  <a href="/myaccount/" id="mobileAccountBtn" style="display:none;" onclick="closeMenu()">My Account</a>
+  <a href="#" id="mobileLogoutBtn" style="display:none;">Logout</a>
 </div>
 
-  <section class="catalog reveal" id="catalog">
-    <div class="catalog-item" 
-    onclick="openModal(
-      'Inferno core',
-      '₹3000',
-      'https://rudohage.com/image/fire-clock-1.png',
-      'pure wood crafted material. with precision crafted by hand.full polished and colured with red using spray.'
-      )">
-      <img src="https://rudohage.com/image/fire-clock-1.png" class="catalog-img">
-    <div class="catalog-overlay">
-  <h3>Inferno Core</h3>
-  <p>Piece No. 01</p>
-
-  <div class="product-price">
-    ₹3000
+<section class="hero reveal">
+  <div class="hero-text">
+    <h1>Un Made.</h1>
+    <p>Luxury craftsmanship dissected with precision</p>
+    <button class="hero-btn" onclick="document.getElementById('autopsy').scrollIntoView({behavior:'smooth'})">Explore Craft</button>
   </div>
-</div>
-      </div>
-    </div>
+</section>
 
-     <div class="catalog-item" 
-    onclick="openModal(
-      'Crimson Orbit',
-      '₹2500',
-      'https://rudohage.com/image/fire-clock-2.png',
-      'pure wood hand crafted material. in a round four layer towards the needle of the clock thats look asthetic.'
-  )">   
+<section class="exhibit-section reveal" id="autopsy">
+  <div class="section-header">
+    <h2 class="section-title">UPCOMING PROJECTS....</h2>
+    <p>Rotate the object. Select layers. Observe perfection. THE PROJECTS ARE COMING SOON.....</p>
+  </div>
+  <div class="exploded-view-container" id="exploder">
+    <div class="layer layer-1 active" data-title="model 1" data-info="pure wood crafted material. with precision crafted by hand.full polished and colured with red using spray."></div>
+    <div class="layer layer-2" data-title="model 2" data-info="pure wood hand crafted material. in a round four layer towards the needle of the clock that's look asthetic."></div>
+    <div class="layer layer-3" data-title="model 3" data-info="pure hand crafted material. i used the heat flames to colour of thre top thats look more satisfying."></div>
+    <div class="layer layer-4" data-title="model 4" data-info="pure hand crafted material. like a boll with anger that's blew flames lile a heat wave."></div>
+    <div class="layer-info show" id="layerInfo">
+      <h3 id="infoTitle">THE COLLECTION.</h3>
+      <p id="infoText">An exploded view of handcrafted components.</p>
+    </div>
+    <div class="controls">
+      <button class="layer-btn" onclick="setLayer(event,1)">model 1</button>
+      <button class="layer-btn" onclick="setLayer(event,2)">model 2</button>
+      <button class="layer-btn" onclick="setLayer(event,3)">model 3</button>
+      <button class="layer-btn" onclick="setLayer(event,4)">model 4</button>
+    </div>
+  </div>
+</section>
+
+<div class="catalog-title">Our Products</div>
+
+<section class="catalog reveal" id="catalog">
+  <div class="catalog-item" onclick="openModal('Inferno core','₹3000','https://rudohage.com/image/fire-clock-1.png','pure wood crafted material. with precision crafted by hand.full polished and colured with red using spray.')">
+    <img src="https://rudohage.com/image/fire-clock-1.png" class="catalog-img">
+    <div class="catalog-overlay"><h3>Inferno Core</h3><p>Piece No. 01</p><div class="product-price">₹3000</div></div>
+  </div>
+  <div class="catalog-item" onclick="openModal('Crimson Orbit','₹2500','https://rudohage.com/image/fire-clock-2.png','pure wood hand crafted material. in a round four layer towards the needle of the clock thats look asthetic.')">
     <img src="https://rudohage.com/image/fire-clock-2.png" class="catalog-img">
-       <div class="catalog-overlay">
-  <h3>Crimson Orbit</h3>
-  <p>Piece No. 02</p>
-
-  <div class="product-price">
-    ₹2500
+    <div class="catalog-overlay"><h3>Crimson Orbit</h3><p>Piece No. 02</p><div class="product-price">₹2500</div></div>
   </div>
-</div>
-      </div>
-    </div>
-
-    <div class="catalog-item"
-    onclick="openModal(
-    'Ember Crown',
-    '₹2500',
-    'https://rudohage.com/image/fire-clock-3.png',
-   'pure hand crafted material. i used the heat flames to colour of three top thats look more satisfying.'
-  )">
-      <img src="https://rudohage.com/image/fire-clock-3.png" class="catalog-img">
-              <div class="catalog-overlay">
-  <h3>Ember Crown</h3>
-  <p>Piece No. 03</p>
-
-  <div class="product-price">
-    ₹2500
+  <div class="catalog-item" onclick="openModal('Ember Crown','₹2500','https://rudohage.com/image/fire-clock-3.png','pure hand crafted material. i used the heat flames to colour of three top thats look more satisfying.')">
+    <img src="https://rudohage.com/image/fire-clock-3.png" class="catalog-img">
+    <div class="catalog-overlay"><h3>Ember Crown</h3><p>Piece No. 03</p><div class="product-price">₹2500</div></div>
   </div>
-</div>
-      </div>
-    </div>
-  </section>
+</section>
 
-  <!-- TRUST SECTION -->
 <section class="trust">
   <div class="trust-container">
-
-    <div class="trust-box">
-      <i class="fas fa-truck"></i>
-      <h3>Free Shipping</h3>
-      <p>Fast and secure delivery across India.</p>
-    </div>
-
-    <div class="trust-box">
-      <i class="fas fa-lock"></i>
-      <h3>Secure Order</h3>
-      <p>Direct WhatsApp ordering with safe communication.</p>
-    </div>
-
-    <div class="trust-box">
-      <i class="fas fa-hammer"></i>
-      <h3>Handcrafted</h3>
-      <p>Each product is handmade with premium materials.</p>
-    </div>
-
-    <div class="trust-box">
-      <i class="fas fa-box-open"></i>
-      <h3>Limited Stock</h3>
-      <p>Exclusive pieces produced in small batches.</p>
-    </div>
-
+    <div class="trust-box"><i class="fas fa-truck"></i><h3>Free Shipping</h3><p>Fast and secure delivery across India.</p></div>
+    <div class="trust-box"><i class="fas fa-lock"></i><h3>Secure Order</h3><p>Direct WhatsApp ordering with safe communication.</p></div>
+    <div class="trust-box"><i class="fas fa-hammer"></i><h3>Handcrafted</h3><p>Each product is handmade with premium materials.</p></div>
+    <div class="trust-box"><i class="fas fa-box-open"></i><h3>Limited Stock</h3><p>Exclusive pieces produced in small batches.</p></div>
   </div>
 </section>
 
-  <!-- MODAL -->
-  <div class="modal" id="modal">
-    <i class="fas fa-times modal-close" onclick="closeModal()"></i>
-    <div class="modal-box">
-      <img id="modalImg" class="modal-img" src="">
-      <div class="modal-content">
-        <h2 id="modalTitle"></h2>
-        <div class="modal-price" id="modalPrice"></div>
-        <p id="modalDesc"></p>
+<div class="modal" id="modal">
+  <i class="fas fa-times modal-close" onclick="closeModal()"></i>
+  <div class="modal-box">
+    <img id="modalImg" class="modal-img" src="">
+    <div class="modal-content">
+      <h2 id="modalTitle"></h2>
+      <div class="modal-price" id="modalPrice"></div>
+      <p id="modalDesc"></p>
+      <div class="modal-buttons">
         <button class="buy-btn" id="buyBtn">QUERIES</button>
-        <a href="#" class="view-btn" id="viewBtn">
-  View Product
-</a>
+        <a href="#" class="view-btn" id="viewBtn">View Product</a>
       </div>
     </div>
   </div>
+</div>
 
-  <script>
-      // CUSTOM CURSOR
-    const cursor = document.getElementById("cursor");
-    const outline = document.getElementById("cursorOutline");
-
-    document.addEventListener("mousemove", (e) => {
-      cursor.style.top = e.clientY + "px";
-      cursor.style.left = e.clientX + "px";
-      outline.style.top = e.clientY + "px";
-      outline.style.left = e.clientX + "px";
-    });
-
-    // MOBILE MENU
-    function openMenu() {
-      document.getElementById("mobileMenu").classList.add("active");
-    }
-    function closeMenu() {
-      document.getElementById("mobileMenu").classList.remove("active");
-    }
-
-    // SCROLL REVEAL
-    function revealOnScroll() {
-      document.querySelectorAll(".reveal").forEach(el => {
-        const rect = el.getBoundingClientRect().top;
-        if (rect < window.innerHeight - 120) {
-          el.classList.add("active");
-        }
-      });
-    }
-    window.addEventListener("scroll", revealOnScroll);
-    revealOnScroll();
-
-            // LAYER SYSTEM
-    const layers = document.querySelectorAll(".layer");
-    const btns = document.querySelectorAll(".layer-btn");
-
-    const infoTitle = document.getElementById("infoTitle");
-    const infoText = document.getElementById("infoText");
-
-    function setLayer(event, layerIndex) {
-      btns.forEach(b => b.classList.remove("active-btn"));
-      event.target.classList.add("active-btn");
-
-      layers.forEach((layer, index) => {
-        layer.classList.remove("active");
-
-        if (layerIndex === 0) {
-          layer.classList.add("active");
-          layer.style.transition = "all 0.8s cubic-bezier(0.22, 1, 0.36, 1)";
-          layer.style.transform = `translateZ(${index * 150}px) scale(${0.55 + index * 0.05})`;
-          infoTitle.innerText = "The Anatomy";
-          infoText.innerText = "An exploded view of handcrafted components.";
-        } else {
-          if (index + 1 === layerIndex) {
-            layer.classList.add("active");
-            layer.style.transition = "all 0.8s cubic-bezier(0.22, 1, 0.36, 1)";
-            layer.style.transform = `translateZ(0px) scale(1)`;
-            infoTitle.innerText = layer.getAttribute("data-title");
-            infoText.innerText = layer.getAttribute("data-info");
-          } else {
-            layer.style.transform = `translateZ(-800px) scale(0.05)`;
-          }
-        }
-      });
-    }
-
-    // Initialize (Show first model on load for mobile)
-    if (window.innerWidth < 768) {
-      setLayer({ target: btns[0] }, 1);
-    }
-
-     setTimeout(() => {
-      // Check if screen width is less than 768px (Mobile/Tablet)
-      if (window.innerWidth < 768) {
-        
-        // MOBILE FIX: Only show Model 1, hide the rest
-        layers.forEach((layer, index) => {
-          if (index === 0) {
-            // Show first layer
-            layer.classList.add("active");
-            layer.style.transform = "translateZ(0px) scale(1)";
-            layer.style.display = "block"; 
-          } else {
-            // Hide other layers
-            layer.classList.remove("active");
-            layer.style.display = "none";
-          }
-        });
-        
-      } else {
-        // DESKTOP: Run the original 3D exploded view animation
-        layers.forEach((layer, index) => {
-          layer.classList.add("active");
-          layer.style.transform = `translateZ(${index * 150}px) scale(${0.82 + index * 0.05})`;
-        });
-      }
-    }, 500);
-      
-    const container = document.getElementById("exploder");
-    container.addEventListener("mousemove", (e) => {
-      const x = (window.innerWidth / 2 - e.pageX) / 40;
-      const y = (window.innerHeight / 2 - e.pageY) / 40;
-
-      layers.forEach(layer => {
-        if (layer.classList.contains("active")) {
-          layer.style.transform += ` rotateY(${x}deg) rotateX(${y}deg)`;
-        }
-      });
-    });
-
-   function openModal(title, price, img, desc) {
-
-  document.getElementById("modal").classList.add("active");
-  document.getElementById("modalTitle").innerText = title;
-  document.getElementById("modalPrice").innerText = price;
-  document.getElementById("modalImg").src = img;
-  document.getElementById("modalDesc").innerText = desc;
-
-const message = `Hello, I HAVE A QUERIES ON  ${title} for ${price}.`;
-const phoneNumber = "918295462556";
-
-document.getElementById("buyBtn").onclick = function() {
-  window.open(
-    `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,
-    "_blank"
-  );
-};
-
-  let productPage = "/product1/";
-
-  if(title === "Crimson Orbit"){
-    productPage = "/product2/";
-  }
-
-  if(title === "Ember Crown"){
-    productPage = "/product3/";
-  }
-
-  document.getElementById("viewBtn").href = productPage;
-}
-
-function closeModal() {
-  document.getElementById("modal").classList.remove("active");
-}
-  </script>
-
-<!-- ABOUT SECTION -->
 <section class="about">
   <h2>About Our Brand</h2>
-<p>
-RUDOHAGE was founded by Anand Prakash with a single belief — true luxury lies in precision.
-Every piece is handcrafted, layer by layer, using premium materials and time-honored techniques.
-We do not mass produce. We create legacy pieces designed to age beautifully..
-</p>
+  <p>RUDOHAGE was founded by Anand Prakash with a single belief — true luxury lies in precision. Every piece is handcrafted, layer by layer, using premium materials and time-honored techniques. We do not mass produce. We create legacy pieces designed to age beautifully.</p>
 </section>
 
-<!-- WHY CHOOSE US -->
 <section class="why">
   <h2>Why Choose Us</h2>
   <div class="why-box">
@@ -1699,384 +301,127 @@ We do not mass produce. We create legacy pieces designed to age beautifully..
   </div>
 </section>
 
-<!-- REVIEWS -->
 <section class="reviews">
-
-<h2>Client Impressions</h2>
-
-<div id="homeReviews">
-
-<div class="review-box">
-<p>Loading reviews...</p>
-</div>
-
-</div>
-
-<br>
-
-<a href="/reviews/" class="hero-btn">
-View All Reviews
-</a>
-
+  <h2>Client Impressions</h2>
+  <div id="homeReviews"><div class="review-box"><p>Loading reviews...</p></div></div>
+  <br>
+  <a href="/reviews/" class="hero-btn">View All Reviews</a>
 </section>
-  
-<!-- CONTACT SECTION -->
+
 <section class="contact" id="contact">
   <h2>Contact Us</h2>
   <p class="contact-sub">Have questions or custom order requests? Reach out to us.</p>
-
   <div class="contact-box">
-    <div class="contact-item">
-      <h3>Email</h3>
-      <p>
-        <a href="mailto:rudohage.com12@gmail.com">
-         rudohage.com12@gmail.com 
-        </a>
-      </p>
-    </div>
-
-    <div class="contact-item">
-      <h3>Business Hours</h3>
-      <p>Mon - Sat : 10 AM - 7 PM</p>
-    </div>
-
-    <div class="contact-item">
-      <h3>WhatsApp</h3>
-      <p>
-        <a href="https://wa.me/918295462556" target="_blank">
-          Chat on WhatsApp
-        </a>
-      </p>
-    </div>
+    <div class="contact-item"><h3>Email</h3><p><a href="mailto:rudohage.com12@gmail.com">rudohage.com12@gmail.com</a></p></div>
+    <div class="contact-item"><h3>Business Hours</h3><p>Mon - Sat : 10 AM - 7 PM</p></div>
+    <div class="contact-item"><h3>WhatsApp</h3><p><a href="https://wa.me/918295462556" target="_blank">Chat on WhatsApp</a></p></div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
- <div class="footer-links">
-
-<div class="footer-brand">
-
-<h3>RUDOHAGE</h3>
-
-<p>
-Handcrafted luxury creations designed for collectors and individuals who value uniqueness.
-</p>
-
-</div>
-
-<div class="footer-column">
-
-<h4>Company</h4>
-
-<a href="/contact/">Contact</a>
-<a href="/shipping/">Shipping Policy</a>
-
-</div>
-
-<div class="footer-column">
-
-<h4>Legal</h4>
-
-<a href="/terms-policy/">Terms & Conditions</a>
-<a href="/refund-policy/">Refund Policy</a>
-<a href="/privacy-policy/">Privacy Policy</a>
-
-</div>
-
-<div class="footer-column">
-
-<h4>Follow</h4>
-
-<a href="https://www.instagram.com/rudohage.com12" target="_blank">
-<i class="fab fa-instagram"></i> Instagram
-</a>
-
-<a href="https://www.facebook.com/profile.php?id=61591394732556" target="_blank">
-<i class="fab fa-facebook-f"></i> Facebook
-</a>
-
-<a href="https://threads.net/" target="_blank">
-<i class="fab fa-threads"></i> Threads
-</a>
-
-<a href="https://in.pinterest.com/rudohagecom/" target="_blank">
-<i class="fab fa-pinterest"></i> Pinterest
-</a>
-
-</div>
-
-</div>
-
-<div class="footer-bottom">
-
-<p>
-© 2026 RUDOHAGE. All Rights Reserved.founder ANAND PRAKASH
-</p>
-
-</div>
+<footer class="footer">
+  <div class="footer-links">
+    <div class="footer-brand">
+      <h3>RUDOHAGE</h3>
+      <p>Handcrafted luxury creations designed for collectors and individuals who value uniqueness.</p>
+    </div>
+    <div class="footer-column">
+      <h4>Company</h4>
+      <a href="/contact/">Contact</a>
+      <a href="/shipping/">Shipping Policy</a>
+    </div>
+    <div class="footer-column">
+      <h4>Legal</h4>
+      <a href="/terms-policy/">Terms & Conditions</a>
+      <a href="/refund-policy/">Refund Policy</a>
+      <a href="/privacy-policy/">Privacy Policy</a>
+    </div>
+    <div class="footer-column">
+      <h4>Follow</h4>
+      <a href="https://www.instagram.com/rudohage.com12" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+      <a href="https://www.facebook.com/profile.php?id=61591394732556" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+      <a href="https://threads.net/" target="_blank"><i class="fab fa-threads"></i> Threads</a>
+      <a href="https://in.pinterest.com/rudohagecom/" target="_blank"><i class="fab fa-pinterest"></i> Pinterest</a>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 RUDOHAGE. All Rights Reserved. Founder ANAND PRAKASH</p></div>
 </footer>
 
-<!-- LUXURY STYLE WHATSAPP BUTTON -->
-<a href="https://wa.me/918295462556?text=Hello,%20I%20am%20interested%20in%20your%20products!" 
-   target="_blank" 
-   class="whatsapp-lux">
-   <i class="fab fa-whatsapp"></i>
-</a>
+<a href="https://wa.me/918295462556?text=Hello,%20I%20am%20interested%20in%20your%20products!" target="_blank" class="whatsapp-lux"><i class="fab fa-whatsapp"></i></a>
+<button class="share-btn" onclick="shareWebsite()"><i class="fas fa-share-alt"></i></button>
+<a href="/support/" class="support-float"><i class="fa-solid fa-headset"></i><span>SUPPORT</span></a>
 
-  <button class="share-btn" onclick="shareWebsite()">
-  <i class="fas fa-share-alt"></i>
-</button>
-
-<style>
-.whatsapp-lux {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 65px;
-  height: 65px;
-  background: rgba(37, 211, 102, 0.85); /* WhatsApp green with transparency */
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 32px;
-  z-index: 10000;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-  backdrop-filter: blur(6px);
-  transition: all 0.3s ease;
+<script>
+function openMenu(){document.getElementById("mobileMenu").classList.add("active");}
+function closeMenu(){document.getElementById("mobileMenu").classList.remove("active");}
+function revealOnScroll(){document.querySelectorAll(".reveal").forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-120)el.classList.add("active");});}
+window.addEventListener("scroll",revealOnScroll);revealOnScroll();
+const layers=document.querySelectorAll(".layer"),btns=document.querySelectorAll(".layer-btn");
+const infoTitle=document.getElementById("infoTitle"),infoText=document.getElementById("infoText");
+function setLayer(event,layerIndex){
+  btns.forEach(b=>b.classList.remove("active-btn"));event.target.classList.add("active-btn");
+  layers.forEach((layer,index)=>{
+    layer.classList.remove("active");
+    if(layerIndex===0){layer.classList.add("active");layer.style.transition="all 0.8s cubic-bezier(0.22,1,0.36,1)";layer.style.transform=`translateZ(${index*150}px) scale(${0.55+index*0.05})`;infoTitle.innerText="The Anatomy";infoText.innerText="An exploded view of handcrafted components.";}
+    else{if(index+1===layerIndex){layer.classList.add("active");layer.style.transition="all 0.8s cubic-bezier(0.22,1,0.36,1)";layer.style.transform="translateZ(0px) scale(1)";infoTitle.innerText=layer.getAttribute("data-title");infoText.innerText=layer.getAttribute("data-info");}else{layer.style.transform="translateZ(-800px) scale(0.05)";}}
+  });
 }
-
-.whatsapp-lux:hover {
-  transform: scale(1.15);
-  box-shadow: 0 12px 35px rgba(0,0,0,0.35);
-  background: rgba(37, 211, 102, 1); /* Full green on hover */
+if(window.innerWidth<768)setLayer({target:btns[0]},1);
+setTimeout(()=>{
+  if(window.innerWidth<768){layers.forEach((layer,index)=>{if(index===0){layer.classList.add("active");layer.style.transform="translateZ(0px) scale(1)";layer.style.display="block";}else{layer.classList.remove("active");layer.style.display="none";}});}
+  else{layers.forEach((layer,index)=>{layer.classList.add("active");layer.style.transform=`translateZ(${index*150}px) scale(${0.82+index*0.05})`;});}
+},500);
+const container=document.getElementById("exploder");
+container.addEventListener("mousemove",(e)=>{const x=(window.innerWidth/2-e.pageX)/40,y=(window.innerHeight/2-e.pageY)/40;layers.forEach(layer=>{if(layer.classList.contains("active"))layer.style.transform+=` rotateY(${x}deg) rotateX(${y}deg)`;});});
+function openModal(title,price,img,desc){
+  document.getElementById("modal").classList.add("active");
+  document.getElementById("modalTitle").innerText=title;document.getElementById("modalPrice").innerText=price;
+  document.getElementById("modalImg").src=img;document.getElementById("modalDesc").innerText=desc;
+  const message=`Hello, I HAVE A QUERIES ON ${title} for ${price}.`;
+  document.getElementById("buyBtn").onclick=function(){window.open(`https://wa.me/918295462556?text=${encodeURIComponent(message)}`,"_blank");};
+  let productPage="/product1/";
+  if(title==="Crimson Orbit")productPage="/product2/";
+  if(title==="Ember Crown")productPage="/product3/";
+  document.getElementById("viewBtn").href=productPage;
 }
-
-  .share-btn{
-  position: fixed;
-  bottom: 110px;
-  right: 35px;
-  width: 55px;
-  height: 55px;
-  border-radius: 50%;
-  border: none;
-  background: #111;
-  color: white;
-  font-size: 22px;
-  cursor: pointer;
-  z-index: 10000;
-  box-shadow: 0 8px 25px rgba(0,0,0,.25);
-  transition: .3s;
+function closeModal(){document.getElementById("modal").classList.remove("active");}
+async function shareWebsite(){
+  const shareData={title:"RUDOHAGE",text:"Check out RUDOHAGE handcrafted luxury collection.",url:window.location.href};
+  if(navigator.share)await navigator.share(shareData);
+  else{navigator.clipboard.writeText(window.location.href);alert("Website link copied!");}
 }
-
-.share-btn:hover{
-  transform: scale(1.1);
-}
-  
-</style>
-
-  <script type="module">
-
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-getFirestore,
-collection,
-getDocs,
-query,
-orderBy,
-limit
-}
-from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
-  authDomain: "rudohage.firebaseapp.com",
-  projectId: "rudohage",
-  storageBucket: "rudohage.firebasestorage.app",
-  messagingSenderId: "487042116246",
-  appId: "1:487042116246:web:990d65636addd6d653f0b7",
-  measurementId: "G-6GLB5PPXMY"
-};
-
-const app = initializeApp(firebaseConfig);
-
-const db = getFirestore(app);
-
-async function loadHomeReviews(){
-
-const container =
-document.getElementById("homeReviews");
-
-container.innerHTML = "";
-
-const q = query(
-collection(db,"reviews"),
-orderBy("date","desc"),
-limit(3)
-);
-
-const snapshot =
-await getDocs(q);
-
-snapshot.forEach(doc=>{
-
-const data = doc.data();
-
-container.innerHTML += `
-
-<div class="review-box">
-
-<p>
-${"★".repeat(data.rating)}
-</p>
-
-<p>
-"${data.review}"
-</p>
-
-<strong>
-— ${data.name}
-</strong>
-
-</div>
-
-`;
-
-});
-
-}
-
-loadHomeReviews();
-
+document.addEventListener('contextmenu',event=>event.preventDefault());
+document.onkeydown=function(e){if(e.keyCode==123||(e.ctrlKey&&e.shiftKey&&e.keyCode==73)||(e.ctrlKey&&e.shiftKey&&e.keyCode==74)||(e.ctrlKey&&e.keyCode==85))return false;};
 </script>
 
-<!-- LOGIN / PROFILE AUTH STATE -->
 <script type="module">
-
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-
-import {
-getAuth,
-onAuthStateChanged,
-signOut
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import{getFirestore,collection,getDocs,query,orderBy,limit}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const firebaseConfig={apiKey:"AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",authDomain:"rudohage.firebaseapp.com",projectId:"rudohage",storageBucket:"rudohage.firebasestorage.app",messagingSenderId:"487042116246",appId:"1:487042116246:web:990d65636addd6d653f0b7",measurementId:"G-6GLB5PPXMY"};
+const app=initializeApp(firebaseConfig),db=getFirestore(app);
+async function loadHomeReviews(){
+  const container=document.getElementById("homeReviews");container.innerHTML="";
+  const snapshot=await getDocs(query(collection(db,"reviews"),orderBy("date","desc"),limit(3)));
+  snapshot.forEach(doc=>{const data=doc.data();container.innerHTML+=`<div class="review-box"><p>${"★".repeat(data.rating)}</p><p>"${data.review}"</p><strong>— ${data.name}</strong></div>`;});
 }
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+loadHomeReviews();
+</script>
 
-import {
-getFirestore,
-doc,
-getDoc
-}
-from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-
-const authConfig = {
-  apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
-  authDomain: "rudohage.firebaseapp.com",
-  projectId: "rudohage",
-  storageBucket: "rudohage.firebasestorage.app",
-  messagingSenderId: "487042116246",
-  appId: "1:487042116246:web:990d65636addd6d653f0b7"
-};
-
-const authApp = initializeApp(authConfig, "authApp");
-const auth = getAuth(authApp);
-const authDb = getFirestore(authApp);
-
-const profileWrap = document.getElementById("profileWrap");
-const headerAvatar = document.getElementById("headerAvatar");
-
-const mobileLoginBtn = document.getElementById("mobileLoginBtn");
-const mobileAccountBtn = document.getElementById("mobileAccountBtn");
-const mobileLogoutBtn = document.getElementById("mobileLogoutBtn");
-
-onAuthStateChanged(auth, async (user) => {
-
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import{getAuth,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+import{getFirestore,doc,getDoc}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+const authConfig={apiKey:"AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",authDomain:"rudohage.firebaseapp.com",projectId:"rudohage",storageBucket:"rudohage.firebasestorage.app",messagingSenderId:"487042116246",appId:"1:487042116246:web:990d65636addd6d653f0b7"};
+const authApp=initializeApp(authConfig,"authApp"),auth=getAuth(authApp),authDb=getFirestore(authApp);
+const profileWrap=document.getElementById("profileWrap"),headerAvatar=document.getElementById("headerAvatar");
+const mobileLoginBtn=document.getElementById("mobileLoginBtn"),mobileAccountBtn=document.getElementById("mobileAccountBtn"),mobileLogoutBtn=document.getElementById("mobileLogoutBtn");
+onAuthStateChanged(auth,async(user)=>{
   if(user){
-    profileWrap.href = "/myaccount/";
-
-    mobileLoginBtn.style.display = "none";
-    mobileAccountBtn.style.display = "block";
-    mobileLogoutBtn.style.display = "block";
-
-    try{
-      const snap = await getDoc(doc(authDb,"users",user.uid));
-      const data = snap.exists() ? snap.data() : {};
-
-      if(data.photoURL){
-        headerAvatar.innerHTML = `<img src="${data.photoURL}">`;
-      }else{
-        const initial = (data.name || user.email || "C").charAt(0).toUpperCase();
-        headerAvatar.innerText = initial;
-      }
-    }catch(err){
-      console.log(err);
-    }
-
-  } else {
-    profileWrap.href = "/login/";
-    headerAvatar.innerHTML = '<i class="fas fa-user"></i>';
-
-    mobileLoginBtn.style.display = "block";
-    mobileAccountBtn.style.display = "none";
-    mobileLogoutBtn.style.display = "none";
-  }
-
+    profileWrap.href="/myaccount/";mobileLoginBtn.style.display="none";mobileAccountBtn.style.display="block";mobileLogoutBtn.style.display="block";
+    try{const snap=await getDoc(doc(authDb,"users",user.uid)),data=snap.exists()?snap.data():{};if(data.photoURL)headerAvatar.innerHTML=`<img src="${data.photoURL}">`;else headerAvatar.innerText=(data.name||user.email||"C").charAt(0).toUpperCase();}catch(err){console.log(err);}
+  }else{profileWrap.href="/login/";headerAvatar.innerHTML='<i class="fas fa-user"></i>';mobileLoginBtn.style.display="block";mobileAccountBtn.style.display="none";mobileLogoutBtn.style.display="none";}
 });
-
-mobileLogoutBtn.addEventListener("click", async (e) => {
-  e.preventDefault();
-  await signOut(auth);
-  window.location.reload();
-});
-
+mobileLogoutBtn.addEventListener("click",async(e)=>{e.preventDefault();await signOut(auth);window.location.reload();});
 </script>
-
-  <script>
-async function shareWebsite() {
-
-  const shareData = {
-    title: "RUDOHAGE",
-    text: "Check out RUDOHAGE handcrafted luxury collection.",
-    url: window.location.href
-  };
-
-  if (navigator.share) {
-    await navigator.share(shareData);
-  } else {
-    navigator.clipboard.writeText(window.location.href);
-    alert("Website link copied!");
-  }
-
-}
-    
-</script>
-
-   <script>
-document.addEventListener('contextmenu', event => event.preventDefault());
-
-document.onkeydown = function(e) {
-    if (
-        e.keyCode == 123 ||
-        (e.ctrlKey && e.shiftKey && e.keyCode == 73) ||
-        (e.ctrlKey && e.shiftKey && e.keyCode == 74) ||
-        (e.ctrlKey && e.keyCode == 85)
-    ) {
-        return false;
-    }
-};
-</script>
-
-
-
-  <a href="/support/" class="support-float">
-    <i class="fa-solid fa-headset"></i>
-    <span>SUPPORT</span>
-</a>
 
 <script src="/toast.js"></script>
 </body>
