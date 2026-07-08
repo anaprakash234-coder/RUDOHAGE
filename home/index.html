@@ -36,19 +36,14 @@
 --bg:#f6f2ea;--text:#111111;--muted:rgba(20,20,20,.6);--accent:#a48b74;--radius:22px;
 --fs-xs:.68rem;--fs-sm:.78rem;--fs-base:.88rem;--fs-md:.92rem;--fs-lg:1rem;--fs-xl:1.1rem;--fs-2xl:1.3rem;--fs-3xl:1.7rem;--fs-hero:3.8vw;
 }
-
-
-
-/* CATALOG BADGE */
+.back-top{position:fixed;bottom:100px;left:34px;width:42px;height:42px;border-radius:50%;background:#111;color:white;border:none;font-size:16px;cursor:pointer;z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(12px);transition:.3s;box-shadow:0 6px 20px rgba(0,0,0,.2);}
+.back-top.show{opacity:1;transform:translateY(0);}
+.back-top:hover{background:var(--accent);transform:translateY(-3px);}
 .catalog-badge{position:absolute;top:14px;left:14px;padding:5px 12px;border-radius:50px;font-size:.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;z-index:5;}
 .catalog-badge.available{background:rgba(255,255,255,.9);color:#111;}
 .catalog-badge.sold{background:rgba(17,17,17,.85);color:#fff;}
-
-/* ACTIVE NAV */
 nav a.active-nav::after{width:100%!important;}
 nav a.active-nav{opacity:1!important;}
-
-/* LAZY IMG FADE */
 img.lazy{opacity:0;transition:opacity .5s ease;}
 img.lazy.loaded{opacity:1;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -462,8 +457,10 @@ mobileLogoutBtn.addEventListener("click",async(e)=>{e.preventDefault();await sig
 <script src="/toast.js"></script>
 
 <script>
-
-/* ACTIVE NAV ON SCROLL */
+const backTop = document.getElementById("backTop");
+window.addEventListener("scroll", () => {
+  backTop.classList.toggle("show", window.scrollY > 400);
+});
 const sections = document.querySelectorAll("section[id], div[id='catalog']");
 const navLinks = document.querySelectorAll("nav a[href^='#']");
 window.addEventListener("scroll", () => {
@@ -475,8 +472,6 @@ window.addEventListener("scroll", () => {
     a.classList.toggle("active-nav", a.getAttribute("href") === "#" + current);
   });
 }, {passive:true});
-
-/* LAZY LOADING */
 const lazyImgs = document.querySelectorAll("img.lazy");
 if("IntersectionObserver" in window){
   const obs = new IntersectionObserver((entries) => {
