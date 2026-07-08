@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,14 +37,39 @@
 --bg:#f6f2ea;--text:#111111;--muted:rgba(20,20,20,.6);--accent:#a48b74;--radius:22px;
 --fs-xs:.68rem;--fs-sm:.78rem;--fs-base:.88rem;--fs-md:.92rem;--fs-lg:1rem;--fs-xl:1.1rem;--fs-2xl:1.3rem;--fs-3xl:1.7rem;--fs-hero:3.8vw;
 }
-.back-top{position:fixed;bottom:100px;left:34px;width:42px;height:42px;border-radius:50%;background:#111;color:white;border:none;font-size:16px;cursor:pointer;z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(12px);transition:.3s;box-shadow:0 6px 20px rgba(0,0,0,.2);}
-.back-top.show{opacity:1;transform:translateY(0);}
-.back-top:hover{background:var(--accent);transform:translateY(-3px);}
+
+/* PAGE TRANSITION */
+.page-transition{position:fixed;inset:0;background:var(--bg);z-index:999998;pointer-events:none;opacity:0;transition:opacity .35s ease;}
+.page-transition.fade-in{opacity:1;}
+.page-transition.fade-out{opacity:0;}
+
+/* BOTTOM NAV BAR */
+.bottom-nav{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:99999;display:flex;align-items:center;background:rgba(246,242,234,.55);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-radius:50px;padding:10px 22px;box-shadow:0 8px 32px rgba(0,0,0,.12);border:1px solid rgba(164,139,116,.3);}
+.bottom-nav-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 20px;border:none;background:transparent;color:var(--accent);cursor:pointer;text-decoration:none;transition:.25s;border-radius:40px;}
+.bottom-nav-btn:hover,.bottom-nav-btn:active{color:#8a715c;background:rgba(164,139,116,.12);}
+.bottom-nav-btn i{font-size:17px;transition:.25s;}
+.bottom-nav-btn span{font-size:.52rem;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;color:var(--accent);opacity:.8;}
+.bottom-nav-divider{width:1px;height:24px;background:rgba(164,139,116,.25);margin:0 2px;}
+.back-top-nav{opacity:.3;pointer-events:none;transition:.3s;}
+.back-top-nav.show{opacity:1;pointer-events:auto;}
+body{padding-bottom:90px;}
+@media(max-width:768px){
+.bottom-nav{padding:8px 10px;bottom:14px;}
+.bottom-nav-btn{padding:7px 12px;}
+.bottom-nav-btn i{font-size:15px;}
+.bottom-nav-btn span{font-size:.46rem;letter-spacing:1px;}
+}
+
+/* CATALOG BADGE */
 .catalog-badge{position:absolute;top:14px;left:14px;padding:5px 12px;border-radius:50px;font-size:.62rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;z-index:5;}
 .catalog-badge.available{background:rgba(255,255,255,.9);color:#111;}
 .catalog-badge.sold{background:rgba(17,17,17,.85);color:#fff;}
+
+/* ACTIVE NAV */
 nav a.active-nav::after{width:100%!important;}
 nav a.active-nav{opacity:1!important;}
+
+/* LAZY IMG FADE */
 img.lazy{opacity:0;transition:opacity .5s ease;}
 img.lazy.loaded{opacity:1;}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -157,17 +183,9 @@ nav a:hover::after{width:100%;}
 .footer-column a{display:block;margin-bottom:7px;text-decoration:none;color:#111;opacity:.7;font-size:var(--fs-sm);transition:.3s;}
 .footer-column a:hover{opacity:1;transform:translateX(3px);}
 .footer-bottom{margin-top:22px;padding-top:18px;border-top:1px solid rgba(0,0,0,.08);text-align:center;opacity:.55;font-size:var(--fs-xs);}
-.support-float{position:fixed;bottom:25px;left:25px;height:56px;width:56px;background:rgba(0,0,0,.75);backdrop-filter:blur(12px);color:#fff;text-decoration:none;border-radius:50px;display:flex;align-items:center;overflow:hidden;z-index:9999;box-shadow:0 10px 25px rgba(0,0,0,.25);animation:introSupport 4s ease forwards;}
-.support-float i{font-size:20px;min-width:56px;text-align:center;}
-.support-float span{white-space:nowrap;font-size:var(--fs-xs);font-weight:600;letter-spacing:2px;opacity:0;animation:textFade 4s ease forwards;}
-.support-float:hover{width:165px;transition:.4s;}
-.support-float:hover span{opacity:1;transition:.4s;}
-@keyframes introSupport{0%{width:56px}25%{width:165px}75%{width:165px}100%{width:56px}}
-@keyframes textFade{0%{opacity:0}25%{opacity:1}75%{opacity:1}100%{opacity:0}}
-.whatsapp-lux{position:fixed;bottom:30px;right:30px;width:62px;height:62px;background:rgba(37,211,102,.85);border-radius:50%;display:flex;justify-content:center;align-items:center;color:white;font-size:30px;z-index:10000;box-shadow:0 8px 25px rgba(0,0,0,.2);backdrop-filter:blur(6px);transition:all .3s ease;}
-.whatsapp-lux:hover{transform:scale(1.12);background:rgba(37,211,102,1);}
-.share-btn{position:fixed;bottom:108px;right:34px;width:52px;height:52px;border-radius:50%;border:none;background:#111;color:white;font-size:20px;cursor:pointer;z-index:10000;box-shadow:0 8px 25px rgba(0,0,0,.22);transition:.3s;}
-.share-btn:hover{transform:scale(1.1);}
+/* end nav */
+/* end animations */
+/* end fixed */
 @media(max-width:950px){header{padding:1rem 2rem}nav{display:none}.hero-text h1{font-size:8vw}.exploded-view-container{height:480px}.layer{width:260px;height:260px}.layer-info{position:relative;top:auto;right:auto;transform:none;width:100%;margin-top:2rem}.catalog{grid-template-columns:1fr}}
 @media(max-width:900px){.trust-container{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:768px){
@@ -197,7 +215,6 @@ header{padding:1rem 1.5rem!important}nav{display:none!important}.menu-btn{displa
 .modal-close{top:10px!important;right:12px!important;font-size:1.4rem!important}
 .catalog-title{text-align:left;padding:2.5rem 5% 1rem;font-size:1.1rem!important}.catalog-title::after{margin:8px 0 0}
 .footer-links{grid-template-columns:1fr;gap:32px}.footer-brand p{max-width:100%}
-.support-float{bottom:20px;left:20px}
 .brand{font-size:1.2rem!important}.header-actions{gap:.6rem}.profile-avatar{width:30px;height:30px;font-size:.85rem}}
 @media(max-width:500px){.trust-container{grid-template-columns:1fr}.hero-text h1{font-size:9vw!important}}
 </style>
@@ -374,9 +391,27 @@ header{padding:1rem 1.5rem!important}nav{display:none!important}.menu-btn{displa
   <div class="footer-bottom"><p>© 2026 RUDOHAGE. All Rights Reserved. Founder ANAND PRAKASH</p></div>
 </footer>
 
-<a href="https://wa.me/918295462556?text=Hello,%20I%20am%20interested%20in%20your%20products!" target="_blank" class="whatsapp-lux"><i class="fab fa-whatsapp"></i></a>
-<button class="share-btn" onclick="shareWebsite()"><i class="fas fa-share-alt"></i></button>
-<a href="/support/" class="support-float"><i class="fa-solid fa-headset"></i><span>SUPPORT</span></a>
+<nav class="bottom-nav">
+  <a href="https://wa.me/918295462556?text=Hello,%20I%20am%20interested%20in%20your%20products!" target="_blank" class="bottom-nav-btn whatsapp-nav">
+    <i class="fab fa-whatsapp"></i>
+    <span>WhatsApp</span>
+  </a>
+  <div class="bottom-nav-divider"></div>
+  <button class="bottom-nav-btn back-top-nav" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fas fa-arrow-up"></i>
+    <span>Top</span>
+  </button>
+  <div class="bottom-nav-divider"></div>
+  <button class="bottom-nav-btn" onclick="shareWebsite()">
+    <i class="fas fa-share-nodes"></i>
+    <span>Share</span>
+  </button>
+  <div class="bottom-nav-divider"></div>
+  <a href="/support/" class="bottom-nav-btn">
+    <i class="fas fa-headset"></i>
+    <span>Support</span>
+  </a>
+</nav>
 
 <script>
 function openMenu(){document.getElementById("mobileMenu").classList.add("active");}
@@ -452,15 +487,33 @@ mobileLogoutBtn.addEventListener("click",async(e)=>{e.preventDefault();await sig
 </script>
 
 <div class="page-transition" id="pageTransition"></div>
-<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
 
 <script src="/toast.js"></script>
 
 <script>
+/* PAGE TRANSITION */
+const pt = document.getElementById("pageTransition");
+window.addEventListener("load", () => {
+  pt.classList.remove("fade-in");
+});
+document.querySelectorAll("a[href]").forEach(link => {
+  const href = link.getAttribute("href");
+  if(!href || href.startsWith("#") || href.startsWith("http") || href.startsWith("mailto") || href.startsWith("tel") || href.startsWith("javascript")) return;
+  link.addEventListener("click", e => {
+    e.preventDefault();
+    pt.classList.add("fade-in");
+    setTimeout(() => window.location.href = href, 320);
+  });
+});
+
+/* BACK TO TOP */
 const backTop = document.getElementById("backTop");
 window.addEventListener("scroll", () => {
   backTop.classList.toggle("show", window.scrollY > 400);
 });
+
+/* ACTIVE NAV ON SCROLL */
 const sections = document.querySelectorAll("section[id], div[id='catalog']");
 const navLinks = document.querySelectorAll("nav a[href^='#']");
 window.addEventListener("scroll", () => {
@@ -472,6 +525,8 @@ window.addEventListener("scroll", () => {
     a.classList.toggle("active-nav", a.getAttribute("href") === "#" + current);
   });
 }, {passive:true});
+
+/* LAZY LOADING */
 const lazyImgs = document.querySelectorAll("img.lazy");
 if("IntersectionObserver" in window){
   const obs = new IntersectionObserver((entries) => {
