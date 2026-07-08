@@ -37,10 +37,6 @@
 --fs-xs:.68rem;--fs-sm:.78rem;--fs-base:.88rem;--fs-md:.92rem;--fs-lg:1rem;--fs-xl:1.1rem;--fs-2xl:1.3rem;--fs-3xl:1.7rem;--fs-hero:3.8vw;
 }
 
-/* PAGE TRANSITION */
-.page-transition{position:fixed;inset:0;background:var(--bg);z-index:999998;pointer-events:none;opacity:0;transition:opacity .35s ease;}
-.page-transition.fade-in{opacity:1;}
-.page-transition.fade-out{opacity:0;}
 
 
 /* CATALOG BADGE */
@@ -467,20 +463,7 @@ mobileLogoutBtn.addEventListener("click",async(e)=>{e.preventDefault();await sig
 
 <script>
 
-const pt = document.getElementById("pageTransition");
-window.addEventListener("load", () => {
-  pt.classList.remove("fade-in");
-});
-document.querySelectorAll("a[href]").forEach(link => {
-  const href = link.getAttribute("href");
-  if(!href || href.startsWith("#") || href.startsWith("http") || href.startsWith("mailto") || href.startsWith("tel") || href.startsWith("javascript")) return;
-  link.addEventListener("click", e => {
-    e.preventDefault();
-    pt.classList.add("fade-in");
-    setTimeout(() => window.location.href = href, 320);
-  });
-});
-
+/* ACTIVE NAV ON SCROLL */
 const sections = document.querySelectorAll("section[id], div[id='catalog']");
 const navLinks = document.querySelectorAll("nav a[href^='#']");
 window.addEventListener("scroll", () => {
@@ -493,6 +476,7 @@ window.addEventListener("scroll", () => {
   });
 }, {passive:true});
 
+/* LAZY LOADING */
 const lazyImgs = document.querySelectorAll("img.lazy");
 if("IntersectionObserver" in window){
   const obs = new IntersectionObserver((entries) => {
