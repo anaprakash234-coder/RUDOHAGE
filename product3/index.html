@@ -1,32 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><link rel="icon" href="/logo.png"><title>RUDOHAGE | Ember Crown</title><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Manrope:wght@300;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root{--bg:#f6f2ea;--text:#111;--radius:22px}*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--text);padding:120px 8% 40px}.product-header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1rem 1.5rem;background:rgba(246,242,234,.55);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,.08)}.product-brand{text-decoration:none;color:#111;font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;letter-spacing:-1px}.hero-piece{text-align:center;margin-bottom:70px;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center}.hero-piece-number{letter-spacing:4px;font-size:12px;opacity:.6;text-transform:uppercase;margin-bottom:15px}.hero-piece h1{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;line-height:1;margin-bottom:15px}.hero-piece p{font-size:15px;letter-spacing:3px;text-transform:uppercase;opacity:.7}.product-container{max-width:1300px;margin:auto;display:flex;gap:60px;align-items:flex-start}.product-image,.product-info{flex:1;width:100%}.gallery{display:flex;gap:10px;margin-bottom:15px;overflow-x:auto;flex-wrap:nowrap}.gallery img{width:70px;height:70px;object-fit:cover;border-radius:12px;cursor:pointer;border:2px solid transparent;transition:.3s;flex-shrink:0}.gallery img:hover{border-color:#111}#mainImage{width:100%;height:auto;object-fit:contain;border-radius:22px;box-shadow:0 15px 50px rgba(0,0,0,.08)}.product-info h1{font-size:3rem;font-family:'Cormorant Garamond',serif;margin-bottom:10px}.piece{opacity:.7;margin-bottom:8px}.made{margin-bottom:20px}.rating{font-size:20px;margin-bottom:20px}.price{font-size:2.2rem;font-weight:700;margin-bottom:20px}.certificate{line-height:2;font-size:15px;margin-bottom:25px}.archive-status{background:#111;color:#fff;padding:18px 22px;border-radius:16px;margin-bottom:25px}.status-label{font-size:11px;letter-spacing:4px;opacity:.7;margin-bottom:8px}.status-value{font-family:'Cormorant Garamond',serif;font-size:1.8rem}.delivery{background:#fff;padding:15px;border-radius:12px;margin-bottom:25px;box-shadow:0 5px 20px rgba(0,0,0,.05)}.buttons{display:flex;gap:15px;flex-wrap:wrap;margin-bottom:30px}.buy-btn,.share-btn{padding:15px 30px;border:none;border-radius:50px;cursor:pointer;text-decoration:none;font-size:15px}.buy-btn{background:#000;color:#fff}.share-btn{background:#fff;color:#000}.story,.specs,.review-section{margin-top:60px}.story h2,.specs h2,.review-section h2,.related-products h2{font-family:'Cormorant Garamond',serif;font-size:2rem;margin-bottom:20px}.story p{line-height:1.8}.spec-box,.review-card,.form-box{background:#fff;padding:20px;border-radius:20px;box-shadow:0 5px 20px rgba(0,0,0,.05);margin-top:20px}.spec-box p{margin-bottom:10px}.form-box{padding:25px}input,textarea,select{width:100%;padding:15px;margin-top:10px;margin-bottom:20px;border:none;background:#f4f4f4;border-radius:12px;font-size:15px}.publish-btn{background:#000;color:#fff;padding:15px 30px;border:none;border-radius:50px;cursor:pointer}.related-products{margin-top:80px}.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px}.related-card{background:#fff;padding:20px;border-radius:20px;text-decoration:none;color:#000;box-shadow:0 5px 20px rgba(0,0,0,.05);transition:.3s}.related-card:hover{transform:translateY(-8px)}.related-card h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:10px}.piece-number{font-size:12px;letter-spacing:3px;text-transform:uppercase;opacity:.6;margin-bottom:12px}.signature{text-align:center;margin-top:100px;margin-bottom:80px}.signature p{letter-spacing:4px;text-transform:uppercase;opacity:.6;margin-bottom:10px}.signature h2{font-family:'Cormorant Garamond',serif;font-size:3rem}@media(max-width:768px){html,body{width:100%;overflow-x:hidden}body{padding:70px 15px 20px}.product-header,.hero-piece{justify-content:center;text-align:center}.product-brand{font-size:1.3rem;width:100%}.hero-piece h1{font-size:2.2rem}.product-container{flex-direction:column}}
-    </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><link rel="icon" href="/logo.png"><title>Ember Crown | Handcrafted Clock | RUDOHAGE</title><meta name="description" content="Ember Crown by RUDOHAGE – Heat-flame colored artisan wood clock with fire-finish technique. One of one creation at ₹2500."><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{--bg:#f6f2ea;--t:#111;--m:rgba(20,20,20,.55);--a:#a48b74;--r:14px;--xxs:.62rem;--xs:.7rem;--sm:.82rem;--bs:.92rem;--md:1.05rem;--lg:1.25rem;--xl:1.6rem;--2xl:2rem;--3xl:2.5rem}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-height:1.6;overflow-x:hidden}
+.hdr{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:.8rem 2rem;background:rgba(246,242,234,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.04);display:flex;align-items:center;justify-content:space-between}
+.brand{text-decoration:none;color:var(--t);font-family:'Cormorant Garamond',serif;font-size:var(--lg);font-weight:700;letter-spacing:-.5px}
+.back{text-decoration:none;color:var(--m);font-size:var(--xxs);letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:5px;transition:.3s}
+.back:hover{color:var(--t)}
+.main{max-width:1100px;margin:0 auto;padding:95px 3% 30px;display:grid;grid-template-columns:380px 1fr;gap:40px;align-items:start}
+.gal{display:flex;gap:12px;position:sticky;top:95px}
+.thumbs{display:flex;flex-direction:column;gap:7px;flex-shrink:0}
+.thumbs img{width:52px;height:52px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:.25s;opacity:.5}
+.thumbs img:hover,.thumbs img.active{border-color:var(--a);opacity:1}
+.imgbox{flex:1;border-radius:var(--r);overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.06);background:#fff}
+#mainImg{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.bread{font-size:var(--xxs);opacity:.4;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.ttl{font-family:'Cormorant Garamond',serif;font-size:var(--2xl);font-weight:700;line-height:1.1;margin-bottom:2px;letter-spacing:-.5px}
+.sub{font-size:var(--sm);opacity:.5;margin-bottom:12px}
+.stars{color:#d4a853;font-size:var(--bs);letter-spacing:1px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.stars span{font-size:var(--xxs);opacity:.4;color:var(--t)}
+.price{font-family:'Cormorant Garamond',serif;font-size:var(--3xl);font-weight:700;margin-bottom:16px}
+.price small{font-size:var(--xxs);opacity:.4;font-weight:400;margin-left:4px}
+.badge{display:inline-block;background:rgba(164,139,116,.12);color:var(--a);padding:4px 12px;border-radius:50px;font-size:10px;font-weight:600;letter-spacing:.5px;margin-bottom:16px}
+.high{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+.high div{display:flex;align-items:center;gap:8px;font-size:var(--sm);opacity:.6}
+.high i{color:var(--a);font-size:11px}
+.del{display:flex;gap:20px;margin-bottom:18px;flex-wrap:wrap}
+.del div{display:flex;align-items:center;gap:6px;font-size:var(--xxs);opacity:.5}
+.del i{color:var(--a);font-size:12px}
+.specs-strip{display:flex;gap:18px;margin-bottom:20px;flex-wrap:wrap}
+.specs-strip div{font-size:var(--xxs);opacity:.45;display:flex;align-items:center;gap:5px;text-transform:uppercase;letter-spacing:1px}
+.btns{display:flex;gap:10px;margin-bottom:24px}
+.buy{flex:1;padding:12px 24px;border-radius:50px;font-size:var(--sm);font-weight:600;letter-spacing:1px;text-transform:uppercase;border:none;font-family:'Manrope',sans-serif;display:flex;align-items:center;gap:7px;justify-content:center;background:var(--a);color:#fff;cursor:pointer;text-decoration:none;transition:.3s}
+.buy:hover{background:#8a715c;transform:translateY(-2px);box-shadow:0 8px 22px rgba(164,139,116,.3)}
+.shr{background:#fff;border:1px solid rgba(0,0,0,.1);padding:12px 15px;border-radius:50px;cursor:pointer;transition:.3s;font-size:var(--bs);color:var(--t)}
+.shr:hover{background:#f5f5f5}
+.arch{background:#111;color:#fff;padding:12px 16px;border-radius:12px;margin-bottom:22px;font-size:var(--xxs);display:flex;align-items:center;gap:8px}
+.arch i{font-size:15px;color:var(--a)}
+.story,.specs-block{margin-bottom:26px}
+.story h3,.specs-block h3{font-family:'Cormorant Garamond',serif;font-size:var(--md);font-weight:700;margin-bottom:8px}
+.story p{font-size:var(--sm);opacity:.55;line-height:1.8}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sgrid div{font-size:var(--sm);opacity:.5;padding:7px 0;border-bottom:1px solid rgba(0,0,0,.04);display:flex;justify-content:space-between}
+.sgrid div span:first-child{text-transform:uppercase;letter-spacing:1px;font-size:var(--xxs)}
+.rel-block{max-width:1100px;margin:0 auto;padding:40px 3% 30px}
+.rel-block h2{font-family:'Cormorant Garamond',serif;font-size:var(--lg);font-weight:700;margin-bottom:18px;text-align:center}
+.rel-grid{display:flex;gap:14px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.rel-grid::-webkit-scrollbar{height:3px}
+.rel-grid::-webkit-scrollbar-thumb{background:rgba(0,0,0,.12);border-radius:10px}
+.rcard{min-width:180px;max-width:180px;background:#fff;border-radius:14px;text-decoration:none;color:var(--t);box-shadow:0 3px 12px rgba(0,0,0,.03);transition:.3s;overflow:hidden;flex-shrink:0;scroll-snap-align:start}
+.rcard:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.06)}
+.rcard img{width:100%;height:140px;object-fit:cover;display:block}
+.rinfo{padding:10px 12px 12px}
+.rinfo .rp{font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:.3;margin-bottom:2px}
+.rinfo h3{font-family:'Cormorant Garamond',serif;font-size:var(--sm);font-weight:700}
+.rinfo .rpr{font-size:var(--xs);font-weight:600;color:var(--a)}
+.rinfo .rd{font-size:10px;opacity:.4;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px}
+.rev-block{max-width:1100px;margin:0 auto;padding:15px 3% 40px}
+.rev-block h2{font-family:'Cormorant Garamond',serif;font-size:var(--lg);font-weight:700;margin-bottom:14px}
+.rev-card{background:#fff;padding:14px 16px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.02);margin-bottom:8px}
+.rev-card h4{font-size:var(--sm);font-weight:600;margin-bottom:2px}
+.rev-card .rs{color:#d4a853;font-size:12px;letter-spacing:1px;margin-bottom:4px}
+.rev-card p{opacity:.55;font-size:var(--sm);line-height:1.6}
+.rev-form{background:#fff;padding:16px 18px;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.02);margin-top:16px}
+.rev-form h4{font-family:'Cormorant Garamond',serif;font-size:var(--bs);font-weight:700;margin-bottom:10px}
+.rev-form input,.rev-form select,.rev-form textarea{width:100%;padding:10px 12px;margin-bottom:8px;border:none;background:#f5f3ef;border-radius:10px;font-size:var(--sm);font-family:'Manrope',sans-serif;outline:none}
+.rev-form textarea{resize:vertical;min-height:70px}
+.sbtn{background:#111;color:#fff;padding:11px 22px;border:none;border-radius:50px;cursor:pointer;font-size:var(--sm);font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:.3s;font-family:'Manrope',sans-serif}
+.sbtn:hover{background:var(--a)}
+.sig{text-align:center;padding:40px 20px 30px}
+.sig p{letter-spacing:4px;text-transform:uppercase;opacity:.3;font-size:var(--xxs);margin-bottom:6px}
+.sig h2{font-family:'Cormorant Garamond',serif;font-size:var(--2xl);font-weight:700}
+@media(max-width:768px){
+.hdr{padding:.7rem 1rem}
+.main{grid-template-columns:1fr;gap:20px;padding:80px 4% 25px}
+.gal{flex-direction:column-reverse;position:relative;top:auto}
+.thumbs{flex-direction:row;overflow-x:auto}
+.thumbs img{width:44px;height:44px}
+.ttl{font-size:1.6rem}
+.price{font-size:2rem}
+.btns{flex-direction:column}
+.sgrid{grid-template-columns:1fr}
+.rcard{min-width:140px;max-width:140px}
+.rcard img{height:110px}
+}
+</style>
 </head>
 <body>
-    <header class="product-header"><a href="index.html" class="product-brand">RUDOHAGE</a></header>
-    <div class="hero-piece"><div class="hero-piece-number">Piece No. 03</div><h1>EMBER CROWN</h1><p>A One-of-One Creation</p></div>
-    <div class="product-container">
-        <div class="product-image"><div class="gallery"><img onclick="document.getElementById('mainImage').src=this.src" src="https://rudohage.com/image/fire-clock-3.png"><img onclick="document.getElementById('mainImage').src=this.src" src="https://rudohage.com/image/fire-clock-8.png"><img onclick="document.getElementById('mainImage').src=this.src" src="https://rudohage.com/image/fire-clock-9.png"><img onclick="document.getElementById('mainImage').src=this.src" src="https://rudohage.com/image/fire-clock-10.png"></div><img id="mainImage" src="https://rudohage.com/image/fire-clock-3.png"></div>
-        <div class="product-info"><h1>Ember Crown</h1><div class="piece">Piece No. 03</div><div class="made">Handmade by RUDOHAGE</div><div class="rating">★★★★★ 5.0</div><div class="price">₹2500</div><div class="certificate"><div>✓ Piece No. 03</div><div>✓ One of One Creation</div><div>✓ Crafted by RUDOHAGE</div><div>✓ Will Never Be Reproduced</div></div><div class="archive-status"><div class="status-label">ARCHIVE STATUS</div><div class="status-value">ACTIVE PIECE</div></div><div class="delivery"><div>Handcrafted & Packed Securely</div><br><div>Dispatch : 3–5 Days</div><div>Tracked Delivery Available</div></div><div class="buttons"><a href="/checkout/?product=Ember Crown&price=2500" class="buy-btn" id="buyNowBtn">Buy Now</a><button class="share-btn" id="shareBtn">Share</button></div><div class="story"><h2>The Story</h2><p>Inspired by the enduring glow of embers, Ember Crown is a handcrafted statement piece that balances strength, artistry, and precision. Crafted from premium wood and finished in deep charred tones with radiant amber highlights, it creates a striking visual presence in any space. More than a timepiece, Ember Crown is a collectible work of craftsmanship designed for those who appreciate individuality and timeless design.</p></div><div class="specs"><h2>Specifications</h2><div class="spec-box"><p>Material : Premium Handcrafted Wood</p><p>Finish : Charred Wood & Ember Glow Finish</p><p>Handmade : Yes</p><p>Collection : RUDOHAGE</p></div></div></div>
-    </div>
-    <div class="related-products"><h2>Explore More Pieces</h2><div class="related-grid"><a href="/product1/" class="related-card"><div class="piece-number">Piece No. 01</div><h3>Inferno Core</h3><p>₹3000</p></a><a href="/product2/" class="related-card"><div class="piece-number">Piece No. 02</div><h3>Crimson Orbit</h3><p>₹2500</p></a></div></div>
-    <div class="signature"><p>Not Produced. Crafted.</p><h2>RUDOHAGE</h2></div>
-    <div class="review-section"><h2>Customer Reviews</h2><div id="reviewsContainer"></div><div class="form-box"><h2>Write a Review</h2><input type="text" id="reviewName" placeholder="Your Name"><select id="reviewRating"><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select><textarea id="reviewText" rows="5" placeholder="Write your review"></textarea><button class="publish-btn" id="publishBtn">Publish Review</button></div></div>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-        const firebaseConfig = { apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E", authDomain: "rudohage.firebaseapp.com", projectId: "rudohage", storageBucket: "rudohage.firebasestorage.app", messagingSenderId: "487042116246", appId: "1:487042116246:web:990d65636addd6d653f0b7", measurementId: "G-6GLB5PPXMY" };
-        const app = initializeApp(firebaseConfig), auth = getAuth(app), db = getFirestore(app); let currentUser = null;
-        onAuthStateChanged(auth, u => currentUser = u);
-        document.getElementById("buyNowBtn").addEventListener("click", e => { e.preventDefault(); const url = e.currentTarget.getAttribute("href"); window.location.href = currentUser ? url : "/login/?redirect=" + encodeURIComponent(url); });
-        async function loadReviews(){ const c = document.getElementById("reviewsContainer"); c.innerHTML=""; const snap = await getDocs(query(collection(db,"product3_reviews"), orderBy("date","desc"))); snap.forEach(doc => { const d = doc.data(); c.innerHTML += `<div class="review-card"><h3>${d.name}</h3><div class="stars">${"★".repeat(d.rating)}</div><p>${d.review}</p></div>`; }); }
-        document.getElementById("publishBtn").addEventListener("click", async () => { const n = document.getElementById("reviewName").value, r = document.getElementById("reviewText").value, rt = parseInt(document.getElementById("reviewRating").value); if(!n || !r){ alert("Please fill all fields"); return; } await addDoc(collection(db,"product3_reviews"), { name:n, review:r, rating:rt, date:Date.now() }); document.getElementById("reviewName").value=""; document.getElementById("reviewText").value=""; loadReviews(); });
-        document.getElementById("shareBtn").addEventListener("click", async () => { if(navigator.share) await navigator.share({ title:"Ember Crown", url:window.location.href }); else { navigator.clipboard.writeText(window.location.href); alert("Link copied"); } }); loadReviews();
-    </script>
-    <script>document.addEventListener('contextmenu', e => e.preventDefault()); document.onkeydown = function(e) { if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) return false; };</script>
-    <script src="/toast.js"></script>
+<header class="hdr"><a href="/" class="brand">RUDOHAGE</a><a href="/" class="back"><i class="fas fa-arrow-left"></i> Back</a></header>
+<div class="main">
+<div class="gal"><div class="thumbs"><img src="https://rudohage.com/image/fire-clock-3.png" class="active" onclick="setMain(this)"><img src="https://rudohage.com/image/fire-clock-8.png" onclick="setMain(this)"><img src="https://rudohage.com/image/fire-clock-9.png" onclick="setMain(this)"><img src="https://rudohage.com/image/fire-clock-10.png" onclick="setMain(this)"></div><div class="imgbox"><img id="mainImg" src="https://rudohage.com/image/fire-clock-3.png" alt="Ember Crown"></div></div>
+<div>
+<div class="bread">RUDOHAGE / Clocks / Ember Crown</div>
+<h1 class="ttl">Ember Crown</h1>
+<p class="sub">Handcrafted by Anand Prakash</p>
+<div class="stars">★★★★★ <span>5.0</span></div>
+<div class="price">₹2,500<small>incl. GST</small></div>
+<div class="badge"><i class="fas fa-tag"></i> Limited Edition</div>
+<div class="high"><div><i class="fas fa-check-circle"></i> One of One — Never Reproduced</div><div><i class="fas fa-tree"></i> Premium Solid Wood</div><div><i class="fas fa-fire"></i> Heat-Flame Finish</div></div>
+<div class="del"><div><i class="fas fa-truck"></i> Free Shipping</div><div><i class="fas fa-clock"></i> Dispatch 3-5 Days</div><div><i class="fas fa-box"></i> Secure Packaging</div></div>
+<div class="specs-strip"><div><i class="fas fa-tree"></i> Wood</div><div><i class="fas fa-fire"></i> Flame Finish</div><div><i class="fas fa-hand-sparkles"></i> Handmade</div></div>
+<div class="btns"><a href="/checkout/?product=Ember Crown&price=2500" class="buy" id="buyBtn"><i class="fas fa-bolt"></i> Buy Now</a><button class="shr" id="shareBtn"><i class="fas fa-share-alt"></i></button></div>
+<div class="arch"><i class="fas fa-archive"></i> <strong>Active Piece</strong> — Never reproduced</div>
+<div class="story"><h3>The Story</h3><p>Ember Crown captures fire's raw intensity — a handcrafted wood clock finished using real heat-flame technique. The surface is kissed by flames, creating a natural, unrepeatable pattern. Like a crown of embers, each piece glows uniquely.</p></div>
+<div class="specs-block"><h3>Specifications</h3><div class="sgrid"><div><span>Material</span><span>Premium Wood</span></div><div><span>Finish</span><span>Flame-Colored</span></div><div><span>Technique</span><span>Heat-Flame</span></div><div><span>Collection</span><span>RUDOHAGE</span></div></div></div>
+</div>
+</div>
+<div class="rel-block"><h2>Similar Products</h2><div class="rel-grid">
+<a href="/product1/" class="rcard"><img src="https://rudohage.com/image/fire-clock-1.png" alt="Inferno Core" loading="lazy"><div class="rinfo"><div class="rp">Piece 01</div><h3>Inferno Core</h3><p class="rpr">₹3,000</p><p class="rd">Flame-colored wood clock with fire-inspired finish</p></div></a>
+<a href="/product2/" class="rcard"><img src="https://rudohage.com/image/fire-clock-2.png" alt="Crimson Orbit" loading="lazy"><div class="rinfo"><div class="rp">Piece 02</div><h3>Crimson Orbit</h3><p class="rpr">₹2,500</p><p class="rd">Round layered wood clock with aesthetic needle design</p></div></a>
+</div></div>
+<div class="rev-block"><h2>Reviews</h2><div id="reviewsContainer"></div><div class="rev-form"><h4>Write a Review</h4><input type="text" id="reviewName" placeholder="Your Name"><select id="reviewRating"><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select><textarea id="reviewText" placeholder="Share your experience..."></textarea><button class="sbtn" id="publishBtn">Publish</button></div></div>
+<div class="sig"><p>Not Produced. Crafted.</p><h2>RUDOHAGE</h2></div>
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";import{getAuth,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";import{getFirestore,collection,addDoc,getDocs,query,orderBy}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+const fc={apiKey:"AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",authDomain:"rudohage.firebaseapp.com",projectId:"rudohage",storageBucket:"rudohage.firebasestorage.app",messagingSenderId:"487042116246",appId:"1:487042116246:web:990d65636addd6d653f0b7",measurementId:"G-6GLB5PPXMY"};
+const app=initializeApp(fc),auth=getAuth(app),db=getFirestore(app);let user=null;
+onAuthStateChanged(auth,u=>user=u);
+document.getElementById("buyBtn").addEventListener("click",e=>{e.preventDefault();const u=e.currentTarget.getAttribute("href");window.location.href=user?u:"/login/?redirect="+encodeURIComponent(u)});
+async function loadReviews(){const c=document.getElementById("reviewsContainer");c.innerHTML="";const s=await getDocs(query(collection(db,"product3_reviews"),orderBy("date","desc")));s.forEach(d=>{const r=d.data();c.innerHTML+=`<div class="rev-card"><h4>${r.name}</h4><div class="rs">${"★".repeat(r.rating)}</div><p>${r.review}</p></div>`})}
+document.getElementById("publishBtn").addEventListener("click",async()=>{const n=document.getElementById("reviewName").value,t=document.getElementById("reviewText").value,rt=parseInt(document.getElementById("reviewRating").value);if(!n||!t){alert("Fill all fields");return}await addDoc(collection(db,"product3_reviews"),{name:n,review:t,rating:rt,date:Date.now()});document.getElementById("reviewName").value="";document.getElementById("reviewText").value="";loadReviews()});
+document.getElementById("shareBtn").addEventListener("click",async()=>{if(navigator.share)await navigator.share({title:"Ember Crown",url:location.href});else{navigator.clipboard.writeText(location.href);alert("Link copied")}});
+loadReviews();
+function setMain(e){document.getElementById("mainImg").src=e.src;document.querySelectorAll(".thumbs img").forEach(t=>t.classList.remove("active"));e.classList.add("active")}
+window.setMain=setMain;
+</script>
+<script>document.addEventListener('contextmenu',e=>e.preventDefault());document.onkeydown=function(e){if(e.keyCode==123||(e.ctrlKey&&e.shiftKey&&(e.keyCode==73||e.keyCode==74))||(e.ctrlKey&&e.keyCode==85))return false}</script>
+<script src="/toast.js"></script>
 </body>
 </html>
