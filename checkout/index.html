@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,6 +77,17 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 .load-spinner{width:44px;height:44px;border:3px solid #ddd;border-top:3px solid var(--t);border-radius:50%;animation:sp .7s linear infinite}
 .load-text{margin-top:14px;font-size:var(--sm);font-weight:600;letter-spacing:.5px;text-align:center}
 .load-text span{display:block;font-size:var(--xs);font-weight:400;opacity:.4}
+
+/* ============ MAP CLEAN - LEAFET LOGO/FLAG HIDE ============ */
+#map{width:100%;height:160px;border-radius:10px;margin-bottom:10px;overflow:hidden;background:#f0ece6}
+.leaflet-container{background:#f0ece6!important}
+.leaflet-control-attribution{display:none!important}
+.leaflet-control-zoom{display:none!important}
+.leaflet-bottom{display:none!important}
+.leaflet-top{display:none!important}
+.leaflet-tile{filter:grayscale(0.1) brightness(0.98)}
+.leaflet-tile-pane{opacity:0.9}
+
 @media(max-width:768px){.hdr{padding:.6rem 1rem}.wrap{padding:70px 4% 20px}.grid{grid-template-columns:1fr;gap:16px}.sum-img{width:100px;height:100px;aspect-ratio:auto;float:left;margin-right:14px;margin-bottom:0}.card{overflow:hidden}}
 </style>
 </head>
@@ -156,12 +166,13 @@ document.getElementById("orderButton").addEventListener("click",async function()
 <div id="luxuryModal" class="modal-overlay"><div class="modal-box"><div class="mtag">RUDOHAGE</div><h2>Cash On Delivery</h2><p>A refundable ₹50 Security Charge is required for COD orders.</p><div class="modal-btns"><button id="cancelCOD" class="btn-c">Cancel</button><button id="continueCOD" class="btn-go">Continue</button></div></div></div>
 <script>
 const LK="pk.7e2f6dce3e940737e4468e4b61b37eb9";let map,marker;
-function initCheckoutMap(){if(map)return;map=L.map('map').setView([28.6139,77.2090],10);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);setTimeout(()=>map.invalidateSize(),200)}
+function initCheckoutMap(){if(map)return;map=L.map('map',{center:[28.6139,77.2090],zoom:10,attributionControl:!1,zoomControl:!1});L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:''}).addTo(map);setTimeout(()=>map.invalidateSize(),200)}
 window.initCheckoutMap=initCheckoutMap;
 document.getElementById("detectLocation").addEventListener("click",()=>{if(!map)initCheckoutMap();navigator.geolocation.getCurrentPosition(async p=>{const lat=p.coords.latitude,lon=p.coords.longitude;map.setView([lat,lon],15);if(marker)map.removeLayer(marker);marker=L.marker([lat,lon]).addTo(map);try{const r=await fetch(`https://us1.locationiq.com/v1/reverse?key=${LK}&lat=${lat}&lon=${lon}&format=json`);const d=await r.json();document.getElementById("address").value=d.display_name||"";document.getElementById("city").value=d.address.city||d.address.town||d.address.village||"";document.getElementById("state").value=d.address.state||"";document.getElementById("pincode").value=d.address.postcode||""}catch(e){console.log(e)}},()=>{alert("Location access denied")})});
 </script>
 <script>document.addEventListener('contextmenu',e=>e.preventDefault());document.onkeydown=function(e){if(e.keyCode==123||(e.ctrlKey&&e.shiftKey&&e.keyCode==73)||(e.ctrlKey&&e.shiftKey&&e.keyCode==74)||(e.ctrlKey&&e.keyCode==85))return false}</script>
 <div id="loadingOverlay" class="load-overlay"><div class="load-spinner"></div><div class="load-text" id="loadingText">Processing Order<span id="loadingSubText">Preparing checkout...</span></div></div>
+
 <script src="/toast.js"></script>
 </body>
 </html>
