@@ -1,190 +1,217 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"><link rel="icon" type="image/png" href="/logo.png"><title>Checkout | RUDOHAGE</title><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="icon" type="image/png" href="/logo.png">
+<title>RUDOHAGE | Checkout</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Manrope:wght@300;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 <style>
-:root{--bg:#f6f2ea;--t:#111;--m:rgba(20,20,20,.5);--a:#a48b74;--r:12px;--xxs:.6rem;--xs:.7rem;--sm:.8rem;--bs:.9rem;--md:1rem;--lg:1.2rem;--xl:1.5rem;--2xl:1.8rem}
-*{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-height:1.5;overflow-x:hidden}
-.hdr{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:.7rem 1.5rem;background:rgba(246,242,234,.8);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.04);display:flex;align-items:center;justify-content:space-between}
-.brand{text-decoration:none;color:var(--t);font-family:'Cormorant Garamond',serif;font-size:var(--lg);font-weight:700}
-.back{text-decoration:none;color:var(--m);font-size:var(--xxs);letter-spacing:2px;text-transform:uppercase}
-.scheck{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;gap:14px}
-.scheck .ld{width:36px;height:36px;border:3px solid #ddd;border-top:3px solid var(--t);border-radius:50%;animation:sp .7s linear infinite}
-.scheck span{font-size:var(--xxs);letter-spacing:2px;text-transform:uppercase;opacity:.4}
-@keyframes sp{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-.wrap{max-width:900px;margin:0 auto;padding:80px 3% 20px;display:none}
-.hero{text-align:center;margin-bottom:20px}
-.hero span{letter-spacing:3px;font-size:9px;opacity:.35;text-transform:uppercase}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:var(--xl);margin:5px 0}
-.hero p{font-size:var(--xs);opacity:.45;max-width:400px;margin:auto}
-.divider{width:50px;height:1px;background:var(--a);margin:20px auto;opacity:.4}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
-.card{background:#fff;border-radius:var(--r);box-shadow:0 3px 15px rgba(0,0,0,.03);padding:18px 20px 22px}
-.sum-img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;margin-bottom:12px}
-.tag{font-size:8px;letter-spacing:3px;opacity:.3;text-transform:uppercase;margin-bottom:2px}
-.card h2,.card h3{font-family:'Cormorant Garamond',serif;font-weight:700}
-.card h2{font-size:var(--lg)}
-.card h3{font-size:var(--md);margin-bottom:10px}
-.one{font-size:var(--xs);opacity:.45;margin-bottom:10px}
-.prc{font-family:'Cormorant Garamond',serif;font-size:var(--xl);font-weight:700}
-.prc small{font-size:var(--xxs);opacity:.35;font-weight:400}
-.extra{font-size:var(--xxs);opacity:.4;margin-top:2px}
-.cert{display:flex;flex-direction:column;gap:4px;margin:12px 0}
-.cert div{font-size:var(--xs);opacity:.45;display:flex;align-items:center;gap:5px}
-.cert i{color:var(--a);font-size:9px}
-.arch{background:#111;color:#fff;padding:8px 12px;border-radius:10px;font-size:var(--xxs);display:flex;align-items:center;gap:7px;margin-top:10px}
-.arch i{font-size:13px;color:var(--a)}
-.arch strong{font-weight:600}
-.form-card input,.form-card textarea{width:100%;padding:10px 12px;margin-bottom:8px;border:none;background:#f5f3ef;border-radius:8px;font-size:var(--xs);font-family:'Manrope',sans-serif;outline:none}
-.form-card textarea{resize:vertical;min-height:60px}
-.loc-btn{width:100%;padding:9px;margin-bottom:8px;border:none;background:var(--t);color:#fff;border-radius:8px;cursor:pointer;font-size:var(--xs);font-weight:600;letter-spacing:1px;font-family:'Manrope',sans-serif;display:flex;align-items:center;justify-content:center;gap:5px}
-#map{width:100%;height:160px;border-radius:10px;margin-bottom:10px;overflow:hidden}
-.leaflet-control-attribution{font-size:6px!important;opacity:.15!important}
-.pay-drop{position:relative;margin-bottom:12px}
-.pay-sel{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:10px 14px;border-radius:10px;cursor:pointer;font-size:var(--sm);font-weight:600;box-shadow:0 2px 10px rgba(0,0,0,.03)}
-.pay-sel span{display:flex;align-items:center;gap:6px}
-.pay-sel i{font-size:13px;color:var(--a)}
-.darr{font-size:10px;opacity:.3;transition:.3s}
-.pay-list{display:none;margin-top:6px;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 6px 20px rgba(0,0,0,.05)}
-.pay-list.on{display:block}
-.pay-opt{padding:11px 16px;cursor:pointer;font-size:var(--sm);display:flex;align-items:center;gap:8px;transition:.2s}
-.pay-opt:hover{background:#f5f3ef}
-.pay-opt i{color:var(--a);font-size:12px;width:16px}
-.order-btn{width:100%;padding:12px;background:var(--a);color:#fff;border:none;border-radius:50px;cursor:pointer;font-size:var(--sm);font-weight:600;letter-spacing:1.5px;text-transform:uppercase;font-family:'Manrope',sans-serif;transition:.3s;margin-top:4px}
-.order-btn:hover{background:#8a715c;transform:translateY(-2px)}
-.trust{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
-.trust div{font-size:var(--xxs);opacity:.4;display:flex;align-items:center;gap:3px}
-.trust i{color:var(--a);font-size:9px}
-.fnote{text-align:center;margin-top:25px;font-size:var(--xxs);opacity:.35;line-height:1.7}
-.sig{text-align:center;padding:25px 20px 20px}
-.sig p{letter-spacing:4px;text-transform:uppercase;opacity:.2;font-size:var(--xxs);margin-bottom:4px}
-.sig h2{font-family:'Cormorant Garamond',serif;font-size:var(--lg);font-weight:700}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;justify-content:center;align-items:center;z-index:9999;padding:15px}
-.modal-overlay.on{display:flex}
-.modal-box{width:100%;max-width:380px;background:#fff;padding:25px 20px;border-radius:20px;text-align:center;box-shadow:0 15px 50px rgba(0,0,0,.12)}
-.modal-box .mtag{letter-spacing:3px;font-size:9px;opacity:.35;margin-bottom:8px;text-transform:uppercase}
-.modal-box h2{font-family:'Cormorant Garamond',serif;font-size:var(--lg);margin-bottom:8px}
-.modal-box p{font-size:var(--sm);opacity:.5;line-height:1.6;margin-bottom:18px}
-.modal-btns{display:flex;gap:8px}
-.modal-btns button{flex:1;padding:11px;border:none;border-radius:50px;cursor:pointer;font-weight:600;font-size:var(--sm);font-family:'Manrope',sans-serif;letter-spacing:.5px}
-.btn-c{background:#f3f3f3;color:var(--t)}
-.btn-go{background:var(--t);color:#fff}
-.load-overlay{position:fixed;inset:0;background:rgba(255,255,255,.05);backdrop-filter:blur(6px);display:none;justify-content:center;align-items:center;flex-direction:column;z-index:99999}
-.load-overlay.on{display:flex}
-.load-spinner{width:44px;height:44px;border:3px solid #ddd;border-top:3px solid var(--t);border-radius:50%;animation:sp .7s linear infinite}
-.load-text{margin-top:14px;font-size:var(--sm);font-weight:600;letter-spacing:.5px;text-align:center}
-.load-text span{display:block;font-size:var(--xs);font-weight:400;opacity:.4}
-@media(max-width:768px){
-.hdr{padding:.6rem 1rem}
-.wrap{padding:70px 4% 20px}
-.grid{grid-template-columns:1fr;gap:16px}
-.sum-img{width:100px;height:100px;aspect-ratio:auto;float:left;margin-right:14px;margin-bottom:0}
-.card{overflow:hidden}
-}
+:root{--bg:#f6f2ea;--text:#111;}*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--text);padding:120px 8% 40px;}
+.checkout-header{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:1.2rem 2rem;background:rgba(246,242,234,.65);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,.08);}
+.logo{text-decoration:none;color:#111;font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:600;}
+.session-check{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;gap:18px;}
+.session-check .loader{width:46px;height:46px;border:3px solid #ddd;border-top:3px solid #111;border-radius:50%;animation:spinSession 1s linear infinite;}
+.session-check span{font-size:12px;letter-spacing:2px;text-transform:uppercase;opacity:.55;}
+@keyframes spinSession{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+.hero{text-align:center;margin-bottom:60px;}.hero span{letter-spacing:4px;font-size:12px;opacity:.6;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:2rem;margin-top:15px;margin-bottom:15px;}
+.hero p{max-width:600px;margin:auto;line-height:1.8;opacity:.75;}.luxury-line{width:120px;height:1px;background:#111;margin:40px auto;opacity:.2;}
+.checkout-grid{max-width:1200px;margin:auto;display:grid;grid-template-columns:420px 1fr;gap:40px;align-items:start;}
+.checkout-image{width:100%;border-radius:20px;margin-bottom:25px;box-shadow:0 15px 40px rgba(0,0,0,.08);}
+.summary-card,.form-card{background:white;padding:35px;border-radius:24px;box-shadow:0 10px 40px rgba(0,0,0,.05);}
+.small-title{font-size:11px;letter-spacing:4px;opacity:.6;margin-bottom:20px;}.product-name{font-family:'Cormorant Garamond',serif;font-size:3rem;margin-bottom:10px;}
+.oneofone{opacity:.65;margin-bottom:25px;}.price{font-size:2rem;font-weight:700;margin-bottom:30px;}.certificate div{margin-bottom:10px;}
+.archive-box{background:#111;color:white;padding:18px 22px;border-radius:16px;margin-top:25px;width:100%;}
+.status-label{font-size:11px;letter-spacing:4px;opacity:.7;margin-bottom:8px;}.status-value{font-family:'Cormorant Garamond',serif;font-size:1.8rem;}
+.form-card h2{font-family:'Cormorant Garamond',serif;font-size:2rem;margin-bottom:20px;}
+input,textarea,select{width:100%;padding:16px;margin-bottom:18px;border:none;background:#f4f4f4;border-radius:14px;font-size:15px;}
+textarea{resize:none;height:120px;}
+#paymentMethod{width:100%;padding:18px 20px;border:none;border-radius:18px;background:white;font-size:15px;font-weight:600;font-family:'Manrope',sans-serif;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.05);transition:.3s;appearance:none;-webkit-appearance:none;-moz-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='black' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 5.646a.5.5 0 0 1 .708 0L8 11.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 18px center;padding-right:50px;}
+#paymentMethod:hover{transform:translateY(-2px);box-shadow:0 15px 35px rgba(0,0,0,.08);}#paymentMethod:focus{outline:none;box-shadow:0 0 0 2px #111;}
+.place-order{width:100%;padding:18px;background:black;color:white;border:none;border-radius:50px;cursor:pointer;font-size:15px;letter-spacing:2px;}
+.trust-box{margin-top:25px;line-height:2;opacity:.75;}.footer-note{margin-top:30px;text-align:center;opacity:.65;font-size:14px;line-height:1.8;}
+@media(max-width:768px){.checkout-grid{grid-template-columns:1fr;}.summary-card,.form-card{width:100%;}.product-name{font-size:2.2rem;}body{padding:90px 20px 20px;}.hero h1{font-size:2rem;}}
+.signature-footer{text-align:center;margin-top:80px;}.signature-footer p{letter-spacing:5px;font-size:11px;opacity:.6;text-transform:uppercase;}.signature-footer h2{font-family:'Cormorant Garamond',serif;font-size:2rem;margin-top:15px;}
+.luxury-modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;justify-content:center;align-items:center;z-index:9999;}.luxury-modal.active{display:flex;}
+.luxury-box{width:90%;max-width:500px;background:white;padding:40px;border-radius:30px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.15);}
+.luxury-tag{letter-spacing:4px;font-size:11px;opacity:.6;margin-bottom:15px;}.luxury-box h2{font-family:'Cormorant Garamond',serif;font-size:2.2rem;margin-bottom:15px;}
+.luxury-box p{line-height:1.8;opacity:.75;margin-bottom:30px;}.luxury-buttons{display:flex;gap:12px;}.luxury-buttons button{flex:1;padding:15px;border:none;border-radius:50px;cursor:pointer;font-weight:600;}
+#cancelCOD{background:#f3f3f3;}#continueCOD{background:#111;color:white;}
+.location-btn{width:100%;padding:16px;margin-bottom:18px;border:none;background:#111;color:#fff;border-radius:14px;cursor:pointer;font-size:15px;}
+#map{width:100%;height:300px;border-radius:18px;margin-bottom:20px;overflow:hidden;}.leaflet-control-attribution{font-size:7px !important;opacity:0.2 !important;}
+.loading-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.05);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;justify-content:center;align-items:center;flex-direction:column;z-index:99999;}
+.loading-overlay.active{display:flex;}.loader{width:60px;height:60px;border:4px solid #ddd;border-top:4px solid #111;border-radius:50%;animation:spin 1s linear infinite;}
+.loading-text{margin-top:24px;font-size:15px;font-weight:600;letter-spacing:1px;text-align:center;line-height:1.8;}.loading-text span{display:block;font-size:13px;font-weight:400;opacity:.65;letter-spacing:.5px;}
+@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+.payment-dropdown{position:relative;margin-bottom:20px;}.payment-list{display:none;margin-top:10px;background:white;border-radius:18px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,.08);}
+.payment-list.active{display:block;}.payment-option{padding:16px 18px;cursor:pointer;transition:.3s;}.payment-option:hover{background:#f5f5f5;}
+.payment-selected{display:flex;justify-content:space-between;align-items:center;background:white;padding:18px;border-radius:18px;cursor:pointer;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.05);}
+.dropdown-arrow{font-size:20px;transition:.3s;}.payment-option i,#selectedText i{width:22px;margin-right:10px;font-size:15px;opacity:.75;}
 </style>
 </head>
 <body>
-<div class="scheck" id="sessionCheck"><div class="ld"></div><span>Verifying Access...</span></div>
-<header class="hdr"><a href="/" class="brand">RUDOHAGE</a><a href="/" class="back">← Back</a></header>
-<div class="wrap" id="checkoutContent">
-<div class="hero"><span>Checkout</span><h1>Complete Your Order</h1><p>Handcrafted piece prepared individually for its owner.</p></div>
-<div class="divider"></div>
-<div class="grid">
-<div class="card">
-<img id="productImage" class="sum-img" src="https://via.placeholder.com/600x600" alt="Product">
-<div class="tag">Order Summary</div>
-<h2 id="productName">Loading...</h2>
-<div class="one">One-of-One Creation</div>
-<div class="prc">₹<span id="productPrice"></span><small> incl.</small></div>
-<div id="extraCharge" class="extra"></div>
-<div class="cert"><div><i class="fas fa-check-circle"></i> Crafted by RUDOHAGE</div><div><i class="fas fa-gem"></i> Handmade Creation</div><div><i class="fas fa-box"></i> Secure Packaging</div><div><i class="fas fa-truck"></i> Tracked Delivery</div></div>
-<div class="arch"><i class="fas fa-archive"></i> <strong>Active Piece</strong></div>
+<div class="session-check" id="sessionCheck"><div class="loader"></div><span>Verifying Access...</span></div>
+<header class="checkout-header"><a href="/" class="logo">RUDOHAGE</a></header>
+<div id="checkoutContent" style="display:none;">
+<section class="hero"><span>CHECKOUT</span><h1>Complete Your Order</h1><p>Every RUDOHAGE piece is handcrafted and prepared individually for its owner.</p></section>
+<div class="luxury-line"></div>
+<div class="checkout-grid">
+<div class="summary-card">
+<img id="productImage" class="checkout-image" src="https://via.placeholder.com/600x600">
+<div class="small-title">ORDER SUMMARY</div>
+<div class="product-name" id="productName">Loading...</div>
+<div class="oneofone">One-of-One Creation</div>
+<div class="price">₹<span id="productPrice"></span></div>
+<div id="extraCharge" style="margin-top:10px;color:#777;font-size:14px;"></div>
+<div class="certificate"><div>✓ Crafted by RUDOHAGE</div><div>✓ Handmade Creation</div><div>✓ Secure Packaging</div><div>✓ Tracked Delivery</div></div>
+<div class="archive-box"><div class="status-label">ARCHIVE STATUS</div><div class="status-value">ACTIVE PIECE</div></div>
 </div>
-<div class="card form-card">
-<h3>Shipping</h3>
+<div class="form-card">
+<h2>Shipping Details</h2>
 <input type="text" placeholder="Full Name">
 <input type="text" placeholder="Phone Number">
-<button type="button" id="detectLocation" class="loc-btn">📍 Use Current Location</button>
+<button type="button" id="detectLocation" class="location-btn">📍 Use Current Location</button>
 <div id="map"></div>
 <textarea id="address" placeholder="Full Address"></textarea>
 <input id="city" type="text" placeholder="City">
 <input id="state" type="text" placeholder="State">
 <input id="pincode" type="text" placeholder="Pincode">
-<h3>Payment</h3>
-<div class="pay-drop">
-<div class="pay-sel" id="paymentSelected"><span><i class="fa-solid fa-qrcode"></i> UPI</span><span class="darr">▾</span></div>
-<div class="pay-list" id="paymentList">
-<div class="pay-opt" data-value="UPI"><i class="fa-solid fa-qrcode"></i> UPI</div>
-<div class="pay-opt" data-value="CARD"><i class="fa-regular fa-credit-card"></i> Card</div>
-<div class="pay-opt" data-value="NETBANKING"><i class="fa-solid fa-building-columns"></i> Net Banking</div>
-<div class="pay-opt" data-value="COD"><i class="fa-solid fa-box"></i> Cash On Delivery</div>
+<h2>Payment Method</h2>
+<div class="payment-dropdown">
+<div class="payment-selected" id="paymentSelected"><span id="selectedText"><i class="fa-solid fa-qrcode"></i>UPI</span><span class="dropdown-arrow">></span></div>
+<div class="payment-list" id="paymentList">
+<div class="payment-option" data-value="UPI"><i class="fa-solid fa-qrcode"></i> ⌁ UPI</div>
+<div class="payment-option" data-value="CARD"><i class="fa-regular fa-credit-card"></i> ⌁ Credit / Debit Card</div>
+<div class="payment-option" data-value="NETBANKING"><i class="fa-solid fa-building-columns"></i> ⌁ Net Banking</div>
+<div class="payment-option" data-value="COD"><i class="fa-solid fa-box"></i> ⌁ Cash On Delivery</div>
 </div>
 </div>
 <input type="hidden" id="paymentMethod" value="UPI">
-<button class="order-btn">Complete Order</button>
-<div class="trust"><div><i class="fas fa-shield-halved"></i> Secure</div><div><i class="fas fa-hand-sparkles"></i> Handcrafted</div><div><i class="fas fa-truck-fast"></i> Tracked</div></div>
+<button class="place-order">COMPLETE ORDER</button>
+<div class="trust-box">✓ Secure Checkout<br>✓ Handcrafted Order<br>✓ Tracked Delivery<br>✓ Premium Packaging</div>
 </div>
 </div>
-<div class="fnote">Every RUDOHAGE Piece Is Handcrafted And Prepared Individually For Its Owner.</div>
-<div class="sig"><p>Not Produced. Crafted.</p><h2>RUDOHAGE</h2></div>
+<div class="footer-note">Every RUDOHAGE Piece Is Handcrafted<br>And Prepared Individually For Its Owner.</div>
+<div class="signature-footer"><p>Not Produced. Crafted.</p><h2>RUDOHAGE</h2></div>
 </div>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-const fc={apiKey:"AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",authDomain:"rudohage.firebaseapp.com",projectId:"rudohage",storageBucket:"rudohage.firebasestorage.app",messagingSenderId:"487042116246",appId:"1:487042116246:web:990d65636addd6d653f0b7",measurementId:"G-6GLB5PPXMY"};
-const app=initializeApp(fc),auth=getAuth(app),db=getFirestore(app);
-const BACKEND="https://razorpay-backend-6yg5.onrender.com",RAZORPAY_KEY="rzp_live_T2N3YbZ3iKazSC";
-let currentUser=null;
-onAuthStateChanged(auth,async user=>{
-if(!user){window.location.href="/login/?redirect="+encodeURIComponent(window.location.href);return}
-const snap=await getDoc(doc(db,"users",user.uid)),data=snap.exists()?snap.data():{};
-if(data.emailVerified===false){window.location.href="/verify-email/?redirect="+encodeURIComponent(window.location.href);return}
-currentUser=user;document.getElementById("sessionCheck").style.display="none";document.getElementById("checkoutContent").style.display="block";
-if(window.initCheckoutMap)setTimeout(()=>window.initCheckoutMap(),50);
+const firebaseConfig = { apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E", authDomain: "rudohage.firebaseapp.com", projectId: "rudohage", storageBucket: "rudohage.firebasestorage.app", messagingSenderId: "487042116246", appId: "1:487042116246:web:990d65636addd6d653f0b7", measurementId: "G-6GLB5PPXMY" };
+const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app);
+const BACKEND = "https://razorpay-backend-6yg5.onrender.com"; const RAZORPAY_KEY = "rzp_live_T2N3YbZ3iKazSC";
+let currentUser = null;
+onAuthStateChanged(auth, async (user) => {
+  if(!user){ window.location.href = "/login/?redirect=" + encodeURIComponent(window.location.href); return; }
+  const snap = await getDoc(doc(db,"users",user.uid)); const data = snap.exists() ? snap.data() : {};
+  if(data.emailVerified === false){ window.location.href = "/verify-email/?redirect=" + encodeURIComponent(window.location.href); return; }
+  currentUser = user; document.getElementById("sessionCheck").style.display = "none"; document.getElementById("checkoutContent").style.display = "block";
+  if(window.initCheckoutMap){ setTimeout(() => window.initCheckoutMap(), 50); }
 });
-const params=new URLSearchParams(window.location.search),product=params.get("product")||"RUDOHAGE Piece";
-const pData={"Inferno Core":3000,"Crimson Orbit":2500,"Ember Crown":2500};
-if(!pData[product]){document.body.innerHTML="<h1>Invalid Product</h1>";throw new Error("Fake product blocked")}
-const price=pData[product]||0;
-document.getElementById("productName").innerText=product;document.getElementById("productPrice").innerText=price;
-if(product==="Inferno Core")document.getElementById("productImage").src="https://rudohage.com/image/fire-clock-1.png";
-if(product==="Crimson Orbit")document.getElementById("productImage").src="https://rudohage.com/image/fire-clock-2.png";
-if(product==="Ember Crown")document.getElementById("productImage").src="https://rudohage.com/image/fire-clock-3.png";
-const pSel=document.getElementById("paymentSelected"),pList=document.getElementById("paymentList"),pInput=document.getElementById("paymentMethod");
-pSel.onclick=()=>{pList.classList.toggle("on");const a=document.querySelector(".darr");a.style.transform=pList.classList.contains("on")?"rotate(180deg)":"rotate(0deg)"};
-document.querySelectorAll(".pay-opt").forEach(o=>{o.onclick=()=>{pInput.value=o.dataset.value;pSel.querySelector("span").innerHTML=o.innerHTML;pList.classList.remove("on");if(o.dataset.value==="COD"){document.getElementById("productPrice").innerText=Number(price)+50;document.getElementById("extraCharge").innerHTML="COD Charge: ₹50"}else{document.getElementById("productPrice").innerText=price;document.getElementById("extraCharge").innerHTML=""}}});
-async function sendConfirm(oid,od){try{await fetch(BACKEND+"/order-confirmed",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({orderId:oid,order:{product:od.product,price:od.price,payment:od.payment,city:od.city,pincode:od.pincode,email:od.email}})})}catch(e){console.log(e)}}
-document.querySelector(".order-btn").addEventListener("click",async()=>{
-if(!currentUser){window.location.href="/login/?redirect="+encodeURIComponent(window.location.href);return}
-const name=document.querySelector('input[placeholder="Full Name"]').value,phone=document.querySelector('input[placeholder="Phone Number"]').value,address=document.querySelector("textarea").value,city=document.querySelector('input[placeholder="City"]').value,pincode=document.querySelector('input[placeholder="Pincode"]').value,pm=document.getElementById("paymentMethod").value;
-if(!name||!phone||!address||!city||!pincode){alert("Fill all details");return}
-if(phone.length!==10){alert("Valid Phone");return}
-if(pincode.length!==6){alert("Valid Pincode");return}
-try{
-if(pm==="COD"){
-const modal=document.getElementById("luxuryModal");modal.classList.add("on");
-document.getElementById("cancelCOD").onclick=()=>{modal.classList.remove("on")};
-document.getElementById("continueCOD").onclick=async()=>{try{modal.classList.remove("on");document.getElementById("loadingOverlay").classList.add("on");startLoader();const res=await fetch(BACKEND+"/create-order",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({product,cod:true})});const order=await res.json();if(!order||!order.id)throw new Error("No order");const opts={key:RAZORPAY_KEY,amount:order.amount,currency:"INR",order_id:order.id,name:"RUDOHAGE",description:"COD Security",prefill:{name,contact:phone},handler:async function(r){const od={uid:currentUser.uid,email:currentUser.email,name,phone,address,city,pincode,product,price:Number(price),codCharge:50,payment:"COD",paymentId:r.razorpay_payment_id,status:"COD Pending",createdAt:Date.now()};const dr=await addDoc(collection(db,"orders"),od);await sendConfirm(dr.id,od);window.location.href=`/success/?orderId=${dr.id}`}};const rzp=new Razorpay(opts);stopLoader();document.getElementById("loadingOverlay").classList.remove("on");rzp.open()}catch(err){document.getElementById("loadingOverlay").classList.remove("on");alert("COD Failed")}};return}
-document.getElementById("loadingOverlay").classList.add("on");startLoader();const res=await fetch(BACKEND+"/create-order",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({product})});const order=await res.json();if(!order.id)throw new Error("No order");const opts={key:RAZORPAY_KEY,amount:order.amount,currency:"INR",order_id:order.id,name:"RUDOHAGE",description:product,prefill:{name,contact:phone},handler:async function(r){const od={uid:currentUser.uid,email:currentUser.email,name,phone,address,city,pincode,product,price:Number(price),payment:pm,paymentId:r.razorpay_payment_id,status:"Paid",createdAt:Date.now()};const dr=await addDoc(collection(db,"orders"),od);await sendConfirm(dr.id,od);window.location.href=`/success/?orderId=${dr.id}`}};const rzp=new Razorpay(opts);stopLoader();document.getElementById("loadingOverlay").classList.remove("on");rzp.open()}catch(error){stopLoader();document.getElementById("loadingOverlay").classList.remove("on");alert("Order Failed")}});
+const params = new URLSearchParams(window.location.search); const product = params.get("product") || "RUDOHAGE Piece";
+const productData = { "Inferno Core": 3000, "Crimson Orbit": 2500, "Ember Crown": 2500 };
+if(!productData[product]){ document.body.innerHTML = "<h1>Invalid Product</h1>"; throw new Error("Fake product blocked"); }
+const price = productData[product] || 0;
+document.getElementById("productName").innerText = product; document.getElementById("productPrice").innerText = price;
+if(product === "Inferno Core") document.getElementById("productImage").src = "https://rudohage.com/image/fire-clock-1.png";
+if(product === "Crimson Orbit") document.getElementById("productImage").src = "https://rudohage.com/image/fire-clock-2.png";
+if(product === "Ember Crown") document.getElementById("productImage").src = "https://rudohage.com/image/fire-clock-3.png";
+const paymentSelected = document.getElementById("paymentSelected"); const paymentList = document.getElementById("paymentList"); const paymentInput = document.getElementById("paymentMethod");
+paymentSelected.onclick = () => {
+  paymentList.classList.toggle("active"); const arrow = document.querySelector(".dropdown-arrow");
+  arrow.style.transform = paymentList.classList.contains("active") ? "rotate(90deg)" : "rotate(0deg)";
+};
+document.querySelectorAll(".payment-option").forEach(option => {
+  option.onclick = () => {
+    paymentInput.value = option.dataset.value; document.getElementById("selectedText").innerHTML = option.innerHTML; paymentList.classList.remove("active");
+    if(option.dataset.value === "COD"){ document.getElementById("productPrice").innerText = Number(price) + 50; document.getElementById("extraCharge").innerHTML = "COD Security Charge: ₹50"; }
+    else { document.getElementById("productPrice").innerText = price; document.getElementById("extraCharge").innerHTML = ""; }
+  };
+});
+async function sendOrderConfirmation(orderId, orderData){
+  try{ await fetch(BACKEND + "/order-confirmed", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify({ orderId, order: { product: orderData.product, price: orderData.price, payment: orderData.payment, city: orderData.city, pincode: orderData.pincode, email: orderData.email } }) }); }
+  catch(e){ console.log("Confirmation email failed:", e); }
+}
+document.querySelector(".place-order").addEventListener("click", async () => {
+  if(!currentUser){ window.location.href = "/login/?redirect=" + encodeURIComponent(window.location.href); return; }
+  const name = document.querySelector('input[placeholder="Full Name"]').value; const phone = document.querySelector('input[placeholder="Phone Number"]').value;
+  const address = document.querySelector("textarea").value; const city = document.querySelector('input[placeholder="City"]').value; const pincode = document.querySelector('input[placeholder="Pincode"]').value; const paymentMethod = document.getElementById("paymentMethod").value;
+  if(!name || !phone || !address || !city || !pincode){ alert("Please fill all details"); return; }
+  if(phone.length !== 10){ alert("Enter Valid Phone Number"); return; } if(pincode.length !== 6){ alert("Enter Valid Pincode"); return; }
+  try{
+    if(paymentMethod === "COD"){
+      const modal = document.getElementById("luxuryModal"); modal.classList.add("active");
+      document.getElementById("cancelCOD").onclick = () => { modal.classList.remove("active"); };
+      document.getElementById("continueCOD").onclick = async () => {
+        try{
+          modal.classList.remove("active"); document.getElementById("loadingOverlay").classList.add("active"); startLuxuryLoader();
+          const res = await fetch(BACKEND + "/create-order", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify({ product, cod: true }) });
+          const order = await res.json(); if(!order || !order.id){ throw new Error("Order ID not received"); }
+          const options = {
+            key: RAZORPAY_KEY, amount: order.amount, currency: "INR", order_id: order.id, name: "RUDOHAGE", description: "COD Security Charge", prefill: { name, contact: phone },
+            handler: async function(response){
+              const orderData = { uid: currentUser.uid, email: currentUser.email, name, phone, address, city, pincode, product, price: Number(price), codCharge: 50, payment: "COD", paymentId: response.razorpay_payment_id, status: "COD Pending Approval", createdAt: Date.now() };
+              const docRef = await addDoc(collection(db,"orders"), orderData); await sendOrderConfirmation(docRef.id, orderData); window.location.href = `/success/?orderId=${docRef.id}`;
+            }
+          };
+          const rzp = new Razorpay(options); stopLuxuryLoader(); document.getElementById("loadingOverlay").classList.remove("active"); rzp.open();
+        }catch(err){ document.getElementById("loadingOverlay").classList.remove("active"); console.log(err); alert("COD Payment Failed"); }
+      }; return;
+    }
+    document.getElementById("loadingOverlay").classList.add("active"); startLuxuryLoader();
+    const res = await fetch(BACKEND + "/create-order", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify({ product }) });
+    const order = await res.json(); if(!order.id){ throw new Error("Order ID not received"); }
+    const options = {
+      key: RAZORPAY_KEY, amount: order.amount, currency: "INR", order_id: order.id, name: "RUDOHAGE", description: product, prefill: { name, contact: phone },
+      handler: async function(response){
+        const orderData = { uid: currentUser.uid, email: currentUser.email, name, phone, address, city, pincode, product, price: Number(price), payment: paymentMethod, paymentId: response.razorpay_payment_id, status: "Paid", createdAt: Date.now() };
+        const docRef = await addDoc(collection(db,"orders"), orderData); await sendOrderConfirmation(docRef.id, orderData); window.location.href = `/success/?orderId=${docRef.id}`;
+      }
+    };
+    const rzp = new Razorpay(options); stopLuxuryLoader(); document.getElementById("loadingOverlay").classList.remove("active"); rzp.open();
+  }catch(error){ stopLuxuryLoader(); document.getElementById("loadingOverlay").classList.remove("active"); console.log(error); alert("Order Failed"); }
+});
 </script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<div id="luxuryModal" class="modal-overlay"><div class="modal-box"><div class="mtag">RUDOHAGE</div><h2>Cash On Delivery</h2><p>A refundable ₹50 Security Charge is required for COD orders.</p><div class="modal-btns"><button id="cancelCOD" class="btn-c">Cancel</button><button id="continueCOD" class="btn-go">Continue</button></div></div></div>
+<div id="luxuryModal" class="luxury-modal">
+<div class="luxury-box">
+<div class="luxury-tag">RUDOHAGE</div><h2>Cash On Delivery</h2>
+<p>To maintain order authenticity and reduce fraudulent deliveries, a refundable ₹50 Security Charge is required before confirmation.</p>
+<div class="luxury-buttons"><button id="cancelCOD">Cancel</button><button id="continueCOD">Continue</button></div>
+</div>
+</div>
 <script>
-const LK="pk.7e2f6dce3e940737e4468e4b61b37eb9";let map,marker;
-function initCheckoutMap(){if(map)return;map=L.map('map').setView([28.6139,77.2090],10);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);setTimeout(()=>map.invalidateSize(),200)}
-window.initCheckoutMap=initCheckoutMap;
-document.getElementById("detectLocation").addEventListener("click",()=>{if(!map)initCheckoutMap();navigator.geolocation.getCurrentPosition(async p=>{const lat=p.coords.latitude,lon=p.coords.longitude;map.setView([lat,lon],15);if(marker)map.removeLayer(marker);marker=L.marker([lat,lon]).addTo(map);const r=await fetch(`https://us1.locationiq.com/v1/reverse?key=${LK}&lat=${lat}&lon=${lon}&format=json`);const d=await r.json();document.getElementById("address").value=d.display_name||"";document.getElementById("city").value=d.address.city||d.address.town||d.address.village||"";document.getElementById("state").value=d.address.state||"";document.getElementById("pincode").value=d.address.postcode||""},()=>{alert("Location denied")})});
+const LOCATIONIQ_KEY = "pk.7e2f6dce3e940737e4468e4b61b37eb9"; let map, marker;
+function initCheckoutMap(){ if(map) return; map = L.map('map').setView([28.6139,77.2090], 10); L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map); setTimeout(() => map.invalidateSize(), 200); }
+window.initCheckoutMap = initCheckoutMap;
+document.getElementById("detectLocation").addEventListener("click", () => {
+  if(!map) initCheckoutMap();
+  navigator.geolocation.getCurrentPosition(async(position) => {
+    const lat = position.coords.latitude, lon = position.coords.longitude; map.setView([lat,lon], 15); if(marker) map.removeLayer(marker); marker = L.marker([lat,lon]).addTo(map);
+    const response = await fetch(`https://us1.locationiq.com/v1/reverse?key=${LOCATIONIQ_KEY}&lat=${lat}&lon=${lon}&format=json`); const data = await response.json();
+    document.getElementById("address").value = data.display_name || ""; document.getElementById("city").value = data.address.city || data.address.town || data.address.village || ""; document.getElementById("state").value = data.address.state || ""; document.getElementById("pincode").value = data.address.postcode || "";
+  }, () => { alert("Location permission denied"); });
+});
 </script>
-<script>document.addEventListener('contextmenu',e=>e.preventDefault());document.onkeydown=function(e){if(e.keyCode==123||(e.ctrlKey&&e.shiftKey&&e.keyCode==73)||(e.ctrlKey&&e.shiftKey&&e.keyCode==74)||(e.ctrlKey&&e.keyCode==85))return false}</script>
-<div id="loadingOverlay" class="load-overlay"><div class="load-spinner"></div><div class="load-text" id="loadingText">Processing Order<span id="loadingSubText">Preparing checkout...</span></div></div>
 <script>
-let s1,s2,s3;
-function startLoader(){const m=document.getElementById("loadingText");m.innerHTML=`Processing Order<span id="loadingSubText">Preparing checkout...</span>`;s1=setTimeout(()=>{m.innerHTML=`Verifying<span id="loadingSubText">Authenticating...</span>`},5000);s2=setTimeout(()=>{m.innerHTML=`Securing<span id="loadingSubText">Encrypting...</span>`},15000);s3=setTimeout(()=>{m.innerHTML=`Connecting<span id="loadingSubText">Loading payment...</span>`},25000)}
-function stopLoader(){clearTimeout(s1);clearTimeout(s2);clearTimeout(s3)}
+document.addEventListener('contextmenu', event => event.preventDefault());
+document.onkeydown = function(e) { if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.shiftKey && e.keyCode == 74) || (e.ctrlKey && e.keyCode == 85)) return false; };
+</script>
+<div id="loadingOverlay" class="loading-overlay"><div class="loader"></div><div class="loading-text" id="loadingText">Processing Order<span id="loadingSubText">Preparing secure checkout...</span></div></div>
+<script>
+let loadingStep1, loadingStep2, loadingStep3;
+function startLuxuryLoader(){
+  const main = document.getElementById("loadingText"); main.innerHTML = `Processing Order<span id="loadingSubText">Preparing secure checkout...</span>`;
+  loadingStep1 = setTimeout(() => { main.innerHTML = `Verifying Credentials<span id="loadingSubText">Authenticating payment session...</span>`; }, 5000);
+  loadingStep2 = setTimeout(() => { main.innerHTML = `Securing Payment<span id="loadingSubText">Establishing encrypted connection...</span>`; }, 15000);
+  loadingStep3 = setTimeout(() => { main.innerHTML = `Connecting To Banking Network<span id="loadingSubText">Please wait while payment loads...</span>`; }, 25000);
+}
+function stopLuxuryLoader(){ clearTimeout(loadingStep1); clearTimeout(loadingStep2); clearTimeout(loadingStep3); }
 </script>
 <script src="/toast.js"></script>
 </body>
