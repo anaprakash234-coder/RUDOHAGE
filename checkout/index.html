@@ -1,7 +1,8 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"><meta name="google" content="notranslate"><link rel="icon" type="image/png" href="/logo.png"><title>Checkout | RUDOHAGE</title><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/><script src="https://pay.google.com/gp/p/js/pay.js" async></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"><link rel="icon" type="image/png" href="/logo.png"><title>Checkout | RUDOHAGE</title><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 <style>
 :root{--bg:#f6f2ea;--t:#111;--m:rgba(20,20,20,.5);--a:#a48b74;--r:12px;--xxs:.6rem;--xs:.7rem;--sm:.8rem;--bs:.9rem;--md:1rem;--lg:1.2rem;--xl:1.5rem;--2xl:1.8rem}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -40,6 +41,7 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 .form-card textarea{resize:vertical;min-height:60px}
 .loc-btn{width:100%;padding:9px;margin-bottom:8px;border:none;background:var(--t);color:#fff;border-radius:8px;cursor:pointer;font-size:var(--xs);font-weight:600;letter-spacing:1px;font-family:'Manrope',sans-serif;display:flex;align-items:center;justify-content:center;gap:5px}
 #map{width:100%;height:160px;border-radius:10px;margin-bottom:10px;overflow:hidden}
+.leaflet-control-attribution{font-size:6px!important;opacity:.15!important}
 .pay-drop{position:relative;margin-bottom:12px}
 .pay-sel{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:10px 14px;border-radius:10px;cursor:pointer;font-size:var(--sm);font-weight:600;box-shadow:0 2px 10px rgba(0,0,0,.03)}
 .pay-sel span{display:flex;align-items:center;gap:6px}
@@ -50,11 +52,8 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 .pay-opt{padding:11px 16px;cursor:pointer;font-size:var(--sm);display:flex;align-items:center;gap:8px;transition:.2s}
 .pay-opt:hover{background:#f5f3ef}
 .pay-opt i{color:var(--a);font-size:12px;width:16px}
-.pay-opt .badge{font-size:8px;background:#a48b74;color:#fff;padding:2px 6px;border-radius:10px;margin-left:auto}
-.pay-opt .tag-google{background:#4285f4;color:#fff;font-size:8px;padding:2px 8px;border-radius:10px;margin-left:auto}
 .order-btn{width:100%;padding:12px;background:var(--a);color:#fff;border:none;border-radius:50px;cursor:pointer;font-size:var(--sm);font-weight:600;letter-spacing:1.5px;text-transform:uppercase;font-family:'Manrope',sans-serif;transition:.3s;margin-top:4px}
 .order-btn:hover{background:#8a715c;transform:translateY(-2px)}
-.order-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
 .trust{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
 .trust div{font-size:var(--xxs);opacity:.4;display:flex;align-items:center;gap:3px}
 .trust i{color:var(--a);font-size:9px}
@@ -77,18 +76,13 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 .load-spinner{width:44px;height:44px;border:3px solid #ddd;border-top:3px solid var(--t);border-radius:50%;animation:sp .7s linear infinite}
 .load-text{margin-top:14px;font-size:var(--sm);font-weight:600;letter-spacing:.5px;text-align:center}
 .load-text span{display:block;font-size:var(--xs);font-weight:400;opacity:.4}
-
-/* ============ MAP CLEAN - LEAFET LOGO/FLAG HIDE ============ */
-#map{width:100%;height:160px;border-radius:10px;margin-bottom:10px;overflow:hidden;background:#f0ece6}
-.leaflet-container{background:#f0ece6!important}
-.leaflet-control-attribution{display:none!important}
-.leaflet-control-zoom{display:none!important}
-.leaflet-bottom{display:none!important}
-.leaflet-top{display:none!important}
-.leaflet-tile{filter:grayscale(0.1) brightness(0.98)}
-.leaflet-tile-pane{opacity:0.9}
-
-@media(max-width:768px){.hdr{padding:.6rem 1rem}.wrap{padding:70px 4% 20px}.grid{grid-template-columns:1fr;gap:16px}.sum-img{width:100px;height:100px;aspect-ratio:auto;float:left;margin-right:14px;margin-bottom:0}.card{overflow:hidden}}
+@media(max-width:768px){
+.hdr{padding:.6rem 1rem}
+.wrap{padding:70px 4% 20px}
+.grid{grid-template-columns:1fr;gap:16px}
+.sum-img{width:100px;height:100px;aspect-ratio:auto;float:left;margin-right:14px;margin-bottom:0}
+.card{overflow:hidden}
+}
 </style>
 </head>
 <body>
@@ -110,8 +104,8 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 </div>
 <div class="card form-card">
 <h3>Shipping</h3>
-<input type="text" id="fullName" placeholder="Full Name">
-<input type="text" id="phoneNumber" placeholder="Phone Number">
+<input type="text" placeholder="Full Name">
+<input type="text" placeholder="Phone Number">
 <button type="button" id="detectLocation" class="loc-btn">📍 Use Current Location</button>
 <div id="map"></div>
 <textarea id="address" placeholder="Full Address"></textarea>
@@ -123,14 +117,13 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 <div class="pay-sel" id="paymentSelected"><span><i class="fa-solid fa-qrcode"></i> UPI</span><span class="darr">▾</span></div>
 <div class="pay-list" id="paymentList">
 <div class="pay-opt" data-value="UPI"><i class="fa-solid fa-qrcode"></i> UPI</div>
-<div class="pay-opt" data-value="GOOGLE_PAY"><i class="fa-brands fa-google-pay"></i> Google Pay <span class="tag-google">Recommended</span></div>
 <div class="pay-opt" data-value="CARD"><i class="fa-regular fa-credit-card"></i> Card</div>
 <div class="pay-opt" data-value="NETBANKING"><i class="fa-solid fa-building-columns"></i> Net Banking</div>
-<div class="pay-opt" data-value="COD"><i class="fa-solid fa-box"></i> Cash On Delivery <span class="badge">+₹50</span></div>
+<div class="pay-opt" data-value="COD"><i class="fa-solid fa-box"></i> Cash On Delivery</div>
 </div>
 </div>
 <input type="hidden" id="paymentMethod" value="UPI">
-<button class="order-btn" id="orderButton">Complete Order</button>
+<button class="order-btn">Complete Order</button>
 <div class="trust"><div><i class="fas fa-shield-halved"></i> Secure</div><div><i class="fas fa-hand-sparkles"></i> Handcrafted</div><div><i class="fas fa-truck-fast"></i> Tracked</div></div>
 </div>
 </div>
@@ -138,41 +131,61 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 <div class="sig"><p>Not Produced. Crafted.</p><h2>RUDOHAGE</h2></div>
 </div>
 <script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-import{getAuth,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-import{getFirestore,collection,addDoc,doc,getDoc}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 const fc={apiKey:"AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",authDomain:"rudohage.firebaseapp.com",projectId:"rudohage",storageBucket:"rudohage.firebasestorage.app",messagingSenderId:"487042116246",appId:"1:487042116246:web:990d65636addd6d653f0b7",measurementId:"G-6GLB5PPXMY"};
 const app=initializeApp(fc),auth=getAuth(app),db=getFirestore(app);
 const BACKEND="https://razorpay-backend-6yg5.onrender.com",RAZORPAY_KEY="rzp_live_T2N3YbZ3iKazSC";
-let currentUser=null,orderEnabled=!0;
-onAuthStateChanged(auth,async user=>{if(!user){window.location.href="/login/?redirect="+encodeURIComponent(window.location.href);return}const snap=await getDoc(doc(db,"users",user.uid)),data=snap.exists()?snap.data():{};if(data.emailVerified===!1){window.location.href="/verify-email/?redirect="+encodeURIComponent(window.location.href);return}currentUser=user;document.getElementById("sessionCheck").style.display="none";document.getElementById("checkoutContent").style.display="block";if(window.initCheckoutMap)setTimeout(()=>window.initCheckoutMap(),50)});
+let currentUser=null;
+onAuthStateChanged(auth,async user=>{
+if(!user){window.location.href="/login/?redirect="+encodeURIComponent(window.location.href);return}
+const snap=await getDoc(doc(db,"users",user.uid)),data=snap.exists()?snap.data():{};
+if(data.emailVerified===false){window.location.href="/verify-email/?redirect="+encodeURIComponent(window.location.href);return}
+currentUser=user;document.getElementById("sessionCheck").style.display="none";document.getElementById("checkoutContent").style.display="block";
+if(window.initCheckoutMap)setTimeout(()=>window.initCheckoutMap(),50);
+});
 const params=new URLSearchParams(window.location.search),product=params.get("product")||"RUDOHAGE Piece";
 const pData={"Inferno Core":3000,"Crimson Orbit":2500,"Ember Crown":2500};
 if(!pData[product]){document.body.innerHTML="<h1>Invalid Product</h1>";throw new Error("Fake product blocked")}
-const basePrice=pData[product]||0;let currentPrice=basePrice;
-document.getElementById("productName").innerText=product;document.getElementById("productPrice").innerText=basePrice;
-const pImg={"Inferno Core":"https://rudohage.com/image/fire-clock-1.png","Crimson Orbit":"https://rudohage.com/image/fire-clock-2.png","Ember Crown":"https://rudohage.com/image/fire-clock-3.png"};if(pImg[product])document.getElementById("productImage").src=pImg[product];
+const price=pData[product]||0;
+document.getElementById("productName").innerText=product;document.getElementById("productPrice").innerText=price;
+if(product==="Inferno Core")document.getElementById("productImage").src="https://rudohage.com/image/fire-clock-1.png";
+if(product==="Crimson Orbit")document.getElementById("productImage").src="https://rudohage.com/image/fire-clock-2.png";
+if(product==="Ember Crown")document.getElementById("productImage").src="https://rudohage.com/image/fire-clock-3.png";
 const pSel=document.getElementById("paymentSelected"),pList=document.getElementById("paymentList"),pInput=document.getElementById("paymentMethod");
-pSel.onclick=()=>{pList.classList.toggle("on");document.querySelector(".darr").style.transform=pList.classList.contains("on")?"rotate(180deg)":"rotate(0deg)"};
-document.querySelectorAll(".pay-opt").forEach(o=>{o.onclick=()=>{const v=o.dataset.value,i=o.querySelector("i").cloneNode(!0),t=o.childNodes[2]?.textContent?.trim()||v;pInput.value=v;pSel.querySelector("span").innerHTML="";pSel.querySelector("span").appendChild(i);pSel.querySelector("span").append(document.createTextNode(" "+t));pList.classList.remove("on");document.querySelector(".darr").style.transform="rotate(0deg)";if(v==="COD"){currentPrice=basePrice+50;document.getElementById("productPrice").innerText=currentPrice;document.getElementById("extraCharge").innerHTML="COD Charge: ₹50"}else{currentPrice=basePrice;document.getElementById("productPrice").innerText=currentPrice;document.getElementById("extraCharge").innerHTML=""}}});
-async function sendConfirm(oid,od){try{await fetch(BACKEND+"/order-confirmed",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({orderId:oid,order:od})})}catch(e){console.log(e)}}
-let s1,s2,s3;
-function startLoader(){const m=document.getElementById("loadingText");m.innerHTML=`Processing Order<span id="loadingSubText">Preparing checkout...</span>`;s1=setTimeout(()=>{m.innerHTML=`Verifying<span id="loadingSubText">Authenticating...</span>`},5e3);s2=setTimeout(()=>{m.innerHTML=`Securing<span id="loadingSubText">Encrypting...</span>`},15e3);s3=setTimeout(()=>{m.innerHTML=`Connecting<span id="loadingSubText">Loading payment...</span>`},25e3)}
-function stopLoader(){clearTimeout(s1);clearTimeout(s2);clearTimeout(s3)}
-document.getElementById("orderButton").addEventListener("click",async function(){if(!orderEnabled)return;if(!currentUser){window.location.href="/login/?redirect="+encodeURIComponent(window.location.href);return}const name=document.getElementById("fullName").value.trim(),phone=document.getElementById("phoneNumber").value.trim(),address=document.getElementById("address").value.trim(),city=document.getElementById("city").value.trim(),state=document.getElementById("state").value.trim(),pincode=document.getElementById("pincode").value.trim(),pm=document.getElementById("paymentMethod").value;if(!name||!phone||!address||!city||!pincode){alert("Fill all shipping details");return}if(phone.length!==10||!/^\d{10}$/.test(phone)){alert("Valid 10-digit phone required");return}if(pincode.length!==6||!/^\d{6}$/.test(pincode)){alert("Valid 6-digit pincode required");return}orderEnabled=!1;this.disabled=!0;this.textContent="Processing...";try{if(pm==="COD"){const modal=document.getElementById("luxuryModal");modal.classList.add("on");document.getElementById("cancelCOD").onclick=()=>{modal.classList.remove("on");orderEnabled=!0;document.getElementById("orderButton").disabled=!1;document.getElementById("orderButton").textContent="Complete Order"};document.getElementById("continueCOD").onclick=async()=>{try{modal.classList.remove("on");document.getElementById("loadingOverlay").classList.add("on");startLoader();const res=await fetch(BACKEND+"/create-order",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({product,cod:!0})});const order=await res.json();if(!order||!order.id)throw new Error("No order");const od={uid:currentUser.uid,email:currentUser.email,name,phone,address,city,state,pincode,product,price:currentPrice,codCharge:50,payment:"COD",paymentId:"COD_"+Date.now(),status:"COD Pending",createdAt:Date.now()};const dr=await addDoc(collection(db,"orders"),od);await sendConfirm(dr.id,od);stopLoader();document.getElementById("loadingOverlay").classList.remove("on");orderEnabled=!0;document.getElementById("orderButton").disabled=!1;document.getElementById("orderButton").textContent="Complete Order";window.location.href=`/success/?orderId=${dr.id}`}catch(err){stopLoader();document.getElementById("loadingOverlay").classList.remove("on");orderEnabled=!0;document.getElementById("orderButton").disabled=!1;document.getElementById("orderButton").textContent="Complete Order";alert("COD failed: "+err.message)}};return}document.getElementById("loadingOverlay").classList.add("on");startLoader();const res=await fetch(BACKEND+"/create-order",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({product,cod:!1})});if(!res.ok){const e=await res.json();throw new Error(e.error||"Order creation failed")}const order=await res.json();if(!order||!order.id)throw new Error("No order ID");const opts={key:RAZORPAY_KEY,amount:order.amount,currency:"INR",order_id:order.id,name:"RUDOHAGE",description:product+" | Handcrafted",prefill:{name,contact:phone,email:currentUser.email},theme:{color:"#a48b74"},modal:{escape:!1,ondismiss:()=>{document.getElementById("loadingOverlay").classList.remove("on");stopLoader();orderEnabled=!0;document.getElementById("orderButton").disabled=!1;document.getElementById("orderButton").textContent="Complete Order";alert("Payment cancelled")}},handler:async function(r){try{if(!r.razorpay_payment_id)throw new Error("No payment ID");const od={uid:currentUser.uid,email:currentUser.email,name,phone,address,city,state,pincode,product,price:currentPrice,payment:pm,paymentId:r.razorpay_payment_id,orderId:r.razorpay_order_id,signature:r.razorpay_signature,status:"Paid",createdAt:Date.now()};const dr=await addDoc(collection(db,"orders"),od);await sendConfirm(dr.id,od);stopLoader();document.getElementById("loadingOverlay").classList.remove("on");orderEnabled=!0;document.getElementById("orderButton").disabled=!1;document.getElementById("orderButton").textContent="Complete Order";window.location.href=`/success/?orderId=${dr.id}`}catch(err){stopLoader();document.getElementById("loadingOverlay").classList.remove("on");orderEnabled=!0;document.getElementById("orderButton").disabled=!1;document.getElementById("orderButton").textContent="Complete Order";alert("Payment verification failed: "+err.message)}}};const rzp=new Razorpay(opts);rzp.on("payment.failed",function(r){console.error("Payment Failed:",r.error);stopLoader();document.getElementById("loadingOverlay").classList.remove("on");orderEnabled=!0;document.getElementById("orderButton").disabled=!1;document.getElementById("orderButton").textContent="Complete Order";let msg="Payment failed. Try again.";if(r.error.code==="PAYMENT_METHOD_NOT_AVAILABLE")msg="Google Pay unavailable. Try UPI.";else if(r.error.description)msg=r.error.description;alert(msg)});stopLoader();document.getElementById("loadingOverlay").classList.remove("on");rzp.open()}catch(err){stopLoader();document.getElementById("loadingOverlay").classList.remove("on");orderEnabled=!0;document.getElementById("orderButton").disabled=!1;document.getElementById("orderButton").textContent="Complete Order";alert("Order failed: "+err.message)}});
+pSel.onclick=()=>{pList.classList.toggle("on");const a=document.querySelector(".darr");a.style.transform=pList.classList.contains("on")?"rotate(180deg)":"rotate(0deg)"};
+document.querySelectorAll(".pay-opt").forEach(o=>{o.onclick=()=>{pInput.value=o.dataset.value;pSel.querySelector("span").innerHTML=o.innerHTML;pList.classList.remove("on");if(o.dataset.value==="COD"){document.getElementById("productPrice").innerText=Number(price)+50;document.getElementById("extraCharge").innerHTML="COD Charge: ₹50"}else{document.getElementById("productPrice").innerText=price;document.getElementById("extraCharge").innerHTML=""}}});
+async function sendConfirm(oid,od){try{await fetch(BACKEND+"/order-confirmed",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({orderId:oid,order:{product:od.product,price:od.price,payment:od.payment,city:od.city,pincode:od.pincode,email:od.email}})})}catch(e){console.log(e)}}
+document.querySelector(".order-btn").addEventListener("click",async()=>{
+if(!currentUser){window.location.href="/login/?redirect="+encodeURIComponent(window.location.href);return}
+const name=document.querySelector('input[placeholder="Full Name"]').value,phone=document.querySelector('input[placeholder="Phone Number"]').value,address=document.querySelector("textarea").value,city=document.querySelector('input[placeholder="City"]').value,pincode=document.querySelector('input[placeholder="Pincode"]').value,pm=document.getElementById("paymentMethod").value;
+if(!name||!phone||!address||!city||!pincode){alert("Fill all details");return}
+if(phone.length!==10){alert("Valid Phone");return}
+if(pincode.length!==6){alert("Valid Pincode");return}
+try{
+if(pm==="COD"){
+const modal=document.getElementById("luxuryModal");modal.classList.add("on");
+document.getElementById("cancelCOD").onclick=()=>{modal.classList.remove("on")};
+document.getElementById("continueCOD").onclick=async()=>{try{modal.classList.remove("on");document.getElementById("loadingOverlay").classList.add("on");startLoader();const res=await fetch(BACKEND+"/create-order",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({product,cod:true})});const order=await res.json();if(!order||!order.id)throw new Error("No order");const opts={key:RAZORPAY_KEY,amount:order.amount,currency:"INR",order_id:order.id,name:"RUDOHAGE",description:"COD Security",prefill:{name,contact:phone},handler:async function(r){const od={uid:currentUser.uid,email:currentUser.email,name,phone,address,city,pincode,product,price:Number(price),codCharge:50,payment:"COD",paymentId:r.razorpay_payment_id,status:"COD Pending",createdAt:Date.now()};const dr=await addDoc(collection(db,"orders"),od);await sendConfirm(dr.id,od);window.location.href=`/success/?orderId=${dr.id}`}};const rzp=new Razorpay(opts);stopLoader();document.getElementById("loadingOverlay").classList.remove("on");rzp.open()}catch(err){document.getElementById("loadingOverlay").classList.remove("on");alert("COD Failed")}};return}
+document.getElementById("loadingOverlay").classList.add("on");startLoader();const res=await fetch(BACKEND+"/create-order",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({product})});const order=await res.json();if(!order.id)throw new Error("No order");const opts={key:RAZORPAY_KEY,amount:order.amount,currency:"INR",order_id:order.id,name:"RUDOHAGE",description:product,prefill:{name,contact:phone},handler:async function(r){const od={uid:currentUser.uid,email:currentUser.email,name,phone,address,city,pincode,product,price:Number(price),payment:pm,paymentId:r.razorpay_payment_id,status:"Paid",createdAt:Date.now()};const dr=await addDoc(collection(db,"orders"),od);await sendConfirm(dr.id,od);window.location.href=`/success/?orderId=${dr.id}`}};const rzp=new Razorpay(opts);stopLoader();document.getElementById("loadingOverlay").classList.remove("on");rzp.open()}catch(error){stopLoader();document.getElementById("loadingOverlay").classList.remove("on");alert("Order Failed")}});
 </script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <div id="luxuryModal" class="modal-overlay"><div class="modal-box"><div class="mtag">RUDOHAGE</div><h2>Cash On Delivery</h2><p>A refundable ₹50 Security Charge is required for COD orders.</p><div class="modal-btns"><button id="cancelCOD" class="btn-c">Cancel</button><button id="continueCOD" class="btn-go">Continue</button></div></div></div>
 <script>
 const LK="pk.7e2f6dce3e940737e4468e4b61b37eb9";let map,marker;
-function initCheckoutMap(){if(map)return;map=L.map('map',{center:[28.6139,77.2090],zoom:10,attributionControl:!1,zoomControl:!1});L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:''}).addTo(map);setTimeout(()=>map.invalidateSize(),200)}
+function initCheckoutMap(){if(map)return;map=L.map('map').setView([28.6139,77.2090],10);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);setTimeout(()=>map.invalidateSize(),200)}
 window.initCheckoutMap=initCheckoutMap;
-document.getElementById("detectLocation").addEventListener("click",()=>{if(!map)initCheckoutMap();navigator.geolocation.getCurrentPosition(async p=>{const lat=p.coords.latitude,lon=p.coords.longitude;map.setView([lat,lon],15);if(marker)map.removeLayer(marker);marker=L.marker([lat,lon]).addTo(map);try{const r=await fetch(`https://us1.locationiq.com/v1/reverse?key=${LK}&lat=${lat}&lon=${lon}&format=json`);const d=await r.json();document.getElementById("address").value=d.display_name||"";document.getElementById("city").value=d.address.city||d.address.town||d.address.village||"";document.getElementById("state").value=d.address.state||"";document.getElementById("pincode").value=d.address.postcode||""}catch(e){console.log(e)}},()=>{alert("Location access denied")})});
+document.getElementById("detectLocation").addEventListener("click",()=>{if(!map)initCheckoutMap();navigator.geolocation.getCurrentPosition(async p=>{const lat=p.coords.latitude,lon=p.coords.longitude;map.setView([lat,lon],15);if(marker)map.removeLayer(marker);marker=L.marker([lat,lon]).addTo(map);const r=await fetch(`https://us1.locationiq.com/v1/reverse?key=${LK}&lat=${lat}&lon=${lon}&format=json`);const d=await r.json();document.getElementById("address").value=d.display_name||"";document.getElementById("city").value=d.address.city||d.address.town||d.address.village||"";document.getElementById("state").value=d.address.state||"";document.getElementById("pincode").value=d.address.postcode||""},()=>{alert("Location denied")})});
 </script>
 <script>document.addEventListener('contextmenu',e=>e.preventDefault());document.onkeydown=function(e){if(e.keyCode==123||(e.ctrlKey&&e.shiftKey&&e.keyCode==73)||(e.ctrlKey&&e.shiftKey&&e.keyCode==74)||(e.ctrlKey&&e.keyCode==85))return false}</script>
 <div id="loadingOverlay" class="load-overlay"><div class="load-spinner"></div><div class="load-text" id="loadingText">Processing Order<span id="loadingSubText">Preparing checkout...</span></div></div>
-
+<script>
+let s1,s2,s3;
+function startLoader(){const m=document.getElementById("loadingText");m.innerHTML=`Processing Order<span id="loadingSubText">Preparing checkout...</span>`;s1=setTimeout(()=>{m.innerHTML=`Verifying<span id="loadingSubText">Authenticating...</span>`},5000);s2=setTimeout(()=>{m.innerHTML=`Securing<span id="loadingSubText">Encrypting...</span>`},15000);s3=setTimeout(()=>{m.innerHTML=`Connecting<span id="loadingSubText">Loading payment...</span>`},25000)}
+function stopLoader(){clearTimeout(s1);clearTimeout(s2);clearTimeout(s3)}
+</script>
 <script src="/toast.js"></script>
 </body>
 </html>
