@@ -3,6 +3,13 @@ const BACKEND = "https://razorpay-backend-6yg5.onrender.com";
 const s = new URLSearchParams(location.search), o = s.get("orderId");
 document.getElementById("o").textContent = o ? o.slice(-8).toUpperCase() : "N/A";
 
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(t.timeout);
+  t.timeout = setTimeout(() => t.classList.remove("show"), 3000);
+}
+
 async function loadOrder() {
   if (!o) return;
   try {
@@ -12,20 +19,12 @@ async function loadOrder() {
     document.getElementById("p").textContent = data.product || "-";
     document.getElementById("a").textContent = "₹" + (data.price || 0);
     document.getElementById("pm").textContent = data.payment || "-";
-  } catch(e) {
-    console.error("Error fetching order:", e);
-  }
+  } catch(e) { console.error("Error fetching order:", e); }
 }
 loadOrder();
 
-document.getElementById("c").onclick = () => {
-  if (o) { navigator.clipboard.writeText(o); showToast("✅ Copied!"); }
-};
-
-document.getElementById("t").onclick = e => {
-  e.preventDefault();
-  if (o) location.href = `/track/?orderId=${o}`;
-};
+document.getElementById("c").onclick = () => { if (o) { navigator.clipboard.writeText(o); showToast("✅ Copied!"); } };
+document.getElementById("t").onclick = e => { e.preventDefault(); if (o) location.href = `/track/?orderId=${o}`; };
 
 document.getElementById("i").onclick = async () => {
   if (!o) return showToast("⚠️ No ID");
@@ -40,11 +39,4 @@ document.getElementById("i").onclick = async () => {
     w ? (w.document.write(H), w.document.close(), showToast("✅ Invoice ready!")) : showToast("⚠️ Popup blocked");
   } catch(e) { console.error(e); showToast("⚠️ Error generating invoice"); }
 };
-
-function showToast(msg) {
-  const t = document.getElementById("toast");
-  t.textContent = msg; t.classList.add("show");
-  clearTimeout(t.timeout);
-  t.timeout = setTimeout(() => t.classList.remove("show"), 3000);
-}
 </script></body></html>
