@@ -1,11 +1,40 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Track Order | RUDOHAGE</title><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#f6f2ea;font-family:'Manrope',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.hdr{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:.7rem 1.5rem;background:rgba(246,242,234,.8);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.04);display:flex;align-items:center;justify-content:space-between}.brand{text-decoration:none;color:#111;font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700}.back{text-decoration:none;color:rgba(20,20,20,.5);font-size:.7rem;letter-spacing:2px;text-transform:uppercase}.back:hover{color:#111}.container{max-width:600px;width:100%;background:#fff;border-radius:24px;padding:45px 35px;box-shadow:0 25px 80px rgba(0,0,0,.06);margin-top:70px;position:relative;overflow:hidden}.container::before{content:"";position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,#a48b74,#8a715c)}.badge{letter-spacing:4px;font-size:11px;color:#a48b74;text-transform:uppercase;font-weight:600}h1{font-family:'Cormorant Garamond',serif;font-size:36px;color:#111;margin:6px 0 20px}.order-id-box{background:#f6f2ea;padding:12px 18px;border-radius:12px;font-size:13px;color:#555;margin-bottom:25px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}.order-id-box strong{color:#111}.copy-btn{background:0 0;border:none;color:#a48b74;cursor:pointer;font-size:14px}.copy-btn:hover{color:#8a715c}.status-badge{display:inline-block;padding:10px 24px;border-radius:50px;background:#111;color:#fff;font-size:12px;letter-spacing:2px;margin:10px 0 20px}.product-name{font-family:'Cormorant Garamond',serif;font-size:28px;margin:10px 0 4px}.product-info{color:#888;font-size:14px;margin-bottom:20px}.progress-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:25px 0;text-align:center}.step{padding:12px 8px;background:#f4f4f4;border-radius:14px;font-size:12px;font-weight:500;color:#888;transition:.5s}.step.active{background:#111;color:#fff}.step i{display:block;font-size:20px;margin-bottom:6px}.timeline{background:#fafafa;padding:20px;border-radius:14px;margin:15px 0;text-align:left}.timeline-item{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px}.timeline-item:last-child{border-bottom:none}.timeline-item i{font-size:16px;color:#ccc;width:24px}.timeline-item.done i{color:#4caf50}.timeline-item.done{color:#111;font-weight:500}.delivery-info{background:#f6f2ea;padding:16px;border-radius:12px;font-size:13px;color:#555;margin:15px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}.delivery-info i{color:#a48b74}.btn-group{display:flex;flex-direction:column;gap:10px;margin-top:15px}.btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px;border-radius:50px;font-weight:600;font-size:14px;text-decoration:none;cursor:pointer;transition:.3s;border:none;font-family:'Manrope',sans-serif;width:100%}.btn-primary{background:#111;color:#fff}.btn-primary:hover{background:#333;transform:translateY(-2px)}.btn-whatsapp{background:#25D366;color:#fff}.btn-whatsapp:hover{background:#1da851;transform:translateY(-2px)}.btn-outline{background:0 0;color:#a48b74;border:2px solid #a48b74}.btn-outline:hover{background:#a48b74;color:#fff}.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;opacity:0;transition:.4s;z-index:999;pointer-events:none}.toast.show{opacity:1}.loading-state{text-align:center;padding:30px 0}.loading-state .spinner{width:40px;height:40px;border:3px solid #ddd;border-top:3px solid #a48b74;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 15px}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@media(max-width:480px){.container{padding:25px 18px}h1{font-size:28px}.hdr{padding:.6rem 1rem}.brand{font-size:1.1rem}}</style></head><body><header class="hdr"><a href="/" class="brand">RUDOHAGE</a><a href="/" class="back">← Back</a></header><div class="container"><div class="badge"><i class="fas fa-truck"></i> TRACKING</div><h1>Track Your Piece</h1><div id="content"><div class="loading-state" id="ls"><div class="spinner"></div><p style="color:#888;font-size:14px">Loading order details...</p></div><div id="od" style="display:none"><div class="order-id-box"><span>Order #<strong id="oid">-</strong></span><button class="copy-btn" id="cb"><i class="fas fa-copy"></i> Copy</button></div><div style="text-align:center"><div class="product-name" id="pn">-</div><div class="product-info">Collector: <span id="cn">-</span> • <span id="oc">-</span></div><div class="status-badge" id="sb">Pending</div></div><div class="progress-steps"><div class="step" id="s1"><i class="fas fa-check-circle"></i>Placed</div><div class="step" id="s2"><i class="fas fa-box"></i>Packed</div><div class="step" id="s3"><i class="fas fa-truck"></i>Shipped</div></div><div class="timeline"><div class="timeline-item done" id="t1"><i class="fas fa-check-circle"></i> Order Placed</div><div class="timeline-item" id="t2"><i class="fas fa-circle"></i> Packing in Progress</div><div class="timeline-item" id="t3"><i class="fas fa-circle"></i> Shipped</div></div><div class="delivery-info"><span><i class="fas fa-calendar-alt"></i> Estimated Delivery</span><span><strong id="de">3-5 Business Days</strong></span></div><div class="btn-group"><a href="#" class="btn btn-whatsapp" id="wb"><i class="fab fa-whatsapp"></i> WhatsApp Support</a><a href="/" class="btn btn-outline"><i class="fas fa-home"></i> Back to Home</a></div></div></div></div><div class="toast" id="toast"></div><script>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Track Order | RUDOHAGE</title><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><style>*{margin:0;padding:0;box-sizing:border-box}body{background:#f6f2ea;font-family:'Manrope',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.hdr{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:.7rem 1.5rem;background:rgba(246,242,234,.8);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.04);display:flex;align-items:center;justify-content:space-between}.brand{text-decoration:none;color:#111;font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700}.back{text-decoration:none;color:rgba(20,20,20,.5);font-size:.7rem;letter-spacing:2px;text-transform:uppercase}.back:hover{color:#111}.container{max-width:600px;width:100%;background:#fff;border-radius:24px;padding:45px 35px;box-shadow:0 25px 80px rgba(0,0,0,.06);margin-top:70px;position:relative;overflow:hidden}.container::before{content:"";position:absolute;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,#a48b74,#8a715c)}.badge{letter-spacing:4px;font-size:11px;color:#a48b74;text-transform:uppercase;font-weight:600}h1{font-family:'Cormorant Garamond',serif;font-size:36px;color:#111;margin:6px 0 20px}.order-id-box{background:#f6f2ea;padding:12px 18px;border-radius:12px;font-size:13px;color:#555;margin-bottom:25px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}.order-id-box strong{color:#111}.copy-btn{background:0 0;border:none;color:#a48b74;cursor:pointer;font-size:14px}.copy-btn:hover{color:#8a715c}.status-badge{display:inline-block;padding:10px 24px;border-radius:50px;background:#111;color:#fff;font-size:12px;letter-spacing:2px;margin:10px 0 20px}.status-badge.cancelled{background:#d32f2f}.product-name{font-family:'Cormorant Garamond',serif;font-size:28px;margin:10px 0 4px}.product-info{color:#888;font-size:14px;margin-bottom:20px}.progress-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:25px 0;text-align:center}.step{padding:12px 8px;background:#f4f4f4;border-radius:14px;font-size:12px;font-weight:500;color:#888;transition:.5s}.step.active{background:#111;color:#fff}.step.cancelled{background:#d32f2f;color:#fff}.step i{display:block;font-size:20px;margin-bottom:6px}.timeline{background:#fafafa;padding:20px;border-radius:14px;margin:15px 0;text-align:left}.timeline-item{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid #f0ede8;font-size:14px}.timeline-item:last-child{border-bottom:none}.timeline-item i{font-size:16px;color:#ccc;width:24px}.timeline-item.done i{color:#4caf50}.timeline-item.done{color:#111;font-weight:500}.timeline-item.cancelled i{color:#d32f2f}.delivery-info{background:#f6f2ea;padding:16px;border-radius:12px;font-size:13px;color:#555;margin:15px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}.delivery-info i{color:#a48b74}.btn-group{display:flex;flex-direction:column;gap:10px;margin-top:15px}.btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px;border-radius:50px;font-weight:600;font-size:14px;text-decoration:none;cursor:pointer;transition:.3s;border:none;font-family:'Manrope',sans-serif;width:100%}.btn-primary{background:#111;color:#fff}.btn-primary:hover{background:#333;transform:translateY(-2px)}.btn-whatsapp{background:#25D366;color:#fff}.btn-whatsapp:hover{background:#1da851;transform:translateY(-2px)}.btn-danger{background:#d32f2f;color:#fff}.btn-danger:hover{background:#b71c1c;transform:translateY(-2px)}.btn-outline{background:0 0;color:#a48b74;border:2px solid #a48b74}.btn-outline:hover{background:#a48b74;color:#fff}.btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:12px 24px;border-radius:10px;font-size:14px;opacity:0;transition:.4s;z-index:999;pointer-events:none}.toast.show{opacity:1}.loading-state{text-align:center;padding:30px 0}.loading-state .spinner{width:40px;height:40px;border:3px solid #ddd;border-top:3px solid #a48b74;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 15px}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@media(max-width:480px){.container{padding:25px 18px}h1{font-size:28px}.hdr{padding:.6rem 1rem}.brand{font-size:1.1rem}}</style></head><body><header class="hdr"><a href="/" class="brand">RUDOHAGE</a><a href="/" class="back">← Back</a></header><div class="container"><div class="badge"><i class="fas fa-truck"></i> TRACKING</div><h1>Track Your Piece</h1><div id="content"><div class="loading-state" id="ls"><div class="spinner"></div><p style="color:#888;font-size:14px">Loading order details...</p></div><div id="od" style="display:none"><div class="order-id-box"><span>Order #<strong id="oid">-</strong></span><button class="copy-btn" id="cb"><i class="fas fa-copy"></i> Copy</button></div><div style="text-align:center"><div class="product-name" id="pn">-</div><div class="product-info">Collector: <span id="cn">-</span> • <span id="oc">-</span></div><div class="status-badge" id="sb">Pending</div></div><div class="progress-steps"><div class="step" id="s1"><i class="fas fa-check-circle"></i>Placed</div><div class="step" id="s2"><i class="fas fa-box"></i>Packed</div><div class="step" id="s3"><i class="fas fa-truck"></i>Shipped</div></div><div class="timeline"><div class="timeline-item done" id="t1"><i class="fas fa-check-circle"></i> Order Placed</div><div class="timeline-item" id="t2"><i class="fas fa-circle"></i> Packing in Progress</div><div class="timeline-item" id="t3"><i class="fas fa-circle"></i> Shipped</div></div><div class="delivery-info"><span><i class="fas fa-calendar-alt"></i> Estimated Delivery</span><span><strong id="de">3-5 Business Days</strong></span></div><div class="btn-group"><a href="#" class="btn btn-whatsapp" id="wb"><i class="fab fa-whatsapp"></i> WhatsApp Support</a><button class="btn btn-danger" id="cancelBtn" style="display:none"><i class="fas fa-times"></i> Cancel Order</button><a href="/" class="btn btn-outline"><i class="fas fa-home"></i> Back to Home</a></div></div></div></div><div class="toast" id="toast"></div><script>
 const BACKEND = "https://razorpay-backend-6yg5.onrender.com";
 const orderId = new URLSearchParams(location.search).get("orderId");
 const ls = document.getElementById("ls");
 const od = document.getElementById("od");
 
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  clearTimeout(t.timeout);
+  t.timeout = setTimeout(() => t.classList.remove("show"), 3000);
+}
+
+async function cancelOrder() {
+  const confirmed = confirm("⚠️ Are you sure you want to cancel this order?\n\n• You can only cancel within 24 hours\n• COD orders: No charge\n• Paid orders: Full refund will be initiated");
+  if (!confirmed) return;
+  const reason = prompt("Reason for cancellation (optional):");
+  try {
+    const response = await fetch(`${BACKEND}/api/cancel-order/${orderId}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ reason: reason || "Customer requested" })
+    });
+    const data = await response.json();
+    if (data.success) {
+      showToast(`✅ Order cancelled! ${data.refund || ''}`);
+      setTimeout(() => location.reload(), 1500);
+    } else {
+      showToast(`❌ ${data.error || "Failed to cancel"}`);
+    }
+  } catch (err) {
+    showToast("❌ Error: " + err.message);
+  }
+}
+
 async function loadOrder() {
-  if (!orderId) {
+  if (!orderId || orderId === "null" || orderId === "undefined") {
     ls.innerHTML = '<i class="fas fa-exclamation-circle" style="font-size:48px;color:#d32f2f;margin-bottom:15px;display:block"></i><h3 style="font-family:Cormorant Garamond,serif;font-size:24px">No Order ID</h3><p style="color:#888;font-size:14px">Please use the tracking link from your confirmation email.</p>';
     return;
   }
@@ -22,6 +51,7 @@ async function loadOrder() {
     ls.style.display = "none";
     od.style.display = "block";
 
+    const isCancelled = data.status === "Cancelled";
     document.getElementById("oid").textContent = orderId.slice(-8).toUpperCase();
     document.getElementById("pn").textContent = data.product || "RUDOHAGE Piece";
     document.getElementById("cn").textContent = data.name || "Collector";
@@ -30,7 +60,10 @@ async function loadOrder() {
     const status = data.status || "Pending";
     const sb = document.getElementById("sb");
     sb.textContent = status;
-    if (status === "Delivered") sb.style.background = "#2e7d32";
+    if (isCancelled) {
+      sb.style.background = "#d32f2f";
+      sb.classList.add("cancelled");
+    } else if (status === "Delivered") sb.style.background = "#2e7d32";
     else if (status === "Shipped") sb.style.background = "#1976d2";
     else if (status === "COD Pending") sb.style.background = "#ed6c02";
     else sb.style.background = "#111";
@@ -38,35 +71,60 @@ async function loadOrder() {
     const s1 = document.getElementById("s1"), s2 = document.getElementById("s2"), s3 = document.getElementById("s3");
     const t1 = document.getElementById("t1"), t2 = document.getElementById("t2"), t3 = document.getElementById("t3");
     
-    [s1, s2, s3].forEach(el => el.classList.remove("active"));
-    [t1, t2, t3].forEach(el => { el.classList.remove("done"); el.innerHTML = el.innerHTML.replace('fa-check-circle', 'fa-circle'); });
+    [s1, s2, s3].forEach(el => { el.classList.remove("active", "cancelled"); });
+    [t1, t2, t3].forEach(el => { el.classList.remove("done", "cancelled"); el.innerHTML = el.innerHTML.replace('fa-check-circle', 'fa-circle'); });
     
-    s1.classList.add("active");
-    t1.classList.add("done");
-    t1.innerHTML = '<i class="fas fa-check-circle"></i> Order Placed';
-    
-    if (status === "Shipped" || status === "Delivered") {
-      s2.classList.add("active");
-      t2.classList.add("done");
-      t2.innerHTML = '<i class="fas fa-check-circle"></i> Packed & Shipped';
+    if (isCancelled) {
+      s1.classList.add("cancelled");
+      s1.innerHTML = '<i class="fas fa-ban"></i>Cancelled';
+      s2.classList.add("cancelled");
+      s2.innerHTML = '<i class="fas fa-ban"></i>Cancelled';
+      s3.classList.add("cancelled");
+      s3.innerHTML = '<i class="fas fa-ban"></i>Cancelled';
+      t1.classList.add("cancelled");
+      t1.innerHTML = '<i class="fas fa-circle-xmark"></i> Order Cancelled';
+      t2.classList.add("cancelled");
+      t2.innerHTML = '<i class="fas fa-ban"></i> Cancelled';
+      t3.classList.add("cancelled");
+      t3.innerHTML = '<i class="fas fa-ban"></i> Cancelled';
+      document.getElementById("de").textContent = "❌ Cancelled";
+      document.getElementById("cancelBtn").style.display = "none";
     } else {
-      t2.innerHTML = '<i class="fas fa-circle"></i> Packing in Progress';
-    }
-    
-    if (status === "Delivered") {
-      s3.classList.add("active");
-      t3.classList.add("done");
-      t3.innerHTML = '<i class="fas fa-check-circle"></i> Delivered';
-    } else {
-      t3.innerHTML = '<i class="fas fa-circle"></i> In Transit';
+      s1.classList.add("active");
+      t1.classList.add("done");
+      t1.innerHTML = '<i class="fas fa-check-circle"></i> Order Placed';
+      
+      if (status === "Shipped" || status === "Delivered") {
+        s2.classList.add("active");
+        t2.classList.add("done");
+        t2.innerHTML = '<i class="fas fa-check-circle"></i> Packed & Shipped';
+      } else {
+        t2.innerHTML = '<i class="fas fa-circle"></i> Packing in Progress';
+      }
+      
+      if (status === "Delivered") {
+        s3.classList.add("active");
+        t3.classList.add("done");
+        t3.innerHTML = '<i class="fas fa-check-circle"></i> Delivered';
+      } else {
+        t3.innerHTML = '<i class="fas fa-circle"></i> In Transit';
+      }
+
+      const de = document.getElementById("de");
+      if (status === "Delivered") de.textContent = "✅ Delivered";
+      else if (status === "Shipped") de.textContent = "2-3 Business Days";
+      else de.textContent = "3-5 Business Days";
+
+      // Show cancel button if order is pending
+      if (status === "Pending" || status === "COD Pending") {
+        document.getElementById("cancelBtn").style.display = "flex";
+        document.getElementById("cancelBtn").onclick = cancelOrder;
+      } else {
+        document.getElementById("cancelBtn").style.display = "none";
+      }
     }
 
     document.getElementById("wb").href = `https://wa.me/917091955862?text=My Order ID is ${orderId}`;
-    
-    const de = document.getElementById("de");
-    if (status === "Delivered") de.textContent = "✅ Delivered";
-    else if (status === "Shipped") de.textContent = "2-3 Business Days";
-    else de.textContent = "3-5 Business Days";
 
   } catch (err) {
     console.error("❌ Error:", err);
@@ -77,13 +135,6 @@ async function loadOrder() {
 document.getElementById("cb").onclick = () => {
   if (orderId) { navigator.clipboard.writeText(orderId); showToast("✅ Copied!"); }
 };
-
-function showToast(msg) {
-  const t = document.getElementById("toast");
-  t.textContent = msg; t.classList.add("show");
-  clearTimeout(t.timeout);
-  t.timeout = setTimeout(() => t.classList.remove("show"), 3000);
-}
 
 loadOrder();
 console.log("🚀 Track Page - Order ID:", orderId);
