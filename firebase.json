@@ -1,6 +1,13 @@
 {
   "hosting": {
     "public": ".",
+    "redirects": [
+      {
+        "source": "https://rudohage.firebaseapp.com/**",
+        "destination": "https://rudohage.com/**",
+        "type": 301
+      }
+    ],
     "rewrites": [
       {
         "source": "/__/auth/**",
