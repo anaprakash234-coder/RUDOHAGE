@@ -3,9 +3,15 @@
     "public": ".",
     "redirects": [
       {
-        "source": "**",
-        "destination": "https://rudohage.com",
+        "source": "https://rudohage.firebaseapp.com/**",
+        "destination": "https://rudohage.com/**",
         "type": 301
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/__/auth/**",
+        "destination": "/__/auth/index.html"
       }
     ]
   }
