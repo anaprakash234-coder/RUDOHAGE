@@ -520,7 +520,7 @@ document.onkeydown=function(e){if(e.keyCode==123||(e.ctrlKey&&e.shiftKey&&e.keyC
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import{getFirestore,collection,getDocs,query,orderBy,limit}from"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-const firebaseConfig={apiKey:"AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",authDomain:"rudohage.firebaseapp.com",projectId:"rudohage",storageBucket:"rudohage.firebasestorage.app",messagingSenderId:"487042116246",appId:"1:487042116246:web:990d65636addd6d653f0b7",measurementId:"G-6GLB5PPXMY"};
+const firebaseConfig={apiKey:"AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",authDomain:"rudohage.com",projectId:"rudohage",storageBucket:"rudohage.firebasestorage.app",messagingSenderId:"487042116246",appId:"1:487042116246:web:990d65636addd6d653f0b7",measurementId:"G-6GLB5PPXMY"};
 const app=initializeApp(firebaseConfig),db=getFirestore(app);
 async function loadHomeReviews(){
   const container=document.getElementById("homeReviews");container.innerHTML="";
@@ -534,7 +534,7 @@ loadHomeReviews();
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import{getAuth,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 import{getFirestore,doc,getDoc}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-const authConfig={apiKey:"AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",authDomain:"rudohage.firebaseapp.com",projectId:"rudohage",storageBucket:"rudohage.firebasestorage.app",messagingSenderId:"487042116246",appId:"1:487042116246:web:990d65636addd6d653f0b7"};
+const authConfig={apiKey:"AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",authDomain:"rudohage.com",projectId:"rudohage",storageBucket:"rudohage.firebasestorage.app",messagingSenderId:"487042116246",appId:"1:487042116246:web:990d65636addd6d653f0b7"};
 const authApp=initializeApp(authConfig,"authApp"),auth=getAuth(authApp),authDb=getFirestore(authApp);
 const profileWrap=document.getElementById("profileWrap"),headerAvatar=document.getElementById("headerAvatar");
 const mobileLoginBtn=document.getElementById("mobileLoginBtn"),mobileAccountBtn=document.getElementById("mobileAccountBtn"),mobileLogoutBtn=document.getElementById("mobileLogoutBtn");
