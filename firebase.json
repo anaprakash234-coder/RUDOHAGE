@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "public": ".",
+    "rewrites": [
+      {
+        "source": "/__/auth/**",
+        "destination": "/__/auth/index.html"
+      }
+    ]
+  }
+}
