@@ -37,6 +37,7 @@ mobileLogoutBtn.addEventListener("click",async(e)=>{e.preventDefault();await sig
 </script>
 <script src="/toast.js"></script>
 <script>
+document.addEventListener('contextmenu',event=>event.preventDefault());document.onkeydown=function(e){if(e.keyCode==123||(e.ctrlKey&&e.shiftKey&&e.keyCode==73)||(e.ctrlKey&&e.shiftKey&&e.keyCode==74)||(e.ctrlKey&&e.keyCode==85))return false;};  
 const backTop=document.getElementById("backTop");window.addEventListener("scroll",()=>{backTop.classList.toggle("show",window.scrollY>400);},{passive:true});
 const sections=document.querySelectorAll("section[id]"),navLinks=document.querySelectorAll("nav a[href^='#']");window.addEventListener("scroll",()=>{let current="";sections.forEach(sec=>{if(window.scrollY>=sec.offsetTop-200)current=sec.id;});navLinks.forEach(a=>{a.classList.toggle("active-nav",a.getAttribute("href")==="#"+current);});},{passive:true});
 const lazyImgs=document.querySelectorAll("img.lazy");if("IntersectionObserver"in window){const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("loaded");obs.unobserve(e.target);}});},{threshold:.1});lazyImgs.forEach(img=>obs.observe(img));}else{lazyImgs.forEach(img=>img.classList.add("loaded"));}
