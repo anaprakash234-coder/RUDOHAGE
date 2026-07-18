@@ -62,6 +62,19 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 .error-state{text-align:center;padding:60px 20px}
 .error-state i{font-size:48px;color:#d32f2f;margin-bottom:20px;display:block}
 .product-grid{display:grid;grid-template-columns:380px 1fr;gap:40px;align-items:start}
+/* ===== REVIEWS SECTION ===== */
+.rev-block{max-width:1100px;margin:20px auto 0;padding:15px 3% 40px}
+.rev-block h2{font-family:'Cormorant Garamond',serif;font-size:var(--lg);font-weight:700;margin-bottom:14px}
+.rev-card{background:#fff;padding:14px 16px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.02);margin-bottom:8px}
+.rev-card h4{font-size:var(--sm);font-weight:600;margin-bottom:2px}
+.rev-card .rs{color:#d4a853;font-size:12px;letter-spacing:1px;margin-bottom:4px}
+.rev-card p{opacity:.55;font-size:var(--sm);line-height:1.6}
+.rev-form{background:#fff;padding:16px 18px;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.02);margin-top:16px}
+.rev-form h4{font-family:'Cormorant Garamond',serif;font-size:var(--bs);font-weight:700;margin-bottom:10px}
+.rev-form input,.rev-form select,.rev-form textarea{width:100%;padding:10px 12px;margin-bottom:8px;border:none;background:#f5f3ef;border-radius:10px;font-size:var(--sm);font-family:'Manrope',sans-serif;outline:none}
+.rev-form textarea{resize:vertical;min-height:70px}
+.sbtn{background:#111;color:#fff;padding:11px 22px;border:none;border-radius:50px;cursor:pointer;font-size:var(--sm);font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:.3s;font-family:'Manrope',sans-serif}
+.sbtn:hover{background:var(--a)}
 @media(max-width:768px){
 .hdr{padding:.7rem 1rem}
 .main{padding:80px 4% 25px}
@@ -73,6 +86,7 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 .price{font-size:2rem}
 .btns{flex-direction:column}
 .sgrid{grid-template-columns:1fr}
+.rev-block{padding:10px 2% 20px}
 }
 </style>
 </head>
@@ -89,13 +103,32 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
     </div>
 </div>
 
+<!-- ===== REVIEWS SECTION ===== -->
+<div class="rev-block" id="reviewsSection" style="display:none;">
+    <h2>Reviews</h2>
+    <div id="reviewsContainer"></div>
+    <div class="rev-form">
+        <h4>Write a Review</h4>
+        <input type="text" id="reviewName" placeholder="Your Name">
+        <select id="reviewRating">
+            <option value="5">★★★★★</option>
+            <option value="4">★★★★</option>
+            <option value="3">★★★</option>
+            <option value="2">★★</option>
+            <option value="1">★</option>
+        </select>
+        <textarea id="reviewText" placeholder="Share your experience..."></textarea>
+        <button class="sbtn" id="publishBtn">Publish</button>
+    </div>
+</div>
+
 <div class="sig"><p>Not Produced. Crafted.</p><h2>RUDOHAGE</h2></div>
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 // Firebase Config
 const firebaseConfig = {
@@ -144,6 +177,7 @@ const PRODUCTS = {
 };
 
 let currentUser = null;
+let currentProductId = null;
 
 onAuthStateChanged(auth, (user) => {
     currentUser = user;
@@ -152,10 +186,12 @@ onAuthStateChanged(auth, (user) => {
 // Get product ID from URL
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('id');
+currentProductId = productId;
 
 async function loadProduct() {
     const loadingEl = document.getElementById('loadingState');
     const contentEl = document.getElementById('productContent');
+    const reviewsEl = document.getElementById('reviewsSection');
     
     if (!productId || !PRODUCTS[productId]) {
         loadingEl.innerHTML = `
@@ -238,8 +274,15 @@ async function loadProduct() {
     `;
     
     loadingEl.style.display = 'none';
+    reviewsEl.style.display = 'block';
     
+    // Load reviews
+    loadReviews(productId);
+    
+    // Setup Buy button -> CHECKOUT PAGE
     document.getElementById('buyBtn').addEventListener('click', () => placeOrder(product));
+    
+    // Setup Share button
     document.getElementById('shareBtn').addEventListener('click', async () => {
         if (navigator.share) {
             await navigator.share({ title: product.name, url: window.location.href });
@@ -256,6 +299,7 @@ window.setMain = function(el) {
     el.classList.add('active');
 };
 
+// ===== PLACE ORDER -> CHECKOUT PAGE =====
 async function placeOrder(product) {
     if (!currentUser) {
         if (confirm('Please login first. Go to login page?')) {
@@ -283,7 +327,8 @@ async function placeOrder(product) {
         if (data.id) {
             localStorage.setItem('currentOrderId', data.id);
             localStorage.setItem('currentProduct', product.name);
-            openRazorpay(data, product);
+            // CHECKOUT PAGE PE BHEJO (pehle wala system)
+            window.location.href = `/checkout/?orderId=${data.id}&product=${encodeURIComponent(product.name)}&price=${product.price}`;
         } else {
             alert('Failed to create order. Please try again.');
         }
@@ -297,30 +342,72 @@ async function placeOrder(product) {
     }
 }
 
-function openRazorpay(order, product) {
-    const options = {
-        key: RAZORPAY_KEY,
-        amount: order.amount,
-        currency: order.currency,
-        name: 'RUDOHAGE',
-        description: product.name,
-        order_id: order.id,
-        prefill: {
-            email: currentUser?.email || '',
-        },
-        handler: function(response) {
-            window.location.href = `/success/?orderId=${order.id}&paymentId=${response.razorpay_payment_id}`;
-        },
-        modal: {
-            ondismiss: function() {
-                window.location.href = `/checkout/?orderId=${order.id}&cancelled=true`;
-            }
-        }
-    };
+// ===== REVIEWS =====
+async function loadReviews(productId) {
+    const container = document.getElementById('reviewsContainer');
+    container.innerHTML = '<p style="opacity:.4;font-size:.7rem;">Loading reviews...</p>';
     
-    const rzp = new Razorpay(options);
-    rzp.open();
+    try {
+        const collectionName = `product${productId}_reviews`;
+        const snapshot = await getDocs(query(collection(db, collectionName), orderBy("date", "desc")));
+        
+        if (snapshot.empty) {
+            container.innerHTML = '<p style="opacity:.4;font-size:.7rem;">No reviews yet. Be the first!</p>';
+            return;
+        }
+        
+        container.innerHTML = '';
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            container.innerHTML += `
+                <div class="rev-card">
+                    <h4>${data.name || 'Anonymous'}</h4>
+                    <div class="rs">${'★'.repeat(data.rating || 5)}</div>
+                    <p>${data.review}</p>
+                </div>
+            `;
+        });
+    } catch (error) {
+        console.error('Error loading reviews:', error);
+        container.innerHTML = '<p style="opacity:.4;font-size:.7rem;">Unable to load reviews.</p>';
+    }
 }
+
+// Publish review
+document.getElementById('publishBtn').addEventListener('click', async () => {
+    if (!currentUser) {
+        alert('Please login to write a review.');
+        window.location.href = `/login/?redirect=${encodeURIComponent(window.location.href)}`;
+        return;
+    }
+    
+    const name = document.getElementById('reviewName').value.trim();
+    const rating = parseInt(document.getElementById('reviewRating').value);
+    const review = document.getElementById('reviewText').value.trim();
+    
+    if (!name || !review) {
+        alert('Please fill all fields.');
+        return;
+    }
+    
+    try {
+        const collectionName = `product${productId}_reviews`;
+        await addDoc(collection(db, collectionName), {
+            name: name,
+            rating: rating,
+            review: review,
+            date: Date.now()
+        });
+        
+        document.getElementById('reviewName').value = '';
+        document.getElementById('reviewText').value = '';
+        alert('✅ Review published!');
+        loadReviews(productId);
+    } catch (error) {
+        alert('Failed to publish review. Please try again.');
+        console.error(error);
+    }
+});
 
 loadProduct();
 </script>
