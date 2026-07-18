@@ -18,7 +18,7 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 .back:hover{color:var(--t)}
 .main{max-width:1100px;margin:0 auto;padding:95px 3% 30px;display:grid;grid-template-columns:1fr;gap:40px;align-items:start}
 
-/* ===== PROFESSIONAL LOADER ===== */
+/* ===== SIMPLE LOADER (SIRF SPINNER) ===== */
 .loading-state {
     display: flex;
     flex-direction: column;
@@ -29,77 +29,17 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
     background: var(--bg);
     transition: opacity 0.6s ease;
 }
-
-.loader-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem;
-    font-weight: 700;
-    color: var(--a);
-    letter-spacing: 2px;
-    margin-bottom: 30px;
-    animation: logoPulse 2s ease-in-out infinite;
-}
-
-@keyframes logoPulse {
-    0%, 100% { opacity: 0.7; transform: scale(1); }
-    50% { opacity: 1; transform: scale(1.05); }
-}
-
 .loader-spinner {
-    width: 60px;
-    height: 60px;
-    border: 3px solid rgba(164, 139, 116, 0.15);
-    border-top: 3px solid var(--a);
+    width: 50px;
+    height: 50px;
+    border: 2px solid rgba(164, 139, 116, 0.15);
+    border-top: 2px solid var(--a);
     border-radius: 50%;
     animation: spin 1s cubic-bezier(0.6, 0, 0.4, 1) infinite;
-    margin-bottom: 25px;
-    box-shadow: 0 0 30px rgba(164, 139, 116, 0.1);
 }
-
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-}
-
-.loader-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--t);
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-    opacity: 0.9;
-}
-
-.loader-sub {
-    font-size: 0.75rem;
-    color: var(--m);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    opacity: 0.5;
-    font-weight: 300;
-}
-
-.loader-dots {
-    display: flex;
-    gap: 8px;
-    margin-top: 20px;
-}
-
-.loader-dots span {
-    width: 8px;
-    height: 8px;
-    background: var(--a);
-    border-radius: 50%;
-    animation: dotBounce 1.4s ease-in-out infinite;
-}
-
-.loader-dots span:nth-child(2) { animation-delay: 0.2s; }
-.loader-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes dotBounce {
-    0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; }
-    40% { transform: scale(1); opacity: 1; }
 }
 
 /* ===== PRODUCT GRID ===== */
@@ -175,6 +115,94 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 .sbtn{background:#111;color:#fff;padding:11px 22px;border:none;border-radius:50px;cursor:pointer;font-size:var(--sm);font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:.3s;font-family:'Manrope',sans-serif}
 .sbtn:hover{background:var(--a)}
 
+/* ===== PROFESSIONAL LOGIN MODAL ===== */
+.login-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    padding: 20px;
+}
+.login-modal.active {
+    display: flex;
+}
+.login-modal-box {
+    max-width: 400px;
+    width: 100%;
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px 32px 32px;
+    text-align: center;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.2);
+    animation: modalFadeIn 0.3s ease;
+}
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+.login-modal-box .icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(164,139,116,0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+}
+.login-modal-box .icon i {
+    font-size: 28px;
+    color: var(--a);
+}
+.login-modal-box h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    color: var(--t);
+    margin-bottom: 6px;
+}
+.login-modal-box p {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+.login-modal-box .modal-btns {
+    display: flex;
+    gap: 10px;
+}
+.login-modal-box .modal-btns button {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: 'Manrope', sans-serif;
+}
+.login-modal-box .modal-btns .btn-cancel {
+    background: #f3f1ee;
+    color: #444;
+}
+.login-modal-box .modal-btns .btn-cancel:hover {
+    background: #e5e0db;
+}
+.login-modal-box .modal-btns .btn-login {
+    background: var(--a);
+    color: #fff;
+}
+.login-modal-box .modal-btns .btn-login:hover {
+    background: #8a715c;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(164,139,116,0.3);
+}
+
 @media(max-width:768px){
 .hdr{padding:.7rem 1rem}
 .main{padding:80px 4% 25px}
@@ -189,27 +217,31 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 .rcard{min-width:140px;max-width:140px}
 .rcard img{height:110px}
 .rev-block{padding:10px 2% 20px}
-.loader-logo{font-size:2.2rem}
-.loader-text{font-size:1.1rem}
-.loader-spinner{width:45px;height:45px}
+.login-modal-box { padding: 30px 20px 24px; }
+.login-modal-box h2 { font-size: 20px; }
 }
 </style>
 </head>
 <body>
 <header class="hdr"><a href="/" class="brand">RUDOHAGE</a><a href="/" class="back"><i class="fas fa-arrow-left"></i> Back</a></header>
 
-<div class="main" id="productContainer">
-    <!-- ===== PROFESSIONAL LOADING STATE ===== -->
-    <div id="loadingState" class="loading-state">
-        <div class="loader-logo">✦ RUDOHAGE</div>
-        <div class="loader-spinner"></div>
-        <p class="loader-text">Preparing Your Piece</p>
-        <p class="loader-sub">Handcrafted with precision</p>
-        <div class="loader-dots">
-            <span></span>
-            <span></span>
-            <span></span>
+<!-- ===== PROFESSIONAL LOGIN MODAL ===== -->
+<div class="login-modal" id="loginModal">
+    <div class="login-modal-box">
+        <div class="icon"><i class="fas fa-lock"></i></div>
+        <h2>Login Required</h2>
+        <p>Please log in to your RUDOHAGE account to continue with your order.</p>
+        <div class="modal-btns">
+            <button class="btn-cancel" id="modalCancel">Cancel</button>
+            <button class="btn-login" id="modalLogin">Login Now</button>
         </div>
+    </div>
+</div>
+
+<div class="main" id="productContainer">
+    <!-- ===== SIMPLE LOADER (SIRF SPINNER) ===== -->
+    <div id="loadingState" class="loading-state">
+        <div class="loader-spinner"></div>
     </div>
     <div id="productContent" style="display:none;">
         <!-- Dynamic content -->
@@ -247,7 +279,7 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-import { getFirestore, doc, getDoc, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
@@ -265,11 +297,17 @@ const db = getFirestore(app);
 const BACKEND_URL = "https://razorpay-backend-6yg5.onrender.com";
 const RAZORPAY_KEY = "rzp_live_T2N3YbZ3iKazSC";
 
+// ===== PRODUCT DATA WITH ALL IMAGES =====
 const PRODUCTS = {
     '1': { 
         name: "Inferno Core", 
         price: 3000,
-        image: "/image/fire-clock-1.png",
+        images: [
+            "/image/fire-clock-1.png",
+            "/image/fire-clock-14.png",
+            "/image/fire-clock-15.png",
+            "/image/fire-clock-16.png"
+        ],
         description: "pure wood crafted material. with precision crafted by hand.full polished and colured with red using spray.",
         material: "Premium Wood",
         finish: "Matte",
@@ -278,7 +316,12 @@ const PRODUCTS = {
     '2': { 
         name: "Crimson Orbit", 
         price: 2500,
-        image: "/image/fire-clock-2.png",
+        images: [
+            "/image/fire-clock-2.png",
+            "/image/fire-clock-11.png",
+            "/image/fire-clock-12.png",
+            "/image/fire-clock-13.png"
+        ],
         description: "pure wood hand crafted material. in a round four layer towards the needle of the clock thats look asthetic.",
         material: "Premium Wood",
         finish: "Matte",
@@ -287,7 +330,12 @@ const PRODUCTS = {
     '3': { 
         name: "Ember Crown", 
         price: 2500,
-        image: "/image/fire-clock-3.png",
+        images: [
+            "/image/fire-clock-3.png",
+            "/image/fire-clock-8.png",
+            "/image/fire-clock-9.png",
+            "/image/fire-clock-10.png"
+        ],
         description: "pure hand crafted material. i used the heat flames to colour of thre top thats look more satisfying.",
         material: "Premium Wood",
         finish: "Flame-Colored",
@@ -297,9 +345,55 @@ const PRODUCTS = {
 
 let currentUser = null;
 let currentProductId = null;
+let pendingLoginProduct = null;
+let isLoginModalOpen = false;
+
+// ===== LOGIN MODAL FUNCTIONS =====
+function showLoginModal(product) {
+    pendingLoginProduct = product;
+    isLoginModalOpen = true;
+    document.getElementById('loginModal').classList.add('active');
+}
+
+function hideLoginModal() {
+    isLoginModalOpen = false;
+    pendingLoginProduct = null;
+    document.getElementById('loginModal').classList.remove('active');
+}
+
+// Modal buttons
+document.getElementById('modalCancel').addEventListener('click', hideLoginModal);
+document.getElementById('modalLogin').addEventListener('click', () => {
+    if (pendingLoginProduct) {
+        const product = pendingLoginProduct;
+        hideLoginModal();
+        // Create order first, then redirect to login
+        createOrderAndRedirect(product);
+    }
+});
+
+// Close modal on outside click
+document.getElementById('loginModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) hideLoginModal();
+});
 
 onAuthStateChanged(auth, (user) => {
     currentUser = user;
+    
+    // ===== CHECK PENDING ORDER AFTER LOGIN =====
+    if (user) {
+        const pendingOrderId = localStorage.getItem('pendingOrderId');
+        const pendingProduct = localStorage.getItem('pendingProduct');
+        const pendingPrice = localStorage.getItem('pendingPrice');
+        
+        if (pendingOrderId) {
+            localStorage.removeItem('pendingOrderId');
+            localStorage.removeItem('pendingProduct');
+            localStorage.removeItem('pendingPrice');
+            
+            window.location.href = `/checkout/?orderId=${pendingOrderId}&product=${encodeURIComponent(pendingProduct || '')}&price=${pendingPrice || 0}`;
+        }
+    }
 });
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -329,13 +423,8 @@ async function loadProduct() {
     document.title = `${product.name} | RUDOHAGE`;
     document.getElementById('pageDesc').content = product.description;
     
-    const thumbs = [product.image];
-    for (let i = 1; i <= 3; i++) {
-        const img = product.image.replace('.png', `-${i+1}.png`);
-        thumbs.push(img);
-    }
-    
-    const thumbsHtml = thumbs.map((img, index) => 
+    // ===== THUMBNAILS WITH ALL IMAGES =====
+    const thumbsHtml = product.images.map((img, index) => 
         `<img src="${img}" onclick="window.setMain(this)" class="${index === 0 ? 'active' : ''}" onerror="this.style.display='none'">`
     ).join('');
     
@@ -344,7 +433,7 @@ async function loadProduct() {
         <div class="product-grid">
             <div class="gal">
                 <div class="thumbs">${thumbsHtml}</div>
-                <div class="imgbox"><img id="mainImg" src="${product.image}" alt="${product.name}" onerror="this.src='/logo.png'"></div>
+                <div class="imgbox"><img id="mainImg" src="${product.images[0]}" alt="${product.name}" onerror="this.src='/logo.png'"></div>
             </div>
             <div>
                 <div class="bread">RUDOHAGE / ${product.name}</div>
@@ -395,8 +484,8 @@ async function loadProduct() {
         loadingEl.style.opacity = '0';
         setTimeout(() => {
             loadingEl.style.display = 'none';
-        }, 600);
-    }, 400);
+        }, 500);
+    }, 300);
     
     reviewsEl.style.display = 'block';
     similarEl.style.display = 'block';
@@ -435,7 +524,7 @@ function loadSimilarProducts(currentId) {
     others.forEach(([id, product]) => {
         grid.innerHTML += `
             <div class="rcard" onclick="window.location.href='/product/?id=${id}'">
-                <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='/logo.png'">
+                <img src="${product.images[0]}" alt="${product.name}" loading="lazy" onerror="this.src='/logo.png'">
                 <div class="rinfo">
                     <div class="rp">Piece 0${id}</div>
                     <h3>${product.name}</h3>
@@ -447,14 +536,49 @@ function loadSimilarProducts(currentId) {
     });
 }
 
-async function placeOrder(product) {
-    if (!currentUser) {
-        if (confirm('Please login first. Go to login page?')) {
+// ===== CREATE ORDER AND REDIRECT TO LOGIN =====
+async function createOrderAndRedirect(product) {
+    try {
+        const btn = document.getElementById('buyBtn');
+        if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Order...'; }
+        
+        const response = await fetch(`${BACKEND_URL}/create-order`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                product: product.name,
+                cod: false
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.id) {
+            localStorage.setItem('pendingOrderId', data.id);
+            localStorage.setItem('pendingProduct', product.name);
+            localStorage.setItem('pendingPrice', product.price);
             window.location.href = `/login/?redirect=${encodeURIComponent(window.location.href)}`;
+        } else {
+            alert('Failed to create order. Please try again.');
+            if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-bolt"></i> Buy Now'; }
         }
+    } catch (error) {
+        alert('Network error. Please try again.');
+        console.error(error);
+        const btn = document.getElementById('buyBtn');
+        if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-bolt"></i> Buy Now'; }
+    }
+}
+
+// ===== PLACE ORDER =====
+async function placeOrder(product) {
+    // ===== AGAR USER LOGGED IN NAHI HAI =====
+    if (!currentUser) {
+        showLoginModal(product);
         return;
     }
     
+    // ===== AGAR USER LOGGED IN HAI =====
     try {
         const btn = document.getElementById('buyBtn');
         btn.disabled = true;
@@ -488,6 +612,7 @@ async function placeOrder(product) {
     }
 }
 
+// ===== REVIEWS =====
 async function loadReviews(productId) {
     const container = document.getElementById('reviewsContainer');
     container.innerHTML = '<p style="opacity:.4;font-size:.7rem;">Loading reviews...</p>';
@@ -520,8 +645,7 @@ async function loadReviews(productId) {
 
 document.getElementById('publishBtn').addEventListener('click', async () => {
     if (!currentUser) {
-        alert('Please login to write a review.');
-        window.location.href = `/login/?redirect=${encodeURIComponent(window.location.href)}`;
+        showLoginModal(null);
         return;
     }
     
@@ -545,7 +669,7 @@ document.getElementById('publishBtn').addEventListener('click', async () => {
         
         document.getElementById('reviewName').value = '';
         document.getElementById('reviewText').value = '';
-        alert('✅ Review published!');
+        alert(' Review published!');
         loadReviews(productId);
     } catch (error) {
         alert('Failed to publish review. Please try again.');
