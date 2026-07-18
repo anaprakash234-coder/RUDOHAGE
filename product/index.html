@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/logo.png">
+<title id="pageTitle">Product | RUDOHAGE</title>
+<meta name="description" id="pageDesc" content="Handcrafted luxury piece by RUDOHAGE">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{--bg:#f6f2ea;--t:#111;--m:rgba(20,20,20,.55);--a:#a48b74;--r:14px;--xxs:.62rem;--xs:.7rem;--sm:.82rem;--bs:.92rem;--md:1.05rem;--lg:1.25rem;--xl:1.6rem;--2xl:2rem;--3xl:2.5rem}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-height:1.6;overflow-x:hidden}
+.hdr{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:.8rem 2rem;background:rgba(246,242,234,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.04);display:flex;align-items:center;justify-content:space-between}
+.brand{text-decoration:none;color:var(--t);font-family:'Cormorant Garamond',serif;font-size:var(--lg);font-weight:700;letter-spacing:-.5px}
+.back{text-decoration:none;color:var(--m);font-size:var(--xxs);letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:5px;transition:.3s}
+.back:hover{color:var(--t)}
+.main{max-width:1100px;margin:0 auto;padding:95px 3% 30px;display:grid;grid-template-columns:1fr;gap:40px;align-items:start}
+.gal{display:flex;gap:12px;position:sticky;top:95px}
+.thumbs{display:flex;flex-direction:column;gap:7px;flex-shrink:0}
+.thumbs img{width:52px;height:52px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:.25s;opacity:.5}
+.thumbs img:hover,.thumbs img.active{border-color:var(--a);opacity:1}
+.imgbox{flex:1;border-radius:var(--r);overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.06);background:#fff}
+#mainImg{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.bread{font-size:var(--xxs);opacity:.4;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.ttl{font-family:'Cormorant Garamond',serif;font-size:var(--2xl);font-weight:700;line-height:1.1;margin-bottom:2px;letter-spacing:-.5px}
+.sub{font-size:var(--sm);opacity:.5;margin-bottom:12px}
+.stars{color:#d4a853;font-size:var(--bs);letter-spacing:1px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.stars span{font-size:var(--xxs);opacity:.4;color:var(--t)}
+.price{font-family:'Cormorant Garamond',serif;font-size:var(--3xl);font-weight:700;margin-bottom:16px}
+.price small{font-size:var(--xxs);opacity:.4;font-weight:400;margin-left:4px}
+.badge{display:inline-block;background:rgba(164,139,116,.12);color:var(--a);padding:4px 12px;border-radius:50px;font-size:10px;font-weight:600;letter-spacing:.5px;margin-bottom:16px}
+.high{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+.high div{display:flex;align-items:center;gap:8px;font-size:var(--sm);opacity:.6}
+.high i{color:var(--a);font-size:11px}
+.del{display:flex;gap:20px;margin-bottom:18px;flex-wrap:wrap}
+.del div{display:flex;align-items:center;gap:6px;font-size:var(--xxs);opacity:.5}
+.del i{color:var(--a);font-size:12px}
+.specs-strip{display:flex;gap:18px;margin-bottom:20px;flex-wrap:wrap}
+.specs-strip div{font-size:var(--xxs);opacity:.45;display:flex;align-items:center;gap:5px;text-transform:uppercase;letter-spacing:1px}
+.btns{display:flex;gap:10px;margin-bottom:24px}
+.buy{flex:1;padding:12px 24px;border-radius:50px;font-size:var(--sm);font-weight:600;letter-spacing:1px;text-transform:uppercase;border:none;font-family:'Manrope',sans-serif;display:flex;align-items:center;gap:7px;justify-content:center;background:var(--a);color:#fff;cursor:pointer;text-decoration:none;transition:.3s}
+.buy:hover{background:#8a715c;transform:translateY(-2px);box-shadow:0 8px 22px rgba(164,139,116,.3)}
+.buy:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.shr{background:#fff;border:1px solid rgba(0,0,0,.1);padding:12px 15px;border-radius:50px;cursor:pointer;transition:.3s;font-size:var(--bs);color:var(--t)}
+.shr:hover{background:#f5f5f5}
+.arch{background:#111;color:#fff;padding:12px 16px;border-radius:12px;margin-bottom:22px;font-size:var(--xxs);display:flex;align-items:center;gap:8px}
+.arch i{font-size:15px;color:var(--a)}
+.story,.specs-block{margin-bottom:26px}
+.story h3,.specs-block h3{font-family:'Cormorant Garamond',serif;font-size:var(--md);font-weight:700;margin-bottom:8px}
+.story p{font-size:var(--sm);opacity:.55;line-height:1.8}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sgrid div{font-size:var(--sm);opacity:.5;padding:7px 0;border-bottom:1px solid rgba(0,0,0,.04);display:flex;justify-content:space-between}
+.sgrid div span:first-child{text-transform:uppercase;letter-spacing:1px;font-size:var(--xxs)}
+.sig{text-align:center;padding:40px 20px 30px}
+.sig p{letter-spacing:4px;text-transform:uppercase;opacity:.3;font-size:var(--xxs);margin-bottom:6px}
+.sig h2{font-family:'Cormorant Garamond',serif;font-size:var(--2xl);font-weight:700}
+.loading-state{text-align:center;padding:80px 20px}
+.loading-state .spinner{width:50px;height:50px;border:3px solid #ddd;border-top:3px solid var(--a);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 20px}
+@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+.error-state{text-align:center;padding:60px 20px}
+.error-state i{font-size:48px;color:#d32f2f;margin-bottom:20px;display:block}
+.product-grid{display:grid;grid-template-columns:380px 1fr;gap:40px;align-items:start}
+@media(max-width:768px){
+.hdr{padding:.7rem 1rem}
+.main{padding:80px 4% 25px}
+.product-grid{grid-template-columns:1fr;gap:20px}
+.gal{flex-direction:column-reverse;position:relative;top:auto}
+.thumbs{flex-direction:row;overflow-x:auto}
+.thumbs img{width:44px;height:44px}
+.ttl{font-size:1.6rem}
+.price{font-size:2rem}
+.btns{flex-direction:column}
+.sgrid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="hdr"><a href="/" class="brand">RUDOHAGE</a><a href="/" class="back"><i class="fas fa-arrow-left"></i> Back</a></header>
+
+<div class="main" id="productContainer">
+    <div id="loadingState" class="loading-state">
+        <div class="spinner"></div>
+        <p style="color:#888;font-size:14px">Loading piece...</p>
+    </div>
+    <div id="productContent" style="display:none;">
+        <!-- Dynamic content -->
+    </div>
+</div>
+
+<div class="sig"><p>Not Produced. Crafted.</p><h2>RUDOHAGE</h2></div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+// Firebase Config
+const firebaseConfig = {
+    apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
+    authDomain: "rudohage.com",
+    projectId: "rudohage",
+    storageBucket: "rudohage.firebasestorage.app",
+    messagingSenderId: "487042116246",
+    appId: "1:487042116246:web:990d65636addd6d653f0b7"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+// Backend Config
+const BACKEND_URL = "https://razorpay-backend-6yg5.onrender.com";
+const RAZORPAY_KEY = "rzp_live_T2N3YbZ3iKazSC";
+
+// Product Data
+const PRODUCTS = {
+    '1': { 
+        name: "Inferno Core", 
+        price: 3000,
+        image: "/image/fire-clock-1.png",
+        description: "pure wood crafted material. with precision crafted by hand.full polished and colured with red using spray.",
+        material: "Premium Wood",
+        finish: "Matte"
+    },
+    '2': { 
+        name: "Crimson Orbit", 
+        price: 2500,
+        image: "/image/fire-clock-2.png",
+        description: "pure wood hand crafted material. in a round four layer towards the needle of the clock thats look asthetic.",
+        material: "Premium Wood",
+        finish: "Matte"
+    },
+    '3': { 
+        name: "Ember Crown", 
+        price: 2500,
+        image: "/image/fire-clock-3.png",
+        description: "pure hand crafted material. i used the heat flames to colour of thre top thats look more satisfying.",
+        material: "Premium Wood",
+        finish: "Flame-Colored"
+    }
+};
+
+let currentUser = null;
+
+onAuthStateChanged(auth, (user) => {
+    currentUser = user;
+});
+
+// Get product ID from URL
+const urlParams = new URLSearchParams(window.location.search);
+const productId = urlParams.get('id');
+
+async function loadProduct() {
+    const loadingEl = document.getElementById('loadingState');
+    const contentEl = document.getElementById('productContent');
+    
+    if (!productId || !PRODUCTS[productId]) {
+        loadingEl.innerHTML = `
+            <div class="error-state">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px">Product Not Found</h3>
+                <p style="color:#888;font-size:14px">Please browse our collection.</p>
+                <a href="/" style="display:inline-block;margin-top:15px;color:#a48b74;">← Back to Shop</a>
+            </div>
+        `;
+        return;
+    }
+    
+    const product = PRODUCTS[productId];
+    
+    // Set page meta
+    document.title = `${product.name} | RUDOHAGE`;
+    document.getElementById('pageDesc').content = product.description;
+    
+    // Thumbnails
+    const thumbs = [product.image];
+    for (let i = 1; i <= 3; i++) {
+        const img = product.image.replace('.png', `-${i+1}.png`);
+        thumbs.push(img);
+    }
+    
+    const thumbsHtml = thumbs.map((img, index) => 
+        `<img src="${img}" onclick="window.setMain(this)" class="${index === 0 ? 'active' : ''}" onerror="this.style.display='none'">`
+    ).join('');
+    
+    contentEl.style.display = 'block';
+    contentEl.innerHTML = `
+        <div class="product-grid">
+            <div class="gal">
+                <div class="thumbs">${thumbsHtml}</div>
+                <div class="imgbox"><img id="mainImg" src="${product.image}" alt="${product.name}" onerror="this.src='/logo.png'"></div>
+            </div>
+            <div>
+                <div class="bread">RUDOHAGE / ${product.name}</div>
+                <h1 class="ttl">${product.name}</h1>
+                <p class="sub">Handcrafted by RUDOHAGE</p>
+                <div class="stars">★★★★★ <span>5.0</span></div>
+                <div class="price">₹${product.price.toLocaleString()}<small>incl. GST</small></div>
+                <div class="badge"><i class="fas fa-tag"></i> Limited Edition</div>
+                <div class="high">
+                    <div><i class="fas fa-check-circle"></i> One of One — Never Reproduced</div>
+                    <div><i class="fas fa-tree"></i> ${product.material}</div>
+                    <div><i class="fas fa-paint-brush"></i> ${product.finish}</div>
+                </div>
+                <div class="del">
+                    <div><i class="fas fa-truck"></i> Free Shipping</div>
+                    <div><i class="fas fa-clock"></i> Dispatch 3-5 Days</div>
+                    <div><i class="fas fa-box"></i> Secure Packaging</div>
+                </div>
+                <div class="specs-strip">
+                    <div><i class="fas fa-tree"></i> ${product.material}</div>
+                    <div><i class="fas fa-paint-brush"></i> ${product.finish}</div>
+                    <div><i class="fas fa-hand-sparkles"></i> Handmade</div>
+                </div>
+                <div class="btns">
+                    <button class="buy" id="buyBtn"><i class="fas fa-bolt"></i> Buy Now</button>
+                    <button class="shr" id="shareBtn"><i class="fas fa-share-alt"></i></button>
+                </div>
+                <div class="arch"><i class="fas fa-archive"></i> <strong>Active Piece</strong> — Never reproduced</div>
+                <div class="story">
+                    <h3>The Story</h3>
+                    <p>${product.description}</p>
+                </div>
+                <div class="specs-block">
+                    <h3>Specifications</h3>
+                    <div class="sgrid">
+                        <div><span>Material</span><span>${product.material}</span></div>
+                        <div><span>Finish</span><span>${product.finish}</span></div>
+                        <div><span>Handmade</span><span>Yes</span></div>
+                        <div><span>Collection</span><span>RUDOHAGE</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    loadingEl.style.display = 'none';
+    
+    document.getElementById('buyBtn').addEventListener('click', () => placeOrder(product));
+    document.getElementById('shareBtn').addEventListener('click', async () => {
+        if (navigator.share) {
+            await navigator.share({ title: product.name, url: window.location.href });
+        } else {
+            navigator.clipboard.writeText(window.location.href);
+            alert('Link copied!');
+        }
+    });
+}
+
+window.setMain = function(el) {
+    document.getElementById('mainImg').src = el.src;
+    document.querySelectorAll('.thumbs img').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+};
+
+async function placeOrder(product) {
+    if (!currentUser) {
+        if (confirm('Please login first. Go to login page?')) {
+            window.location.href = `/login/?redirect=${encodeURIComponent(window.location.href)}`;
+        }
+        return;
+    }
+    
+    try {
+        const btn = document.getElementById('buyBtn');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        
+        const response = await fetch(`${BACKEND_URL}/create-order`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                product: product.name,
+                cod: false
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.id) {
+            localStorage.setItem('currentOrderId', data.id);
+            localStorage.setItem('currentProduct', product.name);
+            openRazorpay(data, product);
+        } else {
+            alert('Failed to create order. Please try again.');
+        }
+    } catch (error) {
+        alert('Network error. Please try again.');
+        console.error(error);
+    } finally {
+        const btn = document.getElementById('buyBtn');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-bolt"></i> Buy Now';
+    }
+}
+
+function openRazorpay(order, product) {
+    const options = {
+        key: RAZORPAY_KEY,
+        amount: order.amount,
+        currency: order.currency,
+        name: 'RUDOHAGE',
+        description: product.name,
+        order_id: order.id,
+        prefill: {
+            email: currentUser?.email || '',
+        },
+        handler: function(response) {
+            window.location.href = `/success/?orderId=${order.id}&paymentId=${response.razorpay_payment_id}`;
+        },
+        modal: {
+            ondismiss: function() {
+                window.location.href = `/checkout/?orderId=${order.id}&cancelled=true`;
+            }
+        }
+    };
+    
+    const rzp = new Razorpay(options);
+    rzp.open();
+}
+
+loadProduct();
+</script>
+<script src="/toast.js"></script>
+</body>
+</html>
