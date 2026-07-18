@@ -17,6 +17,92 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 .back{text-decoration:none;color:var(--m);font-size:var(--xxs);letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:5px;transition:.3s}
 .back:hover{color:var(--t)}
 .main{max-width:1100px;margin:0 auto;padding:95px 3% 30px;display:grid;grid-template-columns:1fr;gap:40px;align-items:start}
+
+/* ===== PROFESSIONAL LOADER ===== */
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: 40px 20px;
+    background: var(--bg);
+    transition: opacity 0.6s ease;
+}
+
+.loader-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--a);
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    animation: logoPulse 2s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+}
+
+.loader-spinner {
+    width: 60px;
+    height: 60px;
+    border: 3px solid rgba(164, 139, 116, 0.15);
+    border-top: 3px solid var(--a);
+    border-radius: 50%;
+    animation: spin 1s cubic-bezier(0.6, 0, 0.4, 1) infinite;
+    margin-bottom: 25px;
+    box-shadow: 0 0 30px rgba(164, 139, 116, 0.1);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--t);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+.loader-sub {
+    font-size: 0.75rem;
+    color: var(--m);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.5;
+    font-weight: 300;
+}
+
+.loader-dots {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.loader-dots span {
+    width: 8px;
+    height: 8px;
+    background: var(--a);
+    border-radius: 50%;
+    animation: dotBounce 1.4s ease-in-out infinite;
+}
+
+.loader-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loader-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotBounce {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.3; }
+    40% { transform: scale(1); opacity: 1; }
+}
+
+/* ===== PRODUCT GRID ===== */
 .gal{display:flex;gap:12px;position:sticky;top:95px}
 .thumbs{display:flex;flex-direction:column;gap:7px;flex-shrink:0}
 .thumbs img{width:52px;height:52px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:.25s;opacity:.5}
@@ -56,14 +142,27 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 .sig{text-align:center;padding:40px 20px 30px}
 .sig p{letter-spacing:4px;text-transform:uppercase;opacity:.3;font-size:var(--xxs);margin-bottom:6px}
 .sig h2{font-family:'Cormorant Garamond',serif;font-size:var(--2xl);font-weight:700}
-.loading-state{text-align:center;padding:80px 20px}
-.loading-state .spinner{width:50px;height:50px;border:3px solid #ddd;border-top:3px solid var(--a);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 20px}
-@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
 .error-state{text-align:center;padding:60px 20px}
 .error-state i{font-size:48px;color:#d32f2f;margin-bottom:20px;display:block}
 .product-grid{display:grid;grid-template-columns:380px 1fr;gap:40px;align-items:start}
-/* ===== REVIEWS SECTION ===== */
-.rev-block{max-width:1100px;margin:20px auto 0;padding:15px 3% 40px}
+
+/* ===== SIMILAR PRODUCTS ===== */
+.rel-block{max-width:1100px;margin:20px auto 0;padding:15px 3% 20px}
+.rel-block h2{font-family:'Cormorant Garamond',serif;font-size:var(--lg);font-weight:700;margin-bottom:18px;text-align:center}
+.rel-grid{display:flex;gap:14px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.rel-grid::-webkit-scrollbar{height:3px}
+.rel-grid::-webkit-scrollbar-thumb{background:rgba(0,0,0,.12);border-radius:10px}
+.rcard{min-width:180px;max-width:180px;background:#fff;border-radius:14px;text-decoration:none;color:var(--t);box-shadow:0 3px 12px rgba(0,0,0,.03);transition:.3s;overflow:hidden;flex-shrink:0;scroll-snap-align:start;cursor:pointer}
+.rcard:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.06)}
+.rcard img{width:100%;height:140px;object-fit:cover;display:block}
+.rinfo{padding:10px 12px 12px}
+.rinfo .rp{font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:.3;margin-bottom:2px}
+.rinfo h3{font-family:'Cormorant Garamond',serif;font-size:var(--sm);font-weight:700}
+.rinfo .rpr{font-size:var(--xs);font-weight:600;color:var(--a)}
+.rinfo .rd{font-size:10px;opacity:.4;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px}
+
+/* ===== REVIEWS ===== */
+.rev-block{max-width:1100px;margin:0 auto;padding:15px 3% 40px}
 .rev-block h2{font-family:'Cormorant Garamond',serif;font-size:var(--lg);font-weight:700;margin-bottom:14px}
 .rev-card{background:#fff;padding:14px 16px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.02);margin-bottom:8px}
 .rev-card h4{font-size:var(--sm);font-weight:600;margin-bottom:2px}
@@ -75,6 +174,7 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 .rev-form textarea{resize:vertical;min-height:70px}
 .sbtn{background:#111;color:#fff;padding:11px 22px;border:none;border-radius:50px;cursor:pointer;font-size:var(--sm);font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:.3s;font-family:'Manrope',sans-serif}
 .sbtn:hover{background:var(--a)}
+
 @media(max-width:768px){
 .hdr{padding:.7rem 1rem}
 .main{padding:80px 4% 25px}
@@ -86,7 +186,12 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 .price{font-size:2rem}
 .btns{flex-direction:column}
 .sgrid{grid-template-columns:1fr}
+.rcard{min-width:140px;max-width:140px}
+.rcard img{height:110px}
 .rev-block{padding:10px 2% 20px}
+.loader-logo{font-size:2.2rem}
+.loader-text{font-size:1.1rem}
+.loader-spinner{width:45px;height:45px}
 }
 </style>
 </head>
@@ -94,13 +199,27 @@ body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-h
 <header class="hdr"><a href="/" class="brand">RUDOHAGE</a><a href="/" class="back"><i class="fas fa-arrow-left"></i> Back</a></header>
 
 <div class="main" id="productContainer">
+    <!-- ===== PROFESSIONAL LOADING STATE ===== -->
     <div id="loadingState" class="loading-state">
-        <div class="spinner"></div>
-        <p style="color:#888;font-size:14px">Loading piece...</p>
+        <div class="loader-logo">✦ RUDOHAGE</div>
+        <div class="loader-spinner"></div>
+        <p class="loader-text">Preparing Your Piece</p>
+        <p class="loader-sub">Handcrafted with precision</p>
+        <div class="loader-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </div>
     <div id="productContent" style="display:none;">
         <!-- Dynamic content -->
     </div>
+</div>
+
+<!-- ===== SIMILAR PRODUCTS ===== -->
+<div class="rel-block" id="similarProducts" style="display:none;">
+    <h2>Similar Products</h2>
+    <div class="rel-grid" id="similarGrid"></div>
 </div>
 
 <!-- ===== REVIEWS SECTION ===== -->
@@ -130,7 +249,6 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/fireba
 import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 import { getFirestore, doc, getDoc, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-// Firebase Config
 const firebaseConfig = {
     apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
     authDomain: "rudohage.com",
@@ -144,11 +262,9 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Backend Config
 const BACKEND_URL = "https://razorpay-backend-6yg5.onrender.com";
 const RAZORPAY_KEY = "rzp_live_T2N3YbZ3iKazSC";
 
-// Product Data
 const PRODUCTS = {
     '1': { 
         name: "Inferno Core", 
@@ -156,7 +272,8 @@ const PRODUCTS = {
         image: "/image/fire-clock-1.png",
         description: "pure wood crafted material. with precision crafted by hand.full polished and colured with red using spray.",
         material: "Premium Wood",
-        finish: "Matte"
+        finish: "Matte",
+        shortDesc: "Flame-colored wood clock with fire-inspired finish"
     },
     '2': { 
         name: "Crimson Orbit", 
@@ -164,7 +281,8 @@ const PRODUCTS = {
         image: "/image/fire-clock-2.png",
         description: "pure wood hand crafted material. in a round four layer towards the needle of the clock thats look asthetic.",
         material: "Premium Wood",
-        finish: "Matte"
+        finish: "Matte",
+        shortDesc: "Round layered wood clock with aesthetic needle design"
     },
     '3': { 
         name: "Ember Crown", 
@@ -172,7 +290,8 @@ const PRODUCTS = {
         image: "/image/fire-clock-3.png",
         description: "pure hand crafted material. i used the heat flames to colour of thre top thats look more satisfying.",
         material: "Premium Wood",
-        finish: "Flame-Colored"
+        finish: "Flame-Colored",
+        shortDesc: "Heat-flame colored artisan wood clock"
     }
 };
 
@@ -183,7 +302,6 @@ onAuthStateChanged(auth, (user) => {
     currentUser = user;
 });
 
-// Get product ID from URL
 const urlParams = new URLSearchParams(window.location.search);
 const productId = urlParams.get('id');
 currentProductId = productId;
@@ -192,6 +310,7 @@ async function loadProduct() {
     const loadingEl = document.getElementById('loadingState');
     const contentEl = document.getElementById('productContent');
     const reviewsEl = document.getElementById('reviewsSection');
+    const similarEl = document.getElementById('similarProducts');
     
     if (!productId || !PRODUCTS[productId]) {
         loadingEl.innerHTML = `
@@ -207,11 +326,9 @@ async function loadProduct() {
     
     const product = PRODUCTS[productId];
     
-    // Set page meta
     document.title = `${product.name} | RUDOHAGE`;
     document.getElementById('pageDesc').content = product.description;
     
-    // Thumbnails
     const thumbs = [product.image];
     for (let i = 1; i <= 3; i++) {
         const img = product.image.replace('.png', `-${i+1}.png`);
@@ -273,16 +390,21 @@ async function loadProduct() {
         </div>
     `;
     
-    loadingEl.style.display = 'none';
+    // ===== FADE OUT LOADER =====
+    setTimeout(() => {
+        loadingEl.style.opacity = '0';
+        setTimeout(() => {
+            loadingEl.style.display = 'none';
+        }, 600);
+    }, 400);
+    
     reviewsEl.style.display = 'block';
+    similarEl.style.display = 'block';
     
-    // Load reviews
     loadReviews(productId);
+    loadSimilarProducts(productId);
     
-    // Setup Buy button -> CHECKOUT PAGE
     document.getElementById('buyBtn').addEventListener('click', () => placeOrder(product));
-    
-    // Setup Share button
     document.getElementById('shareBtn').addEventListener('click', async () => {
         if (navigator.share) {
             await navigator.share({ title: product.name, url: window.location.href });
@@ -299,7 +421,32 @@ window.setMain = function(el) {
     el.classList.add('active');
 };
 
-// ===== PLACE ORDER -> CHECKOUT PAGE =====
+function loadSimilarProducts(currentId) {
+    const grid = document.getElementById('similarGrid');
+    grid.innerHTML = '';
+    
+    const others = Object.entries(PRODUCTS).filter(([id]) => id !== currentId);
+    
+    if (others.length === 0) {
+        document.getElementById('similarProducts').style.display = 'none';
+        return;
+    }
+    
+    others.forEach(([id, product]) => {
+        grid.innerHTML += `
+            <div class="rcard" onclick="window.location.href='/product/?id=${id}'">
+                <img src="${product.image}" alt="${product.name}" loading="lazy" onerror="this.src='/logo.png'">
+                <div class="rinfo">
+                    <div class="rp">Piece 0${id}</div>
+                    <h3>${product.name}</h3>
+                    <p class="rpr">₹${product.price.toLocaleString()}</p>
+                    <p class="rd">${product.shortDesc || ''}</p>
+                </div>
+            </div>
+        `;
+    });
+}
+
 async function placeOrder(product) {
     if (!currentUser) {
         if (confirm('Please login first. Go to login page?')) {
@@ -327,7 +474,6 @@ async function placeOrder(product) {
         if (data.id) {
             localStorage.setItem('currentOrderId', data.id);
             localStorage.setItem('currentProduct', product.name);
-            // CHECKOUT PAGE PE BHEJO (pehle wala system)
             window.location.href = `/checkout/?orderId=${data.id}&product=${encodeURIComponent(product.name)}&price=${product.price}`;
         } else {
             alert('Failed to create order. Please try again.');
@@ -342,7 +488,6 @@ async function placeOrder(product) {
     }
 }
 
-// ===== REVIEWS =====
 async function loadReviews(productId) {
     const container = document.getElementById('reviewsContainer');
     container.innerHTML = '<p style="opacity:.4;font-size:.7rem;">Loading reviews...</p>';
@@ -373,7 +518,6 @@ async function loadReviews(productId) {
     }
 }
 
-// Publish review
 document.getElementById('publishBtn').addEventListener('click', async () => {
     if (!currentUser) {
         alert('Please login to write a review.');
