@@ -1,21 +1,684 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="/logo.png"><title>Product | RUDOHAGE</title><meta name="description" content="Handcrafted luxury piece by RUDOHAGE"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"><style>:root{--bg:#f6f2ea;--t:#111;--a:#a48b74}*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-height:1.6}.hdr{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:.8rem 2rem;background:rgba(246,242,234,.75);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,.04)}.brand{text-decoration:none;color:var(--t);font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700}.back{text-decoration:none;color:rgba(20,20,20,.55);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:5px}.main{max-width:1100px;margin:0 auto;padding:95px 3% 30px}.loading-state{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh}.loader-spinner{width:50px;height:50px;border:2px solid rgba(164,139,116,.15);border-top:2px solid var(--a);border-radius:50%;animation:spin 1s cubic-bezier(.6,0,.4,1)infinite}@keyframes spin{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}.product-grid{display:grid;grid-template-columns:380px 1fr;gap:40px}.gal{display:flex;gap:12px;position:sticky;top:95px}.thumbs{display:flex;flex-direction:column;gap:7px}.thumbs img{width:52px;height:52px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent;opacity:.5}.thumbs img.active,.thumbs img:hover{border-color:var(--a);opacity:1}.imgbox{flex:1;border-radius:14px;overflow:hidden;background:#fff}#mainImg{width:100%;aspect-ratio:1;object-fit:cover}.ttl{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;line-height:1.1}.price{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;margin:8px 0}.btns{display:flex;gap:10px;margin:16px 0}.buy{flex:1;padding:12px 24px;border-radius:50px;font-weight:600;text-transform:uppercase;border:none;background:var(--a);color:#fff;cursor:pointer}.buy:hover{background:#8a715c}.shr{background:#fff;border:1px solid rgba(0,0,0,.1);padding:12px 15px;border-radius:50px;cursor:pointer}.login-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:99999;padding:20px}.login-modal.active{display:flex}.login-modal-box{max-width:400px;width:100%;background:#fff;border-radius:20px;padding:40px 32px;text-align:center}.login-modal-box h2{font-family:'Cormorant Garamond',serif;font-size:24px;margin:8px 0}.modal-btns{display:flex;gap:10px;margin-top:20px}.modal-btns button{flex:1;padding:14px;border:none;border-radius:50px;font-weight:600;cursor:pointer}.btn-cancel{background:#f3f1ee}.btn-login{background:var(--a);color:#fff}.rel-grid{display:flex;gap:14px;overflow-x:auto;padding:10px 0}.rcard{min-width:180px;background:#fff;border-radius:14px;padding:10px;cursor:pointer}.rcard img{width:100%;height:140px;object-fit:cover;border-radius:8px}.rcard h3{font-family:'Cormorant Garamond',serif}.rev-card{background:#fff;padding:14px 16px;border-radius:12px;margin-bottom:8px}.rev-form{background:#fff;padding:16px;border-radius:14px;margin-top:16px}.rev-form input,.rev-form select,.rev-form textarea{width:100%;padding:10px;margin-bottom:8px;border:none;background:#f5f3ef;border-radius:10px;font-family:'Manrope',sans-serif}.sbtn{background:#111;color:#fff;padding:11px 22px;border:none;border-radius:50px;font-weight:600;cursor:pointer}.sbtn:hover{background:var(--a)}.sig{text-align:center;padding:40px 20px 30px;opacity:.3;font-family:'Cormorant Garamond',serif}@media(max-width:768px){.product-grid{grid-template-columns:1fr}.gal{flex-direction:column-reverse;position:relative;top:auto}.thumbs{flex-direction:row;overflow-x:auto}.thumbs img{width:44px;height:44px}.rcard{min-width:140px}}</style></head><body><header class="hdr"><a href="/" class="brand">RUDOHAGE</a><a href="/" class="back"><i class="fas fa-arrow-left"></i> Back</a></header><div class="login-modal" id="loginModal"><div class="login-modal-box"><i class="fas fa-lock" style="font-size:28px;color:var(--a)"></i><h2>Login Required</h2><p style="color:#888;margin:8px 0">Please log in to continue.</p><div class="modal-btns"><button class="btn-cancel" id="modalCancel">Cancel</button><button class="btn-login" id="modalLogin">Login Now</button></div></div></div><div class="main" id="productContainer"><div id="loadingState" class="loading-state"><div class="loader-spinner"></div></div><div id="productContent" style="display:none"></div></div><div class="main" style="padding-top:0" id="similarProducts" style="display:none"><h2 style="font-family:'Cormorant Garamond',serif;margin:10px 0">Similar Products</h2><div class="rel-grid" id="similarGrid"></div></div><div class="main" style="padding-top:0" id="reviewsSection" style="display:none"><h2 style="font-family:'Cormorant Garamond',serif;margin:10px 0">Reviews</h2><div id="reviewsContainer"></div><div class="rev-form"><h4 style="font-family:'Cormorant Garamond',serif;font-size:1rem">Write a Review</h4><input type="text" id="reviewName" placeholder="Your Name"><select id="reviewRating"><option value="5">★★★★★</option><option value="4">★★★★</option><option value="3">★★★</option><option value="2">★★</option><option value="1">★</option></select><textarea id="reviewText" placeholder="Share your experience..."></textarea><button class="sbtn" id="publishBtn">Publish</button></div></div><div class="sig"><p>Not Produced. Crafted.</p><h2>RUDOHAGE</h2></div><script src="https://checkout.razorpay.com/v1/checkout.js"></script><script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-import{getAuth,onAuthStateChanged}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-import{getFirestore,collection,addDoc,getDocs,query,orderBy}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
-const app=initializeApp({apiKey:"AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",authDomain:"rudohage.com",projectId:"rudohage",storageBucket:"rudohage.firebasestorage.app",messagingSenderId:"487042116246",appId:"1:487042116246:web:990d65636addd6d653f0b7"});
-const auth=getAuth(app),db=getFirestore(app),BACKEND_URL="https://razorpay-backend-6yg5.onrender.com",PRODUCTS={1:{name:"Inferno Core",price:3000,images:["/image/fire-clock-1.png","/image/fire-clock-14.png","/image/fire-clock-15.png","/image/fire-clock-16.png"],description:"pure wood crafted material. with precision crafted by hand.full polished and colured with red using spray.",material:"Premium Wood",finish:"Matte",shortDesc:"Flame-colored wood clock"},2:{name:"Crimson Orbit",price:2500,images:["/image/fire-clock-2.png","/image/fire-clock-11.png","/image/fire-clock-12.png","/image/fire-clock-13.png"],description:"pure wood hand crafted material. in a round four layer towards the needle of the clock thats look asthetic.",material:"Premium Wood",finish:"Matte",shortDesc:"Round layered wood clock"},3:{name:"Ember Crown",price:2500,images:["/image/fire-clock-3.png","/image/fire-clock-8.png","/image/fire-clock-9.png","/image/fire-clock-10.png"],description:"pure hand crafted material. i used the heat flames to colour of thre top thats look more satisfying.",material:"Premium Wood",finish:"Flame-Colored",shortDesc:"Heat-flame colored artisan clock"}};
-let currentUser=null,currentProductId=null,pendingLoginProduct=null;
-const url=new URLSearchParams(location.search),productId=url.get('id');currentProductId=productId;
-const $=id=>document.getElementById(id),showModal=p=>{pendingLoginProduct=p;$('loginModal').classList.add('active')},hideModal=()=>{$('loginModal').classList.remove('active');pendingLoginProduct=null};
-$('modalCancel').onclick=hideModal;$('modalLogin').onclick=()=>{if(pendingLoginProduct){const p=pendingLoginProduct;hideModal();createOrderAndRedirect(p)}};$('loginModal').onclick=e=>{if(e.target===e.currentTarget)hideModal()};
-onAuthStateChanged(auth,user=>{currentUser=user;if(user){const id=localStorage.getItem('pendingOrderId'),p=localStorage.getItem('pendingProduct'),pr=localStorage.getItem('pendingPrice');if(id){localStorage.removeItem('pendingOrderId');localStorage.removeItem('pendingProduct');localStorage.removeItem('pendingPrice');location.href=`/checkout/?orderId=${id}&product=${encodeURIComponent(p||'')}&price=${pr||0}`}}});
-async function createOrderAndRedirect(product){try{const btn=$('buyBtn');if(btn){btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Creating...'}const res=await fetch(`${BACKEND_URL}/create-order`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({product:product.name,cod:false})}),data=await res.json();if(data.id){localStorage.setItem('pendingOrderId',data.id);localStorage.setItem('pendingProduct',product.name);localStorage.setItem('pendingPrice',product.price);location.href=`/login/?redirect=${encodeURIComponent(location.href)}`}else{alert('Failed');if(btn){btn.disabled=false;btn.innerHTML='<i class="fas fa-bolt"></i> Buy Now'}}}catch(e){alert('Network error');console.error(e);const btn=$('buyBtn');if(btn){btn.disabled=false;btn.innerHTML='<i class="fas fa-bolt"></i> Buy Now'}}}
-async function placeOrder(product){if(!currentUser)return showModal(product);try{const btn=$('buyBtn');btn.disabled=true;btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Processing...';const res=await fetch(`${BACKEND_URL}/create-order`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({product:product.name,cod:false})}),data=await res.json();if(data.id){localStorage.setItem('currentOrderId',data.id);localStorage.setItem('currentProduct',product.name);location.href=`/checkout/?orderId=${data.id}&product=${encodeURIComponent(product.name)}&price=${product.price}`}else alert('Failed')}catch(e){alert('Network error');console.error(e)}finally{const btn=$('buyBtn');btn.disabled=false;btn.innerHTML='<i class="fas fa-bolt"></i> Buy Now'}}
-window.setMain=function(el){$('mainImg').src=el.src;document.querySelectorAll('.thumbs img').forEach(t=>t.classList.remove('active'));el.classList.add('active')};
-async function loadProduct(){const loading=$('loadingState'),content=$('productContent');if(!productId||!PRODUCTS[productId]){loading.innerHTML='<div style="text-align:center;padding:60px 20px"><i class="fas fa-exclamation-triangle" style="font-size:48px;color:#d32f2f"></i><h3 style="font-family:Cormorant Garamond,serif;font-size:24px">Not Found</h3><a href="/" style="color:#a48b74">← Back</a></div>';return}const p=PRODUCTS[productId];document.title=`${p.name} | RUDOHAGE`;document.getElementById('pageDesc').content=p.description;const thumbs=p.images.map((img,i)=>`<img src="${img}" onclick="window.setMain(this)" class="${i===0?'active':''}" onerror="this.style.display='none'">`).join('');content.style.display='block';content.innerHTML=`<div class="product-grid"><div class="gal"><div class="thumbs">${thumbs}</div><div class="imgbox"><img id="mainImg" src="${p.images[0]}" alt="${p.name}" onerror="this.src='/logo.png'"></div></div><div><div style="font-size:.62rem;opacity:.4;letter-spacing:1.5px;text-transform:uppercase">RUDOHAGE / ${p.name}</div><h1 class="ttl">${p.name}</h1><p style="opacity:.5;font-size:.82rem">Handcrafted by RUDOHAGE</p><div style="color:#d4a853;margin:8px 0">★★★★★ <span style="opacity:.4;font-size:.62rem">5.0</span></div><div class="price">₹${p.price.toLocaleString()}<small style="font-size:.62rem;opacity:.4;margin-left:4px">incl. GST</small></div><div style="display:inline-block;background:rgba(164,139,116,.12);color:var(--a);padding:4px 12px;border-radius:50px;font-size:10px;font-weight:600;margin-bottom:10px"><i class="fas fa-tag"></i> Limited Edition</div><div style="display:flex;flex-direction:column;gap:6px;margin:12px 0"><div><i class="fas fa-check-circle" style="color:var(--a)"></i> One of One — Never Reproduced</div><div><i class="fas fa-tree" style="color:var(--a)"></i> ${p.material}</div><div><i class="fas fa-paint-brush" style="color:var(--a)"></i> ${p.finish}</div></div><div style="display:flex;gap:20px;flex-wrap:wrap;margin:12px 0;font-size:.62rem;opacity:.5"><div><i class="fas fa-truck" style="color:var(--a)"></i> Free Shipping</div><div><i class="fas fa-clock" style="color:var(--a)"></i> Dispatch 3-5 Days</div></div><div class="btns"><button class="buy" id="buyBtn"><i class="fas fa-bolt"></i> Buy Now</button><button class="shr" id="shareBtn"><i class="fas fa-share-alt"></i></button></div><div style="background:#111;color:#fff;padding:12px 16px;border-radius:12px;font-size:.62rem;display:flex;align-items:center;gap:8px"><i class="fas fa-archive" style="color:var(--a)"></i> <strong>Active Piece</strong> — Never reproduced</div><div style="margin:16px 0"><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.05rem">The Story</h3><p style="font-size:.82rem;opacity:.55">${p.description}</p></div><div><h3 style="font-family:'Cormorant Garamond',serif;font-size:1.05rem">Specifications</h3><div style="display:grid;grid-template-columns:1fr 1fr;gap:6px"><div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:.82rem;opacity:.5"><span style="text-transform:uppercase;letter-spacing:1px;font-size:.62rem">Material</span><span>${p.material}</span></div><div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:.82rem;opacity:.5"><span style="text-transform:uppercase;letter-spacing:1px;font-size:.62rem">Finish</span><span>${p.finish}</span></div><div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:.82rem;opacity:.5"><span style="text-transform:uppercase;letter-spacing:1px;font-size:.62rem">Handmade</span><span>Yes</span></div><div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:.82rem;opacity:.5"><span style="text-transform:uppercase;letter-spacing:1px;font-size:.62rem">Collection</span><span>RUDOHAGE</span></div></div></div></div></div>`;setTimeout(()=>{loading.style.opacity='0';setTimeout(()=>{loading.style.display='none'},500)},300);$('reviewsSection').style.display='block';$('similarProducts').style.display='block';loadReviews(productId);loadSimilarProducts(productId);$('buyBtn').addEventListener('click',()=>placeOrder(p));$('shareBtn').addEventListener('click',async()=>{if(navigator.share)await navigator.share({title:p.name,url:location.href});else{navigator.clipboard.writeText(location.href);alert('Link copied!')}})}
-async function loadSimilarProducts(id){const grid=$('similarGrid');grid.innerHTML='';const others=Object.entries(PRODUCTS).filter(([k])=>k!==id);if(!others.length){$('similarProducts').style.display='none';return}others.forEach(([k,p])=>{grid.innerHTML+=`<div class="rcard" onclick="location.href='/product/?id=${k}'"><img src="${p.images[0]}" alt="${p.name}" loading="lazy" onerror="this.src='/logo.png'"><h3>${p.name}</h3><p style="color:var(--a);font-weight:600">₹${p.price.toLocaleString()}</p><p style="font-size:10px;opacity:.4">${p.shortDesc||''}</p></div>`})}
-async function loadReviews(id){const c=$('reviewsContainer');c.innerHTML='<p style="opacity:.4;font-size:.7rem">Loading...</p>';try{const snap=await getDocs(query(collection(db,`product${id}_reviews`),orderBy("date","desc")));if(snap.empty){c.innerHTML='<p style="opacity:.4;font-size:.7rem">No reviews yet.</p>';return}c.innerHTML='';snap.forEach(d=>{const data=d.data();c.innerHTML+=`<div class="rev-card"><h4>${data.name||'Anonymous'}</h4><div style="color:#d4a853;font-size:12px">${'★'.repeat(data.rating||5)}</div><p style="opacity:.55;font-size:.82rem">${data.review}</p></div>`})}catch(e){c.innerHTML='<p style="opacity:.4;font-size:.7rem">Error loading reviews.</p>';console.error(e)}}
-$('publishBtn').addEventListener('click',async()=>{if(!currentUser)return showModal(null);const name=$('reviewName').value.trim(),rating=parseInt($('reviewRating').value),review=$('reviewText').value.trim();if(!name||!review)return alert('Fill all fields.');try{await addDoc(collection(db,`product${productId}_reviews`),{name,rating,review,date:Date.now()});$('reviewName').value='';$('reviewText').value='';alert('✓ Published!');loadReviews(productId)}catch(e){alert('Failed.');console.error(e)}});
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/logo.png">
+<title id="pageTitle">Product | RUDOHAGE</title>
+<meta name="description" id="pageDesc" content="Handcrafted luxury piece by RUDOHAGE">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+:root{--bg:#f6f2ea;--t:#111;--m:rgba(20,20,20,.55);--a:#a48b74;--r:14px;--xxs:.62rem;--xs:.7rem;--sm:.82rem;--bs:.92rem;--md:1.05rem;--lg:1.25rem;--xl:1.6rem;--2xl:2rem;--3xl:2.5rem}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--t);line-height:1.6;overflow-x:hidden}
+.hdr{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:.8rem 2rem;background:rgba(246,242,234,.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.04);display:flex;align-items:center;justify-content:space-between}
+.brand{text-decoration:none;color:var(--t);font-family:'Cormorant Garamond',serif;font-size:var(--lg);font-weight:700;letter-spacing:-.5px}
+.back{text-decoration:none;color:var(--m);font-size:var(--xxs);letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:5px;transition:.3s}
+.back:hover{color:var(--t)}
+.main{max-width:1100px;margin:0 auto;padding:95px 3% 30px;display:grid;grid-template-columns:1fr;gap:40px;align-items:start}
+
+/* ===== SIMPLE LOADER (SIRF SPINNER) ===== */
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    padding: 40px 20px;
+    background: var(--bg);
+    transition: opacity 0.6s ease;
+}
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 2px solid rgba(164, 139, 116, 0.15);
+    border-top: 2px solid var(--a);
+    border-radius: 50%;
+    animation: spin 1s cubic-bezier(0.6, 0, 0.4, 1) infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== PRODUCT GRID ===== */
+.gal{display:flex;gap:12px;position:sticky;top:95px}
+.thumbs{display:flex;flex-direction:column;gap:7px;flex-shrink:0}
+.thumbs img{width:52px;height:52px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid transparent;transition:.25s;opacity:.5}
+.thumbs img:hover,.thumbs img.active{border-color:var(--a);opacity:1}
+.imgbox{flex:1;border-radius:var(--r);overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.06);background:#fff}
+#mainImg{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.bread{font-size:var(--xxs);opacity:.4;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+.ttl{font-family:'Cormorant Garamond',serif;font-size:var(--2xl);font-weight:700;line-height:1.1;margin-bottom:2px;letter-spacing:-.5px}
+.sub{font-size:var(--sm);opacity:.5;margin-bottom:12px}
+.stars{color:#d4a853;font-size:var(--bs);letter-spacing:1px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.stars span{font-size:var(--xxs);opacity:.4;color:var(--t)}
+.price{font-family:'Cormorant Garamond',serif;font-size:var(--3xl);font-weight:700;margin-bottom:16px}
+.price small{font-size:var(--xxs);opacity:.4;font-weight:400;margin-left:4px}
+.badge{display:inline-block;background:rgba(164,139,116,.12);color:var(--a);padding:4px 12px;border-radius:50px;font-size:10px;font-weight:600;letter-spacing:.5px;margin-bottom:16px}
+.high{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+.high div{display:flex;align-items:center;gap:8px;font-size:var(--sm);opacity:.6}
+.high i{color:var(--a);font-size:11px}
+.del{display:flex;gap:20px;margin-bottom:18px;flex-wrap:wrap}
+.del div{display:flex;align-items:center;gap:6px;font-size:var(--xxs);opacity:.5}
+.del i{color:var(--a);font-size:12px}
+.specs-strip{display:flex;gap:18px;margin-bottom:20px;flex-wrap:wrap}
+.specs-strip div{font-size:var(--xxs);opacity:.45;display:flex;align-items:center;gap:5px;text-transform:uppercase;letter-spacing:1px}
+.btns{display:flex;gap:10px;margin-bottom:24px}
+.buy{flex:1;padding:12px 24px;border-radius:50px;font-size:var(--sm);font-weight:600;letter-spacing:1px;text-transform:uppercase;border:none;font-family:'Manrope',sans-serif;display:flex;align-items:center;gap:7px;justify-content:center;background:var(--a);color:#fff;cursor:pointer;text-decoration:none;transition:.3s}
+.buy:hover{background:#8a715c;transform:translateY(-2px);box-shadow:0 8px 22px rgba(164,139,116,.3)}
+.buy:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.shr{background:#fff;border:1px solid rgba(0,0,0,.1);padding:12px 15px;border-radius:50px;cursor:pointer;transition:.3s;font-size:var(--bs);color:var(--t)}
+.shr:hover{background:#f5f5f5}
+.arch{background:#111;color:#fff;padding:12px 16px;border-radius:12px;margin-bottom:22px;font-size:var(--xxs);display:flex;align-items:center;gap:8px}
+.arch i{font-size:15px;color:var(--a)}
+.story,.specs-block{margin-bottom:26px}
+.story h3,.specs-block h3{font-family:'Cormorant Garamond',serif;font-size:var(--md);font-weight:700;margin-bottom:8px}
+.story p{font-size:var(--sm);opacity:.55;line-height:1.8}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.sgrid div{font-size:var(--sm);opacity:.5;padding:7px 0;border-bottom:1px solid rgba(0,0,0,.04);display:flex;justify-content:space-between}
+.sgrid div span:first-child{text-transform:uppercase;letter-spacing:1px;font-size:var(--xxs)}
+.sig{text-align:center;padding:40px 20px 30px}
+.sig p{letter-spacing:4px;text-transform:uppercase;opacity:.3;font-size:var(--xxs);margin-bottom:6px}
+.sig h2{font-family:'Cormorant Garamond',serif;font-size:var(--2xl);font-weight:700}
+.error-state{text-align:center;padding:60px 20px}
+.error-state i{font-size:48px;color:#d32f2f;margin-bottom:20px;display:block}
+.product-grid{display:grid;grid-template-columns:380px 1fr;gap:40px;align-items:start}
+
+/* ===== SIMILAR PRODUCTS ===== */
+.rel-block{max-width:1100px;margin:20px auto 0;padding:15px 3% 20px}
+.rel-block h2{font-family:'Cormorant Garamond',serif;font-size:var(--lg);font-weight:700;margin-bottom:18px;text-align:center}
+.rel-grid{display:flex;gap:14px;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.rel-grid::-webkit-scrollbar{height:3px}
+.rel-grid::-webkit-scrollbar-thumb{background:rgba(0,0,0,.12);border-radius:10px}
+.rcard{min-width:180px;max-width:180px;background:#fff;border-radius:14px;text-decoration:none;color:var(--t);box-shadow:0 3px 12px rgba(0,0,0,.03);transition:.3s;overflow:hidden;flex-shrink:0;scroll-snap-align:start;cursor:pointer}
+.rcard:hover{transform:translateY(-5px);box-shadow:0 10px 25px rgba(0,0,0,.06)}
+.rcard img{width:100%;height:140px;object-fit:cover;display:block}
+.rinfo{padding:10px 12px 12px}
+.rinfo .rp{font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:.3;margin-bottom:2px}
+.rinfo h3{font-family:'Cormorant Garamond',serif;font-size:var(--sm);font-weight:700}
+.rinfo .rpr{font-size:var(--xs);font-weight:600;color:var(--a)}
+.rinfo .rd{font-size:10px;opacity:.4;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px}
+
+/* ===== REVIEWS ===== */
+.rev-block{max-width:1100px;margin:0 auto;padding:15px 3% 40px}
+.rev-block h2{font-family:'Cormorant Garamond',serif;font-size:var(--lg);font-weight:700;margin-bottom:14px}
+.rev-card{background:#fff;padding:14px 16px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.02);margin-bottom:8px}
+.rev-card h4{font-size:var(--sm);font-weight:600;margin-bottom:2px}
+.rev-card .rs{color:#d4a853;font-size:12px;letter-spacing:1px;margin-bottom:4px}
+.rev-card p{opacity:.55;font-size:var(--sm);line-height:1.6}
+.rev-form{background:#fff;padding:16px 18px;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.02);margin-top:16px}
+.rev-form h4{font-family:'Cormorant Garamond',serif;font-size:var(--bs);font-weight:700;margin-bottom:10px}
+.rev-form input,.rev-form select,.rev-form textarea{width:100%;padding:10px 12px;margin-bottom:8px;border:none;background:#f5f3ef;border-radius:10px;font-size:var(--sm);font-family:'Manrope',sans-serif;outline:none}
+.rev-form textarea{resize:vertical;min-height:70px}
+.sbtn{background:#111;color:#fff;padding:11px 22px;border:none;border-radius:50px;cursor:pointer;font-size:var(--sm);font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:.3s;font-family:'Manrope',sans-serif}
+.sbtn:hover{background:var(--a)}
+
+/* ===== PROFESSIONAL LOGIN MODAL ===== */
+.login-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    padding: 20px;
+}
+.login-modal.active {
+    display: flex;
+}
+.login-modal-box {
+    max-width: 400px;
+    width: 100%;
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px 32px 32px;
+    text-align: center;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.2);
+    animation: modalFadeIn 0.3s ease;
+}
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+.login-modal-box .icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(164,139,116,0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+}
+.login-modal-box .icon i {
+    font-size: 28px;
+    color: var(--a);
+}
+.login-modal-box h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    color: var(--t);
+    margin-bottom: 6px;
+}
+.login-modal-box p {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+.login-modal-box .modal-btns {
+    display: flex;
+    gap: 10px;
+}
+.login-modal-box .modal-btns button {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: 'Manrope', sans-serif;
+}
+.login-modal-box .modal-btns .btn-cancel {
+    background: #f3f1ee;
+    color: #444;
+}
+.login-modal-box .modal-btns .btn-cancel:hover {
+    background: #e5e0db;
+}
+.login-modal-box .modal-btns .btn-login {
+    background: var(--a);
+    color: #fff;
+}
+.login-modal-box .modal-btns .btn-login:hover {
+    background: #8a715c;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(164,139,116,0.3);
+}
+
+@media(max-width:768px){
+.hdr{padding:.7rem 1rem}
+.main{padding:80px 4% 25px}
+.product-grid{grid-template-columns:1fr;gap:20px}
+.gal{flex-direction:column-reverse;position:relative;top:auto}
+.thumbs{flex-direction:row;overflow-x:auto}
+.thumbs img{width:44px;height:44px}
+.ttl{font-size:1.6rem}
+.price{font-size:2rem}
+.btns{flex-direction:column}
+.sgrid{grid-template-columns:1fr}
+.rcard{min-width:140px;max-width:140px}
+.rcard img{height:110px}
+.rev-block{padding:10px 2% 20px}
+.login-modal-box { padding: 30px 20px 24px; }
+.login-modal-box h2 { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+<header class="hdr"><a href="/" class="brand">RUDOHAGE</a><a href="/" class="back"><i class="fas fa-arrow-left"></i> Back</a></header>
+
+<!-- ===== PROFESSIONAL LOGIN MODAL ===== -->
+<div class="login-modal" id="loginModal">
+    <div class="login-modal-box">
+        <div class="icon"><i class="fas fa-lock"></i></div>
+        <h2>Login Required</h2>
+        <p>Please log in to your RUDOHAGE account to continue with your order.</p>
+        <div class="modal-btns">
+            <button class="btn-cancel" id="modalCancel">Cancel</button>
+            <button class="btn-login" id="modalLogin">Login Now</button>
+        </div>
+    </div>
+</div>
+
+<div class="main" id="productContainer">
+    <!-- ===== SIMPLE LOADER (SIRF SPINNER) ===== -->
+    <div id="loadingState" class="loading-state">
+        <div class="loader-spinner"></div>
+    </div>
+    <div id="productContent" style="display:none;">
+        <!-- Dynamic content -->
+    </div>
+</div>
+
+<!-- ===== SIMILAR PRODUCTS ===== -->
+<div class="rel-block" id="similarProducts" style="display:none;">
+    <h2>Similar Products</h2>
+    <div class="rel-grid" id="similarGrid"></div>
+</div>
+
+<!-- ===== REVIEWS SECTION ===== -->
+<div class="rev-block" id="reviewsSection" style="display:none;">
+    <h2>Reviews</h2>
+    <div id="reviewsContainer"></div>
+    <div class="rev-form">
+        <h4>Write a Review</h4>
+        <input type="text" id="reviewName" placeholder="Your Name">
+        <select id="reviewRating">
+            <option value="5">★★★★★</option>
+            <option value="4">★★★★</option>
+            <option value="3">★★★</option>
+            <option value="2">★★</option>
+            <option value="1">★</option>
+        </select>
+        <textarea id="reviewText" placeholder="Share your experience..."></textarea>
+        <button class="sbtn" id="publishBtn">Publish</button>
+    </div>
+</div>
+
+<div class="sig"><p>Not Produced. Crafted.</p><h2>RUDOHAGE</h2></div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCNThX_JX4vI8ZP3KZOBTiCwtZlDdgQ51E",
+    authDomain: "rudohage.com",
+    projectId: "rudohage",
+    storageBucket: "rudohage.firebasestorage.app",
+    messagingSenderId: "487042116246",
+    appId: "1:487042116246:web:990d65636addd6d653f0b7"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const BACKEND_URL = "https://razorpay-backend-6yg5.onrender.com";
+const RAZORPAY_KEY = "rzp_live_T2N3YbZ3iKazSC";
+
+// ===== PRODUCT DATA WITH ALL IMAGES =====
+const PRODUCTS = {
+    '1': { 
+        name: "Inferno Core", 
+        price: 3000,
+        images: [
+            "/image/fire-clock-1.png",
+            "/image/fire-clock-14.png",
+            "/image/fire-clock-15.png",
+            "/image/fire-clock-16.png"
+        ],
+        description: "pure wood crafted material. with precision crafted by hand.full polished and colured with red using spray.",
+        material: "Premium Wood",
+        finish: "Matte",
+        shortDesc: "Flame-colored wood clock with fire-inspired finish"
+    },
+    '2': { 
+        name: "Crimson Orbit", 
+        price: 2500,
+        images: [
+            "/image/fire-clock-2.png",
+            "/image/fire-clock-11.png",
+            "/image/fire-clock-12.png",
+            "/image/fire-clock-13.png"
+        ],
+        description: "pure wood hand crafted material. in a round four layer towards the needle of the clock thats look asthetic.",
+        material: "Premium Wood",
+        finish: "Matte",
+        shortDesc: "Round layered wood clock with aesthetic needle design"
+    },
+    '3': { 
+        name: "Ember Crown", 
+        price: 2500,
+        images: [
+            "/image/fire-clock-3.png",
+            "/image/fire-clock-8.png",
+            "/image/fire-clock-9.png",
+            "/image/fire-clock-10.png"
+        ],
+        description: "pure hand crafted material. i used the heat flames to colour of thre top thats look more satisfying.",
+        material: "Premium Wood",
+        finish: "Flame-Colored",
+        shortDesc: "Heat-flame colored artisan wood clock"
+    }
+};
+
+let currentUser = null;
+let currentProductId = null;
+let pendingLoginProduct = null;
+let isLoginModalOpen = false;
+
+// ===== LOGIN MODAL FUNCTIONS =====
+function showLoginModal(product) {
+    pendingLoginProduct = product;
+    isLoginModalOpen = true;
+    document.getElementById('loginModal').classList.add('active');
+}
+
+function hideLoginModal() {
+    isLoginModalOpen = false;
+    pendingLoginProduct = null;
+    document.getElementById('loginModal').classList.remove('active');
+}
+
+// Modal buttons
+document.getElementById('modalCancel').addEventListener('click', hideLoginModal);
+document.getElementById('modalLogin').addEventListener('click', () => {
+    if (pendingLoginProduct) {
+        const product = pendingLoginProduct;
+        hideLoginModal();
+        // Create order first, then redirect to login
+        createOrderAndRedirect(product);
+    }
+});
+
+// Close modal on outside click
+document.getElementById('loginModal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) hideLoginModal();
+});
+
+onAuthStateChanged(auth, (user) => {
+    currentUser = user;
+    
+    // ===== CHECK PENDING ORDER AFTER LOGIN =====
+    if (user) {
+        const pendingOrderId = localStorage.getItem('pendingOrderId');
+        const pendingProduct = localStorage.getItem('pendingProduct');
+        const pendingPrice = localStorage.getItem('pendingPrice');
+        
+        if (pendingOrderId) {
+            localStorage.removeItem('pendingOrderId');
+            localStorage.removeItem('pendingProduct');
+            localStorage.removeItem('pendingPrice');
+            
+            window.location.href = `/checkout/?orderId=${pendingOrderId}&product=${encodeURIComponent(pendingProduct || '')}&price=${pendingPrice || 0}`;
+        }
+    }
+});
+
+const urlParams = new URLSearchParams(window.location.search);
+const productId = urlParams.get('id');
+currentProductId = productId;
+
+async function loadProduct() {
+    const loadingEl = document.getElementById('loadingState');
+    const contentEl = document.getElementById('productContent');
+    const reviewsEl = document.getElementById('reviewsSection');
+    const similarEl = document.getElementById('similarProducts');
+    
+    if (!productId || !PRODUCTS[productId]) {
+        loadingEl.innerHTML = `
+            <div class="error-state">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px">Product Not Found</h3>
+                <p style="color:#888;font-size:14px">Please browse our collection.</p>
+                <a href="/" style="display:inline-block;margin-top:15px;color:#a48b74;">← Back to Shop</a>
+            </div>
+        `;
+        return;
+    }
+    
+    const product = PRODUCTS[productId];
+    
+    document.title = `${product.name} | RUDOHAGE`;
+    document.getElementById('pageDesc').content = product.description;
+    
+    // ===== THUMBNAILS WITH ALL IMAGES =====
+    const thumbsHtml = product.images.map((img, index) => 
+        `<img src="${img}" onclick="window.setMain(this)" class="${index === 0 ? 'active' : ''}" onerror="this.style.display='none'">`
+    ).join('');
+    
+    contentEl.style.display = 'block';
+    contentEl.innerHTML = `
+        <div class="product-grid">
+            <div class="gal">
+                <div class="thumbs">${thumbsHtml}</div>
+                <div class="imgbox"><img id="mainImg" src="${product.images[0]}" alt="${product.name}" onerror="this.src='/logo.png'"></div>
+            </div>
+            <div>
+                <div class="bread">RUDOHAGE / ${product.name}</div>
+                <h1 class="ttl">${product.name}</h1>
+                <p class="sub">Handcrafted by RUDOHAGE</p>
+                <div class="stars">★★★★★ <span>5.0</span></div>
+                <div class="price">₹${product.price.toLocaleString()}<small>incl. GST</small></div>
+                <div class="badge"><i class="fas fa-tag"></i> Limited Edition</div>
+                <div class="high">
+                    <div><i class="fas fa-check-circle"></i> One of One — Never Reproduced</div>
+                    <div><i class="fas fa-tree"></i> ${product.material}</div>
+                    <div><i class="fas fa-paint-brush"></i> ${product.finish}</div>
+                </div>
+                <div class="del">
+                    <div><i class="fas fa-truck"></i> Free Shipping</div>
+                    <div><i class="fas fa-clock"></i> Dispatch 3-5 Days</div>
+                    <div><i class="fas fa-box"></i> Secure Packaging</div>
+                </div>
+                <div class="specs-strip">
+                    <div><i class="fas fa-tree"></i> ${product.material}</div>
+                    <div><i class="fas fa-paint-brush"></i> ${product.finish}</div>
+                    <div><i class="fas fa-hand-sparkles"></i> Handmade</div>
+                </div>
+                <div class="btns">
+                    <button class="buy" id="buyBtn"><i class="fas fa-bolt"></i> Buy Now</button>
+                    <button class="shr" id="shareBtn"><i class="fas fa-share-alt"></i></button>
+                </div>
+                <div class="arch"><i class="fas fa-archive"></i> <strong>Active Piece</strong> — Never reproduced</div>
+                <div class="story">
+                    <h3>The Story</h3>
+                    <p>${product.description}</p>
+                </div>
+                <div class="specs-block">
+                    <h3>Specifications</h3>
+                    <div class="sgrid">
+                        <div><span>Material</span><span>${product.material}</span></div>
+                        <div><span>Finish</span><span>${product.finish}</span></div>
+                        <div><span>Handmade</span><span>Yes</span></div>
+                        <div><span>Collection</span><span>RUDOHAGE</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // ===== FADE OUT LOADER =====
+    setTimeout(() => {
+        loadingEl.style.opacity = '0';
+        setTimeout(() => {
+            loadingEl.style.display = 'none';
+        }, 500);
+    }, 300);
+    
+    reviewsEl.style.display = 'block';
+    similarEl.style.display = 'block';
+    
+    loadReviews(productId);
+    loadSimilarProducts(productId);
+    
+    document.getElementById('buyBtn').addEventListener('click', () => placeOrder(product));
+    document.getElementById('shareBtn').addEventListener('click', async () => {
+        if (navigator.share) {
+            await navigator.share({ title: product.name, url: window.location.href });
+        } else {
+            navigator.clipboard.writeText(window.location.href);
+            alert('Link copied!');
+        }
+    });
+}
+
+window.setMain = function(el) {
+    document.getElementById('mainImg').src = el.src;
+    document.querySelectorAll('.thumbs img').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+};
+
+function loadSimilarProducts(currentId) {
+    const grid = document.getElementById('similarGrid');
+    grid.innerHTML = '';
+    
+    const others = Object.entries(PRODUCTS).filter(([id]) => id !== currentId);
+    
+    if (others.length === 0) {
+        document.getElementById('similarProducts').style.display = 'none';
+        return;
+    }
+    
+    others.forEach(([id, product]) => {
+        grid.innerHTML += `
+            <div class="rcard" onclick="window.location.href='/product/?id=${id}'">
+                <img src="${product.images[0]}" alt="${product.name}" loading="lazy" onerror="this.src='/logo.png'">
+                <div class="rinfo">
+                    <div class="rp">Piece 0${id}</div>
+                    <h3>${product.name}</h3>
+                    <p class="rpr">₹${product.price.toLocaleString()}</p>
+                    <p class="rd">${product.shortDesc || ''}</p>
+                </div>
+            </div>
+        `;
+    });
+}
+
+// ===== CREATE ORDER AND REDIRECT TO LOGIN =====
+async function createOrderAndRedirect(product) {
+    try {
+        const btn = document.getElementById('buyBtn');
+        if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating Order...'; }
+        
+        const response = await fetch(`${BACKEND_URL}/create-order`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                product: product.name,
+                cod: false
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.id) {
+            localStorage.setItem('pendingOrderId', data.id);
+            localStorage.setItem('pendingProduct', product.name);
+            localStorage.setItem('pendingPrice', product.price);
+            window.location.href = `/login/?redirect=${encodeURIComponent(window.location.href)}`;
+        } else {
+            alert('Failed to create order. Please try again.');
+            if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-bolt"></i> Buy Now'; }
+        }
+    } catch (error) {
+        alert('Network error. Please try again.');
+        console.error(error);
+        const btn = document.getElementById('buyBtn');
+        if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-bolt"></i> Buy Now'; }
+    }
+}
+
+// ===== PLACE ORDER =====
+async function placeOrder(product) {
+    // ===== AGAR USER LOGGED IN NAHI HAI =====
+    if (!currentUser) {
+        showLoginModal(product);
+        return;
+    }
+    
+    // ===== AGAR USER LOGGED IN HAI =====
+    try {
+        const btn = document.getElementById('buyBtn');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+        
+        const response = await fetch(`${BACKEND_URL}/create-order`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                product: product.name,
+                cod: false
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.id) {
+            localStorage.setItem('currentOrderId', data.id);
+            localStorage.setItem('currentProduct', product.name);
+            window.location.href = `/checkout/?orderId=${data.id}&product=${encodeURIComponent(product.name)}&price=${product.price}`;
+        } else {
+            alert('Failed to create order. Please try again.');
+        }
+    } catch (error) {
+        alert('Network error. Please try again.');
+        console.error(error);
+    } finally {
+        const btn = document.getElementById('buyBtn');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-bolt"></i> Buy Now';
+    }
+}
+
+// ===== REVIEWS =====
+async function loadReviews(productId) {
+    const container = document.getElementById('reviewsContainer');
+    container.innerHTML = '<p style="opacity:.4;font-size:.7rem;">Loading reviews...</p>';
+    
+    try {
+        const collectionName = `product${productId}_reviews`;
+        const snapshot = await getDocs(query(collection(db, collectionName), orderBy("date", "desc")));
+        
+        if (snapshot.empty) {
+            container.innerHTML = '<p style="opacity:.4;font-size:.7rem;">No reviews yet. Be the first!</p>';
+            return;
+        }
+        
+        container.innerHTML = '';
+        snapshot.forEach(doc => {
+            const data = doc.data();
+            container.innerHTML += `
+                <div class="rev-card">
+                    <h4>${data.name || 'Anonymous'}</h4>
+                    <div class="rs">${'★'.repeat(data.rating || 5)}</div>
+                    <p>${data.review}</p>
+                </div>
+            `;
+        });
+    } catch (error) {
+        console.error('Error loading reviews:', error);
+        container.innerHTML = '<p style="opacity:.4;font-size:.7rem;">Unable to load reviews.</p>';
+    }
+}
+
+document.getElementById('publishBtn').addEventListener('click', async () => {
+    if (!currentUser) {
+        showLoginModal(null);
+        return;
+    }
+    
+    const name = document.getElementById('reviewName').value.trim();
+    const rating = parseInt(document.getElementById('reviewRating').value);
+    const review = document.getElementById('reviewText').value.trim();
+    
+    if (!name || !review) {
+        alert('Please fill all fields.');
+        return;
+    }
+    
+    try {
+        const collectionName = `product${productId}_reviews`;
+        await addDoc(collection(db, collectionName), {
+            name: name,
+            rating: rating,
+            review: review,
+            date: Date.now()
+        });
+        
+        document.getElementById('reviewName').value = '';
+        document.getElementById('reviewText').value = '';
+        alert(' Review published!');
+        loadReviews(productId);
+    } catch (error) {
+        alert('Failed to publish review. Please try again.');
+        console.error(error);
+    }
+});
+
 loadProduct();
-</script></body></html>
+</script>
+<script src="/toast.js"></script>
+</body>
+</html>
