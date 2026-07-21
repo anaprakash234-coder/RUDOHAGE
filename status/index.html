@@ -159,4 +159,6 @@ fetchStatus();
 let cd=30;
 setInterval(()=>{cd--;if(cd<=0){cd=30;fetchStatus()}$("countdown").textContent=cd+"s"},1e3);
 if("Notification"in window&&Notification.permission==="default")Notification.requestPermission();
-</script></body></html>
+</script>
+<script src="/toast.js"></script>
+</body></html>
