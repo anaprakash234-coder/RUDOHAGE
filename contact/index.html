@@ -51,7 +51,7 @@ async function loadContactPage() {
   }
 }
 
-// ===== ULTIMATE FORM HANDLER (Reload Approach) =====
+// ===== FORM HANDLER =====
 function setupFormHandler() {
   const form = document.getElementById("contactForm");
   if (!form) return;
@@ -75,6 +75,7 @@ function setupFormHandler() {
       return;
     }
 
+    // ===== SENDING STATE =====
     btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Sending...`;
     btn.disabled = true;
 
@@ -86,25 +87,26 @@ function setupFormHandler() {
       });
       const data = await res.json();
 
+      console.log("Response from backend:", data); // 👈 CONSOLE LOG
+
       if (data.success) {
         if (window.toast) toast("✅ Message sent successfully!", "success");
         else alert("Message sent successfully!");
         
-        // ===== ULTIMATE RESET =====
-        // 1. Clear manually
+        // ===== CLEAR FORM =====
         nameInp.value = "";
         emailInp.value = "";
         subjectInp.value = "";
         messageInp.value = "";
         
-        // 2. Show Sent ✓
+        // ===== SENT ✓ =====
         btn.innerHTML = `✅ Sent ✓`;
         btn.disabled = true;
         
-        // 3. Reload page after 3 seconds (guaranteed reset)
         setTimeout(() => {
-          location.reload();
-        }, 2000);
+          btn.innerHTML = `Send Message`;
+          btn.disabled = false;
+        }, 3000);
         
       } else {
         if (window.toast) toast("❌ " + (data.error || "Failed to send"), "error");
@@ -113,7 +115,7 @@ function setupFormHandler() {
         btn.disabled = false;
       }
     } catch (err) {
-      console.error(err);
+      console.error("Network error:", err); // 👈 CONSOLE LOG
       if (window.toast) toast("❌ Network error. Try again.", "error");
       else alert("Network error. Try again.");
       btn.innerHTML = `Send Message`;
