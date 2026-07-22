@@ -12,7 +12,8 @@ const subs = {
   "privacy-policy":"How RUDOHAGE collects, uses, and protects your personal information.",
   "contact":"For inquiries, custom requests or support — we're here to assist."
 };
-async function loadPage() {
+
+async function loadContactPage() {
   try {
     const res = await fetch(`${BACKEND}/api/pages/${slug}`);
     const data = await res.json();
@@ -23,35 +24,41 @@ async function loadPage() {
     document.getElementById('pageTag').textContent = titles[slug] || 'Page';
     document.getElementById('pageTitleHero').textContent = title;
     document.getElementById('pageSub').textContent = subs[slug] || '';
-    // Render content
-    document.getElementById('pageContent').innerHTML = content;
+    
+    // Inject Contact Form Content (includes both info + form)
+    const contactHTML = `
+      <div class="grid">
+        <div class="card"><h2>Contact Info</h2><p class="info">We respond within 24–48 business hours.</p>
+          <div class="info-item"><div class="lbl">Email</div><div class="val">rudohage.com12@gmail.com</div></div>
+          <div class="info-item"><div class="lbl">Location</div><div class="val">Gurugram, Haryana, India</div></div>
+          <div class="info-item"><div class="lbl">Hours</div><div class="val">Mon–Sat, 10AM–7PM</div></div>
+        </div>
+        <div class="card"><h2>Send Message</h2>
+          <form id="contactForm">
+            <input id="name" placeholder="Your Name" required>
+            <input id="email" type="email" placeholder="Your Email" required>
+            <input id="subject" placeholder="Subject" required>
+            <textarea id="message" placeholder="Your Message..." required></textarea>
+            <button type="submit" class="submit-btn" id="sendBtn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    `;
+    document.getElementById('pageContent').innerHTML = contactHTML;
+    
+    // Attach form handler after DOM update
+    setupFormHandler();
+    
   } catch (err) {
     document.getElementById('pageContent').innerHTML = '<div class="card"><p>Page not found. <a href="/" style="color:#a48b74;">Go back home</a>.</p></div>';
   }
 }
 
-loadPage();
-function loadContactForm() {
-  const contactHTML = `
-  <div class="grid">
-    <div class="card"><h2>Contact Info</h2><p class="info">We respond within 24–48 business hours.</p>
-      <div class="info-item"><div class="lbl">Email</div><div class="val">rudohage.com12@gmail.com</div></div>
-      <div class="info-item"><div class="lbl">Location</div><div class="val">Gurugram, Haryana, India</div></div>
-      <div class="info-item"><div class="lbl">Hours</div><div class="val">Mon–Sat, 10AM–7PM</div></div>
-    </div>
-    <div class="card"><h2>Send Message</h2>
-      <form id="contactForm">
-        <input id="name" placeholder="Your Name" required>
-        <input id="email" type="email" placeholder="Your Email" required>
-        <input id="subject" placeholder="Subject" required>
-        <textarea id="message" placeholder="Your Message..." required></textarea>
-        <button type="submit" class="submit-btn" id="sendBtn">Send Message</button>
-      </form>
-    </div>
-  </div>`;
-  document.getElementById('pageContent').innerHTML = contactHTML;
-
-  document.getElementById("contactForm").addEventListener("submit", async function(e) {
+function setupFormHandler() {
+  const form = document.getElementById("contactForm");
+  if (!form) return;
+  
+  form.addEventListener("submit", async function(e) {
     e.preventDefault();
     const btn = document.getElementById("sendBtn");
     const name = document.getElementById("name").value.trim();
@@ -79,7 +86,7 @@ function loadContactForm() {
       if (data.success) {
         if (window.toast) toast("✅ Message sent successfully!", "success");
         else alert("Message sent successfully!");
-        document.getElementById("contactForm").reset();
+        form.reset();
         btn.innerHTML = "Sent ✓";
         setTimeout(() => { btn.innerHTML = "Send Message"; btn.disabled = false; }, 3000);
       } else {
@@ -97,8 +104,7 @@ function loadContactForm() {
     }
   });
 }
-
-setTimeout(loadContactForm, 500);
+loadContactPage();
 document.addEventListener('contextmenu', e => e.preventDefault());
 document.onkeydown = function(e) {
   if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) {
