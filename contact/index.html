@@ -12,6 +12,8 @@ const subs = {
   "privacy-policy":"How RUDOHAGE collects, uses, and protects your personal information.",
   "contact":"For inquiries, custom requests or support — we're here to assist."
 };
+
+// ===== LOAD CONTACT PAGE =====
 async function loadContactPage() {
   try {
     const res = await fetch(`${BACKEND}/api/pages/${slug}`);
@@ -48,6 +50,8 @@ async function loadContactPage() {
     document.getElementById('pageContent').innerHTML = '<div class="card"><p>Page not found. <a href="/" style="color:#a48b74;">Go back home</a>.</p></div>';
   }
 }
+
+// ===== FORM HANDLER =====
 function setupFormHandler() {
   const form = document.getElementById("contactForm");
   if (!form) return;
@@ -55,10 +59,15 @@ function setupFormHandler() {
   form.addEventListener("submit", async function(e) {
     e.preventDefault();
     const btn = document.getElementById("sendBtn");
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const subject = document.getElementById("subject").value.trim();
-    const message = document.getElementById("message").value.trim();
+    const nameInp = document.getElementById("name");
+    const emailInp = document.getElementById("email");
+    const subjectInp = document.getElementById("subject");
+    const messageInp = document.getElementById("message");
+
+    const name = nameInp.value.trim();
+    const email = emailInp.value.trim();
+    const subject = subjectInp.value.trim();
+    const message = messageInp.value.trim();
 
     if (!name || !email || !subject || !message) {
       if (window.toast) toast("Please fill all fields", "warning");
@@ -81,7 +90,14 @@ function setupFormHandler() {
       if (data.success) {
         if (window.toast) toast("✅ Message sent successfully!", "success");
         else alert("Message sent successfully!");
-        form.reset();
+        
+        // ===== MANUAL CLEAR (BEST PRACTICE) =====
+        nameInp.value = "";
+        emailInp.value = "";
+        subjectInp.value = "";
+        messageInp.value = "";
+        
+        // ===== SENT ✓ STATE =====
         btn.innerHTML = `✅ Sent ✓`;
         btn.disabled = true;
         
@@ -106,8 +122,13 @@ function setupFormHandler() {
   });
 }
 
+// ===== LOAD =====
 loadContactPage();
+
+// ===== RIGHT CLICK DISABLE =====
 document.addEventListener('contextmenu', e => e.preventDefault());
+
+// ===== KEYBOARD SHORTCUTS DISABLE =====
 document.onkeydown = function(e) {
   if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74)) || (e.ctrlKey && e.keyCode == 85)) {
     return false;
