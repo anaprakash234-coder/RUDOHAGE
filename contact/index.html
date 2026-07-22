@@ -6,7 +6,7 @@
 </div><div class="sig"><p>Not Produced. Crafted.</p><h2>RUDOHAGE</h2></div></div>
 
 <script>
-// ===== FORM HANDLER — DIRECT SIMPLE VERSION =====
+// ===== CONTACT FORM — GUARANTEED WORKING =====
 document.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById('contactForm');
   const btn = document.getElementById('sendBtn');
@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
   form.addEventListener('submit', async function(e) {
     e.preventDefault();
     
-    // Get values
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const subject = document.getElementById('subject').value.trim();
@@ -25,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     
-    // ===== SENDING STATE =====
+    // ===== SENDING =====
     btn.innerHTML = '⏳ Sending...';
     btn.disabled = true;
     
@@ -36,11 +35,13 @@ document.addEventListener('DOMContentLoaded', function() {
         body: JSON.stringify({ name, email, subject, message })
       });
       
+      // ===== CRITICAL: Read response properly =====
       const data = await res.json();
-      console.log('Backend Response:', data);
+      console.log('Response:', data);
       
-      if (data.success) {
-        // ===== SUCCESS =====
+      // ===== Check if success =====
+      if (data.success === true) {
+        // Clear form
         document.getElementById('name').value = '';
         document.getElementById('email').value = '';
         document.getElementById('subject').value = '';
@@ -50,8 +51,11 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.disabled = true;
         
         // Show toast if available
-        if (window.toast) toast('✅ Message sent!', 'success');
-        else alert('✅ Message sent successfully!');
+        if (typeof toast === 'function') {
+          toast('✅ Message sent successfully!', 'success');
+        } else {
+          alert('✅ Message sent successfully!');
+        }
         
         setTimeout(() => {
           btn.innerHTML = 'Send Message';
@@ -59,13 +63,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 3000);
         
       } else {
+        // Backend returned success: false
         btn.innerHTML = 'Send Message';
         btn.disabled = false;
         alert('❌ Failed: ' + (data.error || 'Unknown error'));
       }
       
     } catch (err) {
-      console.error('Error:', err);
+      console.error('Fetch Error:', err);
       btn.innerHTML = 'Send Message';
       btn.disabled = false;
       alert('❌ Network error. Please try again.');
@@ -84,5 +89,4 @@ document.onkeydown = function(e) {
 };
 </script>
 <script src="/toast.js"></script>
-</body>
-</html>
+</body></html>
