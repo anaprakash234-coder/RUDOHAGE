@@ -51,7 +51,7 @@ async function loadContactPage() {
   }
 }
 
-// ===== FORM HANDLER (EXACT ORIGINAL BEHAVIOR) =====
+// ===== ULTIMATE FORM HANDLER (Reload Approach) =====
 function setupFormHandler() {
   const form = document.getElementById("contactForm");
   if (!form) return;
@@ -75,7 +75,6 @@ function setupFormHandler() {
       return;
     }
 
-    // ===== SENDING STATE =====
     btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Sending...`;
     btn.disabled = true;
 
@@ -91,20 +90,21 @@ function setupFormHandler() {
         if (window.toast) toast("✅ Message sent successfully!", "success");
         else alert("Message sent successfully!");
         
-        // ===== CLEAR FORM =====
+        // ===== ULTIMATE RESET =====
+        // 1. Clear manually
         nameInp.value = "";
         emailInp.value = "";
         subjectInp.value = "";
         messageInp.value = "";
         
-        // ===== SENT ✓ =====
+        // 2. Show Sent ✓
         btn.innerHTML = `✅ Sent ✓`;
         btn.disabled = true;
         
+        // 3. Reload page after 3 seconds (guaranteed reset)
         setTimeout(() => {
-          btn.innerHTML = `Send Message`;
-          btn.disabled = false;
-        }, 3000);
+          location.reload();
+        }, 2000);
         
       } else {
         if (window.toast) toast("❌ " + (data.error || "Failed to send"), "error");
