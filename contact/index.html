@@ -51,7 +51,7 @@ async function loadContactPage() {
   }
 }
 
-// ===== FORM HANDLER =====
+// ===== FORM HANDLER (EXACT ORIGINAL BEHAVIOR) =====
 function setupFormHandler() {
   const form = document.getElementById("contactForm");
   if (!form) return;
@@ -75,7 +75,7 @@ function setupFormHandler() {
       return;
     }
 
-    // Sending state
+    // ===== SENDING STATE =====
     btn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Sending...`;
     btn.disabled = true;
 
@@ -91,13 +91,13 @@ function setupFormHandler() {
         if (window.toast) toast("✅ Message sent successfully!", "success");
         else alert("Message sent successfully!");
         
-        // ===== MANUAL CLEAR (BEST PRACTICE) =====
+        // ===== CLEAR FORM =====
         nameInp.value = "";
         emailInp.value = "";
         subjectInp.value = "";
         messageInp.value = "";
         
-        // ===== SENT ✓ STATE =====
+        // ===== SENT ✓ =====
         btn.innerHTML = `✅ Sent ✓`;
         btn.disabled = true;
         
