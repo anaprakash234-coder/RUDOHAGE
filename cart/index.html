@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart | RUDOHAGE</title>
+  <link rel="icon" href="/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/css/cart.css">
+  <style>
+    :root{--bg:#f6f2ea;--text:#111;--accent:#a48b74}
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--text);line-height:1.6}
+    .hdr{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:.8rem 2rem;background:rgba(246,242,234,.75);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.04);display:flex;align-items:center;justify-content:space-between}
+    .brand{text-decoration:none;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700}
+    .back{text-decoration:none;color:rgba(20,20,20,.55);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:5px}
+    .back:hover{color:var(--text)}
+    .cart-page{max-width:1100px;margin:0 auto;padding:100px 4% 40px}
+    .cart-page-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;margin-bottom:4px}
+    .cart-page-sub{font-size:.8rem;opacity:.4;margin-bottom:24px}
+    .cart-page-grid{display:grid;grid-template-columns:1fr 320px;gap:24px}
+    .cart-page-items{display:flex;flex-direction:column;gap:12px}
+    .cart-page-item{display:flex;gap:16px;padding:16px;background:#fff;border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.04);align-items:center}
+    .cart-page-item img{width:80px;height:80px;object-fit:cover;border-radius:10px;flex-shrink:0}
+    .cart-page-item-info{flex:1}
+    .cart-page-item-info h3{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;margin:0 0 2px}
+    .cart-page-item-info .cart-page-item-price{font-size:.85rem;font-weight:600;color:var(--accent);margin:0 0 8px}
+    .cart-page-item-qty{display:flex;align-items:center;gap:8px}
+    .cart-page-item-qty button{width:28px;height:28px;border:1px solid rgba(0,0,0,.1);border-radius:50%;background:transparent;cursor:pointer;font-size:.7rem;display:flex;align-items:center;justify-content:center;transition:.2s}
+    .cart-page-item-qty button:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .cart-page-item-qty span{font-size:.85rem;font-weight:600;min-width:28px;text-align:center}
+    .cart-page-item-remove{background:none;border:none;color:#999;cursor:pointer;font-size:.9rem;padding:8px;transition:.3s}
+    .cart-page-item-remove:hover{color:#d32f2f}
+    .cart-page-summary{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 12px rgba(0,0,0,.04);position:sticky;top:100px}
+    .cart-page-summary h3{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid rgba(0,0,0,.06)}
+    .cart-summary-row{display:flex;justify-content:space-between;padding:6px 0;font-size:.8rem}
+    .cart-summary-row.total{border-top:2px solid rgba(0,0,0,.06);margin-top:10px;padding-top:14px;font-size:1.1rem;font-weight:700}
+    .cart-summary-row .label{opacity:.5}
+    .cart-summary-row .value{font-weight:600}
+    .cart-summary-row .value.accent{color:var(--accent)}
+    .cart-page-checkout-btn{display:block;width:100%;padding:14px;background:var(--text);color:#fff;border:none;border-radius:50px;font-size:.8rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:.3s;margin-top:16px;text-decoration:none;text-align:center;font-family:'Manrope',sans-serif}
+    .cart-page-checkout-btn:hover{background:var(--accent);transform:translateY(-2px);box-shadow:0 8px 24px rgba(164,139,116,.3)}
+    .cart-page-empty{text-align:center;padding:60px 20px}
+    .cart-page-empty i{font-size:4rem;opacity:.2;margin-bottom:16px}
+    .cart-page-empty h2{font-family:'Cormorant Garamond',serif;font-size:1.5rem;margin-bottom:8px}
+    .cart-page-empty p{opacity:.5;margin-bottom:20px}
+    .cart-page-empty .continue-shop{display:inline-block;padding:12px 32px;background:var(--text);color:#fff;border-radius:50px;text-decoration:none;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;transition:.3s}
+    .cart-page-empty .continue-shop:hover{background:var(--accent)}
+    .sig{text-align:center;padding:40px 20px 30px}
+    .sig p{letter-spacing:4px;text-transform:uppercase;opacity:.3;font-size:.62rem;margin-bottom:6px}
+    .sig h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700}
+    @media(max-width:768px){.hdr{padding:.6rem 1rem}.cart-page-grid{grid-template-columns:1fr}.cart-page-summary{position:relative;top:0}.cart-page-item img{width:60px;height:60px}.cart-page{padding:80px 3% 30px}.cart-page-title{font-size:1.5rem}}
+  </style>
+</head>
+<body>
+  <header class="hdr">
+    <a href="/" class="brand">RUDOHAGE</a>
+    <a href="/" class="back"><i class="fas fa-arrow-left"></i> Back to Shop</a>
+  </header>
+  <div class="cart-page" id="cartPage">
+    <h1 class="cart-page-title">Your Cart</h1>
+    <p class="cart-page-sub" id="cartSub">Review your items before checkout</p>
+    <div id="cartContent"></div>
+  </div>
+  <div class="sig"><p>Not Produced. Crafted.</p><h2>RUDOHAGE</h2></div>
+  <script src="/js/cart.js"></script>
+  <script>
+    function renderCartPage() {
+      const container = document.getElementById('cartContent');
+      const items = Cart.getItems();
+      const totalItems = Cart.getTotalItems();
+      const totalPrice = Cart.getTotalPrice();
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="cart-page-empty">
+            <i class="fas fa-shopping-bag"></i>
+            <h2>Your cart is empty</h2>
+            <p>Looks like you haven't added any pieces yet.</p>
+            <a href="/#catalog" class="continue-shop">Start Shopping</a>
+          </div>
+        `;
+        return;
+      }
+      const gst = Math.round(totalPrice * 0.12);
+      const grandTotal = Math.round(totalPrice * 1.12);
+      container.innerHTML = `
+        <div class="cart-page-grid">
+          <div class="cart-page-items">
+            ${items.map(item => `
+              <div class="cart-page-item" data-id="${item.productId}">
+                <img src="${item.image}" alt="${item.name}" onerror="this.src='/logo.png'">
+                <div class="cart-page-item-info">
+                  <h3>${item.name}</h3>
+                  <p class="cart-page-item-price">₹${item.price.toLocaleString()}</p>
+                  <div class="cart-page-item-qty">
+                    <button onclick="Cart.updateQuantity('${item.productId}', ${item.quantity - 1})">−</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="Cart.updateQuantity('${item.productId}', ${item.quantity + 1})">+</button>
+                  </div>
+                </div>
+                <button class="cart-page-item-remove" onclick="Cart.removeItem('${item.productId}')">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            `).join('')}
+          </div>
+          <div class="cart-page-summary">
+            <h3>Order Summary</h3>
+            <div class="cart-summary-row"><span class="label">Subtotal (${totalItems} items)</span><span class="value">₹${totalPrice.toLocaleString()}</span></div>
+            <div class="cart-summary-row"><span class="label">GST (12%)</span><span class="value">₹${gst.toLocaleString()}</span></div>
+            <div class="cart-summary-row total"><span class="label">Total</span><span class="value accent">₹${grandTotal.toLocaleString()}</span></div>
+            <a href="/checkout/" class="cart-page-checkout-btn">Proceed to Checkout</a>
+          </div>
+        </div>
+      `;
+      document.getElementById('cartSub').textContent = `${totalItems} items in your cart`;
+    }
+    Cart._renderCartPage = renderCartPage;
+    document.addEventListener('DOMContentLoaded', () => { renderCartPage(); });
+    if (!document.getElementById('toastContainer')) {
+      const c = document.createElement('div');
+      c.id = 'toastContainer';
+      c.className = 'toast-container';
+      document.body.appendChild(c);
+    }
+  </script>
+  <script src="/toast.js"></script>
+</body>
+</html>
