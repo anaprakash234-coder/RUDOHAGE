@@ -8,6 +8,11 @@ const CART_STATE = {
 
 // ============ CART FUNCTIONS ============
 const Cart = {
+  items: [],
+  totalItems: 0,
+  totalPrice: 0,
+  updatedAt: null,
+
   addItem(productId, name, price, image, quantity = 1) {
     const existing = this.items.find(item => item.productId === productId);
     if (existing) {
