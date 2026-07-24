@@ -8,7 +8,6 @@ const CART_STATE = {
 
 // ============ CART FUNCTIONS ============
 const Cart = {
-  // ---------- CORE ----------
   addItem(productId, name, price, image, quantity = 1) {
     const existing = this.items.find(item => item.productId === productId);
     if (existing) {
@@ -70,15 +69,23 @@ const Cart = {
     return this;
   },
 
-  // ---------- STORAGE ----------
+  clearAfterCheckout() {
+    this.clearCart();
+    this._showToast('Order placed successfully! 🎉');
+  },
+
   _save() {
-    const data = {
-      items: this.items,
-      totalItems: this.totalItems,
-      totalPrice: this.totalPrice,
-      updatedAt: Date.now()
-    };
-    localStorage.setItem('rudohage_cart', JSON.stringify(data));
+    try {
+      const data = {
+        items: this.items,
+        totalItems: this.totalItems,
+        totalPrice: this.totalPrice,
+        updatedAt: Date.now()
+      };
+      localStorage.setItem('rudohage_cart', JSON.stringify(data));
+    } catch (e) {
+      console.log('Cart save error:', e);
+    }
   },
 
   loadFromLocalStorage() {
@@ -98,7 +105,6 @@ const Cart = {
     return this;
   },
 
-  // ---------- FIREBASE SYNC ----------
   async syncToFirebase(userId) {
     if (!userId) return;
     try {
@@ -130,7 +136,6 @@ const Cart = {
       const response = await fetch(`/api/cart/${userId}`);
       const data = await response.json();
       if (data.success && data.cart) {
-        // Merge local + firebase cart
         this._merge(data.cart);
         this._save();
         this._updateUI();
@@ -142,16 +147,11 @@ const Cart = {
   },
 
   _merge(firebaseCart) {
-    // Merge logic - priority to Firebase items, keep local quantity if same
-    const localItems = this.items;
     const fbItems = firebaseCart.items || [];
-
-    // Combine items
-    const combined = [...localItems];
+    const combined = [...this.items];
     fbItems.forEach(fbItem => {
       const existing = combined.find(i => i.productId === fbItem.productId);
       if (existing) {
-        // Keep max quantity
         existing.quantity = Math.max(existing.quantity, fbItem.quantity);
       } else {
         combined.push(fbItem);
@@ -161,9 +161,8 @@ const Cart = {
     this._recalculate();
   },
 
-  // ---------- SYNC (Auto) ----------
   _sync() {
-    // Check if user is logged in
+    // Wait for auth to be available
     const userId = this._getUserId();
     if (userId) {
       this.syncToFirebase(userId);
@@ -171,14 +170,21 @@ const Cart = {
   },
 
   _getUserId() {
-    // Check Firebase auth
-    if (typeof auth !== 'undefined' && auth.currentUser) {
-      return auth.currentUser.uid;
+    // ✅ SAFE CHECK - agar auth defined hai toh use karo
+    try {
+      if (typeof window !== 'undefined' && window.auth && window.auth.currentUser) {
+        return window.auth.currentUser.uid;
+      }
+      // Check if auth is defined globally
+      if (typeof auth !== 'undefined' && auth.currentUser) {
+        return auth.currentUser.uid;
+      }
+    } catch (e) {
+      console.log('Auth not available yet');
     }
     return null;
   },
 
-  // ---------- UI ----------
   _updateUI() {
     this._updateBadge();
     this._renderSidebar();
@@ -230,14 +236,16 @@ const Cart = {
 
   _renderCartPage() {
     // Cart page rendering happens in cart/index.html
-    // This function will be called from there
   },
 
-  // ---------- TOAST ----------
   _showToast(message, type = 'success') {
-    const container = document.getElementById('toastContainer');
-    if (!container) return;
-
+    let container = document.getElementById('toastContainer');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'toastContainer';
+      container.className = 'toast-container';
+      document.body.appendChild(container);
+    }
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
     toast.innerHTML = `
@@ -248,14 +256,12 @@ const Cart = {
     setTimeout(() => toast.remove(), 3000);
   },
 
-  // ---------- UTILITY ----------
   _recalculate() {
     this.totalItems = this.items.reduce((sum, item) => sum + item.quantity, 0);
     this.totalPrice = this.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     this.updatedAt = Date.now();
   },
 
-  // ---------- CHECKOUT ----------
   getCheckoutData() {
     return {
       items: this.items,
@@ -265,20 +271,13 @@ const Cart = {
       gst: Math.round(this.totalPrice * 0.12),
       grandTotal: Math.round(this.totalPrice * 1.12)
     };
-  },
-
-  clearAfterCheckout() {
-    this.clearCart();
-    this._showToast('Order placed successfully! 🎉');
   }
 };
 
 // ============ INIT ============
 document.addEventListener('DOMContentLoaded', () => {
-  // Load cart from localStorage
   Cart.loadFromLocalStorage();
 
-  // Cart icon click - toggle sidebar
   const cartIcon = document.getElementById('cartIcon');
   const sidebar = document.getElementById('cartSidebar');
   const sidebarOverlay = document.getElementById('cartSidebarOverlay');
@@ -288,25 +287,24 @@ document.addEventListener('DOMContentLoaded', () => {
     cartIcon.addEventListener('click', (e) => {
       e.preventDefault();
       sidebar.classList.toggle('open');
-      sidebarOverlay?.classList.toggle('active');
+      if (sidebarOverlay) sidebarOverlay.classList.toggle('active');
     });
   }
 
   if (sidebarClose && sidebar) {
     sidebarClose.addEventListener('click', () => {
       sidebar.classList.remove('open');
-      sidebarOverlay?.classList.remove('active');
+      if (sidebarOverlay) sidebarOverlay.classList.remove('active');
     });
   }
 
   if (sidebarOverlay) {
     sidebarOverlay.addEventListener('click', () => {
-      sidebar?.classList.remove('open');
+      if (sidebar) sidebar.classList.remove('open');
       sidebarOverlay.classList.remove('active');
     });
   }
 
-  // Toast container
   if (!document.getElementById('toastContainer')) {
     const container = document.createElement('div');
     container.id = 'toastContainer';
@@ -314,15 +312,25 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(container);
   }
 
-  // Check user login state for Firebase sync
+  // ✅ Try to sync with Firebase after auth is ready
   if (typeof auth !== 'undefined') {
-    onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        await Cart.loadFromFirebase(user.uid);
+    // Auth is available, listen for changes
+    if (typeof onAuthStateChanged === 'function') {
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          await Cart.loadFromFirebase(user.uid);
+        }
+      });
+    }
+  } else {
+    // Auth not available yet, check again after 2 seconds
+    setTimeout(() => {
+      if (typeof auth !== 'undefined' && auth.currentUser) {
+        Cart.loadFromFirebase(auth.currentUser.uid);
       }
-    });
+    }, 2000);
   }
 });
 
-// ============ EXPOSE TO GLOBAL ============
+// ============ EXPOSE ============
 window.Cart = Cart;
