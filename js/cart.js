@@ -25,6 +25,10 @@ const Cart = {
     this._sync();
     this._updateUI();
     this._showToast(`${name} added to cart! 🛒`);
+    // Update buy buttons on product page
+    if (typeof window.updateBuyButtons === 'function') {
+      setTimeout(window.updateBuyButtons, 200);
+    }
     return this;
   },
 
@@ -34,6 +38,10 @@ const Cart = {
     this._save();
     this._sync();
     this._updateUI();
+    // Update buy buttons on product page
+    if (typeof window.updateBuyButtons === 'function') {
+      setTimeout(window.updateBuyButtons, 200);
+    }
     return this;
   },
 
@@ -65,18 +73,53 @@ const Cart = {
     return this.totalPrice;
   },
 
+  // ============ 🔥 CLEAR CART (UPDATED) ============
   clearCart() {
+    // Clear the items array
     this.items = [];
-    this._recalculate();
+    this.totalItems = 0;
+    this.totalPrice = 0;
+    
+    // Save to localStorage
     this._save();
-    this._sync();
+    
+    // Update all UI elements
     this._updateUI();
+    
+    // Force sidebar update
+    this._renderSidebar();
+    this._updateBadge();
+    
+    // If on cart page, re-render
+    if (document.getElementById('cartContent')) {
+      this._renderCartPage();
+    }
+    
+    // Update buy buttons on product page
+    if (typeof window.updateBuyButtons === 'function') {
+      setTimeout(window.updateBuyButtons, 100);
+    }
+    
+    // Show toast notification
+    this._showToast('Cart cleared! 🗑️');
+    
     return this;
   },
 
+  // ============ CLEAR AFTER CHECKOUT ============
   clearAfterCheckout() {
-    this.clearCart();
+    this.items = [];
+    this.totalItems = 0;
+    this.totalPrice = 0;
+    this._save();
+    this._updateUI();
+    this._renderSidebar();
+    this._updateBadge();
+    if (document.getElementById('cartContent')) {
+      this._renderCartPage();
+    }
     this._showToast('Order placed successfully! 🎉');
+    return this;
   },
 
   _save() {
@@ -88,6 +131,7 @@ const Cart = {
         updatedAt: Date.now()
       };
       localStorage.setItem('rudohage_cart', JSON.stringify(data));
+      console.log('💾 Cart saved:', data);
     } catch (e) {
       console.log('Cart save error:', e);
     }
@@ -103,6 +147,9 @@ const Cart = {
         this.totalPrice = parsed.totalPrice || 0;
         this.updatedAt = parsed.updatedAt || null;
         this._updateUI();
+        console.log('📦 Cart loaded:', this.items.length, 'items');
+      } else {
+        console.log('📦 No cart found in localStorage');
       }
     } catch (e) {
       console.log('Cart load error:', e);
@@ -241,6 +288,54 @@ const Cart = {
 
   _renderCartPage() {
     // Cart page rendering happens in cart/index.html
+    const container = document.getElementById('cartContent');
+    if (!container) return;
+
+    if (this.items.length === 0) {
+      container.innerHTML = `
+        <div class="cart-page-empty">
+          <i class="fas fa-shopping-bag"></i>
+          <h2>Your cart is empty</h2>
+          <p>Looks like you haven't added any pieces yet.</p>
+          <a href="/#catalog" class="continue-shop">Start Shopping</a>
+        </div>
+      `;
+      return;
+    }
+
+    const gst = Math.round(this.totalPrice * 0.12);
+    const grandTotal = Math.round(this.totalPrice * 1.12);
+
+    container.innerHTML = `
+      <div class="cart-page-grid">
+        <div class="cart-page-items">
+          ${this.items.map(item => `
+            <div class="cart-page-item" data-id="${item.productId}">
+              <img src="${item.image}" alt="${item.name}" onerror="this.src='/logo.png'">
+              <div class="cart-page-item-info">
+                <h3>${item.name}</h3>
+                <p class="cart-page-item-price">₹${item.price.toLocaleString()}</p>
+                <div class="cart-page-item-qty">
+                  <button onclick="Cart.updateQuantity('${item.productId}', ${item.quantity - 1})">−</button>
+                  <span>${item.quantity}</span>
+                  <button onclick="Cart.updateQuantity('${item.productId}', ${item.quantity + 1})">+</button>
+                </div>
+              </div>
+              <button class="cart-page-item-remove" onclick="Cart.removeItem('${item.productId}')">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          `).join('')}
+        </div>
+        <div class="cart-page-summary">
+          <h3>Order Summary</h3>
+          <div class="cart-summary-row"><span class="label">Subtotal (${this.totalItems} items)</span><span class="value">₹${this.totalPrice.toLocaleString()}</span></div>
+          <div class="cart-summary-row"><span class="label">GST (12%)</span><span class="value">₹${gst.toLocaleString()}</span></div>
+          <div class="cart-summary-row total"><span class="label">Total</span><span class="value accent">₹${grandTotal.toLocaleString()}</span></div>
+          <a href="/checkout/" class="cart-page-checkout-btn">Proceed to Checkout</a>
+        </div>
+      </div>
+    `;
   },
 
   _showToast(message, type = 'success') {
@@ -281,6 +376,8 @@ const Cart = {
 
 // ============ INIT ============
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('🛒 Cart.js loaded');
+  
   Cart.loadFromLocalStorage();
 
   const cartIcon = document.getElementById('cartIcon');
@@ -339,3 +436,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ============ EXPOSE ============
 window.Cart = Cart;
+
+console.log('✅ Cart object ready');
