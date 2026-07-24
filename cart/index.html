@@ -9,70 +9,79 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="/css/cart.css">
   <style>
-    :root{--bg:#f6f2ea;--text:#111;--accent:#a48b74;--shadow:0 4px 24px rgba(0,0,0,.06);--radius:16px}
+    :root{--bg:#f6f2ea;--text:#111;--accent:#a48b74;--shadow:0 4px 24px rgba(0,0,0,.06);--radius:16px;--transition:.3s cubic-bezier(.22,1,.36,1)}
     *{margin:0;padding:0;box-sizing:border-box}
     body{background:var(--bg);font-family:'Manrope',sans-serif;color:var(--text);line-height:1.6}
     .hdr{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:.8rem 2rem;background:rgba(246,242,234,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.04);display:flex;align-items:center;justify-content:space-between}
-    .brand{text-decoration:none;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700}
+    .brand{text-decoration:none;color:var(--text);font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:700;letter-spacing:-.5px}
     .back{text-decoration:none;color:rgba(20,20,20,.55);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;display:flex;align-items:center;gap:5px;transition:.3s}
     .back:hover{color:var(--text)}
     .cart-page{max-width:1100px;margin:0 auto;padding:100px 4% 40px}
-    .cart-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+    .cart-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:28px}
     .cart-header-left{display:flex;flex-direction:column}
-    .cart-page-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;margin:0}
-    .cart-page-sub{font-size:.8rem;opacity:.4;margin-top:4px}
+    .cart-page-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;margin:0;letter-spacing:-.5px}
+    .cart-page-sub{font-size:.8rem;opacity:.4;margin-top:4px;display:flex;align-items:center;gap:6px}
+    .cart-page-sub .count-badge{background:var(--accent);color:#fff;font-size:.6rem;padding:2px 10px;border-radius:50px;font-weight:600}
     .cart-actions-top{display:flex;gap:10px;align-items:center}
-    .clear-cart-btn{background:transparent;border:1px solid rgba(0,0,0,.08);padding:8px 16px;border-radius:50px;font-size:.65rem;font-weight:500;color:#999;cursor:pointer;transition:.3s;font-family:'Manrope',sans-serif;display:flex;align-items:center;gap:6px}
+    .clear-cart-btn{background:transparent;border:1px solid rgba(0,0,0,.08);padding:8px 16px;border-radius:50px;font-size:.6rem;font-weight:500;color:#999;cursor:pointer;transition:.3s;font-family:'Manrope',sans-serif;display:flex;align-items:center;gap:6px}
     .clear-cart-btn:hover{background:#d32f2f;color:#fff;border-color:#d32f2f}
-    .cart-page-grid{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+    .continue-shop-link{font-size:.6rem;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:4px;font-weight:500;transition:.3s}
+    .continue-shop-link:hover{color:#8a715c}
+    .cart-page-grid{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start}
     .cart-page-items{display:flex;flex-direction:column;gap:12px}
-    .cart-page-item{display:flex;gap:16px;padding:18px 20px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);align-items:center;transition:.3s;border:1px solid transparent;position:relative}
-    .cart-page-item:hover{border-color:rgba(164,139,116,.2);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.08)}
-    .cart-page-item img{width:80px;height:80px;object-fit:cover;border-radius:10px;flex-shrink:0;border:1px solid rgba(0,0,0,.04)}
+    .cart-page-item{display:flex;gap:16px;padding:18px 20px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);align-items:center;transition:var(--transition);border:1px solid transparent;position:relative}
+    .cart-page-item:hover{border-color:rgba(164,139,116,.2);transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.08)}
+    .cart-page-item .item-number{position:absolute;top:-8px;left:-8px;width:24px;height:24px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.55rem;font-weight:700;box-shadow:0 2px 8px rgba(164,139,116,.3)}
+    .cart-page-item img{width:80px;height:80px;object-fit:cover;border-radius:10px;flex-shrink:0;border:1px solid rgba(0,0,0,.04);transition:var(--transition)}
+    .cart-page-item:hover img{transform:scale(1.02)}
     .cart-page-item-info{flex:1;min-width:0}
-    .cart-page-item-info h3{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;margin:0 0 2px}
-    .cart-page-item-info .item-meta{display:flex;gap:12px;flex-wrap:wrap;font-size:.65rem;opacity:.4;margin-bottom:6px}
+    .cart-page-item-info h3{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;margin:0 0 3px}
+    .cart-page-item-info .item-meta{display:flex;gap:12px;flex-wrap:wrap;font-size:.6rem;opacity:.4;margin-bottom:6px}
     .cart-page-item-info .item-meta span{display:flex;align-items:center;gap:4px}
+    .cart-page-item-info .item-meta span i{color:var(--accent);font-size:9px}
     .cart-page-item-info .cart-page-item-price{font-size:.85rem;font-weight:600;color:var(--accent);margin:0 0 8px}
-    .cart-page-item-qty{display:flex;align-items:center;gap:8px;background:#f5f3ef;border-radius:50px;padding:4px 6px}
+    .cart-page-item-qty{display:flex;align-items:center;gap:8px;background:#f5f3ef;border-radius:50px;padding:3px 5px;border:1px solid rgba(0,0,0,.04)}
     .cart-page-item-qty button{width:28px;height:28px;border:none;border-radius:50%;background:transparent;cursor:pointer;font-size:.7rem;display:flex;align-items:center;justify-content:center;transition:.2s;color:#555;font-weight:600}
     .cart-page-item-qty button:hover{background:var(--accent);color:#fff}
     .cart-page-item-qty span{font-size:.85rem;font-weight:600;min-width:24px;text-align:center}
-    .cart-page-item-remove{background:none;border:none;color:#ccc;cursor:pointer;font-size:.85rem;padding:8px;transition:.3s;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center}
+    .cart-page-item-remove{background:none;border:none;color:#ccc;cursor:pointer;font-size:.85rem;padding:6px;transition:.3s;border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center}
     .cart-page-item-remove:hover{color:#d32f2f;background:#fef2f2}
     .cart-item-total{font-size:.9rem;font-weight:700;color:var(--text);min-width:80px;text-align:right}
     .cart-page-summary{background:#fff;border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);position:sticky;top:100px;border:1px solid rgba(0,0,0,.04)}
-    .cart-page-summary h3{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid rgba(0,0,0,.06)}
+    .cart-page-summary .summary-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(0,0,0,.06)}
+    .cart-page-summary .summary-header h3{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;margin:0}
+    .cart-page-summary .summary-header .items-count{font-size:.65rem;opacity:.4}
     .cart-summary-row{display:flex;justify-content:space-between;padding:6px 0;font-size:.8rem}
     .cart-summary-row .label{opacity:.5}
     .cart-summary-row .value{font-weight:600}
-    .cart-summary-row.total{border-top:2px solid rgba(0,0,0,.06);margin-top:10px;padding-top:14px;font-size:1.1rem;font-weight:700}
+    .cart-summary-row.total{border-top:2px solid rgba(0,0,0,.06);margin-top:8px;padding-top:14px;font-size:1.2rem;font-weight:700}
     .cart-summary-row.total .value.accent{color:var(--accent)}
-    .promo-section{display:flex;gap:8px;margin-top:12px}
-    .promo-section input{flex:1;padding:10px 14px;border:1px solid rgba(0,0,0,.08);border-radius:50px;font-size:.75rem;font-family:'Manrope',sans-serif;outline:none;background:#f8f6f3;transition:.3s}
-    .promo-section input:focus{border-color:var(--accent);background:#fff}
-    .promo-section button{padding:10px 18px;border:none;border-radius:50px;background:var(--text);color:#fff;font-size:.7rem;font-weight:600;cursor:pointer;transition:.3s;font-family:'Manrope',sans-serif}
-    .promo-section button:hover{background:var(--accent)}
-    .cart-page-checkout-btn{display:block;width:100%;padding:14px;background:var(--text);color:#fff;border:none;border-radius:50px;font-size:.8rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:.3s;margin-top:16px;text-decoration:none;text-align:center;font-family:'Manrope',sans-serif}
+    .cart-summary-row.savings{color:#2e7d32;font-weight:600}
+    .cart-summary-row.savings .value{color:#2e7d32}
+    .delivery-estimate{background:#f8f6f3;border-radius:10px;padding:12px 16px;margin:14px 0;display:flex;align-items:center;gap:10px;font-size:.7rem;color:#666}
+    .delivery-estimate i{color:var(--accent);font-size:14px}
+    .delivery-estimate strong{color:var(--text)}
+    .cart-page-checkout-btn{display:block;width:100%;padding:14px;background:var(--text);color:#fff;border:none;border-radius:50px;font-size:.8rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:var(--transition);margin-top:12px;text-decoration:none;text-align:center;font-family:'Manrope',sans-serif}
     .cart-page-checkout-btn:hover{background:var(--accent);transform:translateY(-2px);box-shadow:0 8px 24px rgba(164,139,116,.3)}
     .cart-page-checkout-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
-    .secure-badge{display:flex;justify-content:center;gap:14px;margin-top:14px;font-size:.6rem;opacity:.35}
-    .secure-badge i{color:var(--accent)}
+    .secure-badge{display:flex;justify-content:center;gap:16px;margin-top:16px;font-size:.55rem;opacity:.4;flex-wrap:wrap}
+    .secure-badge span{display:flex;align-items:center;gap:5px}
+    .secure-badge i{color:var(--accent);font-size:11px}
     .cart-page-empty{text-align:center;padding:80px 20px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow)}
-    .cart-page-empty i{font-size:4rem;opacity:.1;margin-bottom:16px;color:var(--accent)}
+    .cart-page-empty .empty-icon{font-size:4rem;opacity:.1;color:var(--accent);margin-bottom:16px;display:block}
     .cart-page-empty h2{font-family:'Cormorant Garamond',serif;font-size:1.5rem;margin-bottom:8px}
     .cart-page-empty p{opacity:.5;margin-bottom:20px}
-    .cart-page-empty .continue-shop{display:inline-block;padding:12px 32px;background:var(--text);color:#fff;border-radius:50px;text-decoration:none;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;transition:.3s;font-family:'Manrope',sans-serif}
+    .cart-page-empty .continue-shop{display:inline-block;padding:12px 32px;background:var(--text);color:#fff;border-radius:50px;text-decoration:none;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;transition:var(--transition);font-family:'Manrope',sans-serif}
     .cart-page-empty .continue-shop:hover{background:var(--accent);transform:translateY(-2px)}
     .sig{text-align:center;padding:40px 20px 30px}
     .sig p{letter-spacing:4px;text-transform:uppercase;opacity:.3;font-size:.62rem;margin-bottom:6px}
     .sig h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700}
-    .toast-container{position:fixed;top:80px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:8px}
+    .toast-container{position:fixed;top:80px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:8px;max-width:360px;width:100%}
     .toast{background:#fff;padding:14px 20px;border-radius:12px;box-shadow:0 10px 40px rgba(0,0,0,.12);font-size:.8rem;border-left:4px solid var(--accent);animation:slideIn .3s ease;display:flex;align-items:center;gap:10px}
     .toast-success{border-left-color:#2e7d32}
     .toast-error{border-left-color:#d32f2f}
     @keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
-    @media(max-width:768px){.hdr{padding:.6rem 1rem}.cart-page{padding:80px 3% 20px}.cart-page-grid{grid-template-columns:1fr}.cart-page-summary{position:relative;top:0}.cart-page-item{flex-wrap:wrap;padding:14px 16px}.cart-page-item img{width:60px;height:60px}.cart-item-total{min-width:auto;width:100%;text-align:left;padding-left:76px}.cart-page-title{font-size:1.5rem}.cart-header{flex-direction:column;align-items:flex-start}.cart-actions-top{width:100%}.clear-cart-btn{font-size:.55rem;padding:6px 12px}}
+    @media(max-width:768px){.hdr{padding:.6rem 1rem}.cart-page{padding:80px 3% 20px}.cart-page-grid{grid-template-columns:1fr}.cart-page-summary{position:relative;top:0}.cart-page-item{flex-wrap:wrap;padding:14px 16px;gap:12px}.cart-page-item img{width:60px;height:60px}.cart-item-total{min-width:auto;width:100%;text-align:left;padding-left:76px}.cart-page-title{font-size:1.5rem}.cart-header{flex-direction:column;align-items:flex-start}.cart-actions-top{width:100%}.clear-cart-btn{font-size:.55rem;padding:6px 12px}.cart-page-item .item-number{display:none}.toast-container{top:70px;right:10px;left:10px;max-width:100%}}
   </style>
 </head>
 <body>
@@ -84,10 +93,14 @@
     <div class="cart-header">
       <div class="cart-header-left">
         <h1 class="cart-page-title">Your Cart</h1>
-        <p class="cart-page-sub" id="cartSub">Review your items before checkout</p>
+        <p class="cart-page-sub" id="cartSub">
+          <span>Review your items before checkout</span>
+          <span class="count-badge" id="countBadge">0 items</span>
+        </p>
       </div>
       <div class="cart-actions-top">
-        <button class="clear-cart-btn" id="clearCartBtn" style="display:none;"><i class="fas fa-trash-alt"></i> Clear Cart</button>
+        <a href="/#catalog" class="continue-shop-link"><i class="fas fa-arrow-left"></i> Continue Shopping</a>
+        <button class="clear-cart-btn" id="clearCartBtn" style="display:none;"><i class="fas fa-trash-alt"></i> Clear</button>
       </div>
     </div>
     <div id="cartContent"></div>
@@ -105,7 +118,7 @@
       }
       const toast = document.createElement('div');
       toast.className = `toast toast-${type}`;
-      toast.innerHTML = `<span>${message}</span><button style="background:none;border:none;cursor:pointer;opacity:.3;font-size:.8rem;" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>`;
+      toast.innerHTML = `<span>${message}</span><button style="background:none;border:none;cursor:pointer;opacity:.3;font-size:.8rem;padding:4px;" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>`;
       container.appendChild(toast);
       setTimeout(() => toast.remove(), 3500);
     }
@@ -113,39 +126,48 @@
     function renderCartPage() {
       const container = document.getElementById('cartContent');
       const clearBtn = document.getElementById('clearCartBtn');
+      const countBadge = document.getElementById('countBadge');
       const items = Cart.getItems();
       const totalItems = Cart.getTotalItems();
       const totalPrice = Cart.getTotalPrice();
       
+      if (countBadge) countBadge.textContent = `${totalItems} items`;
+      
       if (items.length === 0) {
         container.innerHTML = `
           <div class="cart-page-empty">
-            <i class="fas fa-shopping-bag"></i>
+            <span class="empty-icon"><i class="fas fa-shopping-bag"></i></span>
             <h2>Your cart is empty</h2>
-            <p>Looks like you haven't added any pieces yet.</p>
-            <a href="/#catalog" class="continue-shop">Start Shopping</a>
+            <p>Looks like you haven't added any handcrafted pieces yet.</p>
+            <a href="/#catalog" class="continue-shop">Explore Collection</a>
           </div>
         `;
         if (clearBtn) clearBtn.style.display = 'none';
+        document.getElementById('cartSub').querySelector('span:first-child').textContent = 'Your cart is empty';
         return;
       }
       
       if (clearBtn) clearBtn.style.display = 'flex';
+      document.getElementById('cartSub').querySelector('span:first-child').textContent = 'Review your items before checkout';
       
-      const gst = Math.round(totalPrice * 0.12);
-      const grandTotal = Math.round(totalPrice * 1.12);
+      // Delivery estimate
+      const deliveryDate = new Date();
+      deliveryDate.setDate(deliveryDate.getDate() + 5);
+      const dateStr = deliveryDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
       
       container.innerHTML = `
         <div class="cart-page-grid">
           <div class="cart-page-items">
-            ${items.map(item => `
+            ${items.map((item, index) => `
               <div class="cart-page-item" data-id="${item.productId}">
+                <span class="item-number">${index + 1}</span>
                 <img src="${item.image}" alt="${item.name}" onerror="this.src='/logo.png'">
                 <div class="cart-page-item-info">
                   <h3>${item.name}</h3>
                   <div class="item-meta">
-                    <span><i class="fas fa-tag"></i> One of One</span>
+                    <span><i class="fas fa-check-circle"></i> One of One</span>
                     <span><i class="fas fa-gem"></i> Handcrafted</span>
+                    <span><i class="fas fa-tag"></i> Limited</span>
                   </div>
                   <p class="cart-page-item-price">₹${item.price.toLocaleString()}</p>
                   <div class="cart-page-item-qty">
@@ -162,51 +184,57 @@
             `).join('')}
           </div>
           <div class="cart-page-summary">
-            <h3>Order Summary</h3>
-            <div class="cart-summary-row"><span class="label">Subtotal (${totalItems} items)</span><span class="value">₹${totalPrice.toLocaleString()}</span></div>
-            <div class="cart-summary-row"><span class="label">GST (12%)</span><span class="value">₹${gst.toLocaleString()}</span></div>
-            <div class="cart-summary-row total"><span class="label">Total</span><span class="value accent">₹${grandTotal.toLocaleString()}</span></div>
-            <div class="promo-section">
-              <input type="text" placeholder="Promo code" id="promoInput">
-              <button id="applyPromoBtn">Apply</button>
+            <div class="summary-header">
+              <h3>Order Summary</h3>
+              <span class="items-count">${totalItems} items</span>
             </div>
-            <a href="/checkout/" class="cart-page-checkout-btn">Proceed to Checkout</a>
+            <div class="cart-summary-row">
+              <span class="label">Subtotal</span>
+              <span class="value">₹${totalPrice.toLocaleString()}</span>
+            </div>
+            <div class="cart-summary-row savings">
+              <span class="label"><i class="fas fa-gift"></i> You Save</span>
+              <span class="value">₹0 <small style="font-weight:400;opacity:.4;">(No discount)</small></span>
+            </div>
+            <div class="delivery-estimate">
+              <i class="fas fa-truck"></i>
+              <span>Estimated Delivery: <strong>${dateStr}</strong> • Free Shipping</span>
+            </div>
+            <div class="cart-summary-row total">
+              <span class="label">Total</span>
+              <span class="value accent">₹${totalPrice.toLocaleString()}</span>
+            </div>
+            <a href="/checkout/" class="cart-page-checkout-btn">
+              <i class="fas fa-lock"></i> Proceed to Checkout
+            </a>
             <div class="secure-badge">
-              <span><i class="fas fa-lock"></i> Secure</span>
-              <span><i class="fas fa-truck"></i> Free Shipping</span>
+              <span><i class="fas fa-shield-alt"></i> Secure Checkout</span>
               <span><i class="fas fa-undo-alt"></i> Easy Returns</span>
+              <span><i class="fas fa-headset"></i> 24/7 Support</span>
             </div>
           </div>
         </div>
       `;
-      document.getElementById('cartSub').textContent = `${totalItems} items in your cart`;
-      
-      // Promo code (demo)
-      document.getElementById('applyPromoBtn')?.addEventListener('click', function() {
-        const input = document.getElementById('promoInput');
-        if (input.value.trim().toUpperCase() === 'RUDO15') {
-          showToast('🎉 Promo code applied! 15% off', 'success');
-          input.value = '';
-        } else {
-          showToast('Invalid promo code', 'error');
-        }
-      });
     }
     
     function updateQty(id, qty) {
+      if (qty < 1) return;
       Cart.updateQuantity(id, qty);
       renderCartPage();
+      showToast('Quantity updated', 'success');
     }
     
     function removeItem(id) {
-      Cart.removeItem(id);
-      renderCartPage();
-      showToast('Item removed from cart', 'success');
+      if (confirm('Remove this item from your cart?')) {
+        Cart.removeItem(id);
+        renderCartPage();
+        showToast('Item removed from cart', 'success');
+      }
     }
     
     document.getElementById('clearCartBtn')?.addEventListener('click', function() {
       if (Cart.getItems().length === 0) return;
-      if (confirm('Are you sure you want to clear your cart?')) {
+      if (confirm('Clear all items from your cart?')) {
         Cart.clearCart();
         renderCartPage();
         showToast('Cart cleared!', 'success');
