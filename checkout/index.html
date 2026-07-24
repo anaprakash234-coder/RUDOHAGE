@@ -14,8 +14,9 @@ const PRODUCTS = {
   "7": { name: "Rustic Halo", price: 2800, img: "/image/rustic-halo-1.png" }
 };
 onAuthStateChanged(auth,async u=>{if(!u){window.location.href="/login/?redirect="+encodeURIComponent(window.location.href);return}const s=await getDoc(doc(db,"users",u.uid)),d=s.exists()?s.data():{};if(d.emailVerified===!1){window.location.href="/verify-email/?redirect="+encodeURIComponent(window.location.href);return}cu=u;document.getElementById("sessionCheck").style.display="none";document.getElementById("checkoutContent").style.display="block";if(window.initCheckoutMap)setTimeout(()=>window.initCheckoutMap(),50);loadCartSummary()});
-function loadCartSummary(){const container=document.getElementById("cartSummaryContainer");if(typeof Cart==="undefined"){container.innerHTML='<p style="opacity:.4;font-size:.8rem;">Loading cart...</p>';return}const items=Cart.getItems();const urlParams=new URLSearchParams(window.location.search);const productIdFromUrl=urlParams.get("productId");
-if(items&&items.length>0){const totalPrice=Cart.getTotalPrice();const gst=Math.round(totalPrice*0.12);const grandTotal=Math.round(totalPrice*1.12);container.innerHTML=items.map(item=>`
+function findProductByName(name){for(const k in PRODUCTS){if(PRODUCTS[k].name===name)return PRODUCTS[k]}return null}
+function loadCartSummary(){const container=document.getElementById("cartSummaryContainer");if(typeof Cart==="undefined"){container.innerHTML='<p style="opacity:.4;font-size:.8rem;">Loading cart...</p>';return}const items=Cart.getItems();const urlParams=new URLSearchParams(window.location.search);const productIdFromUrl=urlParams.get("productId");const directName=urlParams.get("product");const directPrice=urlParams.get("price");
+if(items&&items.length>0){const totalPrice=Cart.getTotalPrice();container.innerHTML=items.map(item=>`
   <div class="cart-summary-item">
     <img src="${item.image}" onerror="this.src='/logo.png'">
     <div class="cart-summary-item-info">
@@ -25,11 +26,9 @@ if(items&&items.length>0){const totalPrice=Cart.getTotalPrice();const gst=Math.r
     <div class="cart-summary-item-price">₹${(item.price*item.quantity).toLocaleString()}</div>
   </div>
 `).join('')+`
-  <div class="cart-total-row"><span class="label">Subtotal</span><span>₹${totalPrice.toLocaleString()}</span></div>
-  <div class="cart-total-row"><span class="label">GST (12%)</span><span>₹${gst.toLocaleString()}</span></div>
-  <div class="cart-total-row total"><span class="label">Total</span><span class="value accent">₹${grandTotal.toLocaleString()}</span></div>
+  <div class="cart-total-row total"><span class="label">Total</span><span class="value accent">₹${totalPrice.toLocaleString()}</span></div>
 `;return;}
-if(productIdFromUrl&&PRODUCTS[productIdFromUrl]){const p=PRODUCTS[productIdFromUrl];const price=p.price;const gst=Math.round(price*0.12);const grandTotal=Math.round(price*1.12);container.innerHTML=`
+if(productIdFromUrl&&PRODUCTS[productIdFromUrl]){const p=PRODUCTS[productIdFromUrl];const price=p.price;container.innerHTML=`
   <div class="single-product-summary">
     <img src="${p.img}" onerror="this.src='/logo.png'">
     <div class="single-product-summary-info">
@@ -38,17 +37,26 @@ if(productIdFromUrl&&PRODUCTS[productIdFromUrl]){const p=PRODUCTS[productIdFromU
       <div class="price">₹${price.toLocaleString()}</div>
     </div>
   </div>
-  <div class="cart-total-row"><span class="label">Subtotal</span><span>₹${price.toLocaleString()}</span></div>
-  <div class="cart-total-row"><span class="label">GST (12%)</span><span>₹${gst.toLocaleString()}</span></div>
-  <div class="cart-total-row total"><span class="label">Total</span><span class="value accent">₹${grandTotal.toLocaleString()}</span></div>
+  <div class="cart-total-row total"><span class="label">Total</span><span class="value accent">₹${price.toLocaleString()}</span></div>
   <p style="font-size:.65rem;opacity:.4;margin-top:8px;">This item will be added to your cart on checkout</p>
+`;return;}
+if(directName&&directPrice){const price=Number(directPrice);const matched=findProductByName(directName);const img=matched?matched.img:"/logo.png";container.innerHTML=`
+  <div class="single-product-summary">
+    <img src="${img}" onerror="this.src='/logo.png'">
+    <div class="single-product-summary-info">
+      <h3>${directName}</h3>
+      <p>One-of-One Creation</p>
+      <div class="price">₹${price.toLocaleString()}</div>
+    </div>
+  </div>
+  <div class="cart-total-row total"><span class="label">Total</span><span class="value accent">₹${price.toLocaleString()}</span></div>
 `;return;}
 container.innerHTML=`<div class="empty-cart-msg"><p>Your cart is empty.</p><a href="/#catalog">Start Shopping →</a></div>`;}
 const ps=document.getElementById("paymentSelected"),pl=document.getElementById("paymentList"),pm=document.getElementById("paymentMethod");
 ps.onclick=()=>{pl.classList.toggle("on");document.querySelector(".darr").style.transform=pl.classList.contains("on")?"rotate(180deg)":"rotate(0deg)"};
 document.querySelectorAll(".pay-opt").forEach(o=>{o.onclick=()=>{pm.value=o.dataset.value;ps.querySelector("span").innerHTML=o.innerHTML;pl.classList.remove("on")}});
-function getOrderProduct(){const items=Cart.getItems();if(items&&items.length>0){return items[0];}const urlParams=new URLSearchParams(window.location.search);const productId=urlParams.get("productId");if(productId&&PRODUCTS[productId]){return{productId:productId,name:PRODUCTS[productId].name,price:PRODUCTS[productId].price};}return null;}
-document.getElementById("placeOrderBtn").addEventListener("click",async()=>{if(!cu){window.location.href="/login/?redirect="+encodeURIComponent(window.location.href);return}const n=document.getElementById("fullName").value,ph=document.getElementById("phoneNumber").value,a=document.getElementById("address").value,c=document.getElementById("city").value,pi=document.getElementById("pincode").value,m=pm.value;if(!n||!ph||!a||!c||!pi){alert("Fill all details");return}if(ph.length!==10){alert("Valid Phone (10 digits)");return}if(pi.length!==6){alert("Valid Pincode (6 digits)");return}const items=Cart.getItems();if(!items||items.length===0){alert("Your cart is empty!");return}const total=Cart.getTotalPrice();const firstItem=items[0];const productName=firstItem.name;const productId=firstItem.productId;const pr=firstItem.price;try{if(m==="COD"){const md=document.getElementById("luxuryModal");md.classList.add("on");document.getElementById("cancelCOD").onclick=()=>{md.classList.remove("on")};document.getElementById("continueCOD").onclick=async()=>{try{md.classList.remove("on");document.getElementById("loadingOverlay").classList.add("on");startLoader();// ✅ SEND TOTAL PRICE TO BACKEND
+function getOrderProduct(){const items=Cart.getItems();if(items&&items.length>0){return items[0];}const urlParams=new URLSearchParams(window.location.search);const productId=urlParams.get("productId");if(productId&&PRODUCTS[productId]){return{productId:productId,name:PRODUCTS[productId].name,price:PRODUCTS[productId].price};}const directName=urlParams.get("product"),directPrice=urlParams.get("price");if(directName&&directPrice){return{productId:Object.keys(PRODUCTS).find(k=>PRODUCTS[k].name===directName)||null,name:directName,price:Number(directPrice)};}return null;}
+document.getElementById("placeOrderBtn").addEventListener("click",async()=>{if(!cu){window.location.href="/login/?redirect="+encodeURIComponent(window.location.href);return}const n=document.getElementById("fullName").value,ph=document.getElementById("phoneNumber").value,a=document.getElementById("address").value,c=document.getElementById("city").value,pi=document.getElementById("pincode").value,m=pm.value;if(!n||!ph||!a||!c||!pi){alert("Fill all details");return}if(ph.length!==10){alert("Valid Phone (10 digits)");return}if(pi.length!==6){alert("Valid Pincode (6 digits)");return}let items=Cart.getItems();let total=Cart.getTotalPrice();if(!items||items.length===0){const direct=getOrderProduct();if(!direct){alert("Your cart is empty!");return}items=[{productId:direct.productId,name:direct.name,price:direct.price,image:(findProductByName(direct.name)||{}).img||"/logo.png",quantity:1}];total=direct.price}const firstItem=items[0];const productName=firstItem.name;const productId=firstItem.productId;const pr=firstItem.price;try{if(m==="COD"){const md=document.getElementById("luxuryModal");md.classList.add("on");document.getElementById("cancelCOD").onclick=()=>{md.classList.remove("on")};document.getElementById("continueCOD").onclick=async()=>{try{md.classList.remove("on");document.getElementById("loadingOverlay").classList.add("on");startLoader();// ✅ SEND TOTAL PRICE TO BACKEND
 const r=await fetch(BACKEND+"/create-order",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({product:productName,productId:productId,total:total,items:items,cod:!0})});const o=await r.json();if(!o||!o.id)throw new Error("No order");const ops={key:RKEY,amount:o.amount,currency:"INR",order_id:o.id,name:"RUDOHAGE",description:"COD Security",prefill:{name:n,contact:ph},handler:async function(rz){const od={uid:cu.uid,email:cu.email,name:n,phone:ph,address:a,city:c,pincode:pi,items:items,total:total,product:productName,price:total,payment:"COD",paymentId:rz.razorpay_payment_id,status:"COD Pending",createdAt:Date.now()};const dr=await addDoc(collection(db,"orders"),od);Cart.clearAfterCheckout();window.location.href=`/success/?orderId=${dr.id}`}};const rzp=new Razorpay(ops);stopLoader();document.getElementById("loadingOverlay").classList.remove("on");rzp.open()}catch(err){document.getElementById("loadingOverlay").classList.remove("on");alert("COD Failed")}};return}document.getElementById("loadingOverlay").classList.add("on");startLoader();// ✅ SEND TOTAL PRICE TO BACKEND
 const r=await fetch(BACKEND+"/create-order",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({product:productName,productId:productId,total:total,items:items})});const o=await r.json();if(!o.id)throw new Error("No order");const itemCount=items.length;const ops={key:RKEY,amount:o.amount,currency:"INR",order_id:o.id,name:"RUDOHAGE",description:productName+(itemCount>1?" +"+(itemCount-1)+" more":""),prefill:{name:n,contact:ph},handler:async function(rz){const od={uid:cu.uid,email:cu.email,name:n,phone:ph,address:a,city:c,pincode:pi,items:items,total:total,product:productName,price:total,payment:m,paymentId:rz.razorpay_payment_id,status:"Paid",createdAt:Date.now()};const dr=await addDoc(collection(db,"orders"),od);Cart.clearAfterCheckout();window.location.href=`/success/?orderId=${dr.id}`}};const rzp=new Razorpay(ops);stopLoader();document.getElementById("loadingOverlay").classList.remove("on");rzp.open()}catch(e){stopLoader();document.getElementById("loadingOverlay").classList.remove("on");alert("Order Failed")}});
 </script><script src="https://unpkg.com/leaflet/dist/leaflet.js"></script><script src="https://checkout.razorpay.com/v1/checkout.js"></script><div id="luxuryModal" class="modal-overlay"><div class="modal-box"><div class="mtag">RUDOHAGE</div><h2>Cash On Delivery</h2><p>A refundable ₹50 Security Charge is required for COD orders.</p><div class="modal-btns"><button id="cancelCOD" class="btn-c">Cancel</button><button id="continueCOD" class="btn-go">Continue</button></div></div></div><script>
