@@ -25,10 +25,12 @@ const Cart = {
     this._sync();
     this._updateUI();
     this._showToast(`${name} added to cart! 🛒`);
-    // Update buy buttons on product page
+    // ✅ Update buy buttons on product page
     if (typeof window.updateBuyButtons === 'function') {
       setTimeout(window.updateBuyButtons, 200);
     }
+    // ✅ FORCE UI UPDATE - REAL TIME
+    this._forceUpdate();
     return this;
   },
 
@@ -38,10 +40,10 @@ const Cart = {
     this._save();
     this._sync();
     this._updateUI();
-    // Update buy buttons on product page
     if (typeof window.updateBuyButtons === 'function') {
       setTimeout(window.updateBuyButtons, 200);
     }
+    this._forceUpdate();
     return this;
   },
 
@@ -58,6 +60,7 @@ const Cart = {
       this._sync();
       this._updateUI();
     }
+    this._forceUpdate();
     return this;
   },
 
@@ -73,53 +76,29 @@ const Cart = {
     return this.totalPrice;
   },
 
-  // ============ 🔥 CLEAR CART (UPDATED) ============
   clearCart() {
-    // Clear the items array
     this.items = [];
     this.totalItems = 0;
     this.totalPrice = 0;
-    
-    // Save to localStorage
     this._save();
-    
-    // Update all UI elements
     this._updateUI();
-    
-    // Force sidebar update
     this._renderSidebar();
     this._updateBadge();
-    
-    // If on cart page, re-render
     if (document.getElementById('cartContent')) {
       this._renderCartPage();
     }
-    
-    // Update buy buttons on product page
     if (typeof window.updateBuyButtons === 'function') {
       setTimeout(window.updateBuyButtons, 100);
     }
-    
-    // Show toast notification
     this._showToast('Cart cleared! 🗑️');
-    
+    this._forceUpdate();
     return this;
   },
 
-  // ============ CLEAR AFTER CHECKOUT ============
   clearAfterCheckout() {
-    this.items = [];
-    this.totalItems = 0;
-    this.totalPrice = 0;
-    this._save();
-    this._updateUI();
-    this._renderSidebar();
-    this._updateBadge();
-    if (document.getElementById('cartContent')) {
-      this._renderCartPage();
-    }
+    this.clearCart();
     this._showToast('Order placed successfully! 🎉');
-    return this;
+    this._forceUpdate();
   },
 
   _save() {
@@ -147,6 +126,7 @@ const Cart = {
         this.totalPrice = parsed.totalPrice || 0;
         this.updatedAt = parsed.updatedAt || null;
         this._updateUI();
+        this._forceUpdate();
         console.log('📦 Cart loaded:', this.items.length, 'items');
       } else {
         console.log('📦 No cart found in localStorage');
@@ -191,6 +171,7 @@ const Cart = {
         this._merge(data.cart);
         this._save();
         this._updateUI();
+        this._forceUpdate();
         console.log('✅ Cart loaded from Firebase');
       }
     } catch (e) {
@@ -214,7 +195,6 @@ const Cart = {
   },
 
   _sync() {
-    // Wait for auth to be available
     const userId = this._getUserId();
     if (userId) {
       this.syncToFirebase(userId);
@@ -222,12 +202,10 @@ const Cart = {
   },
 
   _getUserId() {
-    // ✅ SAFE CHECK - agar auth defined hai toh use karo
     try {
       if (typeof window !== 'undefined' && window.auth && window.auth.currentUser) {
         return window.auth.currentUser.uid;
       }
-      // Check if auth is defined globally
       if (typeof auth !== 'undefined' && auth.currentUser) {
         return auth.currentUser.uid;
       }
@@ -235,6 +213,20 @@ const Cart = {
       console.log('Auth not available yet');
     }
     return null;
+  },
+
+  // ===== 🔥 FORCE UPDATE - REAL TIME FIX =====
+  _forceUpdate() {
+    // Update badge immediately
+    this._updateBadge();
+    // Update sidebar immediately
+    this._renderSidebar();
+    // Update cart page if open
+    this._renderCartPage();
+    // Trigger storage event for other tabs
+    try {
+      localStorage.setItem('rudohage_cart_updated', Date.now().toString());
+    } catch(e) {}
   },
 
   _updateUI() {
@@ -248,6 +240,9 @@ const Cart = {
     if (badge) {
       badge.textContent = this.totalItems;
       badge.style.display = this.totalItems > 0 ? 'flex' : 'none';
+      console.log('🔄 Badge updated:', this.totalItems);
+    } else {
+      console.log('⚠️ Badge element not found');
     }
   },
 
@@ -257,7 +252,10 @@ const Cart = {
     const total = sidebar?.querySelector('.cart-sidebar-total');
     const count = sidebar?.querySelector('.cart-sidebar-count');
 
-    if (!list) return;
+    if (!list) {
+      console.log('⚠️ Sidebar list not found');
+      return;
+    }
 
     if (this.items.length === 0) {
       list.innerHTML = `<div class="cart-empty"><i class="fas fa-shopping-bag"></i><p>Your cart is empty</p><a href="/#catalog" class="cart-empty-btn">Start Shopping</a></div>`;
@@ -284,10 +282,10 @@ const Cart = {
 
     if (total) total.textContent = `₹${this.totalPrice.toLocaleString()}`;
     if (count) count.textContent = `${this.totalItems} items`;
+    console.log('🔄 Sidebar updated:', this.items.length, 'items');
   },
 
   _renderCartPage() {
-    // Cart page rendering happens in cart/index.html
     const container = document.getElementById('cartContent');
     if (!container) return;
 
@@ -303,8 +301,9 @@ const Cart = {
       return;
     }
 
-    const gst = Math.round(this.totalPrice * 0.12);
-    const grandTotal = Math.round(this.totalPrice * 1.12);
+    const totalPrice = this.totalPrice;
+    const gst = Math.round(totalPrice * 0.12);
+    const grandTotal = Math.round(totalPrice * 1.12);
 
     container.innerHTML = `
       <div class="cart-page-grid">
@@ -329,7 +328,7 @@ const Cart = {
         </div>
         <div class="cart-page-summary">
           <h3>Order Summary</h3>
-          <div class="cart-summary-row"><span class="label">Subtotal (${this.totalItems} items)</span><span class="value">₹${this.totalPrice.toLocaleString()}</span></div>
+          <div class="cart-summary-row"><span class="label">Subtotal (${this.totalItems} items)</span><span class="value">₹${totalPrice.toLocaleString()}</span></div>
           <div class="cart-summary-row"><span class="label">GST (12%)</span><span class="value">₹${gst.toLocaleString()}</span></div>
           <div class="cart-summary-row total"><span class="label">Total</span><span class="value accent">₹${grandTotal.toLocaleString()}</span></div>
           <a href="/checkout/" class="cart-page-checkout-btn">Proceed to Checkout</a>
@@ -414,9 +413,15 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(container);
   }
 
-  // ✅ Try to sync with Firebase after auth is ready
+  // ✅ Listen for storage changes from other tabs
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'rudohage_cart_updated') {
+      Cart.loadFromLocalStorage();
+      Cart._forceUpdate();
+    }
+  });
+
   if (typeof auth !== 'undefined') {
-    // Auth is available, listen for changes
     if (typeof onAuthStateChanged === 'function') {
       onAuthStateChanged(auth, async (user) => {
         if (user) {
@@ -425,7 +430,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   } else {
-    // Auth not available yet, check again after 2 seconds
     setTimeout(() => {
       if (typeof auth !== 'undefined' && auth.currentUser) {
         Cart.loadFromFirebase(auth.currentUser.uid);
