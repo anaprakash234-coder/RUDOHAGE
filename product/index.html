@@ -44,26 +44,26 @@ function showCartWarning(productData) {
   modal.dataset.productImage = productData.images[0];
   modal.classList.add('active');
 }
+
 document.getElementById('clearAndBuyBtn').addEventListener('click', function() {
   const modal = document.getElementById('cartWarningModal');
   const productId = modal.dataset.productId;
-  const productName = modal.dataset.productName;
-  const productPrice = parseInt(modal.dataset.productPrice);
-  const productImage = modal.dataset.productImage;
+ 
   if (typeof Cart !== 'undefined' && Cart.clearCart) {
     Cart.clearCart();
   }
   modal.classList.remove('active');
-  if (typeof Cart !== 'undefined' && Cart.addItem) {
-    Cart.addItem(productId, productName, productPrice, productImage);
-  }
   const p = PRODUCTS[productId];
-  if (p) placeOrder(p);
+  if (p) {
+    placeOrderDirect(p);
+  }
 });
+
 document.getElementById('viewCartBtn').addEventListener('click', function() {
   document.getElementById('cartWarningModal').classList.remove('active');
   window.location.href = '/cart/';
 });
+
 document.getElementById('continueShoppingBtn').addEventListener('click', function() {
   document.getElementById('cartWarningModal').classList.remove('active');
 });
@@ -87,11 +87,50 @@ function updateBuyButtons() {
     stickyBuyBtn.title = cartHasItems ? 'Please clear your cart first' : '';
   }
 }
-
+async function placeOrderDirect(p) {
+  if (!cu) { showLogin(p); return; }
+  
+  try {
+    const b = document.getElementById('buyBtn');
+    const sb = document.getElementById('stickyBuyBtn');
+    b.disabled = true;
+    b.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+    if (sb) { sb.disabled = true; sb.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; }
+    
+    const response = await fetch(`${BACKEND_URL}/create-order`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        product: p.name,
+        productId: pid,
+        total: p.price,
+        items: [{ productId: pid, name: p.name, price: p.price, image: p.images[0], quantity: 1 }]
+      })
+    });
+    
+    const data = await response.json();
+    if (data.id) {
+      localStorage.setItem('currentOrderId', data.id);
+      localStorage.setItem('currentProduct', p.name);
+      window.location.href = `/checkout/?orderId=${data.id}&product=${encodeURIComponent(p.name)}&price=${p.price}`;
+    } else {
+      alert('Failed to create order.');
+      b.disabled = false;
+      b.innerHTML = '<i class="fas fa-bolt"></i> Buy Now';
+      if (sb) { sb.disabled = false; sb.innerHTML = '<i class="fas fa-bolt"></i> Buy Now'; }
+    }
+  } catch (e) {
+    alert('Network error.');
+    const b = document.getElementById('buyBtn');
+    b.disabled = false;
+    b.innerHTML = '<i class="fas fa-bolt"></i> Buy Now';
+    const sb = document.getElementById('stickyBuyBtn');
+    if (sb) { sb.disabled = false; sb.innerHTML = '<i class="fas fa-bolt"></i> Buy Now'; }
+  }
+}
 async function loadProduct(){const le=$('loadingState'),ce=$('productContent');if(!pid||!PRODUCTS[pid]){le.innerHTML=`<div class="error-state"><i class="fas fa-exclamation-triangle"></i><h3 style="font-family:'Cormorant Garamond',serif;font-size:24px">Product Not Found</h3><p style="color:#888;font-size:14px">Please browse our collection.</p><a href="/" style="display:inline-block;margin-top:15px;color:#a48b74;">← Back to Shop</a></div>`;return}const p=PRODUCTS[pid];document.title=`${p.name}|RUDOHAGE`;document.querySelector('meta[name="description"]').content=p.description;const th=p.images.map((img,i)=>`<img src="${img}" onclick="window.setMain(this)" class="${i===0?'active':''}" onerror="this.style.display='none'" loading="lazy">`).join('');const feats=p.features?p.features.map(f=>`<div class="feature-item"><i class="fas fa-check-circle"></i><span>${f}</span></div>`).join(''):'';const inboxItems=p.inbox?p.inbox.map(i=>`<li><i class="fas fa-box"></i> ${i}</li>`).join(''):'';ce.style.display='block';ce.innerHTML=`<div class="product-grid"><div class="gal"><div class="thumbs">${th}</div><div class="imgbox" onclick="openZoom('${p.images[0]}')"><img id="mainImg" src="${p.images[0]}" alt="${p.name}" onerror="this.src='/logo.png'"></div></div><div><div class="bread">RUDOHAGE / ${p.name}</div><h1 class="ttl">${p.name}</h1><p class="sub">Handcrafted by RUDOHAGE</p><div class="stars">★★★★★ <span>5.0</span></div><div class="price">₹${p.price.toLocaleString()}<small>incl. GST</small></div><div class="badge"><i class="fas fa-tag"></i> Limited Edition</div><div class="high"><div><i class="fas fa-check-circle"></i> One of One — Never Reproduced</div><div><i class="fas fa-tree"></i> ${p.material}</div><div><i class="fas fa-paint-brush"></i> ${p.finish}</div></div><div class="feature-grid">${feats}</div><div class="delivery-badge"><i class="fas fa-truck"></i><span>Free Shipping • Estimated Delivery: ${p.delivery||"3-5 Business Days"}</span></div><div class="gift-note"><i class="fas fa-gift"></i><span>Gift wrapping available on request — just mention it while ordering</span></div><div class="del"><div><i class="fas fa-truck"></i> Free Shipping</div><div><i class="fas fa-clock"></i> Dispatch 3-5 Days</div><div><i class="fas fa-box"></i> Secure Packaging</div></div><div class="trust-badge-row"><span><i class="fas fa-shield-alt"></i> Lifetime Care</span><span><i class="fas fa-gem"></i> Premium Quality</span><span><i class="fas fa-handshake"></i> Direct Trade</span><span><i class="fas fa-award"></i> Artisan Made</span></div><div class="details-block"><div class="details-item"><i class="fas fa-ruler-combined"></i><span>${p.dimensions||"Approx. handcrafted size"}</span></div><div class="details-item"><i class="fas fa-weight-hanging"></i><span>${p.weight||"Light desk-friendly weight"}</span></div><div class="details-item"><i class="fas fa-leaf"></i><span>${p.material}</span></div></div><div class="why-piece"><h4>Why This Piece</h4><p>${p.story?p.story.substring(0,120)+'...':p.description.substring(0,120)+'...'}</p></div><div class="inbox"><h4><i class="fas fa-box-open"></i> In the Box</h4><ul>${inboxItems}</ul></div><div class="custom-cta"><div><i class="fas fa-pencil-alt"></i><span>Want something unique? Request a custom creation.</span></div><a href="/contact/">Inquire Now →</a></div><div class="pay-strip"><span>Secure Payments</span><div class="pay-icons"><i class="fab fa-cc-visa"></i><i class="fab fa-cc-mastercard"></i><i class="fab fa-google-pay"></i><i class="fas fa-university"></i></div></div><div class="btns"><button class="buy" id="buyBtn"><i class="fas fa-bolt"></i> Buy Now</button>
 <button class="btn-add-cart-product" id="addToCartBtn" onclick="event.stopPropagation(); if(typeof Cart !== 'undefined' && Cart.addItem){ Cart.addItem('${pid}', '${p.name}', ${p.price}, '${p.images[0]}'); setTimeout(updateBuyButtons, 300); } else { alert('Loading cart... Please try again.'); }"><i class="fas fa-plus"></i> Add to Cart</button>
 <button class="shr" id="shareBtn"><i class="fas fa-share-alt"></i></button></div><div class="arch"><i class="fas fa-archive"></i> <strong>Active Piece</strong> — Never reproduced</div><div class="auth-seal"><div class="seal-icon"><i class="fas fa-certificate"></i></div><div><h4>Certificate of Authenticity</h4><p>Every piece ships with a signed RUDOHAGE tag confirming it as an original, one-of-one creation — never mass produced, never reissued.</p></div></div><div class="story"><h3>The Story</h3><p>${p.story||p.description}</p></div><div class="specs-block"><h3>Specifications</h3><div class="sgrid"><div><span>Material</span><span>${p.material}</span></div><div><span>Finish</span><span>${p.finish}</span></div><div><span>Dimensions</span><span>${p.dimensions||"N/A"}</span></div><div><span>Weight</span><span>${p.weight||"N/A"}</span></div><div><span>Handmade</span><span>Yes</span></div><div><span>Collection</span><span>RUDOHAGE</span></div></div></div><div class="care-section"><h3>Care Instructions</h3><p>${p.care?p.care.map(c=>`<i class="fas fa-check-circle"></i> ${c}<br>`).join(''):'<i class="fas fa-check-circle"></i> Wipe with a soft, dry cloth<br><i class="fas fa-check-circle"></i> Avoid moisture and direct sunlight'}</p></div></div></div>`;setTimeout(()=>{le.style.opacity='0';setTimeout(()=>{le.style.display='none'},500)},300);$('reviewsSection').style.display='block';$('similarProducts').style.display='block';loadReviews(pid);loadSimilar(pid);
-
 const buyBtn = document.getElementById('buyBtn');
 const stickyBuyBtn = document.getElementById('stickyBuyBtn');
 setTimeout(updateBuyButtons, 500);
